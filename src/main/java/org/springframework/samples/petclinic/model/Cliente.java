@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors.
+<<<<<<< HEAD
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import javax.persistence.Table;
 @Table(name = "cliente")
 public class Cliente extends BaseEntity {
 
-	@Column(name = "dni")        
+	@Column(name = "dni")
 	private String dni;
 
 	@Column(name = "nombre")
@@ -38,11 +38,11 @@ public class Cliente extends BaseEntity {
 
 	@Column(name = "apellidos")
 	private String apellidos;
-	
-	@Column(name="telefono")
+
+	@Column(name = "telefono")
 	private String telefono;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
 
 	public String getDni() {
@@ -84,6 +84,5 @@ public class Cliente extends BaseEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
 }
