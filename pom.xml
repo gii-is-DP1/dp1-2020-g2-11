@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework.samples</groupId>
-    <artifactId>spring-petclinic</artifactId>
+    <artifactId>Proyecto G2-11</artifactId>
     <version>2.2.0.BUILD-SNAPSHOT</version>
 
     <parent>
@@ -12,7 +12,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.4.RELEASE</version>
     </parent>
-    <name>petclinic</name>
+    <name>Proyecto G2-11</name>
 
     <properties>
 
@@ -31,7 +31,37 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
-
+<developers>
+ <developer>
+ <id>Leo</id>
+ <name>Leonardo</name>
+ <email>leo@tmht.com</email>
+ <url>http://www.tmht.com/leo</url>
+ <roles>
+ <role>leader</role>
+ </roles>
+ <properties>
+ <picUrl>
+https://pbs.twimg.com/media/Eh4n9GhUMAAdO8x?format=jpg&name=large
+</picUrl>
+ </properties>
+ </developer>
+<developer>
+ <id>Donnie</id>
+ <name>Donatello</name>
+ <email>donnie@tmht.com</email>
+ <url>http://www.tmht.com/donnie</url>
+ <roles>
+ <role>tech master</role>
+ </roles>
+ <properties>
+ <picUrl>
+https://pbs.twimg.com/media/Eh4n9GgUYAAan80?format=jpg&name=large
+</picUrl>
+ </properties>
+ </developer>
+ <!-- More developers ...-->
+</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
