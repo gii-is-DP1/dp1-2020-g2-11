@@ -15,14 +15,13 @@
  */
 package org.springframework.samples.petclinic.repository;
 
-import java.time.LocalDate;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.samples.petclinic.model.Cita;
+import org.springframework.samples.petclinic.model.Cliente;
 
 /**
  * Spring Data JPA OwnerRepository interface
@@ -30,16 +29,19 @@ import org.springframework.samples.petclinic.model.Cita;
  * @author Michael Isvy
  * @since 15.1.2013
  */
-public interface ClienteRepository extends Repository<Cita, Integer> {
+public interface ClienteRepository extends Repository<Cliente, Integer> {
 
-	void save(Cita cita) throws DataAccessException;
+	void save(Cliente cliente) throws DataAccessException;
 
-	@Query("SELECT DISTINCT cita FROM Cita cita left join fetch cita.horaCita WHERE cita.fechaCita LIKE :fechaCita%")
-	public Collection<Cita> findByFechaCita(@Param("fechaCita") LocalDate fechaCita);
+	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.dni LIKE :dni%")
+	public Collection<Cliente> findByDni(@Param("dni") String dni);
 
-	@Query("SELECT cita FROM Cita cita left join fetch cita.fechaCita, cita.horaCita WHERE cita.id =:id")
-	public Cita findById(@Param("id") int id);
+	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.id =:id")
+	public Cliente findById(@Param("id") int id);
 	
-	Collection<Cita> findAll() throws DataAccessException;
+	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.nombre =:nombre")
+	public Cliente findByNombre(@Param("nombre") String nombre);
+	
+	Collection<Cliente> findAll() throws DataAccessException;
 
 }
