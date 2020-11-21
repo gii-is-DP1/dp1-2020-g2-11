@@ -27,7 +27,7 @@ import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.repository.CitaRepository;
 import org.springframework.samples.petclinic.repository.PetRepository;
-import org.springframework.samples.petclinic.repository.VetRepository;
+import org.springframework.samples.petclinic.repository.MecanicoRepository;
 import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.stereotype.Service;
@@ -43,11 +43,11 @@ import org.springframework.util.StringUtils;
 @Service
 public class VetService {
 
-	private VetRepository vetRepository;
+	private MecanicoRepository vetRepository;
 
 
 	@Autowired
-	public VetService(VetRepository vetRepository) {
+	public VetService(MecanicoRepository vetRepository) {
 		this.vetRepository = vetRepository;
 	}		
 
