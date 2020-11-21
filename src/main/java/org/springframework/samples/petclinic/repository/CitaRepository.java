@@ -15,29 +15,31 @@
  */
 package org.springframework.samples.petclinic.repository;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.samples.petclinic.model.Vet;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.model.Cita;
 
 /**
- * Repository class for <code>Vet</code> domain objects All method names are compliant
- * with Spring Data naming conventions so this interface can easily be extended for Spring
- * Data See here:
- * http://static.springsource.org/spring-data/jpa/docs/current/reference/html/jpa.repositories.html#jpa.query-methods.query-creation
+ * Spring Data JPA OwnerRepository interface
  *
- * @author Ken Krebs
- * @author Juergen Hoeller
- * @author Sam Brannen
  * @author Michael Isvy
+ * @since 15.1.2013
  */
-public interface VetRepository extends Repository<Vet, Integer>{
+public interface CitaRepository extends Repository<Cita, Integer> {
 
-	/**
-	 * Retrieve all <code>Vet</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Vet</code>s
-	 */
-	Collection<Vet> findAll() throws DataAccessException;
+	void save(Cita cita) throws DataAccessException;
+
+	@Query("SELECT DISTINCT cita FROM Cita cita left join fetch cita.horaCita WHERE cita.fechaCita LIKE :fechaCita%")
+	public Collection<Cita> findByFechaCita(@Param("fechaCita") LocalDate fechaCita);
+
+	@Query("SELECT cita FROM Cita cita left join fetch cita.fechaCita, cita.horaCita WHERE cita.id =:id")
+	public Cita findById(@Param("id") int id);
+	
+	Collection<Cita> findAll() throws DataAccessException;
 
 }
