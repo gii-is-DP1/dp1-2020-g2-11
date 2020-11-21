@@ -22,7 +22,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Cita;
 
 /**
@@ -33,30 +32,14 @@ import org.springframework.samples.petclinic.model.Cita;
  */
 public interface CitaRepository extends Repository<Cita, Integer> {
 
-	/**
-	 * Save an <code>Cita</code> to the data store, either inserting or updating it.
-	 * @param cita the <code>Cita</code> to save
-	 * @see BaseEntity#isNew
-	 */
 	void save(Cita cita) throws DataAccessException;
 
-	/**
-	 * Retrieve <code>Cita</code>s from the data store by fechaCita, returning all citas
-	 * which fechaCita <i>starts</i> with the given fecha.
-	 * @param fechaCita Value to search for
-	 * @return a <code>Collection</code> of matching <code>Cita</code>s (or an empty
-	 * <code>Collection</code> if none found)
-	 */	
 	@Query("SELECT DISTINCT cita FROM Cita cita left join fetch cita.horaCita WHERE cita.fechaCita LIKE :fechaCita%")
 	public Collection<Cita> findByFechaCita(@Param("fechaCita") LocalDate fechaCita);
 
-	/**
-	 * Retrieve an <code>Owner</code> from the data store by id.
-	 * @param id the id to search for
-	 * @return the <code>Owner</code> if found
-	 * @throws org.springframework.dao.DataRetrievalFailureException if not found
-	 */	
 	@Query("SELECT cita FROM Cita cita left join fetch cita.fechaCita, cita.horaCita WHERE cita.id =:id")
 	public Cita findById(@Param("id") int id);
+	
+	Collection<Cita> findAll() throws DataAccessException;
 
 }
