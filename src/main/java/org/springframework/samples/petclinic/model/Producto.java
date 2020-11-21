@@ -6,13 +6,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "producto")
-public class Producto extends BaseEntity {
+public class Producto {
 
 	@Column(name = "referencia")
 	private String referencia;
 
 	@Column(name = "stock")
-	private String stock;
+	private Integer stock;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -21,7 +21,7 @@ public class Producto extends BaseEntity {
 	private String marca;
 
 	@Column(name = "stockseguridad")
-	private String stockseguridad;
+	private Integer stockseguridad;
 
 	public String getReferencia() {
 		return referencia;
@@ -31,11 +31,11 @@ public class Producto extends BaseEntity {
 		this.referencia = referencia;
 	}
 
-	public String getStock() {
+	public Integer getStock() {
 		return stock;
 	}
 
-	public void setStock(String stock) {
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
 
@@ -55,11 +55,11 @@ public class Producto extends BaseEntity {
 		this.marca = marca;
 	}
 
-	public String getStockseguridad() {
+	public Integer getStockseguridad() {
 		return stockseguridad;
 	}
 
-	public void setStockseguridad(String stockseguridad) {
+	public void setStockseguridad(Integer stockseguridad) {
 		this.stockseguridad = stockseguridad;
 	}
 
