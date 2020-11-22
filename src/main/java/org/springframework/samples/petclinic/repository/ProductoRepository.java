@@ -22,7 +22,7 @@ public interface ProductoRepository extends Repository<Producto, Integer>{
 	
 	Collection<Producto> findAll() throws DataAccessException;
 
-	void delete(Producto producto) throws DataAccessException;
+	void delete(String referencia) throws DataAccessException;
 	
 	void update(Producto producto) throws DataAccessException;
 }
