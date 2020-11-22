@@ -49,7 +49,7 @@ public class ProductoService {
 	
 	@Transactional(readOnly = true)
 	public Producto findProductoByNombre(String nombre) throws DataAccessException {
-		return productoRepository.findByName(nombre);
+		return productoRepository.findByNombre(nombre);
 	}
 
 }
