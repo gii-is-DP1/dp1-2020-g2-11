@@ -38,17 +38,17 @@ public class ProductoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Producto findOwnerByReferencia(String referencia) throws DataAccessException {
+	public Producto findProductoByReferencia(String referencia) throws DataAccessException {
 		return productoRepository.findByReferencia(referencia);
 	}
 	
 	@Transactional(readOnly = true)
-	public Producto findOwnerByMarca(String marca) throws DataAccessException {
+	public Producto findProductoByMarca(String marca) throws DataAccessException {
 		return productoRepository.findByMarca(marca);
 	}
 	
 	@Transactional(readOnly = true)
-	public Producto findOwnerByNombre(String nombre) throws DataAccessException {
+	public Producto findProductoByNombre(String nombre) throws DataAccessException {
 		return productoRepository.findByName(nombre);
 	}
 
