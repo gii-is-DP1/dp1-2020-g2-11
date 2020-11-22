@@ -17,7 +17,7 @@ public interface ProveedorRepository extends Repository<Proveedor, Integer> {
 	
 	Collection<Proveedor> findAll() throws DataAccessException;
 	
-	void delete(Proveedor proveedor) throws DataAccessException;
+	void delete(String nombre) throws DataAccessException;
 	
 
 }
