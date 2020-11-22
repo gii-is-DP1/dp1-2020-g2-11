@@ -9,4 +9,6 @@ import org.springframework.samples.petclinic.model.Administrador;
 public interface AdministradorRepository extends Repository<Administrador, Integer> {
 
 	Collection<Administrador> findAll() throws DataAccessException;
+	
+	public void update(Administrador administrador) throws DataAccessException;
 }
