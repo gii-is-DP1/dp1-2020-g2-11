@@ -23,18 +23,10 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cliente;
 
-/**
- * Spring Data JPA OwnerRepository interface
- *
- * @author Michael Isvy
- * @since 15.1.2013
- */
 public interface ClienteRepository extends Repository<Cliente, Integer> {
-
-	void save(Cliente cliente) throws DataAccessException;
-
+	
 	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.dni LIKE :dni%")
-	public Collection<Cliente> findByDni(@Param("dni") String dni);
+	public Cliente findByDni(@Param("dni") String dni);         //Collection<Cliente> findByDni(@Param("dni") String dni); 
 
 	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.id =:id")
 	public Cliente findById(@Param("id") int id);
@@ -42,6 +34,9 @@ public interface ClienteRepository extends Repository<Cliente, Integer> {
 	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.nombre =:nombre")
 	public Cliente findByNombre(@Param("nombre") String nombre);
 	
+    void save(Cliente cliente) throws DataAccessException; //NO ESTABA
+	
 	Collection<Cliente> findAll() throws DataAccessException;
-
+		
 }
+
