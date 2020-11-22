@@ -10,7 +10,7 @@ import org.springframework.samples.petclinic.model.Producto;
 public interface ProductoRepository extends Repository<Producto, Integer>{
 	
 	@Query("SELECT producto FROM Producto producto left join fetch producto.nombre, producto.marca, producto.stock WHERE producto.nombre =:nombre")
-	public Producto findByName(@Param("producto") String nombre);
+	public Producto findByNombre(@Param("producto") String nombre);
 	
 	@Query("SELECT producto FROM Producto producto left join fetch producto.nombre, producto.marca, producto.stock WHERE producto.marca =:marca")
 	public Producto findByMarca(@Param("marca") String marca);
@@ -22,7 +22,7 @@ public interface ProductoRepository extends Repository<Producto, Integer>{
 	
 	Collection<Producto> findAll() throws DataAccessException;
 
-	void delete(Producto producto) throws DataAccessException;
+	void delete(String referencia) throws DataAccessException;
 	
 	void update(Producto producto) throws DataAccessException;
 }
