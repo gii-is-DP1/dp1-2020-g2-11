@@ -27,7 +27,7 @@ public class ClienteService {
 	}	
 	
 	@Transactional(readOnly = true)
-	public Cliente findClienteByDni(String dni) throws DataAccessException {
+	public Collection<Cliente> findClienteByDni(String dni) throws DataAccessException {
 		return clienteRepository.findByDni(dni);
 	}
 	

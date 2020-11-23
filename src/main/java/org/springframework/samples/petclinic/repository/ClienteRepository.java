@@ -26,7 +26,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 public interface ClienteRepository extends Repository<Cliente, Integer> {
 	
 	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.dni LIKE :dni%")
-	public Cliente findByDni(@Param("dni") String dni);         //Collection<Cliente> findByDni(@Param("dni") String dni); 
+	public Collection<Cliente> findByDni(@Param("dni") String dni);        
 
 	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.id =:id")
 	public Cliente findById(@Param("id") int id);
