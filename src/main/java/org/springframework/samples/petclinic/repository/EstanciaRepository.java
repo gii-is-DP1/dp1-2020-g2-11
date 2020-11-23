@@ -24,6 +24,8 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Estancia;
 
+import ch.qos.logback.core.util.Duration;
+
 /**
  * Spring Data JPA OwnerRepository interface
  *
@@ -40,6 +42,9 @@ public interface EstanciaRepository extends Repository<Estancia, Integer> {
 	@Query("SELECT estancia FROM Estancia estancia left join fetch estancia.fechaEntrada, estancia.fechaSalida, estancia.duracion WHERE estancia.id =:id")
 	public Estancia findById(@Param("id") int id);
 	
+	@Query("SELECT DISTINCT cita FROM Estancia estancia left join fetch estancia.fechaEntrada, estancia.fechaSalida, estancia.duracion WHERE estancia.duracion =:null%")
+	public Collection<Estancia> findByEstacionados(@Param("duracion") Duration duracion);
+
 	Collection<Estancia> findAll() throws DataAccessException;
 
 }
