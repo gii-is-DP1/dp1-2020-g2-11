@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.ProductoRepository;
+import org.springframework.samples.petclinic.service.exceptions.ProductoStockSeguridad;
+import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.transaction.annotation.Transactional;
 
 public class ProductoService {
@@ -28,8 +30,13 @@ public class ProductoService {
 	}
 	
 	@Transactional
-	public void updateProducto(Producto producto) throws DataAccessException {
+	public void updateProducto(Producto producto) throws DataAccessException, ProductoStockSeguridad {
 		productoRepository.update(producto);
+		Integer StockSeguridad = productoRepository.findByNombre(producto.getNombre()).getStockseguridad();
+		Integer Stock = productoRepository.findByNombre(producto.getNombre()).getStock();
+		if(Stock <= StockSeguridad) {
+			throw new ProductoStockSeguridad();
+		}
 	}
 	
 	@Transactional(readOnly = true)	

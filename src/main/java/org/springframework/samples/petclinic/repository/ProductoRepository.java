@@ -5,9 +5,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Producto;
 
 public interface ProductoRepository extends Repository<Producto, Integer>{
+	
 	
 	@Query("SELECT producto FROM Producto producto left join fetch producto.nombre, producto.marca, producto.stock WHERE producto.nombre =:nombre")
 	public Producto findByNombre(@Param("producto") String nombre);
