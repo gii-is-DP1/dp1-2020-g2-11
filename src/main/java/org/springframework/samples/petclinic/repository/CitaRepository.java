@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
@@ -39,6 +40,9 @@ public interface CitaRepository extends Repository<Cita, Integer> {
 
 	@Query("SELECT cita FROM Cita cita left join fetch cita.fechaCita, cita.horaCita WHERE cita.id =:id")
 	public Cita findById(@Param("id") int id);
+	
+	@Query("SELECT DISTINCT cita FROM Cita cita left join fetch cita.horaCita WHERE cita.fechaCita LIKE :fechaCita && cita.horaCita =: cita.horaCita%")
+	public Collection<Cita> findByFechaCitaAndHoraCita(@Param("fechaCita") LocalDate fechaCita,@Param("horaCita") LocalTime horaCita);
 	
 	Collection<Cita> findAll() throws DataAccessException;
 
