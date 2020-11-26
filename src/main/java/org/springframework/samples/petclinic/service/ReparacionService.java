@@ -12,6 +12,8 @@ import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.repository.ReparacionRepository;
 import org.springframework.samples.petclinic.repository.RevisionRepository;
 import org.springframework.samples.petclinic.repository.VehiculoRepository;
+import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
+import org.springframework.samples.petclinic.service.exceptions.VehiculosAntiguo;
 import org.springframework.transaction.annotation.Transactional;
 
 public class ReparacionService {
@@ -63,9 +65,13 @@ public class ReparacionService {
 		return vehiculoRepository.findAll();
 	}
 
-	@Transactional
-	public void saveVehiculo(Vehiculo vehiculo) throws DataAccessException {
-		vehiculoRepository.save(vehiculo);
+	@Transactional(rollbackFor = VehiculosAntiguo.class)
+	public void saveVehiculo(Vehiculo vehiculo) throws DataAccessException, VehiculosAntiguo {
+		if (vehiculo.getFechaFabricacion().getYear() < 12) {
+			vehiculoRepository.save(vehiculo);
+		} else {
+			throw new VehiculosAntiguo();
+		}
 	}
 
 	@Transactional
