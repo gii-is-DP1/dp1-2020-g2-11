@@ -15,8 +15,11 @@
  */
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -44,6 +47,10 @@ public class Cliente extends BaseEntity {
 
 	@Column(name = "email")
 	private String email;
+	
+	@OneToMany(mappedBy ="cliente")
+	private List<Factura> factura;
+	
 
 	public String getDni() {
 		return dni;

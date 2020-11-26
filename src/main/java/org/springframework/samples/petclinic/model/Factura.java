@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +30,10 @@ public class Factura extends BaseEntity {
 	@Column(name = "pagado")
 	private Boolean pagado;
 
+	@ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+	
 	public Boolean getPagado() {
 		return pagado;
 	}
@@ -67,6 +73,16 @@ public class Factura extends BaseEntity {
 	public void setHoraEmision(LocalDate horaEmision) {
 		this.horaEmision = horaEmision;
 	}
+	
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 	
 	
 

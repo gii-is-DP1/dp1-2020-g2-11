@@ -20,6 +20,9 @@ public interface FacturaRepository extends Repository<Factura, Integer>{
 	@Query("SELECT factura FROM Factura factura left join fetch factura.fechaEmision, factura.precio, factura.pagado WHERE factura.pagado =:pagado")
 	public Factura findByPagado(@Param("pagado") Boolean pagado);
 	
+	@Query("SELECT factura FROM Factura factura, Cliente cliente left join fetch factura.cliente WHERE factura.cliente =:cliente")
+    public Factura findByCliente(@Param("cliente") LocalDate cliente);
+	
 	void save(Factura factura) throws DataAccessException;
 	
 	void update(Factura factura) throws DataAccessException;
