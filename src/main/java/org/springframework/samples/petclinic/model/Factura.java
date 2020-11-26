@@ -24,6 +24,17 @@ public class Factura extends BaseEntity {
 	@Column(name = "fechaEmision")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate horaEmision;
+	
+	@Column(name = "pagado")
+	private Boolean pagado;
+
+	public Boolean getPagado() {
+		return pagado;
+	}
+
+	public void setPagado(Boolean pagado) {
+		this.pagado = pagado;
+	}
 
 	public String getDescripcion() {
 		return descripcion;

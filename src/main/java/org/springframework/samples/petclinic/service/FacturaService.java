@@ -29,6 +29,11 @@ public class FacturaService {
 	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
 		return facturaRepository.findByFechaEmision(fecha);
 	}
+	
+	@Transactional(readOnly = true)
+	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
+		return facturaRepository.findByPagado(pagado);
+	}
 
 	@Transactional
 	public void saveFactura(Factura factura) throws DataAccessException, TipoPagoException {
