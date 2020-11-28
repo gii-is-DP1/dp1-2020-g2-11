@@ -45,7 +45,7 @@ public class FacturaService {
 			facturaRepository.save(factura);
 		}
 	}
-
+	
 	@Transactional
 	public void updateFactura(Factura factura) throws DataAccessException {
 		facturaRepository.update(factura);

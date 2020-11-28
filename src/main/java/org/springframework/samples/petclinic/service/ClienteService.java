@@ -1,11 +1,17 @@
 package org.springframework.samples.petclinic.service;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
+import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
+import org.springframework.samples.petclinic.service.exceptions.LimitePagoException;
+import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
 import org.springframework.transaction.annotation.Transactional;
 
 public class ClienteService {
@@ -61,7 +67,20 @@ public class ClienteService {
 			System.out.println("Hay facturas sin pagar");
 		
 		}
+	
+	@Transactional
+	public void saveClientebyFactura(Cliente cliente) throws DataAccessException, LimitePagoException {
+		Factura factura= new Factura();
+		factura.getPagado();
+		if(Boolean.FALSE && factura.getHoraEmision().compareTo(LocalDate.now())>=15) {
+			clienteRepository.save(cliente);
+			throw new LimitePagoException();
+		}else {
+			clienteRepository.delete(cliente);
+			
+		}	
 	}
+}
 	
 	
 
