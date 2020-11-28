@@ -18,7 +18,7 @@ import lombok.Setter;
 	@MappedSuperclass
 	@Getter
 	@Setter
-	@Table(name = "Persona")
+	@Table(name = "Person")
 	public class Person extends BaseEntity {
 
 		@Column(name = "nombre")
