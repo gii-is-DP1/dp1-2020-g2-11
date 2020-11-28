@@ -12,13 +12,13 @@ public interface ProductoRepository extends Repository<Producto, Integer>{
 	
 	
 	@Query("SELECT producto FROM Producto producto left join fetch producto.nombre, producto.marca, producto.stock WHERE producto.nombre =:nombre")
-	public Producto findByNombre(@Param("producto") String nombre);
+	public Collection<Producto> findByNombre(@Param("producto") String nombre);
 	
 	@Query("SELECT producto FROM Producto producto left join fetch producto.nombre, producto.marca, producto.stock WHERE producto.marca =:marca")
-	public Producto findByMarca(@Param("marca") String marca);
+	public Collection<Producto> findByMarca(@Param("marca") String marca);
 	
 	@Query("SELECT producto FROM Producto producto left join fetch producto.nombre, producto.marca, producto.stock WHERE producto.referencia =:referencia")
-	public Producto findByReferencia(@Param("referencia") String referencia);
+	public Collection<Producto> findByReferencia(@Param("referencia") String referencia);
 
 	void save(Producto producto) throws DataAccessException;
 	
