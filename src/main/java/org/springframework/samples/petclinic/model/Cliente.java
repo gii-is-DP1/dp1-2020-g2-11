@@ -38,7 +38,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "cliente")
-public class Cliente extends BaseEntity {
+public class Cliente extends Person {
 	
 	@OneToMany(mappedBy ="cliente")
 	private List<Factura> factura;
