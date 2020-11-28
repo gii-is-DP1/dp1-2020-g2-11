@@ -22,6 +22,14 @@ public class MecanicoServiceTest {
    	@BeforeEach
 	void setup() {
 
+		mecanico = mecanicoService.findById(1);
+		
+	}   
+	
+	@Test
+	@Transactional
+	void nuevoMecanico() throws DataAccessException {
+		
 		mecanico = new Mecanico();
 		mecanico.setNombre("Juan");
 		mecanico.setApellidos("Pérez");
@@ -33,15 +41,10 @@ public class MecanicoServiceTest {
 		user.setPassword("jueanperez1");
 		mecanico.setUser(user);
 		
+		this.mecanicoService.saveMecanico(mecanico);
+		Collection<Mecanico> mecanicos = this.mecanicoService.findMecanico();
+		assertThat(mecanicos.size()).isEqualTo(1);
 
-	}   
-	
-	@Test
-	@Transactional
-	void nuevoMecanico() throws DataAccessException {
-				
-	Collection<Mecanico> mecanicos = this.mecanicoService.findMecanico();
-	assertThat(mecanicos.size()).isEqualTo(2);
 	}
 
 }

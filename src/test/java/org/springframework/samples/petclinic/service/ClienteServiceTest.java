@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-class ClienteServiceTest {
+public class ClienteServiceTest {
 
 	@Autowired
 	protected ClienteService clienteService;
@@ -44,9 +44,9 @@ class ClienteServiceTest {
 	@Test
 	@Transactional
 	void nuevocliente() throws DataAccessException {
-				
+	this.clienteService.saveCliente(cliente);			
 	Collection<Cliente> clientes = this.clienteService.findClientes();
-	assertThat(clientes.size()).isEqualTo(5);
+	assertThat(clientes.size()).isEqualTo(1);
 	}
 
 }

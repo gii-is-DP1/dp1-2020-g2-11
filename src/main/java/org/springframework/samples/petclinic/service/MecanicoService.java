@@ -9,18 +9,27 @@ import org.springframework.samples.petclinic.repository.MecanicoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public class MecanicoService {
-	
+
 	private MecanicoRepository mecanicoRepository;
-	
 
 	@Autowired
 	public MecanicoService(MecanicoRepository mecanicoRepository) {
-		this.mecanicoRepository = mecanicoRepository; 
-	}	
-	
-	@Transactional(readOnly = true)	
+		this.mecanicoRepository = mecanicoRepository;
+	}
+
+	@Transactional(readOnly = true)
 	public Collection<Mecanico> findMecanico() throws DataAccessException {
 		return mecanicoRepository.findAll();
 	}
+
+	@Transactional
+	public void saveMecanico(Mecanico mecanico) throws DataAccessException {
+		mecanicoRepository.save(mecanico);
+	}
+	
+	@Transactional
+    public Mecanico findById(Integer id) throws DataAccessException {
+        return mecanicoRepository.findById(id);
+    }
 
 }
