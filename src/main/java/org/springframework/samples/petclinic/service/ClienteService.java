@@ -70,7 +70,7 @@ public class ClienteService {
 	public void saveClientebyFactura(Cliente cliente) throws DataAccessException, LimitePagoException {
 		Factura factura= new Factura();
 		factura.getPagado();
-		if(Boolean.FALSE && factura.getHoraEmision().compareTo(LocalDate.now())>=15) {
+		if(Boolean.FALSE && factura.getFechaEmision().compareTo(LocalDate.now())>=15) {
 			clienteRepository.save(cliente);
 			throw new LimitePagoException();
 		}else {
