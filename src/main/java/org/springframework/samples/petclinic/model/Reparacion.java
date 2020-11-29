@@ -11,7 +11,7 @@ public class Reparacion extends BaseEntity{
 	@Column(name = "duracion")
 	private Integer duracion;
 	@Column(name = "precio")
-	private Float precio;
+	private Double precio;
 	@Column(name = "tipoReparacion")
 	private TipoReparacion tipoReparacion;
 	
@@ -21,10 +21,10 @@ public class Reparacion extends BaseEntity{
 	public void setDuracion(Integer duracion) {
 		this.duracion = duracion;
 	}
-	public Float getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(Float precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 	public TipoReparacion getTipoReparacion() {

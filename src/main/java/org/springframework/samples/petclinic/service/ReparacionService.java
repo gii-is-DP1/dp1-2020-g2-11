@@ -47,7 +47,7 @@ public class ReparacionService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Reparacion> findReparacionById(Integer id) throws DataAccessException {
+	public Reparacion findReparacionById(Integer id) throws DataAccessException {
 		return reparacionRepository.findByID(id);
 	}
 
