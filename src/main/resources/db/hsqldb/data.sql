@@ -64,4 +64,5 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 
 INSERT INTO users(username, password, enabled) VALUES ('mecanico1', '1234', TRUE);
 INSERT INTO authorities(id, username, authority) VALUES (13, 'mecanico1', 'mecanico');
+INSERT INTO mecanico VALUES(1,'Juan','Pérez','788624578K','juanperez9@gmail.com','644895623','mecanico1')
 

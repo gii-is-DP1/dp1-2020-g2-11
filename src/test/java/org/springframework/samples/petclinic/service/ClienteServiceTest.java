@@ -21,6 +21,7 @@ public class ClienteServiceTest {
 	@Autowired
 	protected ClienteService clienteService;
 	
+	@Autowired
 	private Cliente cliente;
 	private User user;
 	
