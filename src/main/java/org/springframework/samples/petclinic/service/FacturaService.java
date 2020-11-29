@@ -9,8 +9,10 @@ import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.TipoPago;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class FacturaService {
 
 	private FacturaRepository facturaRepository;

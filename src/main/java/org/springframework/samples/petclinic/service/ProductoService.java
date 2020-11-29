@@ -7,9 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.ProductoRepository;
 import org.springframework.samples.petclinic.service.exceptions.ProductoStockSeguridad;
-import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ProductoService {
 	
 	private ProductoRepository productoRepository;
