@@ -42,7 +42,7 @@ public class ProveedorService {
 	}
 	
 	@Transactional
-	public void deleteProducto(String nombre) throws DataAccessException {
+	public void deleteProveedor(String nombre) throws DataAccessException {
 		proveedorRepository.delete(nombre);
 	}
 	
