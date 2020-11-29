@@ -47,7 +47,7 @@ public class ReparacionService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Reparacion> findReparacionById(Integer id) throws DataAccessException {
+	public Reparacion findReparacionById(Integer id) throws DataAccessException {
 		return reparacionRepository.findByID(id);
 	}
 
@@ -76,8 +76,8 @@ public class ReparacionService {
 	}
 
 	@Transactional
-	public void deleteVehiculo(Vehiculo vehiculo) throws DataAccessException {
-		vehiculoRepository.delete(vehiculo);
+	public void deleteVehiculo(String matricula) throws DataAccessException {
+		vehiculoRepository.delete(matricula);
 	}
 
 	@Transactional(readOnly = true)

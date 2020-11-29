@@ -46,7 +46,7 @@ public class ProductoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Producto> findProductoByReferencia(String referencia) throws DataAccessException {
+	public Producto findProductoByReferencia(String referencia) throws DataAccessException {
 		return productoRepository.findByReferencia(referencia);
 	}
 	
