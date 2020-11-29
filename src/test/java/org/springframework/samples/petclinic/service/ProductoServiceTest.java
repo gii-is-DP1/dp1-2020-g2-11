@@ -99,8 +99,8 @@ class ProductoServiceTest {
 		producto.setStockseguridad(3);
 
 		productoService.saveProducto(producto);
-		Collection<Producto> productos = this.productoService.findProductoByReferencia("95/70R15");
-		assertThat(productos.size()).isEqualTo(1);
+		Producto productos = this.productoService.findProductoByReferencia("95/70R15");
+		assertThat(productos).isNull();
 	}
 
 	@Test

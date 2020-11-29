@@ -76,8 +76,8 @@ public class ReparacionService {
 	}
 
 	@Transactional
-	public void deleteVehiculo(Vehiculo vehiculo) throws DataAccessException {
-		vehiculoRepository.delete(vehiculo);
+	public void deleteVehiculo(String matricula) throws DataAccessException {
+		vehiculoRepository.delete(matricula);
 	}
 
 	@Transactional(readOnly = true)

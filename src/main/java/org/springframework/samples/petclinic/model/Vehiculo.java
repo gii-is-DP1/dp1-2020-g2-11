@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "vehiculo")
-public class Vehiculo extends BaseEntity{
+public class Vehiculo{
 	
 	@Column(name="matricula")
 	private String matricula;
