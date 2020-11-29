@@ -22,7 +22,7 @@ public class CitaService {
 		int n_otherCita=citaRepository.findByFechaCita(cita.getFechaCita()).size();
 		int n_otherCitasMismaHora= citaRepository.findByFechaCitaAndHoraCita(cita.getFechaCita(), cita.getHoraCita()).size();
 		int n_otherEstancias= estanciaRepository.findByEstacionados(null).size();
-		if ((n_otherCitasMismaHora<=2||n_otherEstancias+n_otherCitasMismaHora<=2) &&n_otherCita<12) {
+		if ((n_otherCitasMismaHora<=2||n_otherEstancias+n_otherCitasMismaHora<=2) && n_otherCita<12) {
 			citaRepository.save(cita);
 		}else {
 			throw new SobrecargaDeVehiculosException();
@@ -31,7 +31,7 @@ public class CitaService {
 	public void saveEstancia(Estancia estancia) throws DataAccessException,SobrecargaDeVehiculosException{
 		int n_otherEstancias= estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
 		int n_otherCitas= citaRepository.findByFechaCita(estancia.getFechaEntrada()).size();
-		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
+		if (n_otherCitas<3 && n_otherEstancias<2) {
 			estanciaRepository.save(estancia);
 		}else {
 			throw new SobrecargaDeVehiculosException();
