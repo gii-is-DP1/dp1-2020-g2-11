@@ -10,8 +10,10 @@ import org.springframework.samples.petclinic.model.Estancia;
 import org.springframework.samples.petclinic.repository.CitaRepository;
 import org.springframework.samples.petclinic.repository.EstanciaRepository;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class CitaService {
 
 	private CitaRepository citaRepository;

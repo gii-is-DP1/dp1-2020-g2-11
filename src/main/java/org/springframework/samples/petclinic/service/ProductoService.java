@@ -7,9 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.ProductoRepository;
 import org.springframework.samples.petclinic.service.exceptions.ProductoStockSeguridad;
-import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ProductoService {
 	
 	private ProductoRepository productoRepository;
@@ -32,8 +33,8 @@ public class ProductoService {
 	@Transactional
 	public void updateProducto(Producto producto) throws DataAccessException, ProductoStockSeguridad {
 		productoRepository.update(producto);
-		Integer StockSeguridad = productoRepository.findByNombre(producto.getNombre()).getStockseguridad();
-		Integer Stock = productoRepository.findByNombre(producto.getNombre()).getStock();
+		Integer StockSeguridad = ((Producto) productoRepository.findByNombre(producto.getNombre())).getStockseguridad();
+		Integer Stock = ((Producto) productoRepository.findByNombre(producto.getNombre())).getStock();
 		if(Stock <= StockSeguridad) {
 			throw new ProductoStockSeguridad();
 		}
@@ -45,17 +46,17 @@ public class ProductoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Producto findProductoByReferencia(String referencia) throws DataAccessException {
+	public Collection<Producto> findProductoByReferencia(String referencia) throws DataAccessException {
 		return productoRepository.findByReferencia(referencia);
 	}
 	
 	@Transactional(readOnly = true)
-	public Producto findProductoByMarca(String marca) throws DataAccessException {
+	public Collection<Producto> findProductoByMarca(String marca) throws DataAccessException {
 		return productoRepository.findByMarca(marca);
 	}
 	
 	@Transactional(readOnly = true)
-	public Producto findProductoByNombre(String nombre) throws DataAccessException {
+	public Collection<Producto> findProductoByNombre(String nombre) throws DataAccessException {
 		return productoRepository.findByNombre(nombre);
 	}
 

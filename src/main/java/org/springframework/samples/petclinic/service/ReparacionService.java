@@ -12,10 +12,11 @@ import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.repository.ReparacionRepository;
 import org.springframework.samples.petclinic.repository.RevisionRepository;
 import org.springframework.samples.petclinic.repository.VehiculoRepository;
-import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.samples.petclinic.service.exceptions.VehiculosAntiguo;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ReparacionService {
 
 	private ReparacionRepository reparacionRepository;

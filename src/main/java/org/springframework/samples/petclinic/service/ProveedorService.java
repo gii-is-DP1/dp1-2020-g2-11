@@ -11,8 +11,10 @@ import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.repository.MecanicoRepository;
 import org.springframework.samples.petclinic.repository.PedidoRepository;
 import org.springframework.samples.petclinic.repository.ProveedorRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ProveedorService {
 	
 	private ProveedorRepository proveedorRepository;
