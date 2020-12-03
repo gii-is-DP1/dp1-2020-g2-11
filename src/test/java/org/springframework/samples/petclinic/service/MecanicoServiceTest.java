@@ -7,11 +7,14 @@ import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Mecanico;
 import org.springframework.samples.petclinic.model.User;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class MecanicoServiceTest {
     @Autowired
     protected MecanicoService mecanicoService;
@@ -19,7 +22,7 @@ public class MecanicoServiceTest {
 //    private Mecanico mecanico;
     private User user;
 
-       @BeforeEach
+      
 //    void setup() {
 //
 //        mecanico = mecanicoService.findById(1);
@@ -40,7 +43,7 @@ public class MecanicoServiceTest {
         mecanico1.setTelefono("644895623");
 
         usuario1.setUsername("juanperez1");
-        usuario1.setPassword("jueanperez1");
+        usuario1.setPassword("juanperez1");
         mecanico1.setUser(usuario1);
 
         this.mecanicoService.saveMecanico(mecanico1);
