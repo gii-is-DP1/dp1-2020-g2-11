@@ -1,7 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -34,38 +34,22 @@ public class AdministradorServiceTest {
 		admin.setUser(usuario);                
                 
 		this.administradorService.saveAdministrador(admin);
-		Administrador adminEncontrado = this.administradorService
-				.findAdministradorById(admin.getId());
-		assertThat(admin).isEqualTo(adminEncontrado);
+		Administrador administradores = this.administradorService.findAdministrador();
+		assertThat(administradores).isNotNull();
 	}
 	
 	@Test
 	@Transactional
 	void shouldUpdateAdministrador() {
-		Administrador admin = this.administradorService.findAdministradorById(1);
+		Administrador admin = this.administradorService.findAdministrador();
 		String oldNombre = admin.getNombre();
 		String newNombre = oldNombre+"Yeah";
 		
 		admin.setNombre(newNombre);
 		this.administradorService.saveAdministrador(admin);
 		
-		admin = this.administradorService.findAdministradorById(1);
-		//assertThat(admin.getNombre()).isEqualTo(newNombre);
-		
+		admin = this.administradorService.findAdministrador();
+		assertThat(admin.getNombre()).isEqualTo(newNombre);
 	}
-	
-	@Test
-	@Transactional
-	void shouldDeleteAdministrador() {
-		Administrador admin = this.administradorService.findAdministradorById(1);
-		
-		this.administradorService.deleteAdministrador(admin);
-		
-		admin = this.administradorService.findAdministradorById(1);
-		
-		assertNull(admin);
-	}
-
-	
 }
 

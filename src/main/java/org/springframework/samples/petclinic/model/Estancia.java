@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import ch.qos.logback.core.util.Duration;
+
 
 @Entity
 @Table(name = "estancia")

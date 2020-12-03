@@ -2,12 +2,14 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 /////////////////////////////////////
 @Entity
 @Table(name = "producto")
 public class Producto {
 	
+	@Id
 	@Column(name = "referencia")
 	private String referencia;
 
