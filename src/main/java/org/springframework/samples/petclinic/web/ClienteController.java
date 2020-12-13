@@ -19,7 +19,7 @@ public class ClienteController {
 		this.clienteService = clienteService;
 	}
 	
-	@GetMapping(value= {"/clientes"})
+	@GetMapping(value= {"/cliente"})
 	public String findAllClientes(Map<String, Object> model) {
 		Collection<Cliente> clientes = clienteService.findClientes();
 		model.put("selections", clientes);
