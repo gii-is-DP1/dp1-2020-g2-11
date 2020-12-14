@@ -28,43 +28,45 @@ INSERT INTO cita(id,fechaCita,horaCita) VALUES (2,'05/01/2021', '08:00');
 INSERT INTO cita(id,fechaCita,horaCita) VALUES (3,'06/01/2021', '09:00');
 INSERT INTO cita(id,fechaCita,horaCita) VALUES (4,'07/01/2021', '09:00');
 
---Cita
+--Estancia
 INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (1,'02/01/2021', '04/01/2021', 4320);
 INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (2,'05/01/2021', '05/01/2021', 200);
 INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (3,'06/01/2021', '08/01/2021', 3300);
 INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (4,'07/01/2021', '08/01/2021', 1200);
 
-INSERT INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
-INSERT INTO owners VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749', 'owner1');
-INSERT INTO owners VALUES (3, 'Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763', 'owner1');
-INSERT INTO owners VALUES (4, 'Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198', 'owner1');
-INSERT INTO owners VALUES (5, 'Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765', 'owner1');
-INSERT INTO owners VALUES (6, 'Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654', 'owner1');
-INSERT INTO owners VALUES (7, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387', 'owner1');
-INSERT INTO owners VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683', 'owner1');
-INSERT INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435', 'owner1');
-INSERT INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487', 'owner1');
+--Factura
+INSERT INTO factura(id,descripcion,precio,tipoPago,fechaEmision,pagado) VALUES (1,'Cambio de aceite', 20.00, 'EFECTIVO', '08/01/2021', FALSE);
+INSERT INTO factura(id,descripcion,precio,tipoPago,fechaEmision,pagado) VALUES (2,'Arreglo pastilla frenos', 50.00, 'EFECTIVO', '14/12/2020', TRUE);
+INSERT INTO factura(id,descripcion,precio,tipoPago,fechaEmision,pagado) VALUES (3,'Arreglo piston de arranque', 100.33, 'TARJETA', '16/12/2020', FALSE);
+INSERT INTO factura(id,descripcion,precio,tipoPago,fechaEmision,pagado) VALUES (4,'Cambio de neumaticos', 60.50, 'TRANSFERENCIA', '16/12/2020', FALSE);
 
-INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
-INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-08-06', 6, 2);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (3, 'Rosy', '2011-04-17', 2, 3);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (4, 'Jewel', '2010-03-07', 2, 3);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (5, 'Iggy', '2010-11-30', 3, 4);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (6, 'George', '2010-01-20', 4, 5);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (7, 'Samantha', '2012-09-04', 1, 6);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (8, 'Max', '2012-09-04', 1, 6);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (9, 'Lucky', '2011-08-06', 5, 7);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (10, 'Mulligan', '2007-02-24', 2, 8);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (11, 'Freddy', '2010-03-09', 5, 9);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (12, 'Lucky', '2010-06-24', 2, 10);
---INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (13, 'Sly', '2012-06-08', 1, 10);
+--Pedido
+INSERT INTO pedido(id,fechaEntrada,fechaEmision) VALUES (1,'10/12/2020', '14/12/2020');
+INSERT INTO pedido(id,fechaEntrada,fechaEmision) VALUES (2,'10/12/2020', '15/12/2020');
+INSERT INTO pedido(id,fechaEntrada,fechaEmision) VALUES (3,'13/12/2020', '16/12/2020');
+INSERT INTO pedido(id,fechaEntrada,fechaEmision) VALUES (4,'13/12/2020', '16/12/2020');
 
---INSERT INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01', 'rabies shot');
---INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
---INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
---INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
+--Producto
+INSERT INTO producto(referencia,stock,nombre,marca,stockseguridad) VALUES ('NEU54638',10,'Neumaticos','Nexen',4);
+INSERT INTO producto(referencia,stock,nombre,marca,stockseguridad) VALUES ('71632A',20,'Aceite','Castrol',10);
+INSERT INTO producto(referencia,stock,nombre,marca,stockseguridad) VALUES ('AS73464',4,'Anticongelante','Repsol',1);
 
-INSERT INTO users(username, password, enabled) VALUES ('mecanico1', '1234', TRUE);
-INSERT INTO authorities(id, username, authority) VALUES (13, 'mecanico1', 'mecanico');
-INSERT INTO mecanico VALUES(1,'Juan','Pérez','788624578K','juanperez9@gmail.com','644895623','mecanico1')
+--Proveedor
+INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso nº31','neumaticospaco@gmail.com');
+INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Recambios JOVAMA','683764346','c/Desengano nº21','jovama@gmail.com');
 
+--Reparacion
+INSERT INTO reparacion(duracion,precio,tipoReparacion) VALUES (10,20.00,'RECAMBIO');
+INSERT INTO reparacion(duracion,precio,tipoReparacion) VALUES (40,60.00,'MECANICA');
+INSERT INTO reparacion(duracion,precio,tipoReparacion) VALUES (55,100.33,'MECANICA');
+
+--Revision
+INSERT INTO revision(descripcion,duracion,fechaRevision) VALUES ('Necesita aceite',10,'10/12/2020');
+INSERT INTO revision(descripcion,duracion,fechaRevision) VALUES ('Pastilla de freno gastada',10,'11/12/2020');
+INSERT INTO revision(descripcion,duracion,fechaRevision) VALUES ('Piston atascado',20,'11/12/2020');
+
+--Vehiculo
+INSERT INTO vehiculo(matricula,tipoVehiculo,fechafabricacion,kilometraje) VALUES ('4728FPG','COCHE','10/10/2007',175684;
+INSERT INTO vehiculo(matricula,tipoVehiculo,fechafabricacion,kilometraje) VALUES ('2968BPY','COCHE','04/06/2001',230856);
+INSERT INTO vehiculo(matricula,tipoVehiculo,fechafabricacion,kilometraje) VALUES ('6576JDJ','MOTO','23/03/2015',102302);
+INSERT INTO vehiculo(matricula,tipoVehiculo,fechafabricacion,kilometraje) VALUES ('E8942JPF','TRACTOR','28/05/2016',5023);
