@@ -34,8 +34,8 @@ public interface ClienteRepository extends Repository<Cliente, Integer> {
 	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.nombre =:nombre")
 	public Cliente findByNombre(@Param("nombre") String nombre);
 	
-	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email, cliente.factura WHERE cliente.id =:id")
-    public Cliente findByIdfactura(@Param("id") int id);
+//	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email, cliente.factura WHERE cliente.id =:id")
+//    public Cliente findByIdfactura(@Param("id") int id);
 	
     void save(Cliente cliente) throws DataAccessException; 
 	

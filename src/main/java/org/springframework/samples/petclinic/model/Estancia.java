@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,37 +17,33 @@ public class Estancia extends BaseEntity {
 
 	@Column(name = "fechaEntrada")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate fechaEntrada;
+	private LocalDateTime fechaEntrada;
 	
 	@Column(name = "fechaSalida")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate fechaSalida;
+	private LocalDateTime fechaSalida;
 	
 	@Column(name = "duracion")        
 	private Integer duracion;
 
-	public LocalDate getFechaEntrada() {
-		return fechaEntrada;
+	public LocalDateTime getFechaEntrada() {
+		return fechaEntrada.withSecond(0);
 	}
 
-	public void setFechaEntrada(LocalDate fechaEntrada) {
-		this.fechaEntrada = fechaEntrada;
+	public void setFechaEntrada(LocalDateTime fechaEntrada) {
+		this.fechaEntrada = fechaEntrada.withSecond(0);
 	}
 
-	public LocalDate getFechaSalida() {
-		return fechaSalida;
+	public LocalDateTime getFechaSalida() {
+		return fechaSalida.withSecond(0);
 	}
 
-	public void setFechaSalida(LocalDate fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public void setFechaSalida(LocalDateTime fechaSalida) {
+		this.fechaSalida = fechaSalida.withSecond(0);
 	}
 
 	public Integer getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(Integer duracion) {
-		this.duracion = duracion;
+		return fechaSalida.compareTo(fechaEntrada);
 	}
 	
 }
