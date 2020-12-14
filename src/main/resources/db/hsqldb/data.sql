@@ -1,36 +1,38 @@
-/*-- One admin user, named admin1 with passwor 4dm1n and authority admin
+-- Creamos un usuario para administrador
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
--- One owner user, named owner1 with passwor 0wn3r
-INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (2,'owner1','owner');
--- One vet user, named vet1 with passwor v3t
-INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
+-- Creamos un usuario para mecanico
+INSERT INTO users(username,password,enabled) VALUES ('mecanico1','m3c4nico',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico');
+-- Creamos un usuario para cliente
+INSERT INTO users(username,password,enabled) VALUES ('cliente1','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (3,'cliente1','cliente');
 
-INSERT INTO vets VALUES (1, 'James', 'Carter');
-INSERT INTO vets VALUES (2, 'Helen', 'Leary');
-INSERT INTO vets VALUES (3, 'Linda', 'Douglas');
-INSERT INTO vets VALUES (4, 'Rafael', 'Ortega');
-INSERT INTO vets VALUES (5, 'Henry', 'Stevens');
-INSERT INTO vets VALUES (6, 'Sharon', 'Jenkins');
+--Administrador
+INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com');
 
-INSERT INTO specialties VALUES (1, 'radiology');
-INSERT INTO specialties VALUES (2, 'surgery');
-INSERT INTO specialties VALUES (3, 'dentistry');
+--Mecanicos
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Pepe', 'Lopez Vazquez', '17483965D', '633846783','pepelova@gmail.com');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Paco', 'Garcia Marquez', '84927546F', '717362549','pacogama@gmail.com');
 
-INSERT INTO vet_specialties VALUES (2, 1);
-INSERT INTO vet_specialties VALUES (3, 2);
-INSERT INTO vet_specialties VALUES (3, 3);
-INSERT INTO vet_specialties VALUES (4, 2);
-INSERT INTO vet_specialties VALUES (5, 1);
+--Clientes
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Manuel', 'Viera Rodriguez', '62748364G', '633572849','manuvierod@gmail.com');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Francisco', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com');
 
-INSERT INTO types VALUES (1, 'cat');
-INSERT INTO types VALUES (2, 'dog');
-INSERT INTO types VALUES (3, 'lizard');
-INSERT INTO types VALUES (4, 'snake');
-INSERT INTO types VALUES (5, 'bird');
-INSERT INTO types VALUES (6, 'hamster');
+--Cita
+INSERT INTO cita(id,fechaCita,horaCita) VALUES (1,'02/01/2021', '10:00');
+INSERT INTO cita(id,fechaCita,horaCita) VALUES (2,'05/01/2021', '08:00');
+INSERT INTO cita(id,fechaCita,horaCita) VALUES (3,'06/01/2021', '09:00');
+INSERT INTO cita(id,fechaCita,horaCita) VALUES (4,'07/01/2021', '09:00');
+
+--Cita
+INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (1,'02/01/2021', '04/01/2021', 4320);
+INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (2,'05/01/2021', '05/01/2021', 200);
+INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (3,'06/01/2021', '08/01/2021', 3300);
+INSERT INTO estancia(id,fechaEntrada,fechaSalida,duracion) VALUES (4,'07/01/2021', '08/01/2021', 1200);
 
 INSERT INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
 INSERT INTO owners VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749', 'owner1');
@@ -60,7 +62,7 @@ INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-
 --INSERT INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01', 'rabies shot');
 --INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
 --INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
---INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');*/
+--INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
 INSERT INTO users(username, password, enabled) VALUES ('mecanico1', '1234', TRUE);
 INSERT INTO authorities(id, username, authority) VALUES (13, 'mecanico1', 'mecanico');

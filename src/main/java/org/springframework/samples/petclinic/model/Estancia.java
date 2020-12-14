@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.model;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -24,7 +23,7 @@ public class Estancia extends BaseEntity {
 	private LocalDate fechaSalida;
 	
 	@Column(name = "duracion")        
-	private Duration duracion;
+	private Integer duracion;
 
 	public LocalDate getFechaEntrada() {
 		return fechaEntrada;
@@ -42,11 +41,11 @@ public class Estancia extends BaseEntity {
 		this.fechaSalida = fechaSalida;
 	}
 
-	public Duration getDuracion() {
+	public Integer getDuracion() {
 		return duracion;
 	}
 
-	public void setDuracion(Duration duracion) {
+	public void setDuracion(Integer duracion) {
 		this.duracion = duracion;
 	}
 	
