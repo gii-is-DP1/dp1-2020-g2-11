@@ -13,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class MecanicoService {
 
 	private MecanicoRepository mecanicoRepository;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private AuthoritiesService authoritiesService;
 
 	@Autowired
 	public MecanicoService(MecanicoRepository mecanicoRepository) {
@@ -26,7 +30,12 @@ public class MecanicoService {
 
 	@Transactional
 	public void saveMecanico(Mecanico mecanico) throws DataAccessException {
-		mecanicoRepository.save(mecanico);
+		//creating owner
+		mecanicoRepository.save(mecanico);		
+		//creating user
+		userService.saveUser(mecanico.getUser());
+		//creating authorities
+		authoritiesService.saveAuthorities(mecanico.getUser().getUsername(), "mecanico");
 	}
 	
 	@Transactional

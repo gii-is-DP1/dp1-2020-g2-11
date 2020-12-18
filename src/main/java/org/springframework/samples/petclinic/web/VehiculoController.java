@@ -9,7 +9,7 @@ public class VehiculoController {
 
 	private static final String VIEWS_VEHICULO_CREATE_OR_UPDATE_FORM = "";
 	
-	private final ReparacionService repService;
+	private ReparacionService repService;
 	
 	@Autowired
 	public void ReparacionController(ReparacionService repService, AuthoritiesService authoritiesService) {

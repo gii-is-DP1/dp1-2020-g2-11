@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import ch.qos.logback.core.util.Duration;
+
 
 @Entity
 @Table(name = "estancia")
@@ -16,37 +17,33 @@ public class Estancia extends BaseEntity {
 
 	@Column(name = "fechaEntrada")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate fechaEntrada;
+	private LocalDateTime fechaEntrada;
 	
 	@Column(name = "fechaSalida")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate fechaSalida;
+	private LocalDateTime fechaSalida;
 	
 	@Column(name = "duracion")        
-	private Duration duracion;
+	private Integer duracion;
 
-	public LocalDate getFechaEntrada() {
-		return fechaEntrada;
+	public LocalDateTime getFechaEntrada() {
+		return fechaEntrada.withSecond(0);
 	}
 
-	public void setFechaEntrada(LocalDate fechaEntrada) {
-		this.fechaEntrada = fechaEntrada;
+	public void setFechaEntrada(LocalDateTime fechaEntrada) {
+		this.fechaEntrada = fechaEntrada.withSecond(0);
 	}
 
-	public LocalDate getFechaSalida() {
-		return fechaSalida;
+	public LocalDateTime getFechaSalida() {
+		return fechaSalida.withSecond(0);
 	}
 
-	public void setFechaSalida(LocalDate fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public void setFechaSalida(LocalDateTime fechaSalida) {
+		this.fechaSalida = fechaSalida.withSecond(0);
 	}
 
-	public Duration getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(Duration duracion) {
-		this.duracion = duracion;
+	public Integer getDuracion() {
+		return fechaSalida.compareTo(fechaEntrada);
 	}
 	
 }

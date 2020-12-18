@@ -4,14 +4,16 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "vehiculo")
-public class Vehiculo{
+public class Vehiculo {
 	
+	@Id
 	@Column(name="matricula")
 	private String matricula;
 	

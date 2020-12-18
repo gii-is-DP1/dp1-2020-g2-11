@@ -25,17 +25,17 @@ import org.springframework.samples.petclinic.model.Cliente;
 
 public interface ClienteRepository extends Repository<Cliente, Integer> {
 	
-	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.dni LIKE :dni%")
+	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.dni LIKE :dni%")
 	public Collection<Cliente> findByDni(@Param("dni") String dni);        
 
-	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.id =:id")
+	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.id =:id")
 	public Cliente findById(@Param("id") int id);
 	
-	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.nombre =:nombre")
+	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email WHERE cliente.nombre =:nombre")
 	public Cliente findByNombre(@Param("nombre") String nombre);
 	
-	@Query("SELECT DISTINCT cita FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email, cliente.facturas WHERE cliente.id =:id")
-    public Cliente findByIdfactura(@Param("id") int id);
+//	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.nombre, cliente.apellidos, cliente.dni, cliente.telefono, cliente.email, cliente.factura WHERE cliente.id =:id")
+//    public Cliente findByIdfactura(@Param("id") int id);
 	
     void save(Cliente cliente) throws DataAccessException; 
 	
