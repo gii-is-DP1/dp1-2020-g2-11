@@ -12,10 +12,9 @@ import org.springframework.samples.petclinic.model.Pedido;
 public interface PedidoRepository extends Repository<Pedido, Integer> {
 	void save(Pedido pedido) throws DataAccessException;
 
-	@Query("SELECT DISTINCT pedido FROM Pedido pedido left join fetch pedido.fechaEntrada WHERE pedido.fechaEntrada LIKE :fechaEntrada%")
+	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.fechaEntrada =:fechaEntrada")
 	public Collection<Pedido> findByFechaPedido(@Param("fechaEntrada") LocalDate fechaEntrada);
 
-	@Query("SELECT pedido FROM Pedido pedido left join fetch pedido.fechaEntrada WHERE pedido.id =:id")
 	public Pedido findById(@Param("id") int id);
 	
 	Collection<Pedido> findAll() throws DataAccessException;
