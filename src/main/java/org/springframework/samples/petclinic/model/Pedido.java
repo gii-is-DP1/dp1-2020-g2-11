@@ -8,7 +8,12 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name="pedido")
 public class Pedido extends BaseEntity{
 	
@@ -19,23 +24,5 @@ public class Pedido extends BaseEntity{
 	@Column(name = "fechaEmision")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEmision;
-
-	public LocalDate getFechaEntrada() {
-		return fechaEntrada;
-	}
-
-	public void setFechaEntrada(LocalDate fechaEntrada) {
-		this.fechaEntrada = fechaEntrada;
-	}
-
-	public LocalDate getFechaEmision() {
-		return fechaEmision;
-	}
-
-	public void setFechaEmision(LocalDate fechaEmision) {
-		this.fechaEmision = fechaEmision;
-	}
-	
-	
 
 }

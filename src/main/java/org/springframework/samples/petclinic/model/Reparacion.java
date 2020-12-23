@@ -4,7 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "Reparacion")
 public class Reparacion extends BaseEntity{
 	
@@ -15,27 +20,4 @@ public class Reparacion extends BaseEntity{
 	@Column(name = "tipoReparacion")
 	private TipoReparacion tipoReparacion;
 	
-	public Integer getDuracion() {
-		return duracion;
-	}
-	public void setDuracion(Integer duracion) {
-		this.duracion = duracion;
-	}
-	public Double getPrecio() {
-		return precio;
-	}
-	public void setPrecio(Double precio) {
-		this.precio = precio;
-	}
-	public TipoReparacion getTipoReparacion() {
-		return tipoReparacion;
-	}
-	public void setTipoReparacion(TipoReparacion tipoReparacion) {
-		this.tipoReparacion = tipoReparacion;
-	}
-	
-	
-	
-	
-
 }

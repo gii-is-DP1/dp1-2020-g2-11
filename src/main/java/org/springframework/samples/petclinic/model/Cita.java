@@ -9,7 +9,12 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "cita")
 public class Cita extends BaseEntity{
 
@@ -21,19 +26,4 @@ public class Cita extends BaseEntity{
 	@DateTimeFormat(pattern = "hh:mm")
 	private LocalTime horaCita;
 
-	public LocalDate getFechaCita() {
-		return fechaCita;
-	}
-
-	public void setFechaCita(LocalDate fechaCita) {
-		this.fechaCita = fechaCita;
-	}
-
-	public LocalTime getHoraCita() {
-		return horaCita;
-	}
-
-	public void setHoraCita(LocalTime horaCita) {
-		this.horaCita = horaCita;
-	}
 }
