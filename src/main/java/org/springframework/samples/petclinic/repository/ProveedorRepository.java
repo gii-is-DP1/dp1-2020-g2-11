@@ -12,12 +12,12 @@ public interface ProveedorRepository extends Repository<Proveedor, Integer> {
 	
 	void save (Proveedor proveedor) throws DataAccessException;
 	
-	@Query("SELECT DISTINCT proveedor FROM Proveedor proveedor left join fetch proveedor.nombre WHERE proveedor.nombre LIKE :nombre%")
-	public Collection <Proveedor> findByNombre(@Param("nombre") String nombre);
+	@Query("SELECT proveedor FROM Proveedor proveedor WHERE proveedor.nombre =:nombre")
+	public Collection<Proveedor> findByNombre(@Param("nombre") String nombre);
 	
 	Collection<Proveedor> findAll() throws DataAccessException;
 	
-	void delete(String nombre) throws DataAccessException;
+	//void delete(String nombre) throws DataAccessException;
 	
 
 }

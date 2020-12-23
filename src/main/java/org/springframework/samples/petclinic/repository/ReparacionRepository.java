@@ -11,7 +11,6 @@ public interface ReparacionRepository {
 
 	void save(Reparacion reparacion) throws DataAccessException;
 
-	@Query("SELECT DISTINCT reparacion FROM Reparacion reparacion left join fetch reparacion.precio, reparacion.tipoReparacion WHERE reparacion.id=:id")
 	public Reparacion findByID(@Param("id") Integer id);
 
 	Collection<Reparacion> findAll() throws DataAccessException;

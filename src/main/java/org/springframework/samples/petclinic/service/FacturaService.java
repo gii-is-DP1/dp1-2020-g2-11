@@ -27,15 +27,15 @@ public class FacturaService {
 		return facturaRepository.findById(id);
 	}
 
-	@Transactional(readOnly = true)
-	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
-		return facturaRepository.findByFechaEmision(fecha);
-	}
+//	@Transactional(readOnly = true)
+//	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
+//		return facturaRepository.findByFechaEmision(fecha);
+//	}
 	
-	@Transactional(readOnly = true)
-	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
-		return facturaRepository.findByPagado(pagado);
-	}
+//	@Transactional(readOnly = true)
+//	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
+//		return facturaRepository.findByPagado(pagado);
+//	}
 
 	@Transactional
 	public void saveFactura(Factura factura) throws DataAccessException, TipoPagoException {
@@ -48,10 +48,10 @@ public class FacturaService {
 		}
 	}
 	
-	@Transactional
-	public void updateFactura(Factura factura) throws DataAccessException {
-		facturaRepository.update(factura);
-	}
+//	@Transactional
+//	public void updateFactura(Factura factura) throws DataAccessException {
+//		facturaRepository.update(factura);
+//	}
 
 	@Transactional(readOnly = true)
 	public Collection<Factura> findFacturas() throws DataAccessException {

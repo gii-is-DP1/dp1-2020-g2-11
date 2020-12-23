@@ -10,7 +10,12 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "factura")
 public class Factura extends BaseEntity {
 	
@@ -33,57 +38,5 @@ public class Factura extends BaseEntity {
 	@ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-	
-	public Boolean getPagado() {
-		return pagado;
-	}
-
-	public void setPagado(Boolean pagado) {
-		this.pagado = pagado;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public Double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(Double precio) {
-		this.precio = precio;
-	}
-
-	public TipoPago getTipoPago() {
-		return tipoPago;
-	}
-
-	public void setTipoPago(TipoPago tipoPago) {
-		this.tipoPago = tipoPago;
-	}
-
-	public LocalDate getFechaEmision() {
-		return fechaEmision;
-	}
-
-	public void setHoraEmision(LocalDate fechaEmision) {
-		this.fechaEmision = fechaEmision;
-	}
-	
-	
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	
-	
 
 }
