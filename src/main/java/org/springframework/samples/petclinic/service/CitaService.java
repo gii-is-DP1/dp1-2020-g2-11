@@ -32,6 +32,7 @@ public class CitaService {
 		int n_otherEstancias= estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
 		int n_otherCitas= citaRepository.findByFechaCita(estancia.getFechaEntrada().toLocalDate()).size();
 		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
+
 			estanciaRepository.save(estancia);
 		}else {
 			throw new SobrecargaDeVehiculosException();
@@ -44,5 +45,4 @@ public class CitaService {
 	public Collection<Estancia> findEstanciasActuales() {
 		return estanciaRepository.findByEstacionados();
 	}
-	
 }
