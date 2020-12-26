@@ -39,10 +39,10 @@ public class ProveedorService {
 		return proveedorRepository.findAll();
 	}
 	
-	@Transactional
-	public void deleteProveedor(String nombre) throws DataAccessException {
-		proveedorRepository.delete(nombre);
-	}
+//	@Transactional
+//	public void deleteProveedor(String nombre) throws DataAccessException {
+//		proveedorRepository.delete(nombre);
+//	}
 	
 	@Transactional(readOnly = true)	
 	public Collection<Pedido> findPedidos() throws DataAccessException {
