@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
-import java.time.LocalDate;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -43,7 +43,7 @@ public class Estancia extends BaseEntity {
 	}
 
 	public Integer getDuracion() {
-		return fechaSalida.compareTo(fechaEntrada);
+		return (int) Duration.between(this.fechaEntrada, this.fechaSalida).toHours();
 	}
 	
 }
