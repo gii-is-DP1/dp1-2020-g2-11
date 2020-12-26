@@ -21,7 +21,7 @@ public class CitaService {
 	@Transactional(rollbackFor = SobrecargaDeVehiculosException.class)
 	public void saveCita(Cita cita) throws DataAccessException,SobrecargaDeVehiculosException {
 		int n_otherCitas= citaRepository.findByFechaCita(cita.getFechaCita()).size();
-		int n_otherEstancias= estanciaRepository.findByEstacionados(null).size();
+		int n_otherEstancias= estanciaRepository.findByEstacionados().size();
 		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
 			citaRepository.save(cita);
 		}else {
@@ -30,7 +30,7 @@ public class CitaService {
 	}
 	public void saveEstancia(Estancia estancia) throws DataAccessException,SobrecargaDeVehiculosException{
 		int n_otherEstancias= estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
-		int n_otherCitas= citaRepository.findByFechaCita(estancia.getFechaEntrada()).size();
+		int n_otherCitas= citaRepository.findByFechaCita(estancia.getFechaEntrada().toLocalDate()).size();
 		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
 			estanciaRepository.save(estancia);
 		}else {
@@ -42,7 +42,7 @@ public class CitaService {
 	}
 	
 	public Collection<Estancia> findEstanciasActuales() {
-		return estanciaRepository.findByEstacionados(null);
+		return estanciaRepository.findByEstacionados();
 	}
 	
 }

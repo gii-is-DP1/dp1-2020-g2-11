@@ -12,16 +12,11 @@ public class AdministradorService {
 	
 	private AdministradorRepository administradorRepository;
 
-	@Transactional
-	public void updateAdministrador(Administrador administrador) {
-		administradorRepository.update(administrador);
-	}
+//	@Transactional
+//	public void updateAdministrador(Integer id) {
+//		administradorRepository.update(id);
+//	}
 
-	@Transactional
-	public Administrador findAdministrador() throws DataAccessException {
-		return administradorRepository.findAdministrador();
-	}
-	
 	@Transactional
 	public void saveAdministrador(Administrador administrador) throws DataAccessException {
 		administradorRepository.save(administrador);

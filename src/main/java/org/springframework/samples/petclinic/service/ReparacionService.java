@@ -36,10 +36,10 @@ public class ReparacionService {
 		reparacionRepository.save(reparacion);
 	}
 
-	@Transactional
-	public void updateReparacion(Reparacion reparacion) throws DataAccessException {
-		reparacionRepository.update(reparacion);
-	}
+//	@Transactional
+//	public void updateReparacion(Reparacion reparacion) throws DataAccessException {
+//		reparacionRepository.update(reparacion);
+//	}
 
 	@Transactional(readOnly = true)
 	public Collection<Reparacion> findReparaciones() throws DataAccessException {
@@ -48,7 +48,7 @@ public class ReparacionService {
 
 	@Transactional(readOnly = true)
 	public Reparacion findReparacionById(Integer id) throws DataAccessException {
-		return reparacionRepository.findByID(id);
+		return reparacionRepository.findById(id);
 	}
 
 	@Transactional(readOnly = true)
@@ -75,10 +75,10 @@ public class ReparacionService {
 		}
 	}
 
-	@Transactional
-	public void deleteVehiculo(String matricula) throws DataAccessException {
-		vehiculoRepository.delete(matricula);
-	}
+//	@Transactional
+//	public void deleteVehiculo(String matricula) throws DataAccessException {
+//		vehiculoRepository.delete(matricula);
+//	}
 
 	@Transactional(readOnly = true)
 	public Collection<Revision> findRevisionByFecha(LocalDate fechaRevision) throws DataAccessException {
@@ -92,6 +92,6 @@ public class ReparacionService {
 
 	@Transactional
 	public void deleteRevision(Integer idRevision) throws DataAccessException {
-		revisionRepository.delete(idRevision);
+		revisionRepository.deleteById(idRevision);
 	}
 }
