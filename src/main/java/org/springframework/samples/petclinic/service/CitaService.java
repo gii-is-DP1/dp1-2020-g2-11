@@ -28,6 +28,7 @@ public class CitaService {
 			throw new SobrecargaDeVehiculosException();
 		}
 	}
+	
 	public void saveEstancia(Estancia estancia) throws DataAccessException,SobrecargaDeVehiculosException{
 		int n_otherEstancias= estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
 		int n_otherCitas= citaRepository.findByFechaCita(estancia.getFechaEntrada().toLocalDate()).size();
@@ -38,6 +39,7 @@ public class CitaService {
 			throw new SobrecargaDeVehiculosException();
 		}
 	}
+	
 	public Collection<Cita> findCitaByFechaCita(LocalDate fecha) {
 		return citaRepository.findByFechaCita(fecha);
 	}
