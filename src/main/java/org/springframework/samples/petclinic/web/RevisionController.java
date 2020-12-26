@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class RevisionController {
 	@GetMapping(value = { "/revision" })
 	public String findRevisionByFecha(Revision revision, BindingResult res, Map<String, Object> model) {
 		if (revision.getFechaRevision() == null) {
-			revision.setFechaRevision(""); // empty string signifies broadest possible search
+			revision.setFechaRevision(LocalDate.parse("")); // empty string signifies broadest possible search
 		}
 		Collection<Revision> results= this.reparacionService.findRevisionByFecha(revision.getFechaRevision());
 		if (results.isEmpty()) {
