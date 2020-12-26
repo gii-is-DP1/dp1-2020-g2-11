@@ -21,7 +21,7 @@ import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cita;
 
@@ -31,15 +31,10 @@ import org.springframework.samples.petclinic.model.Cita;
  * @author Michael Isvy
  * @since 15.1.2013
  */
-public interface CitaRepository extends Repository<Cita, Integer> {
+public interface CitaRepository extends CrudRepository<Cita, Integer> {
 
-	void save(Cita cita) throws DataAccessException;
-
-	@Query("SELECT DISTINCT cita FROM Cita cita left join fetch cita.horaCita WHERE cita.fechaCita LIKE :fechaCita%")
-	public Collection<Cita> findByFechaCita(@Param("fechaCita") LocalDate fechaCita);
-
-	@Query("SELECT cita FROM Cita cita left join fetch cita.fechaCita, cita.horaCita WHERE cita.id =:id")
-	public Cita findById(@Param("id") int id);
+	@Query("SELECT DISTINCT c FROM Cita c WHERE c.fechaCita = :fechaCita")
+	Collection<Cita> findByFechaCita(@Param("fechaCita") LocalDate fechaCita);
 	
 	@Query("SELECT DISTINCT cita FROM Cita cita left join fetch cita.horaCita WHERE cita.fechaCita LIKE :fechaCita && cita.horaCita =: cita.horaCita%")
 	public Collection<Cita> findByFechaCitaAndHoraCita(@Param("fechaCita") LocalDate fechaCita,@Param("horaCita") LocalTime horaCita);

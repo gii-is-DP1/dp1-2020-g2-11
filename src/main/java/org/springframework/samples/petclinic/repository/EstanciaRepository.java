@@ -15,16 +15,14 @@
  */
 package org.springframework.samples.petclinic.repository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Estancia;
-
-import ch.qos.logback.core.util.Duration;
 
 /**
  * Spring Data JPA OwnerRepository interface
@@ -32,18 +30,13 @@ import ch.qos.logback.core.util.Duration;
  * @author Michael Isvy
  * @since 15.1.2013
  */
-public interface EstanciaRepository extends Repository<Estancia, Integer> {
+public interface EstanciaRepository extends CrudRepository<Estancia, Integer> {
 
-	void save(Estancia estancia) throws DataAccessException;
-
-	@Query("SELECT DISTINCT cita FROM Estancia estancia left join fetch estancia.fechaEntrada, estancia.fechaSalida, estancia.duracion WHERE estancia.fechaEntrada LIKE :fechaEntrada%")
-	public Collection<Estancia> findByFechaEstancia(@Param("fechaEntrada") LocalDate fechaEntrada);
-
-	@Query("SELECT estancia FROM Estancia estancia left join fetch estancia.fechaEntrada, estancia.fechaSalida, estancia.duracion WHERE estancia.id =:id")
-	public Estancia findById(@Param("id") int id);
+	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.fechaEntrada = :fechaEntrada")
+	Collection<Estancia> findByFechaEstancia(@Param("fechaEntrada") LocalDateTime fechaEntrada);
 	
-	@Query("SELECT DISTINCT cita FROM Estancia estancia left join fetch estancia.fechaEntrada, estancia.fechaSalida, estancia.duracion WHERE estancia.duracion =:null%")
-	public Collection<Estancia> findByEstacionados(@Param("duracion") Duration duracion);
+	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.duracion = :null")
+	Collection<Estancia> findByEstacionados();
 
 	Collection<Estancia> findAll() throws DataAccessException;
 
