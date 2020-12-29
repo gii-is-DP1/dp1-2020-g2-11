@@ -34,7 +34,7 @@ public class AdministradorServiceTest {
 		admin.setUser(usuario);                
                 
 		this.administradorService.saveAdministrador(admin);
-		Administrador administradores = this.administradorService.findAdministrador();
+		Administrador administradores = this.administradorService.;
 		assertThat(administradores).isNotNull();
 	}
 	

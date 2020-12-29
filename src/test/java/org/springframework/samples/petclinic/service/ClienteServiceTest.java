@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,8 +102,8 @@ class ClienteServiceTest {
 		cliente.setUser(user);
 		
 		clienteService.saveCliente(cliente);
-		Cliente clientes = this.clienteService.findClienteById(25);
-		assertThat(clientes.getId()).isNull();
+		Optional<Cliente> clientes = this.clienteService.findClienteById(25);
+		assertThat(clientes.get()).isNull();
 	}
 	
 	@Test
@@ -121,8 +122,8 @@ class ClienteServiceTest {
 		cliente.setUser(user);
 		
 		clienteService.saveCliente(cliente);
-		Cliente clientes = this.clienteService.findClienteByNombre("Antonio");
-		assertThat(clientes.getNombre()).isNotNull();
+		Collection<Cliente> clientes = this.clienteService.findClienteByNombre("Antonio");
+		assertThat(clientes.size()).isNotNull();
 	}
 	
 	@Test
