@@ -20,7 +20,7 @@ public class ProductoController {
 
 	@GetMapping(value = { "/producto" })
 	public String findAllProductos(Map<String, Object> model) {
-		Collection<Producto> productos = productoService.findProductos();
+		Collection<Producto> productos = (Collection<Producto>) productoService.findProductos();
 		model.put("selections", productos);
 		return "producto/ListaProductos";
 	}

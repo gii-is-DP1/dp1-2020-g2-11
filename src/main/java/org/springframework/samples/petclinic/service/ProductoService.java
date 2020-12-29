@@ -25,8 +25,8 @@ public class ProductoService {
 	}
 	
 	@Transactional
-	public void deleteProducto(String referencia) throws DataAccessException {
-		productoRepository.delete(referencia);
+	public void deleteProducto(Producto producto) throws DataAccessException {
+		productoRepository.delete(producto);
 	}
 	
 //	@Transactional
@@ -41,7 +41,7 @@ public class ProductoService {
 	
 	@Transactional(readOnly = true)	
 	public Collection<Producto> findProductos() throws DataAccessException {
-		return productoRepository.findAll();
+		return (Collection<Producto>) productoRepository.findAll();
 	}
 	
 	@Transactional(readOnly = true)

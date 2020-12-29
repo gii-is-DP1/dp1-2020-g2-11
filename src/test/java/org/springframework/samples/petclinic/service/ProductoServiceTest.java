@@ -49,7 +49,7 @@ class ProductoServiceTest {
 		producto.setStock(7);
 
 		productoService.saveProducto(producto);
-		productoService.deleteProducto("95/70R15");
+		productoService.deleteProducto(producto);
 		assertThat(producto.getReferencia()).isNull();
 	}
 
@@ -80,7 +80,7 @@ class ProductoServiceTest {
 		producto.setStock(7);
 
 		productoService.saveProducto(producto);
-		Collection<Producto> productos = this.productoService.findProductos();
+		Collection<Producto> productos = (Collection<Producto>) this.productoService.findProductos();
 		assertThat(productos.size()).isEqualTo(1);
 	}
 
