@@ -18,7 +18,7 @@ public class ProveedorServiceTest {
 	
 	@Autowired
 	protected ProveedorService proveedorService;
-	
+	private Proveedor proveedor;
 	void newProveedor() throws DataAccessException{
 		
 	}
@@ -27,7 +27,7 @@ public class ProveedorServiceTest {
 	@Transactional
 	public void shouldInsertProveedor() {
 
-		Proveedor proveedor = new Proveedor();
+		proveedor = new Proveedor();
 		proveedor.setNombre("Aceites Juan");
 		proveedor.setTelefono("655212326");
 		proveedor.setDireccion("C/Jacinto");
@@ -43,13 +43,13 @@ public class ProveedorServiceTest {
 	@Transactional
 	public void shoulFindProveedorByNombre() {
 
-		Proveedor proveedor1 = new Proveedor();
-		proveedor1.setNombre("Aceites Juan");
-		proveedor1.setTelefono("655212326");
-		proveedor1.setDireccion("C/Jacinto");
-		proveedor1.setEmail("aceitesjuan@gmail.com");         
+		proveedor = new Proveedor();
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");         
                 
-		proveedorService.saveProveedor(proveedor1);
+		proveedorService.saveProveedor(proveedor);
 		Collection<Proveedor> proveedores = this.proveedorService.findProveedorByNombre("Aceites Juan");
 		assertThat(proveedores.size()).isEqualTo(1);
 
@@ -59,13 +59,13 @@ public class ProveedorServiceTest {
 	@Transactional
 	public void shoulFindAllProveedores() {
 
-		Proveedor proveedor2 = new Proveedor();
-		proveedor2.setNombre("Aceites Pedro");
-		proveedor2.setTelefono("655442326");
-		proveedor2.setDireccion("C/Guadalquivie");
-		proveedor2.setEmail("aceitespedro@gmail.com");         
+		proveedor = new Proveedor();
+		proveedor.setNombre("Aceites Pedro");
+		proveedor.setTelefono("655442326");
+		proveedor.setDireccion("C/Guadalquivie");
+		proveedor.setEmail("aceitespedro@gmail.com");         
                 
-		proveedorService.saveProveedor(proveedor2);
+		proveedorService.saveProveedor(proveedor);
 		Collection<Proveedor> proveedores = this.proveedorService.findProveedorByNombre("Aceites Juan");
 		assertThat(proveedores.size()).isEqualTo(2);
 	}
@@ -74,14 +74,15 @@ public class ProveedorServiceTest {
 	@Transactional
 	public void shoulDeleteProveedores() {
 
-		Proveedor proveedor2 = new Proveedor();
-		proveedor2.setNombre("Neumaticos Paco");
-		proveedor2.setTelefono("655442233");
-		proveedor2.setDireccion("C/Reina Mercedes");
-		proveedor2.setEmail("neumaticosPaco@gmail.com");         
+		proveedor = new Proveedor();
+		proveedor.setId(1);
+		proveedor.setNombre("Neumaticos Paco");
+		proveedor.setTelefono("655442233");
+		proveedor.setDireccion("C/Reina Mercedes");
+		proveedor.setEmail("neumaticosPaco@gmail.com");         
                 
-		proveedorService.saveProveedor(proveedor2);
-		proveedorService.deleteProveedor("Neumaticos Paco");
+		proveedorService.saveProveedor(proveedor);
+		proveedorService.deleteProveedor(proveedor);
 		assertThat(proveedorService.findProveedorByNombre("Neumaticos Paco")).isNull();
 		
 	}
