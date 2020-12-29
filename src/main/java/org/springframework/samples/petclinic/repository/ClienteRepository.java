@@ -33,8 +33,8 @@ public interface ClienteRepository extends CrudRepository<Cliente, Integer> {
 	@Query("SELECT c FROM Cliente c WHERE c.nombre = :nombre")
 	public Collection<Cliente> findByNombre(@Param("nombre") String nombre);
 
-	@Query("SELECT c FROM Cliente c WHERE c.factura.id = :idFactura")
-	public Cliente findByIdFactura(@Param("idFactura") Integer idFactura);
+//	@Query("SELECT c FROM Cliente c WHERE c.factura.id = :idFactura")
+//	public Cliente findByIdFactura(@Param("idFactura") Integer idFactura);
 	
 	Collection<Cliente> findAll() throws DataAccessException;
 		
