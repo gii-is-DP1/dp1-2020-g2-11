@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -23,19 +24,19 @@ public class FacturaService {
 	}
 
 	@Transactional(readOnly = true)
-	public Factura findFacturabyId(Integer id) throws DataAccessException {
+	public Optional<Factura> findFacturabyId(Integer id) throws DataAccessException {
 		return facturaRepository.findById(id);
 	}
 
-//	@Transactional(readOnly = true)
-//	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
-//		return facturaRepository.findByFechaEmision(fecha);
-//	}
+	@Transactional(readOnly = true)
+	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
+		return facturaRepository.findByFechaEmision(fecha);
+	}
 	
-//	@Transactional(readOnly = true)
-//	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
-//		return facturaRepository.findByPagado(pagado);
-//	}
+	@Transactional(readOnly = true)
+	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
+		return facturaRepository.findByPagado(pagado);
+	}
 
 	@Transactional
 	public void saveFactura(Factura factura) throws DataAccessException, TipoPagoException {
