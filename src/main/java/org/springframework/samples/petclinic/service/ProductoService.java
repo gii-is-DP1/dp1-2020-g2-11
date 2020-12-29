@@ -25,10 +25,10 @@ public class ProductoService {
 		productoRepository.save(producto);
 	}
 	
-//	@Transactional
-//	public void deleteProducto(String referencia) throws DataAccessException {
-//		productoRepository.delete(referencia);
-//	}
+	@Transactional
+	public void deleteProducto(String referencia) throws DataAccessException {
+		productoRepository.delete(referencia);
+	}
 	
 //	@Transactional
 //	public void updateProducto(Producto producto) throws DataAccessException, ProductoStockSeguridad {
@@ -45,20 +45,20 @@ public class ProductoService {
 		return productoRepository.findAll();
 	}
 	
-//	@Transactional(readOnly = true)
-//	public Producto findProductoByReferencia(String referencia) throws DataAccessException {
-//		return productoRepository.findByReferencia(referencia);
-//	}
+	@Transactional(readOnly = true)
+	public Producto findProductoByReferencia(String referencia) throws DataAccessException {
+		return productoRepository.findByReferencia(referencia);
+	}
 	
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductoByMarca(String marca) throws DataAccessException {
 		return productoRepository.findByMarca(marca);
 	}
 	
-//	@Transactional(readOnly = true)
-//	public Collection<Producto> findProductoByNombre(String nombre) throws DataAccessException {
-//		return productoRepository.findByNombre(nombre);
-//	}
+	@Transactional(readOnly = true)
+	public Collection<Producto> findProductoByNombre(String nombre) throws DataAccessException {
+		return productoRepository.findByNombre(nombre);
+	}
 
 	
 }
