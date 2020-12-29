@@ -21,4 +21,10 @@ public class AdministradorService {
 	public void saveAdministrador(Administrador administrador) throws DataAccessException {
 		administradorRepository.save(administrador);
 	}
+	
+	@Transactional
+	public Administrador findAdministrador() throws DataAccessException {
+		return (Administrador) administradorRepository.findAll();
+	}
+	
 }

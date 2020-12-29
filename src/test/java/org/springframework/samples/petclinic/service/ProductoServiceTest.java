@@ -32,7 +32,7 @@ class ProductoServiceTest {
 		producto.setMarca("Castrol");
 		producto.setReferencia("102375");
 		producto.setStock(7);
-		producto.setStockseguridad(3);
+		producto.setStockSeguridad(3);
 
 		productoService.saveProducto(producto);
 		assertThat(producto.getMarca()).isNotNull();

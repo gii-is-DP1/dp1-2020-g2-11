@@ -19,24 +19,23 @@ import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cliente;
 
-public interface ClienteRepository extends Repository<Cliente, Integer> {
+public interface ClienteRepository extends CrudRepository<Cliente, Integer> {
 	
-	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.factura WHERE cliente.dni LIKE :dni%")
+	@Query("SELECT DISTINCT c FROM Cliente c WHERE c.dni = :dni")
 	public Collection<Cliente> findByDni(@Param("dni") String dni);        
 
 	public Cliente findById(@Param("id") int id);	
 
-	@Query("SELECT DISTINCT cliente FROM Cliente cliente left join fetch cliente.factura WHERE cliente.nombre LIKE :nombre%")
+	@Query("SELECT c FROM Cliente c WHERE c.nombre = :nombre")
 	public Collection<Cliente> findByNombre(@Param("nombre") String nombre);
-	
-    void save(Cliente cliente) throws DataAccessException; 
+
+//	@Query("SELECT c FROM Cliente c WHERE c.factura.id = :idFactura")
+//	public Cliente findByIdFactura(@Param("idFactura") Integer idFactura);
 	
 	Collection<Cliente> findAll() throws DataAccessException;
-
-	void delete(Cliente cliente) throws DataAccessException;
 		
 }

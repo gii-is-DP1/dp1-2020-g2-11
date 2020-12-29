@@ -27,7 +27,7 @@ public class Producto {
 	@Column(name = "marca")
 	private String marca;
 
-	@Column(name = "stockseguridad")
-	private Integer stockseguridad;
+	@Column(name = "stockSeguridad")
+	private Integer stockSeguridad;
 
 }
