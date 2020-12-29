@@ -41,9 +41,21 @@ import lombok.Setter;
 public class Cliente extends Person {
 	
 	@OneToMany(mappedBy ="cliente")
-	private List<Factura> factura;
+	private List<Factura> facturas;
+	
+//	@Column(name ="factura")
+//	private Factura factura;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
+	
+//	public Factura getFacturas(Integer idFactura) {
+//		for(int i=0;i<facturas.size();i++) {
+//			if(idFactura == facturas.get(i).getId()) {
+//				this.factura = facturas.get(i);
+//			}
+//		}		
+//		return factura;
+//	}	
 }
