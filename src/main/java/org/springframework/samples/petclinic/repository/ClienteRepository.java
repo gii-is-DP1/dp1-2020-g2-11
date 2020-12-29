@@ -25,7 +25,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 
 public interface ClienteRepository extends CrudRepository<Cliente, Integer> {
 	
-	@Query("SELECT DISTINCT c FROM Cliente c WHERE c.dni = :dni%")
+	@Query("SELECT DISTINCT c FROM Cliente c WHERE c.dni = :dni")
 	public Collection<Cliente> findByDni(@Param("dni") String dni);        
 
 	public Cliente findById(@Param("id") int id);	
