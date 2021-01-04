@@ -17,7 +17,6 @@ public class AdministradorServiceTest {
 	@Autowired
 	protected AdministradorService administradorService;
 	
-	
 	@Test
 	@Transactional
 	public void shouldInsertAdministrador() {

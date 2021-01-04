@@ -51,4 +51,8 @@ public class CitaService {
 	public void removeCita(Integer id) {
 		citaRepository.remove(id);
 	}
+	
+	public Collection<Cita> findAll(){
+		return (Collection<Cita>) citaRepository.findAll();
+	}
 }
