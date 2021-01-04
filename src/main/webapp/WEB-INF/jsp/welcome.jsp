@@ -5,6 +5,16 @@
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
 <TalleresLaPlata:layout pageName="home">
+<Body>
+	<header>
+        <nav>
+            <ul>
+                <li><img src="images/LogoTaller.jpg" alt="LogoTaller" width="40"></li>
+                <li><a href="FormularioCliente.jsp">Iniciar sesion</a></li>
+                <li><a href="Registro.jsp">Registrse</a></li>
+            </ul>
+        </nav>
+	</header>
     <h2>BIENVENIDOS</h2>
     <div class="row">
         <div class="col-md-12">
@@ -12,4 +22,5 @@
             <img src="${logoTaller}" width="300" height="200"/>
         </div>
     </div>
+    </Body>
 </TalleresLaPlata:layout>
