@@ -47,4 +47,8 @@ public class CitaService {
 	public Collection<Estancia> findEstanciasActuales() {
 		return estanciaRepository.findByEstacionados();
 	}
+	
+	public void removeCita(Integer id) {
+		citaRepository.remove(id);
+	}
 }

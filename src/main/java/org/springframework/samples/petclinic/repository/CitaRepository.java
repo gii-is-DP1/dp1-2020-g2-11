@@ -20,6 +20,7 @@ import java.time.LocalTime;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -40,5 +41,8 @@ public interface CitaRepository extends CrudRepository<Cita, Integer> {
 	Collection<Cita> findByFechaCitaAndHoraCita(@Param("fechaCita") LocalDate fechaCita,@Param("horaCita") LocalTime horaCita);
 	
 	Collection<Cita> findAll() throws DataAccessException;
-
+	
+	@Modifying
+	@Query("DELETE c FROM Cita c WHERE c.id = :id")
+	void remove(@Param("id") Integer id);	
 }
