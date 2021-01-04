@@ -38,20 +38,20 @@ class ProductoServiceTest {
 		assertThat(producto.getMarca()).isNotNull();
 	}
 
-//	@Test
-//	@Transactional
-//	public void shouldDeleteProducto() {
-//
-//		producto = new Producto();
-//		producto.setNombre("Neumaticos");
-//		producto.setMarca("Nexen");
-//		producto.setReferencia("95/70R15");
-//		producto.setStock(7);
-//
-//		productoService.saveProducto(producto);
-//		productoService.deleteProducto(producto);
-//		assertThat(producto.getReferencia()).isNull();
-//	}
+	@Test
+	@Transactional
+	public void shouldDeleteProducto() {
+
+		producto = new Producto();
+		producto.setNombre("Neumaticos");
+		producto.setMarca("Nexen");
+		producto.setReferencia("95/70R15");
+		producto.setStock(7);
+
+		productoService.saveProducto(producto);
+		productoService.deleteProducto("95/70R15");
+		assertThat(producto.getReferencia()).isNull();
+	}
 
 //	@Test
 //	@Transactional

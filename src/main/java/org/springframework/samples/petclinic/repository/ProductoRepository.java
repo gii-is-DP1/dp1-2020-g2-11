@@ -17,5 +17,8 @@ public interface ProductoRepository extends CrudRepository<Producto, Integer>{
 	
 	@Query("SELECT p FROM Producto p WHERE p.referencia =:referencia")
 	Producto findByReferencia(@Param("referencia") String referencia);
+	
+	@Query("DELETE FROM Producto p WHERE p.referencia = :referencia")
+	void remove(String referencia);
 
 }
