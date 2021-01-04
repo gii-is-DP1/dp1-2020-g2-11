@@ -43,6 +43,6 @@ public interface CitaRepository extends CrudRepository<Cita, Integer> {
 	Collection<Cita> findAll() throws DataAccessException;
 	
 	@Modifying
-	@Query("DELETE c FROM Cita c WHERE c.id = :id")
+	@Query("DELETE FROM Cita c WHERE c.id = :id")
 	void remove(@Param("id") Integer id);	
 }

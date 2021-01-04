@@ -125,7 +125,7 @@ public class ReparacionServiceTest {
 		vehiculo.setTipoVehiculo(TipoVehiculo.COCHE);
 
 		this.reparacionService.saveVehiculo(vehiculo);
-	//	this.reparacionService.deleteVehiculo("1234FCD");
+		this.reparacionService.deleteVehiculo("1234FCD");
 		Collection<Vehiculo> vehiculos = this.reparacionService.findVehiculos();
 		assertThat(vehiculos.size()).isEqualTo(0);
 	}

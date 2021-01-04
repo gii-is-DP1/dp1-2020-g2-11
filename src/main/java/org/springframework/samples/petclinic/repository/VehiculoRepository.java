@@ -18,4 +18,7 @@ public interface VehiculoRepository extends CrudRepository<Vehiculo, Integer> {
 	Collection<Vehiculo> findByTipoVehiculo(@Param("tipoVehiculo") TipoVehiculo tipoVehiculo);
 
 	Collection<Vehiculo> findAll() throws DataAccessException;
+
+	@Query("DELETE FROM Vehiculo v WHERE v.matricula = :matricula")
+	void remove(String matricula);
 }

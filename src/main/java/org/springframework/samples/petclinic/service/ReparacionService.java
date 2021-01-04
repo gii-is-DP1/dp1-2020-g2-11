@@ -94,4 +94,8 @@ public class ReparacionService {
 	public void deleteRevision(Integer idRevision) throws DataAccessException {
 		revisionRepository.deleteById(idRevision);
 	}
+
+	public void deleteVehiculo(String matricula) {
+		vehiculoRepository.remove(matricula);
+	}
 }
