@@ -80,7 +80,7 @@ public class ProveedorServiceTest {
 		proveedor.setEmail("neumaticosPaco@gmail.com");         
                 
 		proveedorService.saveProveedor(proveedor);
-		proveedorService.deleteProveedor(proveedor);
+		proveedorService.deleteProveedor(proveedor.getId());
 		assertThat(proveedorService.findProveedorByNombre("Neumaticos Paco")).isNull();
 		
 	}

@@ -40,8 +40,8 @@ public class ProveedorService {
 	}
 	
 	@Transactional
-	public void deleteProveedor(Proveedor proveedor) throws DataAccessException {
-		proveedorRepository.deleteById(proveedor.getId());
+	public void deleteProveedor(Integer id) throws DataAccessException {
+		proveedorRepository.deleteById(id);
 	}
 	
 	@Transactional(readOnly = true)	

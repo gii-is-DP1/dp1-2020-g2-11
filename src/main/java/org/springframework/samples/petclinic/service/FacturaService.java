@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.TipoPago;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
+import org.springframework.samples.petclinic.service.exceptions.NoPagadaException;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class FacturaService {
 	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
 		return facturaRepository.findByFechaEmision(fecha);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
 		return facturaRepository.findByPagado(pagado);
@@ -48,7 +49,7 @@ public class FacturaService {
 			facturaRepository.save(factura);
 		}
 	}
-	
+
 //	@Transactional
 //	public void updateFactura(Factura factura) throws DataAccessException {
 //		facturaRepository.update(factura);
@@ -59,4 +60,14 @@ public class FacturaService {
 		return facturaRepository.findAll();
 	}
 
+	public void deleteFactura(Integer id) throws NoPagadaException {
+		for (Factura f : findFacturas()) {
+			if (f.getPagado() == false) {
+				throw new NoPagadaException();
+			} else {
+				facturaRepository.deleteById(id);
+			}
+		}
+
+	}
 }
