@@ -5,11 +5,11 @@
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
 <TalleresLaPlata:layout pageName="home">
-    <h2><fmt:message key="welcome"/></h2>
+    <h2>BIENVENIDOS</h2>
     <div class="row">
         <div class="col-md-12">
-            <spring:url value="/resources/images/LogoTaller.jpg" htmlEscape="true" var="LogoImage"/>
-            <img class="img-responsive" src="${logoImage}"/>
+            <spring:url value="/resources/images/LogoTaller.jpg" var="logoTaller"/>
+            <img src="${logoTaller}" width="300" height="200"/>
         </div>
     </div>
 </TalleresLaPlata:layout>
