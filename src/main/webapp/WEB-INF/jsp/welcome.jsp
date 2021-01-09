@@ -9,9 +9,8 @@
 	<header>
         <nav>
             <ul>
-                <li><img src="images/LogoTaller.jpg" alt="LogoTaller" width="40"></li>
                 <li><a href="FormularioCliente.jsp">Iniciar sesion</a></li>
-                <li><a href="Registro.jsp">Registrse</a></li>
+                <li><a href="Registro.jsp">Registrese</a></li>
             </ul>
         </nav>
 	</header>
