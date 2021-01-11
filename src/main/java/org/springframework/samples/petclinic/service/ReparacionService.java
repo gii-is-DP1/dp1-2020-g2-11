@@ -24,11 +24,10 @@ public class ReparacionService {
 	private RevisionRepository revisionRepository;
 
 	@Autowired
-	public ReparacionService(ReparacionRepository reparacionRepository, VehiculoRepository vehiculoRepository,
-			RevisionRepository revisionRepository) {
+	public ReparacionService(ReparacionRepository reparacionRepository) {
 		this.reparacionRepository = reparacionRepository;
-		this.vehiculoRepository = vehiculoRepository;
-		this.revisionRepository = revisionRepository;
+//		this.vehiculoRepository = vehiculoRepository;
+//		this.revisionRepository = revisionRepository;
 	}
 
 	@Transactional

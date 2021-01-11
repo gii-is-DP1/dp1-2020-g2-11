@@ -12,7 +12,7 @@ INSERT INTO authorities(id,username,authority) VALUES (3,'cliente1','cliente');
 INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com');
 
 --Mecanicos
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email, username) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com','mecanico1');
 INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Pepe', 'Lopez Vazquez', '17483965D', '633846783','pepelova@gmail.com');
 INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Paco', 'Garcia Marquez', '84927546F', '717362549','pacogama@gmail.com');
 
