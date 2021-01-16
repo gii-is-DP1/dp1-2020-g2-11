@@ -36,6 +36,7 @@ public class MecanicoServiceTest {
 
         usuario1.setUsername("juanperez1");
         usuario1.setPassword("juanperez1");
+        usuario1.setEnabled(true);
         mecanico1.setUser(usuario1);
 
         this.mecanicoService.saveMecanico(mecanico1);

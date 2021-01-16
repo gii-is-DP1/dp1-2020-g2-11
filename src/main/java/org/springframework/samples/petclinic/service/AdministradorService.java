@@ -2,7 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,23 +18,25 @@ public class AdministradorService {
 	private UserService userService;
 	@Autowired
 	private AuthoritiesService authoritiesService;
-//	@Transactional
-//	public void updateAdministrador(Integer id) {
-//		administradorRepository.update(id);
-//	}
-
-	@Transactional
-	public void saveAdministrador(Administrador administrador) throws DataAccessException {
-		administradorRepository.save(administrador);
-		userService.saveUser(administrador.getUser());
-		authoritiesService.saveAuthorities(administrador.getUser().getUsername(), "administrador");
-	}
 	
-	@Transactional
+	@Autowired
+	public AdministradorService(AdministradorRepository administradorRepository) {
+		this.administradorRepository = administradorRepository;
+	}
+
+	@Transactional(readOnly = true)
 	public Collection<Administrador> findAdministrador() throws DataAccessException {
 		return (Collection<Administrador>) administradorRepository.findAll();
 	}
 	
-	
+	@Transactional
+	public void saveAdministrador(Administrador admin) throws DataAccessException {
+		//creating owner
+		administradorRepository.save(admin);		
+		//creating user
+		userService.saveUser(admin.getUser());
+		//creating authorities
+		authoritiesService.saveAuthorities(admin.getUser().getUsername(), "administrador");
+	}
 	
 }
