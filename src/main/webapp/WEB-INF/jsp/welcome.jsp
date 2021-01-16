@@ -6,14 +6,7 @@
 
 <TalleresLaPlata:layout pageName="home">
 <Body>
-	<header>
-        <nav>
-            <ul>
-                <li><a href="FormularioCliente.jsp">Iniciar sesion</a></li>
-                <li><a href="Registro.jsp">Registrese</a></li>
-            </ul>
-        </nav>
-	</header>
+
     <h2>BIENVENIDOS</h2>
     <div class="row">
         <div class="col-md-12">

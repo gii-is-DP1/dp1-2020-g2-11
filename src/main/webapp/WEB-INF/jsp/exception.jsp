@@ -4,10 +4,10 @@
 
 <TalleresLaPlata:layout pageName="error">
 
-    <spring:url value="/resources/images/LogoTaller.jpg" var="LogoImage"/>
-    <img src="${logoImage}"/>
-
-    <h2>Algo va mal...</h2>
+    <h2>Se produjo un error...</h2>
+    
+     <spring:url value="/resources/images/Error.jpg" var="logoTaller"/>
+            <img src="${logoTaller}" width="300" height="200" />
 
     <p>${exception.message}</p>
 
