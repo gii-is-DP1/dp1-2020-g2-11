@@ -63,9 +63,9 @@ INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (3,'2020-12-13', '2020
 INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (4,'2020-12-13', '2020-12-16');
 
 --Producto
-INSERT INTO producto(referencia,stock,nombre,marca,stock_seguridad) VALUES ('NEU54638',10,'Neumaticos','Nexen',4);
-INSERT INTO producto(referencia,stock,nombre,marca,stock_seguridad) VALUES ('71632A',20,'Aceite','Castrol',10);
-INSERT INTO producto(referencia,stock,nombre,marca,stock_seguridad) VALUES ('AS73464',4,'Anticongelante','Repsol',1);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (1,'NEU54638',10,'Neumaticos','Nexen',4);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (2,'71632A',20,'Aceite','Castrol',10);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (3,'AS73464',4,'Anticongelante','Repsol',1);
 
 --Proveedor
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com');
