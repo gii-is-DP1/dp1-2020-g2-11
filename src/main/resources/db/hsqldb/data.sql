@@ -3,24 +3,40 @@ INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
 -- Creamos un usuario para mecanico
 INSERT INTO users(username,password,enabled) VALUES ('mecanico1','m3c4nico',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico');
+INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico1');
+
+INSERT INTO users(username,password,enabled) VALUES ('mecanico2','m3c4nico',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (4,'mecanico2','mecanico2');
+
+INSERT INTO users(username,password,enabled) VALUES ('mecanico3','m3c4nico',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (5,'mecanico3','mecanico3');
+
 -- Creamos un usuario para cliente
 INSERT INTO users(username,password,enabled) VALUES ('cliente1','cl13nte',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (3,'cliente1','cliente');
+INSERT INTO authorities(id,username,authority) VALUES (6,'cliente1','cliente1');
+
+INSERT INTO users(username,password,enabled) VALUES ('cliente2','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (7,'cliente2','cliente2');
+
+INSERT INTO users(username,password,enabled) VALUES ('cliente3','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (8,'cliente3','cliente3');
+
+INSERT INTO users(username,password,enabled) VALUES ('cliente4','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (9,'cliente4','cliente4');
 
 --Administrador
-INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com');
+INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com','admin1');
 
 --Mecanicos
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email, username) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com','mecanico1');
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Pepe', 'Lopez Vazquez', '17483965D', '633846783','pepelova@gmail.com');
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Paco', 'Garcia Marquez', '84927546F', '717362549','pacogama@gmail.com');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com','mecanico1');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Pepe', 'Lopez Vazquez', '17483965D', '633846783','pepelova@gmail.com','mecanico2');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Paco', 'Garcia Marquez', '84927546F', '717362549','pacogama@gmail.com','mecanico3');
 
 --Clientes
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Manuel', 'Viera Rodriguez', '62748364G', '633572849','manuvierod@gmail.com');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Francisco', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Manuel', 'Viera Rodriguez', '62748364G', '633572849','manuvierod@gmail.com','cliente1');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Francisco', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com','cliente2');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com','cliente3');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com','cliente4');
 
 --Cita
 INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (1,'2021-01-04', '10:00');
@@ -35,10 +51,10 @@ INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (3,'2021-01-
 INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (4,'2021-01-07', '2021-01-08', 1200);
 
 --Factura
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (1,'Cambio de aceite', 20.00, 1, '2021-01-08', FALSE);
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (2,'Arreglo pastilla frenos', 50.00, 1, '2021-12-14', TRUE);
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (3,'Arreglo piston de arranque', 100.33, 2, '2020-12-16', FALSE);
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (4,'Cambio de neumaticos', 60.50, 3, '2020-12-16', FALSE);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (1,'Cambio de aceite', 20.00, 1, '2021-01-08', FALSE,1);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (2,'Arreglo pastilla frenos', 50.00, 1, '2021-12-14', TRUE,2);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (3,'Arreglo piston de arranque', 100.33, 2, '2020-12-16', FALSE,3);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (4,'Cambio de neumaticos', 60.50, 3, '2020-12-16', FALSE,4);
 
 --Pedido
 INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (1,'2020-12-10', '2020-12-14');
@@ -47,9 +63,9 @@ INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (3,'2020-12-13', '2020
 INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (4,'2020-12-13', '2020-12-16');
 
 --Producto
-INSERT INTO producto(referencia,stock,nombre,marca,stock_seguridad) VALUES ('NEU54638',10,'Neumaticos','Nexen',4);
-INSERT INTO producto(referencia,stock,nombre,marca,stock_seguridad) VALUES ('71632A',20,'Aceite','Castrol',10);
-INSERT INTO producto(referencia,stock,nombre,marca,stock_seguridad) VALUES ('AS73464',4,'Anticongelante','Repsol',1);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (1,'NEU54638',10,'Neumaticos','Nexen',4);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (2,'71632A',20,'Aceite','Castrol',10);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (3,'AS73464',4,'Anticongelante','Repsol',1);
 
 --Proveedor
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com');

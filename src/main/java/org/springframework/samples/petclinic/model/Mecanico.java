@@ -15,8 +15,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "mecanico")
+
 public class Mecanico extends Person {
-	
 
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
