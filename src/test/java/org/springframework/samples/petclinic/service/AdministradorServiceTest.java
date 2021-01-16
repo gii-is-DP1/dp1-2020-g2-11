@@ -34,8 +34,8 @@ public class AdministradorServiceTest {
 		admin.setEmail("juanperez9@gmail.com");
 		admin.setTelefono("644895623");
 
-		usuario1.setUsername("juanperez1");
-		usuario1.setPassword("juanperez1");
+		usuario1.setUsername("admin2");
+		usuario1.setPassword("admin2");
 		admin.setUser(usuario1);
 
 		this.administradorService.saveAdministrador(admin);

@@ -25,7 +25,7 @@ INSERT INTO users(username,password,enabled) VALUES ('cliente4','cl13nte',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'cliente4','cliente4');
 
 --Administrador
-INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com');
+INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com','admin1');
 
 --Mecanicos
 INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com','mecanico1');
