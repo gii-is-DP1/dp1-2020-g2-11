@@ -3,24 +3,40 @@ INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
 -- Creamos un usuario para mecanico
 INSERT INTO users(username,password,enabled) VALUES ('mecanico1','m3c4nico',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico');
+INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico1');
+
+INSERT INTO users(username,password,enabled) VALUES ('mecanico2','m3c4nico',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (4,'mecanico2','mecanico2');
+
+INSERT INTO users(username,password,enabled) VALUES ('mecanico3','m3c4nico',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (5,'mecanico3','mecanico3');
+
 -- Creamos un usuario para cliente
 INSERT INTO users(username,password,enabled) VALUES ('cliente1','cl13nte',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (3,'cliente1','cliente');
+INSERT INTO authorities(id,username,authority) VALUES (6,'cliente1','cliente1');
+
+INSERT INTO users(username,password,enabled) VALUES ('cliente2','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (7,'cliente2','cliente2');
+
+INSERT INTO users(username,password,enabled) VALUES ('cliente3','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (8,'cliente3','cliente3');
+
+INSERT INTO users(username,password,enabled) VALUES ('cliente4','cl13nte',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (9,'cliente4','cliente4');
 
 --Administrador
 INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com');
 
 --Mecanicos
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email, username) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com','mecanico1');
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Pepe', 'Lopez Vazquez', '17483965D', '633846783','pepelova@gmail.com');
-INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Paco', 'Garcia Marquez', '84927546F', '717362549','pacogama@gmail.com');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Juan', 'Perez Barea', '45637892P', '654738291','juanpeba@gmail.com','mecanico1');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Pepe', 'Lopez Vazquez', '17483965D', '633846783','pepelova@gmail.com','mecanico2');
+INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Paco', 'Garcia Marquez', '84927546F', '717362549','pacogama@gmail.com','mecanico3');
 
 --Clientes
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (1, 'Manuel', 'Viera Rodriguez', '62748364G', '633572849','manuvierod@gmail.com');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (2, 'Francisco', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Manuel', 'Viera Rodriguez', '62748364G', '633572849','manuvierod@gmail.com','cliente1');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Francisco', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com','cliente2');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com','cliente3');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com','cliente4');
 
 --Cita
 INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (1,'2021-01-04', '10:00');
