@@ -36,7 +36,7 @@ public class MecanicoServiceTest {
         User usuario1 = new User();
         mecanico1.setNombre("Juan");
         mecanico1.setApellidos("Pérez");
-        mecanico1.setDni("788624578K");
+        mecanico1.setDni("78862457K");
         mecanico1.setId(2);
         mecanico1.setEmail("juanperez9@gmail.com");
         mecanico1.setTelefono("644895623");
@@ -47,7 +47,7 @@ public class MecanicoServiceTest {
 
         this.mecanicoService.saveMecanico(mecanico1);
         Collection<Mecanico> mecanicos = this.mecanicoService.findMecanico();
-        assertThat(mecanicos.size()).isEqualTo(1);
+        assertThat(mecanicos.size()).isEqualTo(3);
 
     }
 
