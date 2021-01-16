@@ -57,7 +57,7 @@ public class FacturaService {
 
 	@Transactional(readOnly = true)
 	public Collection<Factura> findFacturas() throws DataAccessException {
-		return facturaRepository.findAll();
+		return (Collection<Factura>) facturaRepository.findAll();
 	}
 
 	public void deleteFactura(Integer id) throws NoPagadaException {

@@ -17,16 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MecanicoServiceTest {
     @Autowired
     protected MecanicoService mecanicoService;
-
-//    private Mecanico mecanico;
     private User user;
-
-      
-//    void setup() {
-//
-//        mecanico = mecanicoService.findById(1);
-//
-//    }
 
     @Test
     @Transactional

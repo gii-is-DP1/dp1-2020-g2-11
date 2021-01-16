@@ -24,5 +24,5 @@ public interface FacturaRepository extends CrudRepository<Factura, Integer>{
 	
 //	void update(Factura factura) throws DataAccessException;
 	
-	Collection<Factura> findAll() throws DataAccessException;
+	
 }

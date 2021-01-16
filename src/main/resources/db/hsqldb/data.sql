@@ -51,10 +51,10 @@ INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (3,'2021-01-
 INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (4,'2021-01-07', '2021-01-08', 1200);
 
 --Factura
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (1,'Cambio de aceite', 20.00, 1, '2021-01-08', FALSE);
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (2,'Arreglo pastilla frenos', 50.00, 1, '2021-12-14', TRUE);
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (3,'Arreglo piston de arranque', 100.33, 2, '2020-12-16', FALSE);
-INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado) VALUES (4,'Cambio de neumaticos', 60.50, 3, '2020-12-16', FALSE);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (1,'Cambio de aceite', 20.00, 1, '2021-01-08', FALSE,1);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (2,'Arreglo pastilla frenos', 50.00, 1, '2021-12-14', TRUE,2);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (3,'Arreglo piston de arranque', 100.33, 2, '2020-12-16', FALSE,3);
+INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (4,'Cambio de neumaticos', 60.50, 3, '2020-12-16', FALSE,4);
 
 --Pedido
 INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (1,'2020-12-10', '2020-12-14');
