@@ -60,6 +60,7 @@ public class FacturaService {
 		return (Collection<Factura>) facturaRepository.findAll();
 	}
 
+	@Transactional
 	public void deleteFactura(Integer id) throws NoPagadaException {
 		for (Factura f : findFacturas()) {
 			if (f.getPagado() == false) {

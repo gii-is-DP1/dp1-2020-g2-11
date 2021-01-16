@@ -33,7 +33,7 @@ public class FacturaServiceTest {
 	@Transactional
 	public void nuevaFacturaTest() throws DataAccessException, TipoPagoException {
 		
-		Factura factura = new Factura();
+		factura = new Factura();
 		factura.setCliente(clienteService.findClienteById(1).get());
 		factura.setDescripcion("p");
 		factura.setFechaEmision(LocalDate.of(2020, 8, 12));

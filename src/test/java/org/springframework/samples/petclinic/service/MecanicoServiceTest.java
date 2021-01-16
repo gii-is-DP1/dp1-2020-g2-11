@@ -13,18 +13,20 @@ import org.springframework.samples.petclinic.model.Mecanico;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class MecanicoServiceTest {
+	
     @Autowired
     protected MecanicoService mecanicoService;
-    private User user;
 
     @Test
     @Transactional
-    void nuevoMecanico() throws DataAccessException {
+    public void shouldInsertMecanico() throws DataAccessException {
 
         Mecanico mecanico1 = new Mecanico();
         User usuario1 = new User();
+        
         mecanico1.setNombre("Juan");
         mecanico1.setApellidos("Pérez");
         mecanico1.setDni("78862457K");
@@ -41,5 +43,4 @@ public class MecanicoServiceTest {
         assertThat(mecanicos.size()).isEqualTo(3);
 
     }
-
 }
