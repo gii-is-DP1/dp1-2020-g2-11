@@ -25,8 +25,8 @@ public class ProductoService {
 	}
 	
 	@Transactional
-	public void deleteProducto(String referencia) throws DataAccessException {
-		productoRepository.remove(referencia);
+	public void deleteProducto(Integer id) throws DataAccessException {
+		productoRepository.deleteById(id);
 	}
 	
 //	@Transactional

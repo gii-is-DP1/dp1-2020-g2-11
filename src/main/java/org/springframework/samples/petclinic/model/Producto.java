@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -12,9 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "producto")
-public class Producto {
+public class Producto extends BaseEntity{
 	
-	@Id
 	@Column(name = "referencia")
 	private String referencia;
 
