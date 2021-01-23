@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class FacturaService {
 
 	private FacturaRepository facturaRepository;
-
+	@Autowired
+	private AuthoritiesService authoritiesService;
+	
 	@Autowired
 	public FacturaService(FacturaRepository facturaRepository) {
 		this.facturaRepository = facturaRepository;
@@ -62,13 +64,13 @@ public class FacturaService {
 
 	@Transactional
 	public void deleteFactura(Integer id) throws NoPagadaException {
-		for (Factura f : findFacturas()) {
-			if (f.getPagado() == false) {
+		
+			if (findFacturabyId(id).get().getPagado() == false) {
 				throw new NoPagadaException();
 			} else {
 				facturaRepository.deleteById(id);
 			}
-		}
+		
 
 	}
 }

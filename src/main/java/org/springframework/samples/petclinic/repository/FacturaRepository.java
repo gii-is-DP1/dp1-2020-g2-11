@@ -18,4 +18,6 @@ public interface FacturaRepository extends CrudRepository<Factura, Integer>{
 	
 	@Query("SELECT f FROM Factura f, Cliente c WHERE f.cliente.id = :cliente_id")
     public List<Factura> findByCliente(@Param("cliente_id") Integer idCliente);
+	
+	
 }

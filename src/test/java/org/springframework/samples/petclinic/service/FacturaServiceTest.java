@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -52,7 +53,7 @@ public class FacturaServiceTest {
 	@Transactional
 	public void deleteFacturaTest() throws DataAccessException, TipoPagoException, NoPagadaException {
 		
-		facturaService.deleteFactura(1);
+		facturaService.deleteFactura(2);
 		Collection<Factura> facturas = this.facturaService.findFacturas();
 		assertThat(facturas.size()).isEqualTo(3);
 	}
