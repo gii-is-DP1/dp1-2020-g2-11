@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,32 +18,60 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Estancia extends BaseEntity {
 
 	@Column(name = "fechaEntrada")        
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
-	private LocalDateTime fechaEntrada;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private LocalDate fechaEntrada;
+	
+	
+	@Column(name= "horaEntrada")
+	@DateTimeFormat(pattern= "hh:mm")
+	private LocalTime horaEntrada;
+	
 	
 	@Column(name = "fechaSalida")        
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime fechaSalida;
+	
+	
+	@Column(name= "horaSalida")
+	@DateTimeFormat(pattern= "hh:mm")
+	private LocalTime horaSalida;
+	
 	
 	@Column(name = "duracion")        
 	private Integer duracion;
 
-	public LocalDateTime getFechaEntrada() {
-		return fechaEntrada.withSecond(0);
+	
+	public LocalDate getFechaEntrada() {
+		return fechaEntrada;
 	}
 
-	public void setFechaEntrada(LocalDateTime fechaEntrada) {
-		this.fechaEntrada = fechaEntrada.withSecond(0);
+	
+	public LocalTime getHoraEntrada() {
+		return horaEntrada;
+	}
+	
+	
+	public void setFechaEntrada(LocalDate fechaEntrada) {
+		this.fechaEntrada = fechaEntrada;
 	}
 
+	
+	public void setHoraEntrada(LocalTime horaEntrada) {
+		this.horaEntrada=horaEntrada;
+	}
+	
+	
 	public LocalDateTime getFechaSalida() {
-		return fechaSalida.withSecond(0);
+		return fechaSalida;
 	}
 
 	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida.withSecond(0);
 	}
-
+	
+	public void setHoraSalida(LocalTime horaSalida) {
+		this.horaSalida=horaSalida;
+	}
 	public Integer getDuracion() {
 		return (int) Duration.between(this.fechaEntrada, this.fechaSalida).toHours();
 	}

@@ -45,10 +45,10 @@ INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (3,'2021-01-04', '09:00');
 INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (4,'2021-01-04', '09:00');
 
 --Estancia
-INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (1,'2021-01-02', '2021-01-04', 4320);
-INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (2,'2021-01-05', '2021-01-05', 200);
-INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (3,'2021-01-06', '2021-01-08', 3300);
-INSERT INTO estancia(id,fecha_entrada,fecha_salida,duracion) VALUES (4,'2021-01-07', '2021-01-08', 1200);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (1,'2021-01-02','10:00', '2021-01-04','12:00', 4320);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (2,'2021-01-05','10:00',  '2021-01-05','12:00', 200);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (3,'2021-01-06','10:00',  '2021-01-08','12:00', 3300);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (4,'2021-01-07','12:00',  '2021-01-08','13:00', 1200);
 
 --Factura
 INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (1,'Cambio de aceite', 20.00, 1, '2021-01-08', FALSE,1);

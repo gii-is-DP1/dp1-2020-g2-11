@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -33,7 +34,7 @@ import org.springframework.samples.petclinic.model.Estancia;
 public interface EstanciaRepository extends CrudRepository<Estancia, Integer> {
 
 	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.fechaEntrada = :fechaEntrada")
-	Collection<Estancia> findByFechaEstancia(@Param("fechaEntrada") LocalDateTime fechaEntrada);
+	Collection<Estancia> findByFechaEstancia(@Param("fechaEntrada") LocalDate fechaEntrada);
 	
 	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.duracion = :null")
 	Collection<Estancia> findByEstacionados();

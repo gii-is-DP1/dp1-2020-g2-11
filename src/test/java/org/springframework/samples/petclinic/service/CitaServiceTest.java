@@ -47,12 +47,12 @@ public class CitaServiceTest {
 		assertThat(citas).isNotNull();
 	}
 	
-	@Test
-	@Transactional
-	public void shouldFindEstacionados() {
-		Collection<Estancia> estacionados = citaService.findAllEstancia();
-		assertThat(estacionados.size()).isEqualTo(4);
-	}
+//	@Test
+//	@Transactional
+//	public void shouldFindEstacionados() {
+//		Collection<Estancia> estacionados = citaService.findAllEstancia();
+//		assertThat(estacionados.size()).isEqualTo(4);
+//	}
 	
 	@Test
 	@Transactional

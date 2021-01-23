@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CitaService {
 
 	private CitaRepository citaRepository;
-	private EstanciaRepository estanciaRepository;
+	private EstanciaService estanciaService;
 	
 	
 	@Autowired
@@ -33,35 +33,21 @@ public class CitaService {
 	
 	@Transactional
 	public void saveCita(Cita cita) throws DataAccessException, SobrecargaDeVehiculosException {
-//		int n_otherCitas= citaRepository.findByFechaCita(cita.getFechaCita()).size();
-//		int n_otherEstancias= estanciaRepository.findByEstacionados().size();
-//		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
-//			
-//		}else {
-//			throw new SobrecargaDeVehiculosException();
-//		}
+		int n_otherCitas= citaRepository.findByFechaCita(cita.getFechaCita()).size();
+		int n_otherEstancias= estanciaService.findEstanciaByFechaCita(cita.getFechaCita());
+		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
+			
+		}else {
+			throw new SobrecargaDeVehiculosException();
+		}
 		citaRepository.save(cita);
 	}
 	
-	public void saveEstancia(Estancia estancia) throws DataAccessException,SobrecargaDeVehiculosException{
-//		int n_otherEstancias= estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
-//		int n_otherCitas= citaRepository.findByFechaCita(estancia.getFechaEntrada().toLocalDate()).size();
-//		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
-//
-//			
-//		}else {
-//			throw new SobrecargaDeVehiculosException();
-//		}
-		estanciaRepository.save(estancia);
-	}
-	
+	@Transactional(readOnly=true)
 	public Collection<Cita> findCitaByFechaCita(LocalDate fecha) {
 		return citaRepository.findByFechaCita(fecha);
 	}
-	@Transactional(readOnly = true)
-	public Collection<Estancia> findEstanciasActuales() throws DataAccessException{
-		return estanciaRepository.findByEstacionados();
-	}
+	
 	@Transactional
 	public void removeCita(Integer id)  throws DataAccessException{
 		citaRepository.deleteById(id);
@@ -71,8 +57,5 @@ public class CitaService {
 		return (Collection<Cita>) citaRepository.findAll();
 	}
 	
-	@Transactional(readOnly = true)
-	public Collection<Estancia> findAllEstancia() throws DataAccessException{
-		return (Collection<Estancia>) estanciaRepository.findAll();
-	}
+
 }
