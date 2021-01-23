@@ -16,11 +16,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Estancia extends BaseEntity {
 
 	@Column(name = "fechaEntrada")        
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	private LocalDateTime fechaEntrada;
 	
 	@Column(name = "fechaSalida")        
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	private LocalDateTime fechaSalida;
 	
 	@Column(name = "duracion")        

@@ -28,14 +28,15 @@ public class CitaServiceTest {
 	
 	@Test
 	@Transactional
-	public void shouldInsertCita() throws DataAccessException, SobrecargaDeVehiculosException {
+	public void shouldInsertCita() throws DataAccessException, SobrecargaDeVehiculosException{
+		
 		cita = new Cita();
 		cita.setId(5);
 		cita.setFechaCita(LocalDate.of(2021, 1, 25));
 		cita.setHoraCita(LocalTime.of(9, 30));
 		
 		this.citaService.saveCita(cita);
-		Collection<Cita> citas = citaService.findAll();
+		Collection<Cita> citas = citaService.findAllCita();
 		assertThat(citas.size()).isEqualTo(5);
 	}
 	
@@ -49,18 +50,15 @@ public class CitaServiceTest {
 	@Test
 	@Transactional
 	public void shouldFindEstacionados() {
-		Collection<Estancia> estacionados = citaService.findEstanciasActuales();
-		assertThat(estacionados.size()).isEqualTo(0);
+		Collection<Estancia> estacionados = citaService.findAllEstancia();
+		assertThat(estacionados.size()).isEqualTo(4);
 	}
 	
-	public void shouldDeleteCita() throws DataAccessException, SobrecargaDeVehiculosException {
-		cita = new Cita();
-		cita.setId(5);
-		cita.setFechaCita(LocalDate.of(2021, 1, 25));
-		cita.setHoraCita(LocalTime.of(9, 30));
+	@Test
+	@Transactional
+	public void shouldDeleteCita() throws DataAccessException {
 		
-		this.citaService.saveCita(cita);
-		citaService.removeCita(5);;
-		assertThat(citaService.findAll().size()).isEqualTo(4);
+		this.citaService.removeCita(3);
+		assertThat(citaService.findAllCita().size()).isEqualTo(3);
 	}
 }
