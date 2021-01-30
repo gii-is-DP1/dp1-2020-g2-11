@@ -16,7 +16,6 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
