@@ -34,7 +34,7 @@ public class CitaService {
 	@Transactional
 	public void saveCita(Cita cita) throws DataAccessException, SobrecargaDeVehiculosException {
 		int n_otherCitas= citaRepository.findByFechaCita(cita.getFechaCita().now()).size();
-		if (n_otherCitas<=2) {
+		if (n_otherCitas<=12) {
 			citaRepository.save(cita);
 		}else {
 			throw new SobrecargaDeVehiculosException();
