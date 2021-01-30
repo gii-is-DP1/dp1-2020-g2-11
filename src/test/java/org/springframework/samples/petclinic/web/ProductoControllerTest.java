@@ -19,8 +19,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(value = ProductoController.class,
+@WebMvcTest(controllers=ProductoController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
 public class ProductoControllerTest {
@@ -37,12 +38,14 @@ public class ProductoControllerTest {
 	@BeforeEach
 	void setup() {
 		Producto producto = new Producto();
-		producto.setId(5);
+		producto.setId(1);
 		producto.setReferencia("95/65R15");
 		producto.setNombre("Neumatico");
 		producto.setMarca("Firestone");
 		producto.setStock(4);
 		producto.setStockSeguridad(2);
+		
+		//given(this.productoService.findProductos()).willReturn(Lists.newArrayList(producto));
 		
 	}
 	
@@ -50,13 +53,13 @@ public class ProductoControllerTest {
 	 @Test
 	 void findAllProductosTest() throws Exception{
 		 mockMvc.perform(get("/producto")).andExpect(status().isOk())
-		 .andExpect(view().name("producto/ListaProductos"));
+		 .andExpect(model().attributeExists("producto")).andExpect(view().name("producto/ListaProductos"));
 	 }
 	 
-	 @WithMockUser(value = "spring")
-	 @Test
-	 void findProductoByNombreTest() throws Exception{
-		 mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
-	 }
+//	 @WithMockUser(value = "spring")
+//	 @Test
+//	 void findProductoByNombreTest() throws Exception{
+//		 mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
+//	 }
 
 }
