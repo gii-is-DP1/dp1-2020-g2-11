@@ -29,7 +29,7 @@ public class Estancia extends BaseEntity {
 	
 	@Column(name = "fechaSalida")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDateTime fechaSalida;
+	private LocalDate fechaSalida;
 	
 	
 	@Column(name= "horaSalida")
@@ -61,12 +61,12 @@ public class Estancia extends BaseEntity {
 	}
 	
 	
-	public LocalDateTime getFechaSalida() {
+	public LocalDate getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(LocalDateTime fechaSalida) {
-		this.fechaSalida = fechaSalida.withSecond(0);
+	public void setFechaSalida(LocalDate fechaSalida) {
+		this.fechaSalida = fechaSalida;
 	}
 	
 	public void setHoraSalida(LocalTime horaSalida) {

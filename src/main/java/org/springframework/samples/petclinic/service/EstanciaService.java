@@ -14,7 +14,7 @@ import org.springframework.samples.petclinic.model.Estancia;
 @Service
 public class EstanciaService {
 	private EstanciaRepository estanciaRepository;
-	private CitaService citaService;
+	
 
 	@Autowired
 	public EstanciaService(EstanciaRepository estanciaRepository) throws DataAccessException {
@@ -24,13 +24,12 @@ public class EstanciaService {
 	@Transactional
 	public void saveEstancia(Estancia estancia) throws DataAccessException, SobrecargaDeVehiculosException {
 		int n_otherEstancias = estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
-		int n_otherCitas = citaService.findCitaByFechaCita(estancia.getFechaEntrada()).size();
-		if (n_otherCitas <= 2 || n_otherEstancias + n_otherCitas <= 2) {
+		if (n_otherEstancias  <= 2) {
 			estanciaRepository.save(estancia);
 		} else {
 			throw new SobrecargaDeVehiculosException();
 		}
-
+		
 	}
 
 	@Transactional(readOnly = true)
