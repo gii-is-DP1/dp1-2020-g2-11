@@ -72,17 +72,17 @@ INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos 
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com');
 
 --Reparacion
-INSERT INTO reparacion(duracion,precio,tipo_reparacion) VALUES (10,20.00,3);
-INSERT INTO reparacion(duracion,precio,tipo_reparacion) VALUES (40,60.00,2);
-INSERT INTO reparacion(duracion,precio,tipo_reparacion) VALUES (55,100.33,2);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion) VALUES (1,10,20.00,2);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion) VALUES (2,40,60.00,1);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion) VALUES (3,55,100.33,1);
 
 --Revision
-INSERT INTO revision(descripcion,duracion,fecha_revision) VALUES ('Necesita aceite',10,'2020-12-10');
-INSERT INTO revision(descripcion,duracion,fecha_revision) VALUES ('Pastilla de freno gastada',10,'2020-12-11');
-INSERT INTO revision(descripcion,duracion,fecha_revision) VALUES ('Piston atascado',20,'2020-12-11');
+INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (1,'Necesita aceite',10,'2020-12-10');
+INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (2,'Pastilla de freno gastada',10,'2020-12-11');
+INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (3,'Piston atascado',20,'2020-12-11');
 
 --Vehiculo
-INSERT INTO vehiculo(matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES ('4728FPG',1,'2007-10-10',175684);
-INSERT INTO vehiculo(matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES ('2968BPY',1,'2001-06-04',230856);
-INSERT INTO vehiculo(matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES ('6576JDJ',3,'2015-03-23',102302);
-INSERT INTO vehiculo(matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES ('E8942JPF',2,'2016-05-28',5023);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (1,'4728FPG',0,'2007-10-10',175684);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (2,'2968BPY',0,'2001-06-04',230856);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (3,'6576JDJ',2,'2015-03-23',102302);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (4,'E8942JPF',1,'2016-05-28',5023);

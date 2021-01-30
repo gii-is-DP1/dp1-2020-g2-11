@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,9 +15,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "vehiculo")
-public class Vehiculo {
+public class Vehiculo extends BaseEntity{
 	
-	@Id
 	@Column(name="matricula")
 	private String matricula;
 	

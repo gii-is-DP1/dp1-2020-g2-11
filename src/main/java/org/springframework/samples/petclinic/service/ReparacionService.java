@@ -62,12 +62,12 @@ public class ReparacionService {
 
 	@Transactional(readOnly = true)
 	public Collection<Vehiculo> findVehiculos() throws DataAccessException {
-		return vehiculoRepository.findAll();
+		return (Collection<Vehiculo>) vehiculoRepository.findAll();
 	}
 
 	@Transactional(rollbackFor = VehiculosAntiguo.class)
 	public void saveVehiculo(Vehiculo vehiculo) throws DataAccessException, VehiculosAntiguo {
-		if (vehiculo.getFechaFabricacion().getYear() < 12) {
+		if (vehiculo.getFechaFabricacion().getYear() - LocalDate.now().getYear() < 12) {
 			vehiculoRepository.save(vehiculo);
 		} else {
 			throw new VehiculosAntiguo();
@@ -94,7 +94,7 @@ public class ReparacionService {
 		revisionRepository.deleteById(idRevision);
 	}
 
-	public void deleteVehiculo(String matricula) {
-		vehiculoRepository.remove(matricula);
+	public void deleteVehiculo(Integer id) {
+		vehiculoRepository.deleteById(id);
 	}
 }
