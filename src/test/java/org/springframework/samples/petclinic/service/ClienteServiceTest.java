@@ -29,101 +29,51 @@ class ClienteServiceTest {
 	@Test
 	@Transactional
 	public void shouldInsertCliente() {
-
 		cliente = new Cliente();
 		cliente.setNombre("Antonio");
 		cliente.setApellidos("López");
-		cliente.setDni("578624578K");
+		cliente.setDni("57862458K");
 		cliente.setId(25);
 		cliente.setEmail("antoniolopez96@gmail.com");
 		cliente.setTelefono("658748325");
+		
+		user = new User();
 		user.setUsername("antoniord34");
 		user.setPassword("julioverne23");
+		user.setEnabled(true);
 		cliente.setUser(user);
 		
 		clienteService.saveCliente(cliente);
-		assertThat(cliente.equals(cliente));
-
+		Collection<Cliente> clientes = this.clienteService.findClientes();
+		assertThat(clientes.size()).isEqualTo(5);
 	}   
 	
 	@Test
 	@Transactional
 	public void shouldFindCliente() {
-		
-		cliente = new Cliente();
-		cliente.setNombre("Antonio");
-		cliente.setApellidos("López");
-		cliente.setDni("578624578K");
-		cliente.setId(25);
-		cliente.setEmail("antoniolopez96@gmail.com");
-		cliente.setTelefono("658748325");
-		user.setUsername("antoniord34");
-		user.setPassword("julioverne23");
-		cliente.setUser(user);
-		
-		clienteService.saveCliente(cliente);
 		Collection<Cliente> clientes = this.clienteService.findClientes();
-		assertThat(clientes.size()).isEqualTo(1);
+		assertThat(clientes.size()).isEqualTo(4);
 	}		
     
 	@Test
 	@Transactional
 	public void shouldFindClienteByDni(){
-		
-		cliente = new Cliente();
-		cliente.setNombre("Antonio");
-		cliente.setApellidos("López");
-		cliente.setDni("578624578K");
-		cliente.setId(25);
-		cliente.setEmail("antoniolopez96@gmail.com");
-		cliente.setTelefono("658748325");
-		user.setUsername("antoniord34");
-		user.setPassword("julioverne23");
-		cliente.setUser(user);
-		
-		clienteService.saveCliente(cliente);
-		Collection<Cliente> clientes = this.clienteService.findClienteByDni("578624578K");
-		assertThat(clientes.size()).isEqualTo(1);	
+		Cliente cliente = this.clienteService.findClienteByDni("62748364G");
+		assertThat(cliente).isNotNull();	
 	}
 	
 	@Test
 	@Transactional
 	public void shouldFindClienteById(){
-		
-		cliente = new Cliente();
-		cliente.setNombre("Antonio");
-		cliente.setApellidos("López");
-		cliente.setDni("578624578K");
-		cliente.setId(25);
-		cliente.setEmail("antoniolopez96@gmail.com");
-		cliente.setTelefono("658748325");
-		user.setUsername("antoniord34");
-		user.setPassword("julioverne23");
-		cliente.setUser(user);
-		
-		clienteService.saveCliente(cliente);
-		Optional<Cliente> clientes = this.clienteService.findClienteById(25);
-		assertThat(clientes.get()).isNull();
+		Optional<Cliente> cliente = this.clienteService.findClienteById(1);
+		assertThat(cliente).isNotNull();
 	}
 	
 	@Test
 	@Transactional
 	public void shouldFindClienteByNombre(){
-		
-		cliente = new Cliente();
-		cliente.setNombre("Antonio");
-		cliente.setApellidos("López");
-		cliente.setDni("578624578K");
-		cliente.setId(25);
-		cliente.setEmail("antoniolopez96@gmail.com");
-		cliente.setTelefono("658748325");
-		user.setUsername("antoniord34");
-		user.setPassword("julioverne23");
-		cliente.setUser(user);
-		
-		clienteService.saveCliente(cliente);
-		Collection<Cliente> clientes = this.clienteService.findClienteByNombre("Antonio");
-		assertThat(clientes.size()).isNotNull();
+		Collection<Cliente> clientes = this.clienteService.findClienteByNombre("Manuel");
+		assertThat(clientes.size()).isEqualTo(1);
 	}
 	
 //	@Test

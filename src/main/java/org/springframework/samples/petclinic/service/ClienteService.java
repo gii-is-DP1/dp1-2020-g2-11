@@ -36,11 +36,11 @@ public class ClienteService {
 
 	@Transactional(readOnly = true)
 	public Collection<Cliente> findClientes() throws DataAccessException {
-		return clienteRepository.findAll();
+		return (Collection<Cliente>) clienteRepository.findAll();
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Cliente> findClienteByDni(String dni) throws DataAccessException {
+	public Cliente findClienteByDni(String dni) throws DataAccessException {
 		return clienteRepository.findByDni(dni);
 	}
 
