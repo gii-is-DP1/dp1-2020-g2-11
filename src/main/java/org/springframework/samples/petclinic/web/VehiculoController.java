@@ -6,14 +6,12 @@ import org.springframework.samples.petclinic.service.ReparacionService;
 import org.springframework.samples.petclinic.service.UserService;
 
 public class VehiculoController {
-
-	private static final String VIEWS_VEHICULO_CREATE_OR_UPDATE_FORM = "";
 	
-	private ReparacionService repService;
+	private ReparacionService reparacionService;
 	
 	@Autowired
-	public void ReparacionController(ReparacionService repService, AuthoritiesService authoritiesService) {
-		this.repService = repService;
+	public void ReparacionController(ReparacionService reparacionService, AuthoritiesService authoritiesService) {
+		this.reparacionService = reparacionService;
 	}
 
 }

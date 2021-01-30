@@ -9,10 +9,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
-<TalleresLaPlata:layout pageName="clientes">
+<TalleresLaPlata:layout pageName="cliente">
 
 	<h2>Buscar cliente</h2>
-	<form:form modelAttribute="cliente" action="/clientes" method="get"
+	<form:form modelAttribute="cliente" action="/cliente" method="get"
 		class="form-horizontal" id="buscador-clientes">
 		<div class="form-group">
 			<div class="control-group" id="nombre">
@@ -36,8 +36,9 @@
 		<thead>
 			<tr>
 				<th style="width: 150px;">Nombre</th>
+				<th style="width: 100px;">Apellidos</th>
 				<th style="width: 100px;">DNI</th>
-				<th style="width: 100px">Telefono</th>
+				<th style="width: 100px">Teléfono</th>
 				<th style="width: 100px">Email</th>
 			</tr>
 		</thead>

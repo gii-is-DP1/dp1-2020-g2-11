@@ -48,6 +48,13 @@ public class ClienteController {
 			return "redirect:/";
 		}
 	}
+	
+	
+	@GetMapping(value = "/cliente/find")
+	public String initFindForm(Map<String, Object> model) {
+		model.put("cliente", new Cliente());
+		return "cliente/ListaClientes";
+	}
 
 	@GetMapping(value = { "/cliente" })
 	public String findClientesByNombre(Cliente cliente, BindingResult res, Map<String, Object> model) {

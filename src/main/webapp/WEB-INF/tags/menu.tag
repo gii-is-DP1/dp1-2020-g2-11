@@ -22,22 +22,47 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
-				<petclinic:menuItem active="${name eq 'home'}" url="/"
-					title="home page">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					<span>Home</span>
-				</petclinic:menuItem>
 
-				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
-					title="Administrador">
+				<petclinic:menuItem active="${name eq 'cliente'}" url="/cliente/find"
+					title="cliente">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Administrador</span>
+					<span>Clientes</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'vehiculo'}" url="/cita"
+					title="vehiculo">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Vehículos</span>
 				</petclinic:menuItem>
 
-				<petclinic:menuItem active="${name eq 'citas'}" url="/cita"
+				<petclinic:menuItem active="${name eq 'cita'}" url="/cita"
 					title="cita">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Cita</span>
+					<span>Citas</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'estancia'}" url="/cita"
+					title="estancia">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Estancias</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'proveedores'}" url="/cita"
+					title="proveedor">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Proveedores</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'productos'}" url="/cita"
+					title="producto">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Productos</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'facturas'}" url="/cita"
+					title="factura">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Facturas</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
