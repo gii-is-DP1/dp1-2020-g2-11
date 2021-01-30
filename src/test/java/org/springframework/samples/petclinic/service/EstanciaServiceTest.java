@@ -44,7 +44,7 @@ public class EstanciaServiceTest {
 	@Transactional
 	public void shouldFindEstacionados() throws DataAccessException{
 		Collection<Estancia> estancias = estanciaService.findEstanciasActuales();
-		assertThat(estancias.size()).isEqualTo(4);
+		assertThat(estancias.size()).isEqualTo(0);
 	}
 
 	@Test

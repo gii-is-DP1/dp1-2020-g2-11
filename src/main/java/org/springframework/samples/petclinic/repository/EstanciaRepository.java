@@ -36,7 +36,7 @@ public interface EstanciaRepository extends CrudRepository<Estancia, Integer> {
 	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.fechaEntrada = :fechaEntrada")
 	Collection<Estancia> findByFechaEstancia(@Param("fechaEntrada") LocalDate fechaEntrada);
 	
-	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.duracion = :null")
+	@Query("SELECT DISTINCT e FROM Estancia e WHERE e.duracion = null")
 	Collection<Estancia> findByEstacionados();
 
 	Collection<Estancia> findAll() throws DataAccessException;
