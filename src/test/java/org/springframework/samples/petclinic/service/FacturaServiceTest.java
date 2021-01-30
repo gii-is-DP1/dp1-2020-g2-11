@@ -18,22 +18,20 @@ import org.springframework.samples.petclinic.model.TipoPago;
 import org.springframework.samples.petclinic.service.exceptions.NoPagadaException;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
 import org.springframework.stereotype.Service;
+
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class FacturaServiceTest {
 	@Autowired
 	protected FacturaService facturaService;
 	@Autowired
 	protected ClienteService clienteService;
+
 	private Factura factura;
-	
-	
-	 
-	
-	
+
 	@Test
 	@Transactional
 	public void nuevaFacturaTest() throws DataAccessException, TipoPagoException {
-		
+
 		factura = new Factura();
 		factura.setCliente(clienteService.findClienteById(1).get());
 		factura.setDescripcion("p");
@@ -42,17 +40,16 @@ public class FacturaServiceTest {
 		factura.setPagado(false);
 		factura.setPrecio(12.20);
 		factura.setTipoPago(TipoPago.EFECTIVO);
-		
+
 		facturaService.saveFactura(factura);
 		Collection<Factura> facturas = facturaService.findFacturas();
 		assertThat(facturas.size()).isEqualTo(5);
-			
 	}
-	
+
 	@Test
 	@Transactional
 	public void deleteFacturaTest() throws DataAccessException, TipoPagoException, NoPagadaException {
-		
+
 		facturaService.deleteFactura(2);
 		Collection<Factura> facturas = this.facturaService.findFacturas();
 		assertThat(facturas.size()).isEqualTo(3);
