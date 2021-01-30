@@ -33,14 +33,13 @@ public class CitaService {
 	
 	@Transactional
 	public void saveCita(Cita cita) throws DataAccessException, SobrecargaDeVehiculosException {
-		int n_otherCitas= citaRepository.findByFechaCita(cita.getFechaCita()).size();
-		int n_otherEstancias= estanciaService.findEstanciaByFechaCita(cita.getFechaCita()).size();
-		if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
-			
+		int n_otherCitas= citaRepository.findByFechaCita(cita.getFechaCita().now()).size();
+		if (n_otherCitas<=2) {
+			citaRepository.save(cita);
 		}else {
 			throw new SobrecargaDeVehiculosException();
 		}
-		citaRepository.save(cita);
+		
 	}
 	
 	@Transactional(readOnly=true)
