@@ -13,36 +13,38 @@ import org.springframework.samples.petclinic.model.Estancia;
 
 @Service
 public class EstanciaService {
-private EstanciaRepository estanciaRepository;
-private CitaService citaService;
-@Autowired
-public EstanciaService(EstanciaRepository estanciaRepository) throws DataAccessException{
-	this.estanciaRepository= estanciaRepository;
-}
+	private EstanciaRepository estanciaRepository;
+	private CitaService citaService;
 
+	@Autowired
+	public EstanciaService(EstanciaRepository estanciaRepository) throws DataAccessException {
+		this.estanciaRepository = estanciaRepository;
+	}
 
-@Transactional 
-public void saveEstancia(Estancia estancia)throws DataAccessException, SobrecargaDeVehiculosException{
-	int n_otherEstancias= estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
-	int n_otherCitas = citaService.findCitaByFechaCita(estancia.getFechaEntrada()).size();
-	if (n_otherCitas<=2||n_otherEstancias+n_otherCitas<=2) {
-		estanciaRepository.save(estancia);
+	@Transactional
+	public void saveEstancia(Estancia estancia) throws DataAccessException, SobrecargaDeVehiculosException {
+		int n_otherEstancias = estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
+		int n_otherCitas = citaService.findCitaByFechaCita(estancia.getFechaEntrada()).size();
+		if (n_otherCitas <= 2 || n_otherEstancias + n_otherCitas <= 2) {
+			estanciaRepository.save(estancia);
+		} else {
+			throw new SobrecargaDeVehiculosException();
+		}
+
 	}
-	else {
-		throw new SobrecargaDeVehiculosException();
+
+	@Transactional(readOnly = true)
+	public Collection<Estancia> findEstanciasActuales() throws DataAccessException {
+		return estanciaRepository.findByEstacionados();
 	}
-	
-}
-@Transactional(readOnly = true)
-public Collection<Estancia> findEstanciasActuales() throws DataAccessException{
-	return estanciaRepository.findByEstacionados();
-}
-@Transactional(readOnly = true)
-public Collection<Estancia> findAllEstancia() throws DataAccessException{
-	return (Collection<Estancia>) estanciaRepository.findAll();
-}
-@Transactional(readOnly=true)
-public Collection<Estancia> findEstanciaByFechaCita(LocalDate fecha) {
-	return estanciaRepository.findByFechaEstancia(fecha);
-}
+
+	@Transactional(readOnly = true)
+	public Collection<Estancia> findAllEstancia() throws DataAccessException {
+		return (Collection<Estancia>) estanciaRepository.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Collection<Estancia> findEstanciaByFechaCita(LocalDate fecha) {
+		return estanciaRepository.findByFechaEstancia(fecha);
+	}
 }
