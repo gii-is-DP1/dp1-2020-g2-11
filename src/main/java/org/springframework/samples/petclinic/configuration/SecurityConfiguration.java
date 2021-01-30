@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/pedido/new").hasAnyAuthority("admin")
 				.antMatchers("/proveedor/all").hasAnyAuthority("admin")
 				.antMatchers("/proveedor/new").hasAnyAuthority("admin")
+				.antMatchers("/producto/all").hasAnyAuthority("admin")
+				.antMatchers("/producto/new").hasAnyAuthority("admin")
 				
 				.anyRequest().denyAll()
 				.and()
