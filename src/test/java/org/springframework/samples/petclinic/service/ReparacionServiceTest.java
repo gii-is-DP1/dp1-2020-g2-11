@@ -28,8 +28,8 @@ public class ReparacionServiceTest {
 	protected ReparacionService reparacionService;
 
 	private Reparacion reparacion;
-	private Vehiculo vehiculo;
-	private Revision revision;
+	
+	
 
 	@Test
 	@Transactional
@@ -86,73 +86,12 @@ public class ReparacionServiceTest {
 		assertThat(reparacion).isNotNull();
 	}
 
-	@Test
-	@Transactional
-	public void shouldInsertVehiculo() throws DataAccessException, VehiculosAntiguo {
-		vehiculo = new Vehiculo();
-		vehiculo.setId(5);
-		vehiculo.setMatricula("1234FGB");
-		vehiculo.setKilometraje(24000);
-		vehiculo.setFechaFabricacion(LocalDate.of(2017, Month.NOVEMBER, 20));
-		vehiculo.setTipoVehiculo(TipoVehiculo.COCHE);
 
-		this.reparacionService.saveVehiculo(vehiculo);
-		Collection<Vehiculo> vehiculos = reparacionService.findVehiculos();
-		assertThat(vehiculos.size()).isEqualTo(5);
+	
 
-	}
 
-	@Test
-	@Transactional
-	public void shouldFindVehículoByTipo() throws DataAccessException, VehiculosAntiguo {
-		Collection<Vehiculo> vehiculos = this.reparacionService.findVehículoByTipo(TipoVehiculo.COCHE);
-		assertThat(vehiculos).isEqualTo(2);
-	}
 
-	@Test
-	@Transactional
-	public void shouldFindVehiculos() throws DataAccessException, VehiculosAntiguo {
-		Collection<Vehiculo> vehiculos = this.reparacionService.findVehiculos();
-		assertThat(vehiculos.size()).isEqualTo(4);
-	}
 
-	@Test
-	@Transactional
-	public void shouldDeleteVehiculos() throws DataAccessException, VehiculosAntiguo {
-		this.reparacionService.deleteVehiculo(1);
-		Collection<Vehiculo> vehiculos = this.reparacionService.findVehiculos();
-		assertThat(vehiculos.size()).isEqualTo(3);
-	}
 
-	@Test
-	@Transactional
-	public void shouldInsertRevision() {
-		revision = new Revision();
-		revision.setId(4);
-		revision.setDescripcion("Fallo en trasmision");
-		revision.setDuracion(20);
-		revision.setFechaRevision(LocalDate.of(2020, Month.DECEMBER, 12));
-
-		this.reparacionService.saveRevision(revision);
-		Collection<Revision> revisiones = this.reparacionService
-				.findRevisionByFecha(LocalDate.of(2020, Month.DECEMBER, 12));
-		assertThat(revisiones.size()).isEqualTo(1);
-	}
-
-	@Test
-	@Transactional
-	public void shouldFindRevision() throws DataAccessException {
-		Collection<Revision> revisiones = this.reparacionService
-				.findRevisionByFecha(LocalDate.of(2020, Month.DECEMBER, 11));
-		assertThat(revisiones.size()).isEqualTo(2);
-	}
-
-	@Test
-	@Transactional
-	public void shouldDeleteRevision() throws DataAccessException {
-		reparacionService.deleteRevision(3);
-		Collection<Revision> revisiones = this.reparacionService
-				.findRevisionByFecha(LocalDate.of(2020, Month.DECEMBER, 11));
-		assertThat(revisiones.size()).isEqualTo(0);
-	}
+	
 }
