@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Reparacion;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ReparacionService;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
 public class RevisionController {
 	
 	private ReparacionService reparacionService;
