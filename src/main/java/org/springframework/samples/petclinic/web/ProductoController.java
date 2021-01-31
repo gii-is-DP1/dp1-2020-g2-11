@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
-import org.springframework.samples.petclinic.model.Productos;
 import org.springframework.samples.petclinic.service.ProductoService;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
+@Controller
 public class ProductoController {
 	
 	private ProductoService productoService;
@@ -19,14 +19,14 @@ public class ProductoController {
 		this.productoService = productoService;
 	}
 
-	@GetMapping(value = { "/producto" })
+	@GetMapping(value = { "/productos" })
 	public String findAllProductos(Map<String, Object> model) {
 		Collection<Producto> productos = (Collection<Producto>) productoService.findProductos();
 		model.put("selections", productos);
 		return "producto/ListaProductos";
 	}
 
-	@GetMapping(value = { "/producto" })
+	@GetMapping(value = { "/productonombre" })
 	public String findProductosByNombre(Producto producto, BindingResult res, Map<String, Object> model) {
 		if (producto.getNombre() == null) {
 			producto.setNombre(""); // empty string signifies broadest possible search
