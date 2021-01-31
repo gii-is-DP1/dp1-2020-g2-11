@@ -70,4 +70,10 @@ public class CitaControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/citas/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
 	
 	}
+	
+	void findcitasByFecha() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/cita/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
+	
+	}
+	
 }
