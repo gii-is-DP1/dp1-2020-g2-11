@@ -7,13 +7,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.service.CitaService;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-
+@Controller
 public class CitaController {
-	
+	@Autowired
 	private CitaService citaService;
 	
 	@Autowired
@@ -26,7 +27,7 @@ public class CitaController {
 		dataBinder.setDisallowedFields ("id");
 	}
 	
-	@GetMapping(value = { "/cita" })
+	@GetMapping(value = { "/citas" })
 	public String findAllcitas(Map<String, Object> model, LocalDate fecha) {
 		Collection<Cita> citas = citaService.findCitaByFechaCita(fecha);
 		model.put("selections", citas);

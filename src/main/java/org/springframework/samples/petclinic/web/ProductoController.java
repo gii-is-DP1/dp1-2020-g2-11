@@ -5,10 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
-import org.springframework.samples.petclinic.model.Productos;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -22,17 +20,14 @@ public class ProductoController {
 		this.productoService = productoService;
 	}
 
-	@GetMapping(value = { "/producto" })
-	public String findAllProductos(ModelMap modelMap) {
-//		Collection<Producto> productos = (Collection<Producto>) productoService.findProductos();
-//		modelMap.addAttribute("selections", productos);
-		Productos vets = new Productos();
-		vets.getProductoList().addAll(this.productoService.findProductos());
-		modelMap.put("selections", vets);
+	@GetMapping(value = { "/productos" })
+	public String findAllProductos(Map<String, Object> model) {
+		Collection<Producto> productos = (Collection<Producto>) productoService.findProductos();
+		model.put("selections", productos);
 		return "producto/ListaProductos";
 	}
 
-	@GetMapping(value = { "/producto" })
+	@GetMapping(value = { "/productonombre" })
 	public String findProductosByNombre(Producto producto, BindingResult res, Map<String, Object> model) {
 		if (producto.getNombre() == null) {
 			producto.setNombre(""); // empty string signifies broadest possible search
@@ -42,7 +37,7 @@ public class ProductoController {
 		if (results.isEmpty()) {
 			// no Producto found
 			res.rejectValue("nombre", "notFound", "not found");
-			return "producto/findProductos";
+			return "producto/ListaProductos";
 		} else if (results.size() == 1) {
 			// 1 Producto found
 			producto = results.iterator().next();

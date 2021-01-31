@@ -2,18 +2,19 @@ package org.springframework.samples.petclinic.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
-import org.springframework.samples.petclinic.service.ReparacionService;
-import org.springframework.samples.petclinic.service.UserService;
+
+import org.springframework.samples.petclinic.service.VehiculoService;
+
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class VehiculoController {
 	
-	private ReparacionService reparacionService;
+	private VehiculoService vehiculoService;
 	
 	@Autowired
-	public void ReparacionController(ReparacionService reparacionService, AuthoritiesService authoritiesService) {
-		this.reparacionService = reparacionService;
+	public VehiculoController(VehiculoService vehiculoService, AuthoritiesService authoritiesService) {
+		this.vehiculoService = vehiculoService;
 	}
 
 }

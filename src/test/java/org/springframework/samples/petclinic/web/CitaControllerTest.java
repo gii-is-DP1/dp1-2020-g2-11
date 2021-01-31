@@ -24,11 +24,12 @@ import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(value = ProductoController.class,
+@WebMvcTest(value = CitaController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
-
 public class CitaControllerTest {
 	
 	@Autowired
@@ -39,9 +40,10 @@ public class CitaControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
-	private static final int TEST_FECHA = LocalDate.of(2021, 1, 25);
+	private static final LocalDate TEST_FECHA = LocalDate.of(2020, 1, 25);
 	@BeforeEach
 	void setup() {
+		System.out.println("aqui");
 		Cita cita = new Cita();
 		cita.setId(1);
 		cita.setFechaCita(LocalDate.of(2021, 1, 25));
@@ -50,17 +52,22 @@ public class CitaControllerTest {
 		cita1.add(cita);
 		
 		given(this.citaService.findAllCita()).willReturn(cita1);
-		given(this.citaService.findCitaByFechaCita(LocalDate.of(2021, 1, 25)).willReturn(cita1);
-		
+		given(this.citaService.findCitaByFechaCita(LocalDate.of(2021, 1, 25))).willReturn(cita1);
 	}
 	
-	@WithMockUser(value = "spring")
+	/*@WithMockUser(value = "spring")
     @Test
 	void findAllCitaTest() throws Exception {
-		mockMvc.perform(get("/cita"))
+		this.mockMvc.perform(get("/cita"))
 		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("cita"))
 		.andExpect(view().name("cita/ListaCitas"));
 	}
+	*/
+	@WithMockUser(value = "spring")
+    @Test
+    void testCitaList() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/citas/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
 	
+	}
 }

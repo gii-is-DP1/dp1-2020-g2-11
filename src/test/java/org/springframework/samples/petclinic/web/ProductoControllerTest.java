@@ -50,14 +50,16 @@ public class ProductoControllerTest {
 	 @WithMockUser(value = "spring")
 	 @Test
 	 void findAllProductosTest() throws Exception{
-		 mockMvc.perform(get("/producto")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("producto")).andExpect(view().name("producto/ListaProductos"));
+		 mockMvc.perform(get("/productos")).andExpect(status().isOk())
+		 .andExpect(model().attributeExists("selections")).andExpect(view().name("producto/ListaProductos"));
 	 }
 	 
-//	 @WithMockUser(value = "spring")
-//	 @Test
-//	 void findProductoByNombreTest() throws Exception{
-//		 mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
-//	 }
+	 @WithMockUser(value = "spring")
+	 @Test
+	 void findProductoByNombreTest() throws Exception{
+		 mockMvc.perform(get("/productonombre")).andExpect(status().isOk())
+		 .andExpect(model().attributeExists("producto")).andExpect(view().name("producto/ListaProductos"));
+		// mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
+	 }
 
 }
