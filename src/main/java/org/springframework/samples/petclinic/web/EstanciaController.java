@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Estancia;
 import org.springframework.samples.petclinic.service.EstanciaService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -23,6 +25,43 @@ public class EstanciaController {
 		Collection<Estancia> estancias = estanciaService.findEstanciasActuales();
 		model.put("selections", estancias);
 		return "estancias/ListaEstancias";
+	}
+	
+
+	@GetMapping(value = { "/estanciafechachita" })
+	public String findEstanciaByFechaCita(Estancia estancia, BindingResult res, Map<String, Object> model) {
+		if (estancia.getFechaEntrada() == null) {
+			estancia.setFechaSalida(LocalDate.parse("")); // empty string signifies broadest possible search
+		}
+		Collection<Estancia> results= this.estanciaService.findEstanciaByFechaEstancia(estancia.getFechaEntrada());
+		if (results.isEmpty()) {
+			res.rejectValue("fecha", "notFound", "not found");
+			return "estancias/findEstancias";
+		}else if(results.size()==1) {
+			estancia= results.iterator().next();
+			return  "redirect:/estancia/" +estancia.getId();
+		}else {
+			model.put("selections", results);
+			return "estancia/ListaEstancia";
+		}
+	}	
+
+	@GetMapping(value = { "/estanciasactuales" })
+	public String findEstanciasActuales(Estancia estancia, BindingResult res, Map<String, Object> model) {
+		if (estancia.getFechaEntrada() == null) {
+			estancia.setFechaSalida(LocalDate.parse("")); // empty string signifies broadest possible search
+		}
+		Collection<Estancia> results= this.estanciaService.findEstanciaByFechaEstancia(estancia.getFechaEntrada());
+		if (results.isEmpty()) {
+			res.rejectValue("fecha", "notFound", "not found");
+			return "estancias/findEstancias";
+		}else if(results.size()==1) {
+			estancia= results.iterator().next();
+			return  "redirect:/estancia/" +estancia.getId();
+		}else {
+			model.put("selections", results);
+			return "estancia/ListaEstancia";
+		}			
 	}
 
 }

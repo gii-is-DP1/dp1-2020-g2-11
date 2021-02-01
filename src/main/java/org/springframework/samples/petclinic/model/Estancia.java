@@ -75,5 +75,12 @@ public class Estancia extends BaseEntity {
 	public Integer getDuracion() {
 		return (int) Duration.between(this.fechaEntrada, this.fechaSalida).toHours();
 	}
+
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+		
+		
+	}
 	
 }

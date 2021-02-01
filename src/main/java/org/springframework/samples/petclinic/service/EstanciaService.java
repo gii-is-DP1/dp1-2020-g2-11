@@ -43,7 +43,7 @@ public class EstanciaService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Estancia> findEstanciaByFechaCita(LocalDate fecha) {
+	public Collection<Estancia> findEstanciaByFechaEstancia(LocalDate fecha) {
 		return estanciaRepository.findByFechaEstancia(fecha);
 	}
 }
