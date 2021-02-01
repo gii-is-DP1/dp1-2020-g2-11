@@ -14,7 +14,8 @@ public interface PedidoRepository extends Repository<Pedido, Integer> {
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.fechaEntrada =:fechaEntrada")
 	public Collection<Pedido> findByFechaPedido(@Param("fechaEntrada") LocalDate fechaEntrada);
-
+	
+	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.id =:id")
 	public Pedido findById(@Param("id") int id);
 	
 	Collection<Pedido> findAll() throws DataAccessException;
