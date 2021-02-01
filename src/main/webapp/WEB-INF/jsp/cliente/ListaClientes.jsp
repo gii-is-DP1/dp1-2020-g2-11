@@ -38,8 +38,8 @@
 				<th style="width: 150px;">Nombre</th>
 				<th style="width: 100px;">Apellidos</th>
 				<th style="width: 100px;">DNI</th>
-				<th style="width: 100px">Teléfono</th>
-				<th style="width: 100px">Email</th>
+				<th style="width: 100px;">Teléfono</th>
+				<th style="width: 100px;">Email</th>
 			</tr>
 		</thead>
 		<tbody>
