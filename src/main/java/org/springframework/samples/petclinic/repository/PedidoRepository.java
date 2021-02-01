@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.repository;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +17,7 @@ public interface PedidoRepository extends Repository<Pedido, Integer> {
 	public Collection<Pedido> findByFechaPedido(@Param("fechaEntrada") LocalDate fechaEntrada);
 	
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.id =:id")
-	public Pedido findById(@Param("id") int id);
+	public Optional<Pedido> findById(@Param("id") int id);
 	
 	Collection<Pedido> findAll() throws DataAccessException;
 
