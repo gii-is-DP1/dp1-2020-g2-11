@@ -29,14 +29,14 @@ public String findAllVehiculos(Map<String, Object> model) {
 }
 
 @GetMapping(value= {"/vehiculos"})
-public String findVehiculoByTipo(TipoVehiculo tp ,BindingResult res,Map<String, Object> model) {
+public String findVehiculoByTipo(String tpo ,BindingResult res,Map<String, Object> model) {
 	
-	if(tp==null) { 
+	if(tpo==null||tpo=="") { 
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
 		model.put("selections", vehiculos);
 	}
 	else {
-		
+	TipoVehiculo tp= TipoVehiculo.valueOf(tpo);
 	Collection<Vehiculo> results=vehiculoService.findVehículoByTipo(tp);
 	if(results.isEmpty()) {
 		res.rejectValue("tipoVehiculo","notFound",  "not found");
