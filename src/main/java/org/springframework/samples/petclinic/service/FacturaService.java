@@ -32,7 +32,7 @@ public class FacturaService {
 	}
 
 	@Transactional(readOnly = true)
-	public Factura findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
+	public Collection<Factura> findFacturabyFechaEmision(LocalDate fecha) throws DataAccessException {
 		return facturaRepository.findByFechaEmision(fecha);
 	}
 
