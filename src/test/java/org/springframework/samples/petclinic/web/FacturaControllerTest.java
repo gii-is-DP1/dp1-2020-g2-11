@@ -43,7 +43,7 @@ public class FacturaControllerTest {
 		Factura factura = new Factura();
 		factura.setCliente(clienteService.findClienteById(1).get());
 		factura.setDescripcion("factura de un cambio de aceite");
-		factura.setFechaEmision(LocalDate.parse("2/01/2021"));
+		factura.setFechaEmision(LocalDate.parse("02/01/2021"));
 		factura.setId(6);
 		factura.setPagado(false);
 		factura.setPrecio(20.30);

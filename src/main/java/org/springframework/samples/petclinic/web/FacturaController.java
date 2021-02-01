@@ -27,7 +27,7 @@ private FacturaService facturaService;
 	public String findAllFacturas(Map<String, Object> model) {
 		Collection<Factura> facturas = facturaService.findFacturas();
 		model.put("selections", facturas);
-		return "factura/ListaFacturas";
+		return "facturas/ListaFacturas";
 	}
 	
 	@GetMapping(value = { "/facturaId" })
@@ -43,7 +43,6 @@ private FacturaService facturaService;
 			return "factura/ListaFacturas";
 		
 		} else {
-			
 			model.put("selections", results);
 			return "factura/ListaFacturas";
 		}
