@@ -23,7 +23,7 @@ private FacturaService facturaService;
 		this.facturaService = facturaService;
 	}
 	
-	@GetMapping(value= {"/factura"})
+	@GetMapping(value= {"/facturas"})
 	public String findAllFacturas(Map<String, Object> model) {
 		Collection<Factura> facturas = facturaService.findFacturas();
 		model.put("selections", facturas);
@@ -50,11 +50,11 @@ private FacturaService facturaService;
 	}
 	
 	@GetMapping(value= {"/facturaFechaEmision"})
-	public String findFacturaByFechaEmision(Factura factura, BindingResult res, Map<String, Object> model) {
+	public String findFacturaByFechaEmision(Factura factura, BindingResult res, Map<String, Object> model, LocalDate fecha) {
 		if (factura.getFechaEmision() == null) {
 			factura.setFechaEmision(LocalDate.parse("")); // empty string signifies broadest possible search
 		}
-		Collection<Factura> results= this.facturaService.findFacturabyFechaEmision(factura.getFechaEmision());
+		Collection<Factura> results= this.facturaService.findFacturabyFechaEmision(fecha);
 		if (results.isEmpty()) {
 			res.rejectValue("fecha", "notFound", "not found");
 			return "facturas/findFacturas";

@@ -28,12 +28,12 @@ public class ProductoController {
 	}
 
 	@GetMapping(value = { "/productonombre" })
-	public String findProductosByNombre(Producto producto, BindingResult res, Map<String, Object> model) {
+	public String findProductosByNombre(String nombre, Producto producto, BindingResult res, Map<String, Object> model) {
 		if (producto.getNombre() == null) {
 			producto.setNombre(""); // empty string signifies broadest possible search
 		}
 		// find Productos by name
-		Collection<Producto> results = this.productoService.findProductoByNombre(producto.getNombre());
+		Collection<Producto> results = this.productoService.findProductoByNombre(nombre);
 		if (results.isEmpty()) {
 			// no Producto found
 			res.rejectValue("nombre", "notFound", "not found");
@@ -41,7 +41,7 @@ public class ProductoController {
 		} else if (results.size() == 1) {
 			// 1 Producto found
 			producto = results.iterator().next();
-			return "redirect:/producto/" + producto.getReferencia();
+			return "redirect:/producto/" + producto.getId();
 		} else {
 			// multiple Productos found
 			model.put("selections", results);
