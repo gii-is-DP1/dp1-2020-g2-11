@@ -18,7 +18,12 @@ public class RevisionService {
 	@Autowired
 	public RevisionService(RevisionRepository revisionRepository) {
 		this.revisionRepository = revisionRepository;
-	}	
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Revision> findRevisiones() throws DataAccessException {
+		return (Collection<Revision>) revisionRepository.findAll();
+	}
 	
 	@Transactional
 	public void saveRevision(Revision revision) throws DataAccessException {

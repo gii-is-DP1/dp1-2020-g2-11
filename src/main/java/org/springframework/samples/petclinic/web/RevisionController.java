@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Reparacion;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ReparacionService;
+import org.springframework.samples.petclinic.service.RevisionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +16,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RevisionController {
 	
-	private ReparacionService reparacionService;
+	private RevisionService revisionService;
 	
 	@Autowired
-	public RevisionController(ReparacionService reparacionService) {
-		this.reparacionService= reparacionService;
+	public RevisionController(RevisionService revisionService) {
+		this.revisionService=revisionService;
 	}
-	@GetMapping(value = { "/revision" })
+	@GetMapping(value = { "/revisiones" })
 	public String findAllRevision(Map<String, Object> model) {
-		Collection<Reparacion> reparaciones = reparacionService.findReparaciones();
+		Collection<Revision> reparaciones = revisionService.findRevisiones();
 		model.put("selections", reparaciones);
 		return "revisiones/ListaRevisiones";
 	}
@@ -33,7 +34,7 @@ public class RevisionController {
 		if (revision.getFechaRevision() == null) {
 			revision.setFechaRevision(LocalDate.parse("")); // empty string signifies broadest possible search
 		}
-		Collection<Revision> results= this.reparacionService.findRevisionByFecha(revision.getFechaRevision());
+		Collection<Revision> results= this.revisionService.findRevisionByFecha(revision.getFechaRevision());
 		if (results.isEmpty()) {
 			res.rejectValue("fecha", "notFound", "not found");
 			return "revisiones/findRevisones";
