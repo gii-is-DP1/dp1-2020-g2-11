@@ -32,7 +32,7 @@
 
 
 <h2>Todas las Revisiones</h2>
-	<table id="tablaCliente" class="table table-striped">
+	<table id="tablaRevision" class="table table-striped">
 		<thead>
 			<tr>
 				<th style="width: 150px;">Fecha</th>

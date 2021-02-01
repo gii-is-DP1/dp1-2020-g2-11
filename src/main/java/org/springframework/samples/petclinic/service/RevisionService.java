@@ -21,7 +21,7 @@ public class RevisionService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Revision> findRevisiones() throws DataAccessException {
+	public Collection<Revision> findAllRevisiones() throws DataAccessException {
 		return (Collection<Revision>) revisionRepository.findAll();
 	}
 	

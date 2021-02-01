@@ -15,9 +15,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ReparacionService;
+import org.springframework.samples.petclinic.service.RevisionService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,7 +31,7 @@ public class RevisionControllerTest {
 	private RevisionController revisionController;
 
 	@MockBean
-	private ReparacionService reparacionService;
+	private RevisionService revisionService;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -50,9 +50,9 @@ public class RevisionControllerTest {
 	
 	@WithMockUser(value = "spring")
 	 @Test
-	 void findAllProductosTest() throws Exception{
+	 void findAllRevisionesTest() throws Exception{
 		 mockMvc.perform(get("/revisones")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("selections")).andExpect(view().name("productos/ListaProductos"));
+		 .andExpect(model().attributeExists("selections")).andExpect(view().name("revision/Revisiones"));
 	 }
 
 }
