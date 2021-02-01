@@ -66,4 +66,19 @@ private FacturaService facturaService;
 			return "factura/ListaFacturas";
 		}
 	}
+	
+	@GetMapping(value= {"/facturaPago"})
+	public String findFacturaPagado(Factura factura, Boolean pago, BindingResult res, Map<String, Object> model) {
+		Collection<Factura> results = this.facturaService.findFacturaPagado(pago);
+		if (results.isEmpty()) {
+			res.rejectValue("pago", "notFound", "not found");
+			return "facturas/findFacturas";
+		}else if(results.size()==1) {
+			factura = results.iterator().next();
+			return  "redirect:/factura/" +factura.getId();
+		}else {
+			model.put("selections", results);
+			return "factura/ListaFacturas";
+		}	
+	}
 }

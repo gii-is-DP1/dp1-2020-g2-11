@@ -37,7 +37,7 @@ public class FacturaService {
 	}
 
 	@Transactional(readOnly = true)
-	public Factura findFacturaPagado(Boolean pagado) throws DataAccessException {
+	public Collection<Factura> findFacturaPagado(Boolean pagado) throws DataAccessException {
 		return facturaRepository.findByPagado(pagado);
 	}
 
