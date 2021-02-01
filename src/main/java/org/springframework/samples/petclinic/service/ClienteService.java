@@ -54,6 +54,11 @@ public class ClienteService {
 		return clienteRepository.findByNombre(nombre);
 	}
 
+	@Transactional(readOnly = true)
+	public Cliente findClienteByUsername(String username) throws DataAccessException {
+		return clienteRepository.findByUsername(username);
+	}
+	
 //	@Transactional(readOnly = true)
 //	public Cliente findClienteByFactura(Integer idFactura) throws DataAccessException {
 //		return clienteRepository.findByIdFactura(idFactura);

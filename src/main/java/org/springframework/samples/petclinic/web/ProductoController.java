@@ -48,5 +48,7 @@ public class ProductoController {
 			return "producto/ListaProductos";
 		}
 	}
+	
+	
 
 }

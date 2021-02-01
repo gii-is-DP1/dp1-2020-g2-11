@@ -76,6 +76,13 @@ class ClienteServiceTest {
 		assertThat(clientes.size()).isEqualTo(1);
 	}
 	
+	@Test
+	@Transactional
+	public void shouldFindClienteByUsername(){
+		Cliente cliente = this.clienteService.findClienteByUsername("cliente1");
+		assertThat(cliente).isNotNull();
+	}
+	
 //	@Test
 //	@Transactional
 //	public void shouldFindClienteByFactura(){
