@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class FacturaService {
 
 	private FacturaRepository facturaRepository;
-	@Autowired
-	private AuthoritiesService authoritiesService;
 	
 	@Autowired
 	public FacturaService(FacturaRepository facturaRepository) {
