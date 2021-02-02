@@ -38,7 +38,6 @@ public class RevisionControllerTest {
 		Revision revision = new Revision();
 		revision.setId(1);
 		revision.setDescripcion("Ruedas traseras y frenos desgastados");
-		;
 		revision.setDuracion(5);
 		revision.setFechaRevision(LocalDate.of(2021, 1, 23));
 
@@ -50,14 +49,14 @@ public class RevisionControllerTest {
 	@Test
 	void findAllRevisionesTest() throws Exception {
 		mockMvc.perform(get("/revisiones")).andExpect(status().isOk()).andExpect(model().attributeExists("selections"))
-				.andExpect(view().name("revision/Revisiones"));
+				.andExpect(view().name("revisiones/Revisiones"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void findRevisionByFechaTest() throws Exception {
 		mockMvc.perform(get("/revisionFecha")).andExpect(status().isOk())
-				.andExpect(model().attributeExists("revision"))
-				.andExpect(view().name("revision/Revisiones"));
+				.andExpect(model().attributeExists("selections"))
+				.andExpect(view().name("revisiones/Revisiones"));
 	}
 }

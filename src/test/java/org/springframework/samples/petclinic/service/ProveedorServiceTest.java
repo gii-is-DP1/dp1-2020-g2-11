@@ -20,13 +20,11 @@ public class ProveedorServiceTest {
 	protected ProveedorService proveedorService;
 	private Proveedor proveedor;
 	void newProveedor() throws DataAccessException{
-		
 	}
 	
 	@Test
 	@Transactional
 	public void shouldInsertProveedor() {
-
 		proveedor = new Proveedor();
 		proveedor.setNombre("Aceites Juan");
 		proveedor.setTelefono("655212326");
@@ -35,20 +33,12 @@ public class ProveedorServiceTest {
                 
 		proveedorService.saveProveedor(proveedor);
 		assertThat(proveedor.getNombre()).isNotNull();
-
 	}
 	
 	@Test
 	@Transactional
 	public void shoulFindProveedorByNombre() {
-		proveedor = new Proveedor();
-		proveedor.setNombre("Aceites Juan");
-		proveedor.setTelefono("655212326");
-		proveedor.setDireccion("C/Jacinto");
-		proveedor.setEmail("aceitesjuan@gmail.com");         
-                
-		proveedorService.saveProveedor(proveedor);
-		Collection<Proveedor> proveedores = this.proveedorService.findProveedorByNombre("Aceites Juan");
+		Collection<Proveedor> proveedores = this.proveedorService.findProveedorByNombre("Neumaticos Paco");
 		assertThat(proveedores.size()).isEqualTo(1);
 	}
 	

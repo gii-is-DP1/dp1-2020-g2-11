@@ -1,10 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,6 +17,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.service.CitaService;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,13 +31,16 @@ public class CitaControllerTest {
 	
 	@Autowired
 	private CitaController citaController;
-
+	
 	@MockBean
 	private CitaService citaService;
+	@MockBean
+	private ClienteService clienteService;
 	
 	@Autowired
 	private MockMvc mockMvc;
 	private static final LocalDate TEST_FECHA = LocalDate.of(2020, 1, 25);
+	
 	@BeforeEach
 	void setup() {
 		System.out.println("aqui");

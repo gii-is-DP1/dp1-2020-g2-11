@@ -21,20 +21,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class CitaController {
-	@Autowired
-	private CitaService citaService;
-	@Autowired
-	private ClienteService clienteService;
+
+	private final CitaService citaService;
+	private final ClienteService clienteService;
 
 	@Autowired
-	public CitaController(CitaService citaService) {
+	public CitaController(CitaService citaService, ClienteService clienteService) {
 		this.citaService = citaService;
+		this.clienteService = clienteService;
 	}
 
-	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
-	}
+//	@InitBinder
+//	public void setAllowedFields(WebDataBinder dataBinder) {
+//		dataBinder.setDisallowedFields("id");
+//	}
 
 	@GetMapping(value = { "/citas" })
 	public String findAllCitas(Map<String, Object> model) {

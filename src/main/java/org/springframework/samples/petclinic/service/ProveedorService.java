@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -46,11 +47,11 @@ public class ProveedorService {
 	
 	@Transactional(readOnly = true)	
 	public Collection<Pedido> findPedidos() throws DataAccessException {
-		return pedidoRepository.findAll();
+		return (Collection<Pedido>) pedidoRepository.findAll();
 	}
 	
 	@Transactional(readOnly = true)
-	public Pedido findPedidobyId(Integer id) throws DataAccessException {
+	public Optional<Pedido> findPedidobyId(Integer id) throws DataAccessException {
 		return pedidoRepository.findById(id);
 	}
 	

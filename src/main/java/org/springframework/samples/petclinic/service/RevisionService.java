@@ -37,7 +37,7 @@ public class RevisionService {
 	
 	@Transactional(readOnly = true)
 	public Collection<Revision> findRevisionByFecha(LocalDate fechaRevision) throws DataAccessException {
-		return revisionRepository.findByFechaRevision(fechaRevision);
+		return (Collection<Revision>) revisionRepository.findByFechaRevision(fechaRevision);
 	}
 
 }

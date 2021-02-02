@@ -20,49 +20,59 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.TipoVehiculo;
 import org.springframework.samples.petclinic.model.Vehiculo;
+import org.springframework.samples.petclinic.service.AuthoritiesService;
 import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-@WebMvcTest(controllers=VehiculoController.class,
-excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
-excludeAutoConfiguration= SecurityConfiguration.class)
+@WebMvcTest(controllers = VehiculoController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class VehiculoControllerTest {
+
 	@Autowired
 	private VehiculoController vehiculoController;
-	
+
 	@MockBean
 	private VehiculoService vehiculoService;
-	
+	@MockBean
+	private AuthoritiesService authoritiesServices;
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@BeforeEach
 	void setup() {
 		Vehiculo vehiculo = new Vehiculo();
 		vehiculo.setId(4);
-		vehiculo.setFechaFabricacion(LocalDate.of(2017,05,28));
+		vehiculo.setFechaFabricacion(LocalDate.of(2017, 05, 28));
 		vehiculo.setTipoVehiculo(TipoVehiculo.COCHE);
 		vehiculo.setKilometraje(25000);
 		vehiculo.setMatricula("2718ODX");
-		Collection<Vehiculo> vehiculo1= new ArrayList<>();
+		Collection<Vehiculo> vehiculo1 = new ArrayList<>();
 		vehiculo1.add(vehiculo);
-		
+
 		given(this.vehiculoService.findVehiculos()).willReturn(vehiculo1);
 		given(this.vehiculoService.findVehículoByTipo(TipoVehiculo.COCHE)).willReturn(vehiculo1);
-		
-	
 	}
-	
-	@WithMockUser(value="spring")
+
+	@WithMockUser(value = "spring")
 	@Test
-	void findAllVehiculosTest() throws Exception{
-		mockMvc.perform(get("/vehiculo"))
-		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("selections"))
-		.andExpect(view().name("vehiculo/ListaVehiculos"));
-		
+	void findAllVehiculosTest() throws Exception {
+		mockMvc.perform(get("/vehiculos")).andExpect(status().isOk()).andExpect(model().attributeExists("vehiculos"))
+				.andExpect(view().name("vehiculos/ListaVehiculos"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void findVehiculoByMatriculaTest() throws Exception {
+		mockMvc.perform(get("/vehiculo")).andExpect(status().isOk()).andExpect(model().attributeExists("vehiculoMat"))
+				.andExpect(view().name("vehiculos/ListaVehiculos"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void findVehiculoByTipoTest() throws Exception {
+		mockMvc.perform(get("/vehiculo/tipo")).andExpect(status().isOk())
+				.andExpect(model().attributeExists("vehiculoTipo")).andExpect(view().name("vehiculos/ListaVehiculos"));
 	}
 }
