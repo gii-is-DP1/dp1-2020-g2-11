@@ -1,8 +1,10 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.TipoVehiculo;
 import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
@@ -48,7 +50,12 @@ public class VehiculoController {
 		return "proveedor/ListaVehiculos";
 
 	}
-
+	@GetMapping(value = "/vehiculos/find")
+	public String initFindForm(Map<String, Object> model) {
+		model.put("vehiculo", new Vehiculo());
+		return "vehiculos/findVehiculos";
+	}
+	
 	@GetMapping(value = { "/vehiculo/{vehiculoId}/details" })
 	public String findVehiculosByMatricula(@PathVariable("vehiculoId") int vehiculoId, String matricula,
 			BindingResult res, ModelMap model) {
