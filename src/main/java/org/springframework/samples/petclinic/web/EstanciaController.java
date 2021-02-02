@@ -41,7 +41,7 @@ public class EstanciaController {
 			estancia= results.iterator().next();
 			return  "redirect:/estancia/" +estancia.getId();
 		}else {
-			model.put("selections", results);
+			model.put("estancia1", results);
 			return "estancia/ListaEstancia";
 		}
 	}	
@@ -59,7 +59,7 @@ public class EstanciaController {
 			estancia= results.iterator().next();
 			return  "redirect:/estancia/" +estancia.getId();
 		}else {
-			model.put("selections", results);
+			model.put("estancia2", results);
 			return "estancia/ListaEstancia";
 		}			
 	}

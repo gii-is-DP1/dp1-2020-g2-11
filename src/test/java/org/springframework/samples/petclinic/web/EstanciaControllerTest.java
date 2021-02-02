@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(value = CitaController.class,
+@WebMvcTest(value = EstanciaController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
 
@@ -63,14 +63,14 @@ public class EstanciaControllerTest {
 	 @Test
 	 void findEstanciasactuales() throws Exception{
 		 mockMvc.perform(get("/estanciasactuales")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("selections")).andExpect(view().name("estancia/ListaEstancia"));
+		 .andExpect(model().attributeExists("estancia2")).andExpect(view().name("estancia/ListaEstancia"));
 	 }
 	 
 	 @WithMockUser(value = "spring")
 	 @Test
 	 void findEstanciasfechacita() throws Exception{
 		 mockMvc.perform(get("/estanciafechacita")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("selections")).andExpect(view().name("estancia/ListaEstancia"));
+		 .andExpect(model().attributeExists("estancia1")).andExpect(view().name("estancia/ListaEstancia"));
 	 }
 	
 }
