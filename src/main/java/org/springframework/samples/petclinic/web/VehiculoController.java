@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class VehiculoController {
@@ -34,26 +35,26 @@ public class VehiculoController {
 
 		if (tpo == null || tpo == "") {
 			Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
-			model.put("vehiculoTipo", vehiculos);
+			model.put("vehiculos", vehiculos);
 		} else {
 			TipoVehiculo tp = TipoVehiculo.valueOf(tpo);
 			Collection<Vehiculo> results = vehiculoService.findVehículoByTipo(tp);
 			if (results.isEmpty()) {
 				res.rejectValue("tipoVehiculo", "notFound", "not found");
 			} else {
-				model.put("vehiculoTipo", results);
+				model.put("vehiculos", results);
 			}
 		}
 		return "proveedor/ListaVehiculos";
 
 	}
 
-	@GetMapping(value = { "/vehiculo" })
-	public String findVehiculosByMatricula(String matricula, BindingResult res, ModelMap model) {
-
+	@GetMapping(value = { "/vehiculo/{vehiculoId}/details" })
+	public String findVehiculosByMatricula(@PathVariable("vehiculoId") int vehiculoId, String matricula,
+			BindingResult res, ModelMap model) {
 		if (matricula == null) {
 			Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
-			model.put("vehiculoMat", vehiculos);
+			model.put("vehiculos", vehiculos);
 			return "vehiculo/listaVehiculos";
 		} else {
 			Collection<Vehiculo> results = vehiculoService.findVehículoByMatricula(matricula);
@@ -62,9 +63,9 @@ public class VehiculoController {
 				return "vehiculo/listaVehiculos";
 			} else if (results.size() == 1) {
 				Vehiculo vehiculo = results.iterator().next();
-				return "redirect:/vehiculo/" + vehiculo.getMatricula();
+				return "redirect:/vehiculo/" + vehiculoId + "/details";
 			} else {
-				model.put("selections", results);
+				model.put("vehiculos", results);
 				return "vehiculo/listaVehiculos";
 			}
 		}
