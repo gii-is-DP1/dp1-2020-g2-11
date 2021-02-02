@@ -40,6 +40,15 @@
 				</sec:authorize>
 
 				<sec:authorize
+					access="hasAuthority('cliente')">
+					<petclinic:menuItem active="${name eq 'vehiculo'}"
+						url="/cliente/{clienteId}/vehiculos" title="vehiculo">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Mis Vehículos</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+
+				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<petclinic:menuItem active="${name eq 'cita'}" url="/cita"
 						title="cita">
@@ -66,7 +75,7 @@
 				</sec:authorize>
 
 				<sec:authorize access="hasAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'proveedores'}" url="/cita"
+					<petclinic:menuItem active="${name eq 'proveedores'}" url="/proveedores"
 						title="proveedor">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Proveedores</span>
@@ -74,22 +83,30 @@
 				</sec:authorize>
 
 				<sec:authorize access="hasAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'productos'}" url="/cita"
+					<petclinic:menuItem active="${name eq 'productos'}" url="/productos"
 						title="producto">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Productos</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 
+				<sec:authorize access="hasAuthority('cliente')">
+					<petclinic:menuItem active="${name eq 'productos'}" url="/cliente/{clienteId}/facturas)"
+						title="producto">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Mis Facturas</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+
 				<sec:authorize access="hasAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'facturas'}" url="/cita"
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
 						title="factura">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Facturas</span>
 					</petclinic:menuItem>
 				</sec:authorize>
-				
-				
+
+
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
