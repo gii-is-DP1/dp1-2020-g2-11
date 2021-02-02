@@ -26,7 +26,7 @@ public class ClienteController {
 	public String findAllClientes(Map<String, Object> model) {
 		Collection<Cliente> clientes = clienteService.findClientes();
 		model.put("selections", clientes);
-		return "cliente/ListaClientes";
+		return "cliente/findClientes";
 	}
 	
 	//crear nuevo cliente
