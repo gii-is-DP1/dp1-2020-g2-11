@@ -29,7 +29,7 @@
 					<span>Clientes</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'vehiculo'}" url="/cita"
+				<petclinic:menuItem active="${name eq 'vehiculo'}" url="/vehiculos/find"
 					title="vehiculo">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Vehículos</span>
@@ -41,7 +41,7 @@
 					<span>Citas</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'estancia'}" url="/cita"
+				<petclinic:menuItem active="${name eq 'estancia'}" url="/estancias/find"
 					title="estancia">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Estancias</span>

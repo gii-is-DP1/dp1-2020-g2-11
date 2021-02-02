@@ -20,11 +20,11 @@ public class EstanciaController {
 		this.estanciaService = estanciaService;
 	}
 
-	@GetMapping(value = { "/estancias" })
+	@GetMapping(value = { "/estancias/find" })
 	public String findAllEstancias(Map<String, Object> model) {
 		Collection<Estancia> estancias = estanciaService.findEstanciasActuales();
 		model.put("selections", estancias);
-		return "estancias/ListaEstancias";
+		return "estancias/findEstancias";
 	}
 	
 
@@ -42,7 +42,7 @@ public class EstanciaController {
 			return  "redirect:/estancia/" +estancia.getId();
 		}else {
 			model.put("estancia1", results);
-			return "estancia/ListaEstancia";
+			return "estancias/findEstancias";
 		}
 	}	
 
@@ -60,7 +60,7 @@ public class EstanciaController {
 			return  "redirect:/estancia/" +estancia.getId();
 		}else {
 			model.put("estancia2", results);
-			return "estancia/ListaEstancia";
+			return "estancia/findEstancias";
 		}			
 	}
 
