@@ -51,8 +51,8 @@ public class VehiculoControllerTest {
 		Collection<Vehiculo> vehiculo1 = new ArrayList<>();
 		vehiculo1.add(vehiculo);
 
-		given(this.vehiculoService.findVehiculos()).willReturn(vehiculo1);
-		given(this.vehiculoService.findVehículoByTipo(TipoVehiculo.COCHE)).willReturn(vehiculo1);
+//		given(this.vehiculoService.findVehiculos()).willReturn(vehiculo1);
+//		given(this.vehiculoService.findVehículoByTipo(TipoVehiculo.COCHE)).willReturn(vehiculo1);
 	}
 
 	@WithMockUser(value = "spring")
@@ -65,14 +65,14 @@ public class VehiculoControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void findVehiculoByMatriculaTest() throws Exception {
-		mockMvc.perform(get("/vehiculo")).andExpect(status().isOk()).andExpect(model().attributeExists("vehiculoMat"))
-				.andExpect(view().name("vehiculos/ListaVehiculos"));
+		mockMvc.perform(get("/vehiculo/{vehiculoId}/details", 1)).andExpect(status().isOk())
+				.andExpect(model().attributeExists("vehiculos")).andExpect(view().name("vehiculos/ListaVehiculos"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void findVehiculoByTipoTest() throws Exception {
 		mockMvc.perform(get("/vehiculo/tipo")).andExpect(status().isOk())
-				.andExpect(model().attributeExists("vehiculoTipo")).andExpect(view().name("vehiculos/ListaVehiculos"));
+				.andExpect(model().attributeExists("vehiculos")).andExpect(view().name("vehiculos/ListaVehiculos"));
 	}
 }
