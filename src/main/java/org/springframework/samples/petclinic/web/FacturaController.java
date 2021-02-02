@@ -50,19 +50,22 @@ public class FacturaController {
 	@GetMapping(value = { "/facturaFechaEmision" })
 	public String findFacturaByFechaEmision(Factura factura, BindingResult res, ModelMap model, LocalDate fecha) {
 		if (factura.getFechaEmision() == null) {
-			factura.setFechaEmision(LocalDate.parse("")); // empty string signifies broadest possible search
-		}
-		Collection<Factura> results = this.facturaService.findFacturabyFechaEmision(fecha);
-
-		if (results.isEmpty()) {
-			res.rejectValue("fecha", "notFound", "not found");
-			return "facturas/findFacturas";
-//		}else if(results.size()==1) {
-//			factura= results.iterator().next();
-//			return  "redirect:/factura/" +factura.getId();
-		} else {
-			model.put("facturaFecha", results);
+			Collection<Factura> results = this.facturaService.findFacturas();
+			model.addAttribute("facturaFecha", results);
 			return "facturas/ListaFacturas";
+		} else {
+			Collection<Factura> results = this.facturaService.findFacturabyFechaEmision(fecha);
+
+			if (results.isEmpty()) {
+				res.rejectValue("fecha", "notFound", "not found");
+				return "facturas/ListaFacturas";
+			}else if(results.size()==1) {
+				factura= results.iterator().next();
+				return  "redirect:/factura/" +factura.getId();
+			} else {
+				model.addAttribute("facturaFecha", results);
+				return "facturas/ListaFacturas";
+			}
 		}
 	}
 
