@@ -3,16 +3,20 @@ package org.springframework.samples.petclinic.web;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProductoController {
-	
+
 	private ProductoService productoService;
 
 	@Autowired
@@ -28,7 +32,8 @@ public class ProductoController {
 	}
 
 	@GetMapping(value = { "/productonombre" })
-	public String findProductosByNombre(String nombre, Producto producto, BindingResult res, Map<String, Object> model) {
+	public String findProductosByNombre(String nombre, Producto producto, BindingResult res,
+			Map<String, Object> model) {
 		if (producto.getNombre() == null) {
 			producto.setNombre(""); // empty string signifies broadest possible search
 		}
@@ -48,7 +53,23 @@ public class ProductoController {
 			return "producto/ListaProductos";
 		}
 	}
-	
-	
+
+	@GetMapping(value = "/producto/new")
+	public String initCreationForm(ModelMap model) {
+		Producto producto = new Producto();
+		model.put("producto", producto);
+		return "productos/FormularioProducto";
+	}
+
+	@PostMapping(value = "/producto/new")
+	public String processCreationForm(@Valid Producto producto, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			model.put("producto", producto);
+			return "productos/FormularioProducto";
+		} else {
+			this.productoService.saveProducto(producto);
+			return "redirect:/productos/ListaProductos";
+		}
+	}
 
 }
