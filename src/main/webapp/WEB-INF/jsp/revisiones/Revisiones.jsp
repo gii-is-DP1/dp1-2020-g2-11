@@ -41,7 +41,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="revision">
+			<c:forEach items="${revisiones}" var="revision">
 				<tr>
 					<td><spring:url value="/revision/{revisionId}" var="revisionUrl">
 							<spring:param name="revisionId" value="${revision.id}" />

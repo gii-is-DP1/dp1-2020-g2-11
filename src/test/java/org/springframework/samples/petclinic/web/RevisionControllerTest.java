@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,14 @@ public class RevisionControllerTest {
 		revision.setDuracion(5);
 		revision.setFechaRevision(LocalDate.of(2021, 1, 23));
 
-		// given(this.productoService.findProductos()).willReturn(Lists.newArrayList(producto));
+//		given(this.revisionService.findAllRevisiones()).willReturn(Lists.newArrayList(revision));
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void findAllRevisionesTest() throws Exception {
-		mockMvc.perform(get("/revisiones")).andExpect(status().isOk()).andExpect(model().attributeExists("selections"))
+		mockMvc.perform(get("/revisiones")).andExpect(status().isOk()).andExpect(model().attributeExists("revisiones"))
 				.andExpect(view().name("revisiones/Revisiones"));
 	}
 
@@ -56,7 +57,7 @@ public class RevisionControllerTest {
 	@Test
 	void findRevisionByFechaTest() throws Exception {
 		mockMvc.perform(get("/revisionFecha")).andExpect(status().isOk())
-				.andExpect(model().attributeExists("selections"))
+				.andExpect(model().attributeExists("revisiones"))
 				.andExpect(view().name("revisiones/Revisiones"));
 	}
 }
