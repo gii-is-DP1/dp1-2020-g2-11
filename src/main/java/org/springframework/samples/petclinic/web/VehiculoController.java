@@ -25,11 +25,11 @@ public class VehiculoController {
 		this.vehiculoService = vehiculoService;
 	}
 
-	@GetMapping(value = { "/vehiculos" })
+	@GetMapping(value = { "/vehiculo/find" })
 	public String findAllVehiculos(ModelMap model) {
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
 		model.put("vehiculos", vehiculos);
-		return "vehiculos/ListaVehiculos";
+		return "vehiculos/findVehiculos";
 	}
 
 	@GetMapping(value = { "/vehiculo/tipo" })

@@ -82,10 +82,10 @@
 				</sec:authorize>
 
 				<sec:authorize access="hasAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'facturas'}" url="/cita"
-						title="factura">
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/reparacion/find"
+						title="reparacion">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Facturas</span>
+						<span>Reparacion</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				
