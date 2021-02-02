@@ -10,12 +10,15 @@ import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Cita;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -23,11 +26,17 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 
 @WebMvcTest(value = CitaController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
 public class CitaControllerTest {
+	
+	private static final int TEST_CITA_ID = 1;
 	
 	@Autowired
 	private CitaController citaController;
@@ -75,5 +84,19 @@ public class CitaControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/cita/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
 	
 	}
+	
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+	mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID)
+						.with(csrf())
+						.param("fechaCita", "25/3/2021")
+						.param("horaCita", "11:00"))
+			.andExpect(model().attributeHasNoErrors("cita"));
+//			.andExpect(status().is3xxRedirection())
+//			.andExpect(status().isOk())
+//			.andExpect(view().name("redirect:/citas/FormularioCita"));
+}
 	
 }
