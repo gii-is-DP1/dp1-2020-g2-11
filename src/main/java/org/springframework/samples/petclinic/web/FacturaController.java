@@ -71,16 +71,25 @@ public class FacturaController {
 
 	@GetMapping(value = { "/facturaPago" })
 	public String findFacturaPagado(Factura factura, Boolean pago, BindingResult res, ModelMap model) {
-		Collection<Factura> results = this.facturaService.findFacturaPagado(pago);
-		if (results.isEmpty()) {
-			res.rejectValue("pago", "notFound", "not found");
-			return "facturas/findFacturas";
-//		}else if(results.size()==1) {
-//			factura = results.iterator().next();
-//			return  "redirect:/factura/" +factura.getId();
-		} else {
-			model.put("facturaPagado", results);
+		if (factura.getPagado() == null) {
+			Collection<Factura> results = this.facturaService.findFacturas();
+			model.addAttribute("facturaPagado", results);
 			return "facturas/ListaFacturas";
+		}else {
+			Collection<Factura> results = this.facturaService.findFacturaPagado(pago);
+			if (results.isEmpty()) {
+				res.rejectValue("pago", "notFound", "not found");
+				return "facturas/findFacturas";
+			}else if(results.size()==1) {
+				factura = results.iterator().next();
+				return  "redirect:/factura/" +factura.getId();
+			} else {
+				model.addAttribute("facturaPagado", results);
+				return "facturas/ListaFacturas";
+			}
 		}
+		
+		
+		
 	}
 }
