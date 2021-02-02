@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.RevisionService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,27 +22,27 @@ public class RevisionController {
 		this.revisionService=revisionService;
 	}
 	@GetMapping(value = { "/revisiones" })
-	public String findAllRevision(Map<String, Object> model) {
+	public String findAllRevision(ModelMap modelMap) {
 		Collection<Revision> revisiones = (Collection<Revision>) revisionService.findAllRevisiones();
-		model.put("selections", revisiones);
-		return "revision/Revisiones";
+		modelMap.addAttribute("selections", revisiones);
+		return "revisiones/Revisiones";
 	}
 	
 	@GetMapping(value = { "/revisionFecha" })
-	public String findRevisionByFecha(LocalDate fecha, Revision revision, BindingResult res, Map<String, Object> model) {
+	public String findRevisionByFecha(LocalDate fecha, Revision revision, BindingResult res, ModelMap modelMap) {
 		if (revision.getFechaRevision() == null) {
 			revision.setFechaRevision(LocalDate.parse("")); // empty string signifies broadest possible search
 		}
 		Collection<Revision> results= this.revisionService.findRevisionByFecha(fecha);
 		if (results.isEmpty()) {
 			res.rejectValue("fecha", "notFound", "not found");
-			return "revision/Revisiones";
-		}else if(results.size()==1) {
-			revision= results.iterator().next();
-			return  "redirect:/revision/" +revision.getId();
+			return "revisiones/Revisiones";
+		} else if (results.size() == 1) {
+			revision = results.iterator().next();
+			return "redirect:/revisiones/" + revision.getId();
 		}else {
-			model.put("selections", results);
-			return "revision/Revisiones";
+			modelMap.addAttribute("selections", results);
+			return "revisiones/Revisiones";
 		}
 		
 	}
