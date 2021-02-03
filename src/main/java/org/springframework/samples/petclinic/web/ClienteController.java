@@ -25,8 +25,8 @@ public class ClienteController {
 	@GetMapping(value = { "/clientes" })
 	public String findAllClientes(Map<String, Object> model) {
 		Collection<Cliente> clientes = clienteService.findClientes();
-		model.put("selections", clientes);
-		return "cliente/findClientes";
+		model.put("cliente", clientes);
+		return "cliente/ListaClientes";
 	}
 	
 	//crear nuevo cliente
@@ -53,11 +53,11 @@ public class ClienteController {
 	@GetMapping(value = "/cliente/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("cliente", new Cliente());
-		return "cliente/ListaClientes";
+		return "cliente/findClientes";
 	}
 
 	@GetMapping(value = { "/cliente" })
-	public String findClientesByNombre(Cliente cliente, BindingResult res, Map<String, Object> model) {
+	public String processFindForm(Cliente cliente, BindingResult res, Map<String, Object> model) {
 		if (cliente.getNombre() == null) {
 			cliente.setNombre(""); // empty string signifies broadest possible search
 		}
@@ -72,9 +72,10 @@ public class ClienteController {
 			cliente = results.iterator().next();
 			return "redirect:/cliente/" + cliente.getId();
 		} else {
+			
 			// multiple clientes found
-			model.put("selections", results);
-			return "cliente/ListaCliente";
+			model.put("cliente", results);
+			return "cliente/ListaClientes";
 		}
 	}
 }

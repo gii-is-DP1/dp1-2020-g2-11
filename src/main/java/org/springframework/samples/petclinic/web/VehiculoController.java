@@ -48,7 +48,6 @@ public class VehiculoController {
 			}
 		}
 		return "proveedor/ListaVehiculos";
-
 	}
 	@GetMapping(value = "/vehiculos/find")
 	public String initFindForm(Map<String, Object> model) {
