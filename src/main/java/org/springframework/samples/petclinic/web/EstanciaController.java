@@ -21,10 +21,10 @@ public class EstanciaController {
 		this.estanciaService = estanciaService;
 	}
 
-	@GetMapping(value = { "/estancias/find" })
+	@GetMapping(value = { "/estancias" })
 	public String findAllEstancias(Map<String, Object> model) {
 		Collection<Estancia> estancias = estanciaService.findEstanciasActuales();
-		model.put("selections", estancias);
+		model.put("estancias", estancias);
 		return "estancias/findEstancias";
 	}
 	
