@@ -11,9 +11,9 @@
 
 <TalleresLaPlata:layout pageName="cliente">
 
-	<h2>Find Clientes</h2>
+	<h2>Buscar Clientes</h2>
 
-	<form:form modelAttribute="cliente" action="/clientes" method="get"
+	<form:form modelAttribute="cliente" action="/cliente" method="get"
 		class="form-horizontal" id="search-cliente-form">
 		<div class="form-group">
 			<div class="control-group" id="nombre">
@@ -27,8 +27,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar
-					Cliente</button>
+				<button type="submit" class="btn btn-default">Buscar</button>
 			</div>
 		</div>
 	</form:form>

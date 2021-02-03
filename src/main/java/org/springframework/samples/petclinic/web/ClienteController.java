@@ -2,7 +2,9 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
 import java.util.Map;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.service.ClienteService;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ClienteController {
@@ -28,28 +32,26 @@ public class ClienteController {
 		model.put("cliente", clientes);
 		return "cliente/ListaClientes";
 	}
-	
-	//crear nuevo cliente
+
+	// crear nuevo cliente
 	@GetMapping(value = "/clientes/new")
 	public String initCreationForm(Map<String, Object> model) {
 		Cliente cliente = new Cliente();
 		model.put("cliente", cliente);
 		return "cliente/createOrUpdateClienteForm";
 	}
-	
+
 	@PostMapping(value = "/clientes/new")
 	public String processCreationForm(@Valid Cliente cliente, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
 			model.put("cliente", cliente);
 			return "cliente/createOrUpdateClienteForm";
-		}
-		else {
+		} else {
 			this.clienteService.saveCliente(cliente);
 			return "redirect:/";
 		}
 	}
-	
-	
+
 	@GetMapping(value = "/cliente/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("cliente", new Cliente());
@@ -72,10 +74,17 @@ public class ClienteController {
 			cliente = results.iterator().next();
 			return "redirect:/cliente/" + cliente.getId();
 		} else {
-			
+
 			// multiple clientes found
 			model.put("cliente", results);
 			return "cliente/ListaClientes";
 		}
+	}
+
+	@GetMapping(value = { "/cliente/{clienteId}" })
+	public String findById(@PathVariable("clienteId") int clienteId, ModelMap map) {
+		Cliente clientes = clienteService.findClienteById(clienteId).get();
+		map.put("cliente", clientes);
+		return "cliente/clienteDetails";
 	}
 }
