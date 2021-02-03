@@ -19,11 +19,15 @@ public class ReparacionController {
 		this.reparacionService= reparacionService;
 	}
 	
-	@GetMapping(value= {"/reparacion"})
+	@GetMapping(value= {"/reparacion/find"})
 	public String findAllReparaciones(Map<String,Object> model) {
 		Collection<Reparacion> reparaciones= reparacionService.findReparaciones();
-		model.put("selections", reparaciones);
+		model.put("reparacion", reparaciones);
 		return "reparacion/ListaReparaciones";
 	}
-	
+//	@GetMapping(value = "/reparacion/find")
+//	public String initFindForm(Map<String, Object> model) {
+//		model.put("selections", new Reparacion());
+//		return "reparaciones/ListaReparaciones";
+//	}
 }
