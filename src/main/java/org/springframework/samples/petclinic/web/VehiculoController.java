@@ -46,7 +46,6 @@ public class VehiculoController {
 			}
 		}
 		return "proveedor/ListaVehiculos";
-
 	}
 
 	@GetMapping(value = { "/vehiculo/{vehiculoId}/details" })
