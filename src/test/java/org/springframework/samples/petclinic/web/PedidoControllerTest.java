@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.service.PedidosService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,9 +31,7 @@ public class PedidoControllerTest {
 	private PedidoController pedidoController;
 	
 	@MockBean
-	private PedidoService pedidoService;
-	@MockBean
-	private PedidoService pedidoService;
+	private PedidosService pedidoService;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -40,3 +39,6 @@ public class PedidoControllerTest {
 	
 	@BeforeEach
 	void setup() {
+		
+	}
+}

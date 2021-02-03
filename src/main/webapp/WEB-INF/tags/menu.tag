@@ -24,7 +24,7 @@
 
 				<sec:authorize access="hasAuthority('admin')">
 					<petclinic:menuItem active="${name eq 'cliente'}"
-						url="/cliente" title="cliente">
+						url="/cliente/find" title="cliente">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						<span>Clientes</span>
 					</petclinic:menuItem>
@@ -33,7 +33,7 @@
 				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<petclinic:menuItem active="${name eq 'vehiculo'}"
-						url="/vehiculos/find" title="vehiculo">
+						url="/vehiculos" title="vehiculo">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Vehículos</span>
 					</petclinic:menuItem>
@@ -102,7 +102,7 @@
 					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
 						title="factura">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Facturas</span>
+						<span>Reparacion</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 

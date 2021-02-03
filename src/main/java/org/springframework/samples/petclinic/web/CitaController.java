@@ -37,6 +37,13 @@ public class CitaController {
 		this.citaService = citaService;
 		this.clienteService = clienteService;
 	}
+	
+	
+	@GetMapping(value = "/cita/find")
+	public String initFindForm(Map<String, Object> model) {
+		model.put("cita", new Cita());
+		return "cita/ListaCitas";
+	}
 
 //	@InitBinder
 //	public void setAllowedFields(WebDataBinder dataBinder) {

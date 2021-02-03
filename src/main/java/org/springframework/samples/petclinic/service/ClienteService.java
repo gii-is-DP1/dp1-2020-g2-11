@@ -51,6 +51,9 @@ public class ClienteService {
 
 	@Transactional(readOnly = true)
 	public Collection<Cliente> findClienteByNombre(String nombre) throws DataAccessException {
+		if(nombre == "") {
+			return (Collection<Cliente>) clienteRepository.findAll();
+		}
 		return clienteRepository.findByNombre(nombre);
 	}
 

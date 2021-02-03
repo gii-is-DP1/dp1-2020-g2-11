@@ -11,25 +11,7 @@
 
 <TalleresLaPlata:layout pageName="productos">
 
-	<h2>Buscar producto</h2>
-	<form:form modelAttribute="producto" action="/productos" method="get"
-		class="form-horizontal" id="buscador-productos">
-		<div class="form-group">
-			<div class="control-group" id="marca">
-				<label class="col-sm-2 control-label">Marca</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="marca" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
-			</div>
-		</div>
-	</form:form>
+	
 
 	<h2>Todos los productos</h2>
 	<table id="tablaProducto" class="table table-striped">
@@ -43,7 +25,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="producto">
+			<c:forEach items="${producto}" var="producto">
 				<tr>
 					<td><spring:url value="/producto/{productoId}" var="productoUrl">
 							<spring:param name="productoId" value="${producto.id}" />
@@ -62,5 +44,6 @@
 	</table>
 
 	<br />
+		<a class="btn btn-default" href='<spring:url value="/productos/new" htmlEscape="true"/>'>Añadir</a>
 
 </TalleresLaPlata:layout>

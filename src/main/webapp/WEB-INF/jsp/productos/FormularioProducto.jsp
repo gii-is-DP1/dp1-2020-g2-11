@@ -8,9 +8,9 @@
 
 <TalleresLaPlata:layout pageName="productos">
     <h2>
-        <c:if test="${productos['new']}">Nuevo </c:if> Producto
+        <c:if test="${producto['new']}">Nuevo </c:if> Producto
     </h2>
-    <form:form modelAttribute="producto" class="form-horizontal" id="add-proveedor-form">
+    <form:form modelAttribute="producto" class="form-horizontal" id="add-producto-form">
         <div class="form-group has-feedback">
             <TalleresLaPlata:inputField label="Nombre" name="nombre"/>
             <TalleresLaPlata:inputField label="Marca" name="marca"/>

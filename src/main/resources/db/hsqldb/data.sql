@@ -34,7 +34,7 @@ INSERT INTO mecanico(id,nombre,apellidos,dni,telefono,email,username) VALUES (3,
 
 --Clientes
 INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Manuel', 'Viera Rodriguez', '62748364G', '633572849','manuvierod@gmail.com','cliente1');
-INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Francisco', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com','cliente2');
+INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Manuel', 'Dominguez Rodriguez', '35462748F', '667483749','fradomrod@gmail.com','cliente2');
 INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com','cliente3');
 INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com','cliente4');
 
