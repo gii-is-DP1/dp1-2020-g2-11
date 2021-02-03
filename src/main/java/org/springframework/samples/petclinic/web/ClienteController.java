@@ -65,16 +65,18 @@ public class ClienteController {
 		}
 		// find clientes by name
 		Collection<Cliente> results = this.clienteService.findClienteByNombre(cliente.getNombre());
+		
 		if (results.isEmpty()) {
 			// no clientes found
 			res.rejectValue("nombre", "notFound", "not found");
-			return "cliente/findClientes";
+			return "redirect:/cliente/find";
+			
 		} else if (results.size() == 1) {
 			// 1 cliente found
 			cliente = results.iterator().next();
 			return "redirect:/cliente/" + cliente.getId();
+			
 		} else {
-
 			// multiple clientes found
 			model.put("cliente", results);
 			return "cliente/ListaClientes";

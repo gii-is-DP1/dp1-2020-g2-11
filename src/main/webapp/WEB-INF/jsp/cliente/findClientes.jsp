@@ -32,6 +32,7 @@
 		</div>
 	</form:form>
 	<br />
+	
 	<%--    <sec:authorize access="hasAuthority('admin')">
 		<a class="btn btn-default" href='<spring:url value="/clientes/new" htmlEscape="true"/>'>Add Cliente</a>
 	</sec:authorize>--%>
