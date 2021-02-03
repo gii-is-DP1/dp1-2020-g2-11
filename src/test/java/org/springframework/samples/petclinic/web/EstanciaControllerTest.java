@@ -55,22 +55,21 @@ public class EstanciaControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
     void findAllEstancias() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/estancias/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/estancias/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("estancia/findEstancias"));
 	
 	}
 	
 	 @WithMockUser(value = "spring")
 	 @Test
 	 void findEstanciasactuales() throws Exception{
-		 mockMvc.perform(get("/estanciasactuales")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("estancia2")).andExpect(view().name("estancia/ListaEstancia"));
+		 this.mockMvc.perform(MockMvcRequestBuilders.get("/estanciasactuales/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("estancia2")).andExpect(MockMvcResultMatchers.view().name("estancia/findEstancias"));
+		 
 	 }
 	 
 	 @WithMockUser(value = "spring")
 	 @Test
 	 void findEstanciasfechacita() throws Exception{
-		 mockMvc.perform(get("/estanciafechacita")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("estancia1")).andExpect(view().name("estancia/ListaEstancia"));
+		 this.mockMvc.perform(MockMvcRequestBuilders.get("/estanciafechacita/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("estancia1")).andExpect(MockMvcResultMatchers.view().name("estancia/findEstancias"));
 	 }
 	
 }
