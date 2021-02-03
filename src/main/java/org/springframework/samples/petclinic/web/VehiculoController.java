@@ -25,11 +25,11 @@ public class VehiculoController {
 		this.vehiculoService = vehiculoService;
 	}
 
-	@GetMapping(value = { "/vehiculo/find" })
+	@GetMapping(value = { "/vehiculos" })
 	public String findAllVehiculos(ModelMap model) {
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
 		model.put("vehiculos", vehiculos);
-		return "vehiculos/findVehiculos";
+		return "vehiculos/ListaVehiculos";
 	}
 
 	@GetMapping(value = { "/vehiculo/tipo" })
@@ -55,7 +55,7 @@ public class VehiculoController {
 		return "vehiculos/findVehiculos";
 	}
 	
-	@GetMapping(value = { "/vehiculo/{vehiculoId}/details" })
+	@GetMapping(value = { "/vehiculo/{vehiculoId}" })
 	public String findVehiculosByMatricula(@PathVariable("vehiculoId") int vehiculoId, String matricula,
 			BindingResult res, ModelMap model) {
 		if (matricula == null) {
