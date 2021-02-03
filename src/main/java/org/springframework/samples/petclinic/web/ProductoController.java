@@ -27,11 +27,11 @@ public class ProductoController {
 	@GetMapping(value = { "/productos" })
 	public String findAllProductos(Map<String, Object> model) {
 		Collection<Producto> productos = (Collection<Producto>) productoService.findProductos();
-		model.put("selections", productos);
-		return "producto/ListaProductos";
+		model.put("producto", productos);
+		return "productos/ListaProductos";
 	}
 
-	@GetMapping(value = { "/productonombre" })
+	@GetMapping(value = { "/productoNombre" })
 	public String findProductosByNombre(String nombre, Producto producto, BindingResult res,
 			Map<String, Object> model) {
 		if (producto.getNombre() == null) {
@@ -42,31 +42,32 @@ public class ProductoController {
 		if (results.isEmpty()) {
 			// no Producto found
 			res.rejectValue("nombre", "notFound", "not found");
-			return "producto/ListaProductos";
+			return "productos/ListaProductos";
 		} else if (results.size() == 1) {
 			// 1 Producto found
 			producto = results.iterator().next();
-			return "redirect:/producto/" + producto.getId();
+			return "redirect:/productos/" + producto.getId();
 		} else {
 			// multiple Productos found
 			model.put("selections", results);
-			return "producto/ListaProductos";
+			return "productos/ListaProductos";
 		}
 	}
 
-	@GetMapping(value = "/producto/new")
+	@GetMapping(value = "/productos/new")
 	public String initCreationForm(ModelMap model) {
 		Producto producto = new Producto();
 		model.put("producto", producto);
 		return "productos/FormularioProducto";
 	}
 
-	@PostMapping(value = "/producto/new")
+	@PostMapping(value = "/productos/new")
 	public String processCreationForm(@Valid Producto producto, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
 			model.put("producto", producto);
 			return "productos/FormularioProducto";
 		} else {
+			model.put("producto", producto);
 			this.productoService.saveProducto(producto);
 			return "redirect:/productos/ListaProductos";
 		}
