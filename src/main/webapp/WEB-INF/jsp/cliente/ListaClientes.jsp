@@ -1,5 +1,5 @@
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -11,6 +11,7 @@
 
 <TalleresLaPlata:layout pageName="cliente">
 
+	
 	<h2>Clientes</h2>
 	<table id="tablaCliente" class="table table-striped">
 		<thead>
@@ -25,7 +26,7 @@
 		<tbody>
 			<c:forEach items="${cliente}" var="cliente">
 				<tr>
-					<td><spring:url value="/clientes/{clienteId}" var="clienteUrl">
+					<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
 							<spring:param name="clienteId" value="${cliente.id}" />
 						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
 								value="${cliente.nombre}" /></a></td>

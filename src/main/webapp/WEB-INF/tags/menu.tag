@@ -24,7 +24,7 @@
 
 				<sec:authorize access="hasAuthority('admin')">
 					<petclinic:menuItem active="${name eq 'cliente'}"
-						url="/cliente" title="cliente">
+						url="/cliente/find" title="cliente">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						<span>Clientes</span>
 					</petclinic:menuItem>
