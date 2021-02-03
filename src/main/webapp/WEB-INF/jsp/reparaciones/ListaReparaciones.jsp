@@ -11,41 +11,25 @@
 
 <TalleresLaPlata:layout pageName="reparaciones">
 
-	<h2>Buscar reparacion</h2>
-	<form:form modelAttribute="reparacion" action="/reparaciones" method="get"
-		class="form-horizontal" id="buscador-reparacion">
-		<div class="form-group">
-			<div class="control-group" id="id">
-				<label class="col-sm-2 control-label">TipoReparacion</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="tipoReparacion" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
-			</div>
-		</div>
-	</form:form>
+	
 
 	<h2>Todas las reparaciones</h2>
 	<table id="tablaReparacion" class="table table-striped">
 		<thead>
 			<tr>
-			    <th style="width: 150px;">TipoReparacion</th>
-				
+			    <th style="width: 150px;">Precio</th>
+				<th style="width: 150px;">Duracion</th>
+				<th style="width: 150px;">Tipo Reparacion</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="reparacion">
+			<c:forEach items="${reparacion}" var="reparacion">
 				<tr>
 					<td><spring:url value="/reparaciones/{reparacionesId}" var="reparacionUrl">
 							<spring:param name="reparacionTipo" value="${reparacion.tipoReparacion}" />
-						</spring:url> <a href="${fn:escapeXml(reparacionUrl)}"><c:out
-								value="${reparacion.precio} " /></a></td>
+						</spring:url> <a href="${fn:escapeXml(reparacionUrl)}">
+						<c:out value="${reparacion.tipoReparacion} " /></a></td>
+					<td><c:out value="${reparacion.precio}" /></td>
 					<td><c:out value="${reparacion.duracion}" /></td>
 					
 				</tr>
