@@ -50,7 +50,7 @@
 
 				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
-					<petclinic:menuItem active="${name eq 'cita'}" url="/cita"
+					<petclinic:menuItem active="${name eq 'cita'}" url="/citas"
 						title="cita">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Citas</span>

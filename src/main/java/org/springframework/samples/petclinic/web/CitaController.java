@@ -53,8 +53,6 @@ public class CitaController {
 	@GetMapping(value = { "/citas" })
 	public String findAllCitas(Map<String, Object> model) {
 		Collection<Cita> citas = citaService.findAllCita();
-		Cita cita = new Cita();
-		model.put("cita", cita);
 		model.put("citas", citas);
 		return "citas/ListaCitas";
 	}
