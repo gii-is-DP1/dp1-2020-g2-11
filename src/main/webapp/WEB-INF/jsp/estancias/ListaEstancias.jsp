@@ -9,42 +9,37 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
-<TalleresLaPlata:layout pageName="cliente">
+<TalleresLaPlata:layout pageName="estancias">
 
-	
-	<h2>Clientes</h2>
-	<table id="tablaCliente" class="table table-striped">
+
+	<h2>Estancias</h2>
+	<table id="tablaEstancia" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 150px;">Nombre</th>
-				<th style="width: 100px;">Apellidos</th>
-				<th style="width: 100px;">DNI</th>
-				<th style="width: 100px;">Teléfono</th>
-				<th style="width: 100px;">Email</th>
+				<th style="width: 100px;">Vehículo</th>
+				<th style="width: 100px;">Fecha entrada</th>
+				<th style="width: 100px;">Hora entrada</th>
+				<th style="width: 100px;">Fecha salida</th>
+				<th style="width: 100px;">Hora salida</th>
+				<th style="width: 100px;">Duración</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${cliente}" var="cliente">
+			<c:forEach items="${estancias}" var="estancia">
 				<tr>
-					<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
-							<spring:param name="clienteId" value="${cliente.id}" />
-						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
-								value="${cliente.nombre}" /></a></td>
-					<td><c:out value="${cliente.apellidos}" /></td>
-					<td><c:out value="${cliente.dni}" /></td>
-					<td><c:out value="${cliente.telefono}" /></td>
-					<td><c:out value="${cliente.email}" /></td>
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
+					<td><spring:url value="/vehiculo/{vehiculoId}"
+							var="vehiculoUrl">
+							<spring:param name="vehiculoId" value="${estancia.vehiculo.id}" />
+						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}"> <c:out
+								value="${estancia.vehiculo.matricula}" /></a></td>
+					<td><c:out value="${estancia.fechaEntrada}" /></td>
+					<td><c:out value="${estancia.horaEntrada}" /></td>
+					<td><c:out value="${estancia.fechaSalida}" /></td>
+					<td><c:out value="${estancia.horaSalida}" /></td>
+					<td><c:out value="${estancia.duracion}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
 	<br />
-	<%--     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a>
-	</sec:authorize> --%>
-
 </TalleresLaPlata:layout>

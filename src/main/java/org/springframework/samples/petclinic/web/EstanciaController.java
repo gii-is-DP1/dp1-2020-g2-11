@@ -17,15 +17,15 @@ public class EstanciaController {
 	private EstanciaService estanciaService;
 
 	@Autowired
-	public EstanciaController(EstanciaService citaService) {
+	public EstanciaController(EstanciaService estanciaService) {
 		this.estanciaService = estanciaService;
 	}
 
 	@GetMapping(value = { "/estancias" })
-	public String findAllEstancias(Map<String, Object> model) {
-		Collection<Estancia> estancias = estanciaService.findEstanciasActuales();
+	public String findAllEstancias(ModelMap model) {
+		Collection<Estancia> estancias = estanciaService.findAllEstancia();
 		model.put("estancias", estancias);
-		return "estancias/findEstancias";
+		return "estancias/ListaEstancias";
 	}
 	
 

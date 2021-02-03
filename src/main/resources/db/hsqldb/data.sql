@@ -44,11 +44,17 @@ INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (2,'2021-01-04', '08:00');
 INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (3,'2021-01-04', '09:00');
 INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (4,'2021-01-04', '09:00');
 
+--Vehiculo
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (1,'4728FPG',0,'2007-10-10',175684);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (2,'2968BPY',0,'2001-06-04',230856);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (3,'6576JDJ',2,'2015-03-23',102302);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (4,'E8942JPF',1,'2016-05-28',5023);
+
 --Estancia
-INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (1,'2021-01-02','10:00', '2021-01-04','12:00', 4320);
-INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (2,'2021-01-05','10:00',  '2021-01-05','12:00', 200);
-INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (3,'2021-01-06','10:00',  '2021-01-08','12:00', 3300);
-INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion) VALUES (4,'2021-01-07','12:00',  '2021-01-08','13:00', 1200);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (1,'2021-01-02','10:00', '2021-01-04','12:00', 4320, 1);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (2,'2021-01-05','10:00',  '2021-01-05','12:00', 200, 2);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (3,'2021-01-06','10:00',  '2021-01-08','12:00', 3300, 3);
+INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (4,'2021-01-07','12:00',  '2021-01-08','13:00', 1200, 4);
 
 --Factura
 INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (1,'Cambio de aceite', 20.00, 1, '2021-01-08', FALSE,1);
@@ -82,8 +88,4 @@ INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (2,'Pastilla
 INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (3,'Piston atascado',20,'2020-12-11');
 INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (4,'Piston atascado',20,'2020-12-11');
 
---Vehiculo
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (1,'4728FPG',0,'2007-10-10',175684);
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (2,'2968BPY',0,'2001-06-04',230856);
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (3,'6576JDJ',2,'2015-03-23',102302);
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (4,'E8942JPF',1,'2016-05-28',5023);
+
