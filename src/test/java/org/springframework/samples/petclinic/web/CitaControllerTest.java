@@ -1,6 +1,12 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,15 +16,12 @@ import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Cita;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -26,9 +29,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
 @WebMvcTest(value = CitaController.class,
@@ -76,14 +76,21 @@ public class CitaControllerTest {
 	@WithMockUser(value = "spring")
     @Test
     void testCitaList() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/citas/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/citas/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("citas")).andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
 	
 	}
 	
 	void findcitasByFecha() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/cita/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("selections")).andExpect(MockMvcResultMatchers.view().name("cita/ListaCitas"));
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/cita/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("citas")).andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
 	
 	}
+
+	@WithMockUser(value = "spring")
+    @Test
+   void testInitCreationForm() throws Exception {
+       mockMvc.perform(get("/cliente/{clienteId}/cita/new",TEST_CITA_ID)).andExpect(status().isOk()).andExpect(view().name("citas/FormularioCita"));
+   }	
+	
 	
 	
 	@WithMockUser(value = "spring")
@@ -91,12 +98,12 @@ public class CitaControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 	mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID)
 						.with(csrf())
-						.param("fechaCita", "25/3/2021")
-						.param("horaCita", "11:00"))
-			.andExpect(model().attributeHasNoErrors("cita"));
-//			.andExpect(status().is3xxRedirection())
-//			.andExpect(status().isOk())
-//			.andExpect(view().name("redirect:/citas/FormularioCita"));
+						.param("fechaCita", "04/05/2021")
+						.param("horaCita", "10:00"))
+//			.andExpect(model().attributeHasNoErrors("cita"))
+//		.andExpect(status().is3xxRedirection())
+//			.andExpect(status().isOk());
+		.andExpect(view().name("redirect:/citas"));
 }
 	
 }

@@ -12,7 +12,7 @@
 <TalleresLaPlata:layout pageName="citas">
 
 	<h2>Buscar cita</h2>
-	<form:form modelAttribute="cita" action="/citas" method="get"
+	<form:form modelAttribute="cita" action="/citas" method="post"
 		class="form-horizontal" id="buscador-citas">
 		<div class="form-group">
 			<div class="control-group" id="fechaCita">
@@ -41,7 +41,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="cita">
+			<c:forEach items="${citas}" var="cita">
 				<tr>
 					<td><spring:url value="/cita/{citaID}" var="citaUrl">
 							<spring:param name="citaId" value="${cita.id}" />

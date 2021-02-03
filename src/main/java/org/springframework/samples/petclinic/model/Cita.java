@@ -23,7 +23,7 @@ public class Cita extends BaseEntity{
 	private LocalDate fechaCita;
 	
 	@Column(name = "horaCita")        
-	@DateTimeFormat(pattern = "hh:mm")
+	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime horaCita;
 
 }

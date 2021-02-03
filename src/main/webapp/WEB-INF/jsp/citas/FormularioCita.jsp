@@ -11,8 +11,8 @@
     </h2>
     <form:form modelAttribute="cita" class="form-horizontal" id="add-cita-form">
         <div class="form-group has-feedback">
-            <TalleresLaPlata:inputField label="FechaCita" name="fechaCita"/>
-            <TalleresLaPlata:inputField label="HoraCita" name="horaCita"/>
+            <TalleresLaPlata:inputField label="FechaCita" name="fechaCita" />
+            <TalleresLaPlata:inputField label="HoraCita" name="horaCita" />
             
         </div>
         <div class="form-group">
