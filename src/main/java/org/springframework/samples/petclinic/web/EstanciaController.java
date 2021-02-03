@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Estancia;
 import org.springframework.samples.petclinic.service.EstanciaService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -46,22 +47,52 @@ public class EstanciaController {
 		}
 	}	
 
-	@GetMapping(value = { "/estanciasactuales" })
-	public String findEstanciasActuales(Estancia estancia, BindingResult res, Map<String, Object> model) {
-		if (estancia.getFechaEntrada() == null) {
-			estancia.setFechaSalida(LocalDate.parse("")); // empty string signifies broadest possible search
-		}
-		Collection<Estancia> results= this.estanciaService.findEstanciaByFechaEstancia(estancia.getFechaEntrada());
-		if (results.isEmpty()) {
-			res.rejectValue("fecha", "notFound", "not found");
-			return "estancias/findEstancias";
-		}else if(results.size()==1) {
-			estancia= results.iterator().next();
-			return  "redirect:/estancia/" +estancia.getId();
-		}else {
-			model.put("estancia2", results);
-			return "estancia/findEstancias";
-		}			
-	}
+//	@GetMapping(value = { "/estanciasactuales" })
+//	public String findEstanciasActuales(Estancia estancia, BindingResult res, Map<String, Object> model) {
+//		if (estancia.getFechaEntrada() == null) {
+//			estancia.setFechaSalida(LocalDate.parse("")); // empty string signifies broadest possible search
+//		}
+//		Collection<Estancia> results= this.estanciaService.findEstanciaByFechaEstancia(estancia.getFechaEntrada());
+//		if (results.isEmpty()) {
+//			res.rejectValue("fecha", "notFound", "not found");
+//			return "estancias/findEstancias";
+//		}else if(results.size()==1) {
+//			estancia= results.iterator().next();
+//			return  "redirect:/estancia/" +estancia.getId();
+//		}else {
+//			model.put("estancia2", results);
+//			return "estancia/findEstancias";
+//		}				
+//	}
 
+	@GetMapping(value = { "/estanciasactuales" })
+	public String findEstanciasActuales(LocalDate fecha, Estancia estancia, BindingResult res, ModelMap modelMap) {
+		if (estancia.getFechaEntrada() == null) {
+			Collection<Estancia> results = this.estanciaService.findAllEstancia();
+			modelMap.addAttribute("estancia2",results);
+			return "estancias/findEstancias";
+		} else {
+			Collection<Estancia> results = this.estanciaService.findEstanciaByFechaEstancia(fecha);
+			if (results.isEmpty()) {
+				res.rejectValue("fecha", "notFound", "not found");
+				return "estancias/findEstancias";
+			} else if (results.size() == 1) {
+				estancia = results.iterator().next();
+				return "redirect:/estancias/" + estancia.getId();
+			} else {
+				modelMap.addAttribute("estancia2", results);
+				return "estancias/findEstancias";
+			}
+		}
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

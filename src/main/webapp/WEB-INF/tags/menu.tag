@@ -102,7 +102,7 @@
 					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
 						title="factura">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Facturas</span>
+						<span>Reparacion</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 
