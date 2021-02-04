@@ -69,7 +69,7 @@ public class ProductoController {
 		} else {
 			model.put("producto", producto);
 			this.productoService.saveProducto(producto);
-			return "redirect:/productos/ListaProductos";
+			return "redirect:/productos";
 		}
 	}
 
