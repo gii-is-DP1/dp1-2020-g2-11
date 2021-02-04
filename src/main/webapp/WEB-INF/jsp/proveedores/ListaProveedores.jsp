@@ -46,12 +46,9 @@
 				
 				
 				
-				<td></table>
-	<sec:authorize access="hasAuthority('admin')">
-		<spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
+				<td><spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar</a>
-	</sec:authorize></td>
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar proveedor</a></td>
 				</tr>
 				
 			</c:forEach>
