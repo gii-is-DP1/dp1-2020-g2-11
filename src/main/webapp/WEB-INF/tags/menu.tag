@@ -98,7 +98,7 @@
 					</petclinic:menuItem>
 				</sec:authorize>
 
-				<sec:authorize access="hasAuthority('admin') or hasAuthrity('mecanico')">
+				<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<petclinic:menuItem active="${name eq 'reparaciones'}" url="/reparaciones"
 						title="reparacion">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>

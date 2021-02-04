@@ -21,14 +21,19 @@ import org.springframework.transaction.annotation.Transactional;
 		this.vehiculoRepository = vehiculoRepository;
 		}
 
+		@Transactional(readOnly = true)
+		public Vehiculo findVehiculoById(Integer id) throws DataAccessException {
+			return vehiculoRepository.findById(id).get();
+		}
+
 
 		@Transactional(readOnly = true)
-		public Collection<Vehiculo> findVehículoByMatricula(String matricula) throws DataAccessException {
+		public Vehiculo findVehiculoByMatricula(String matricula) throws DataAccessException {
 			return vehiculoRepository.findByMatricula(matricula);
 		}
 
 		@Transactional(readOnly = true)
-		public Collection<Vehiculo> findVehículoByTipo(TipoVehiculo tipo) throws DataAccessException {
+		public Collection<Vehiculo> findVehiculoByTipo(TipoVehiculo tipo) throws DataAccessException {
 			return vehiculoRepository.findByTipoVehiculo(tipo);
 		}
 

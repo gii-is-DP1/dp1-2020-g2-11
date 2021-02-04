@@ -45,10 +45,10 @@ INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (3,'2021-01-04', '09:00');
 INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (4,'2021-01-04', '09:00');
 
 --Vehiculo
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (1,'4728FPG',0,'2007-10-10',175684);
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (2,'2968BPY',0,'2001-06-04',230856);
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (3,'6576JDJ',2,'2015-03-23',102302);
-INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje) VALUES (4,'E8942JPF',1,'2016-05-28',5023);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (1,'4728FPG',0,'2007-10-10',175684,1);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (2,'2968BPY',0,'2001-06-04',230856,1);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (3,'6576JDJ',2,'2015-03-23',102302,2);
+INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (4,'E8942JPF',1,'2016-05-28',5023,3);
 
 --Estancia
 INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (1,'2021-01-02','10:00', '2021-01-04','12:00', 4320, 1);

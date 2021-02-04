@@ -40,7 +40,7 @@ public class VehiculoController {
 			model.put("vehiculos", vehiculos);
 		} else {
 			TipoVehiculo tp = TipoVehiculo.valueOf(tpo);
-			Collection<Vehiculo> results = vehiculoService.findVehículoByTipo(tp);
+			Collection<Vehiculo> results = vehiculoService.findVehiculoByTipo(tp);
 			if (results.isEmpty()) {
 				res.rejectValue("tipoVehiculo", "notFound", "not found");
 			} else {
@@ -49,33 +49,18 @@ public class VehiculoController {
 		}
 		return "proveedor/ListaVehiculos";
 	}
+
 	@GetMapping(value = "/vehiculos/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("vehiculo", new Vehiculo());
 		return "vehiculos/findVehiculos";
 	}
-	
-	@GetMapping(value = { "/vehiculo/{vehiculoId}" })
-	public String findVehiculosByMatricula(@PathVariable("vehiculoId") int vehiculoId, String matricula,
-			BindingResult res, ModelMap model) {
-		if (matricula == null) {
-			Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
-			model.put("vehiculos", vehiculos);
-			return "vehiculo/listaVehiculos";
-		} else {
-			Collection<Vehiculo> results = vehiculoService.findVehículoByMatricula(matricula);
-			if (results.isEmpty()) {
-				res.rejectValue("matricula", "notFound", "not found");
-				return "vehiculo/listaVehiculos";
-			} else if (results.size() == 1) {
-				Vehiculo vehiculo = results.iterator().next();
-				return "redirect:/vehiculo/" + vehiculoId + "/details";
-			} else {
-				model.put("vehiculos", results);
-				return "vehiculo/listaVehiculos";
-			}
-		}
 
+	@GetMapping(value = { "/vehiculo/{vehiculoId}" })
+	public String findVehiculosById(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
+		Vehiculo vehiculo = vehiculoService.findVehiculoById(vehiculoId);
+		model.put("vehiculo", vehiculo);
+		return "vehiculos/vehiculoDetails";
 	}
 
 }

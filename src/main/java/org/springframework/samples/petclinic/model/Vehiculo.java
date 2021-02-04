@@ -1,11 +1,11 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +32,8 @@ public class Vehiculo extends BaseEntity{
 	@Column (name="kilometraje")
 	private Integer kilometraje;
 	
-//	@OneToMany(mappedBy ="vehiculo")
-//	private List<Estancia> estancias;
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 
 }
