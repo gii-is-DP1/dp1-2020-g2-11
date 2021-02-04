@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class EstanciaController {
@@ -86,6 +87,12 @@ public class EstanciaController {
 		}
 	
 	
+	}
+	
+	@GetMapping(value = { "/estancias/delete/{estanciaId}" })
+	public String deleteEstancia(@PathVariable("estanciaId") int estanciaId) {
+		estanciaService.deleteEstancia(estanciaId);
+		return "redirect:/estancias";
 	}
 	
 	
