@@ -87,15 +87,6 @@ public class VehiculoController {
 
 	@GetMapping(value = "/vehiculo/new")
 	public String initCreationForm(ModelMap model) {
-//		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-//				.getPrincipal();
-//		String username = clienteDetails.getUsername();
-//		Cliente cliente = clienteService.findClienteByUsername(username);
-//		if (cliente.getId() == clienteId) {
-//			String message = "No puedes crear un vehiculo por otro";
-//			model.put("customMessage", message);
-//			return "exception";
-//		}
 		Vehiculo vehiculo = new Vehiculo();
 		model.put("vehiculo", vehiculo);
 		return "vehiculos/formularioVehiculo";
@@ -112,7 +103,6 @@ public class VehiculoController {
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
 			vehiculo.setCliente(clienteRegistered);
-            //cliente.addVehiculo(vehiculo);
 			this.vehiculoService.saveVehiculo(vehiculo);
             return "redirect:/vehiculo/"+vehiculo.getId();
 		}
