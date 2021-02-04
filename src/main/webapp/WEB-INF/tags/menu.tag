@@ -105,6 +105,15 @@
 						<span>Reparacion</span>
 					</petclinic:menuItem>
 				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('admin')">
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
+						title="factura">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Facturas</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
 
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
