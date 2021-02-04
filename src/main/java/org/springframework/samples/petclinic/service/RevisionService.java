@@ -2,9 +2,11 @@ package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.repository.RevisionRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,8 @@ public class RevisionService {
 	public Collection<Revision> findRevisionByFecha(LocalDate fechaRevision) throws DataAccessException {
 		return revisionRepository.findByFechaRevision(fechaRevision);
 	}
-
+	@Transactional(readOnly = true)
+	public Optional<Revision> findRevisionById(Integer id) throws DataAccessException {
+		return revisionRepository.findById(id);
+	}
 }

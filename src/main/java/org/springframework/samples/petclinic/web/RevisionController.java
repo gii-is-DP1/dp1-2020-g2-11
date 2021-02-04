@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.RevisionService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class RevisionController {
@@ -50,6 +52,25 @@ public class RevisionController {
 			}
 		}
 	}
+	@GetMapping(value = { "/revision/{revisionId}" })
+	public String findById(@PathVariable("revisionId") int revisionId, ModelMap map) {
+		Revision revision = revisionService.findRevisionById(revisionId).get();
+		map.put("revision", revision);
+		return "revisiones/revisionDetails";
+	}
+
+
+
+
+	@GetMapping(value = { "/revision/delete/{revisionId}" })
+	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
+		revisionService.deleteRevision(revisionId);
+		return "redirect:/revisiones";
+	}
+}
+
+
+
 
 //	@GetMapping(value = { "/productonombre" })
 //	public String findProductosByNombre(String nombre, Producto producto, BindingResult res, Map<String, Object> model) {
@@ -73,4 +94,3 @@ public class RevisionController {
 //		}
 //	}
 
-}

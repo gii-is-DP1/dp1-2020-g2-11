@@ -83,9 +83,9 @@ INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (2
 INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (3,55,100.33,1,3);
 
 --Revision
-INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (1,'Necesita aceite',10,'2020-12-10');
-INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (2,'Pastilla de freno gastada',10,'2020-12-13');
-INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (3,'Piston atascado',20,'2020-12-11');
-INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (4,'Piston atascado',20,'2020-12-11');
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (1,'Necesita aceite',10,'2020-12-10',1,1);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (2,'Pastilla de freno gastada',10,'2020-12-13',1,2);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (3,'Piston atascado',20,'2020-12-11',2,3);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (4,'Piston atascado',20,'2020-12-11',3,4);
 
 

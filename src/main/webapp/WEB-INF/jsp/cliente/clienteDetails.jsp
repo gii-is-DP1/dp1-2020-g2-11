@@ -27,4 +27,6 @@
 		</tr>
 
 	</table>
+	
+	
 </petclinic:layout>

@@ -16,4 +16,5 @@ public interface RevisionRepository extends CrudRepository<Revision, Integer>{
 	Collection<Revision> findByFechaRevision(@Param("fechaRevision") LocalDate fechaRevision);
 
 	Collection<Revision> findAll() throws DataAccessException;
+	
 }
