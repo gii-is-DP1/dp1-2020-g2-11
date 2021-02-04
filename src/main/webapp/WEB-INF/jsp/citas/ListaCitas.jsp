@@ -64,7 +64,7 @@
 	
 	<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
 		<a class="btn btn-default" href='<spring:url value="/citas/new" htmlEscape="true"/>'>Anadir Cita</a>
-	</sec:authorize>+
+	</sec:authorize>
 	
 	
 	

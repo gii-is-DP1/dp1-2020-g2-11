@@ -13,8 +13,8 @@
         <div class="form-group has-feedback">
             <TalleresLaPlata:inputField label="FechaCita" name="fechaCita" />
             <TalleresLaPlata:inputField label="HoraCita" name="horaCita" />
-            <TalleresLaPlata:inputField label="Matricula" name="vehiculo.matricula" />
-            
+            <TalleresLaPlata:inputField label="Dni-Cliente" name="cliente.id" />
+            <TalleresLaPlata:inputField label="Matricula-Coche" name="vehiculo.id" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

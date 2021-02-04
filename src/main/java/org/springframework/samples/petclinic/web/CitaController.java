@@ -13,13 +13,13 @@ import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,14 +28,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CitaController {
 
+	
 	private final CitaService citaService;
+	@Autowired
 	private final ClienteService clienteService;
-	private static final String VIEWS_CITAS_CREATE_OR_UPDATE_FORM = "teams/createOrUpdateBikeForm";
+	@Autowired
+	private final VehiculoService vehiculoService;
 
 	@Autowired
-	public CitaController(CitaService citaService, ClienteService clienteService) {
+	public CitaController(CitaService citaService, ClienteService clienteService,VehiculoService vehiculoService) {
 		this.citaService = citaService;
 		this.clienteService = clienteService;
+		this.vehiculoService = vehiculoService;
 	}
 
 //	@InitBinder
@@ -55,7 +59,6 @@ public class CitaController {
 	@PostMapping(value = { "/citas" })
 	public String findcitasByFecha(@Valid Cita cita, BindingResult res, Map<String, Object> model) {
 		// buscamos citas por fecha
-		
 		Collection<Cita> citas = this.citaService.findCitaByFechaCita(cita.getFechaCita());
 		model.put("citas", citas);
 		return "citas/ListaCitas";
@@ -66,11 +69,11 @@ public class CitaController {
 		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = clienteDetails.getUsername();
 		Optional<Cliente> clienteRegistered = this.clienteService.findClienteById(clienteId);
-		//if (clienteRegistered.get().getId() == clienteId) {
-			//String message = "No puedes crear una cita por otro";
-			//model.put("customMessage", message);
-			//return "exception";
-		//}
+		if (clienteRegistered.get().getId() == clienteId) {
+			String message = "No puedes crear una cita por otro";
+			model.put("customMessage", message);
+			return "exception";
+		}
 		Cita cita = new Cita();
 		model.put("cita", cita);
 		return "citas/FormularioCita";
@@ -90,15 +93,7 @@ public class CitaController {
 	}	
 	
 	@GetMapping(value = "/citas/new")
-	public String initCreationForm2(@PathVariable("clienteId") int clienteId, ModelMap model) {
-		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = clienteDetails.getUsername();
-		Optional<Cliente> clienteRegistered = this.clienteService.findClienteById(clienteId);
-		//if (clienteRegistered.get().getId() == clienteId) {
-			//String message = "No puedes crear una cita por otro";
-			//model.put("customMessage", message);
-			//return "exception";
-		//}
+	public String initCreationForm2( ModelMap model) {
 		Cita cita = new Cita();
 		model.put("cita", cita);
 		return "citas/FormularioCitaByAdmin";
@@ -109,11 +104,12 @@ public class CitaController {
 		if (result.hasErrors()) {
 			model.put("cita", cita);
 			return "citas/FormularioCitaByAdmin";
+			
 		} else {
 			model.put("cita", cita);
 			this.citaService.saveCita(cita);
 			return "redirect:/citas";
-		}
+			}
 	}	
 	
 }

@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,11 +28,11 @@ public class Cita extends BaseEntity{
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime horaCita;
 
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 	
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
 }
