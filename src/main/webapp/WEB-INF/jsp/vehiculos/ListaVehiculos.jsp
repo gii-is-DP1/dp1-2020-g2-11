@@ -29,11 +29,12 @@
 		<tbody>
 			<c:forEach items="${vehiculos}" var="vehiculos">
 				<tr>
-					<td><spring:url value="/vehiculos/{vehiculoId}"
+					<td><spring:url value="/vehiculo/{vehiculoId}"
 							var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
-						</spring:url> <a href="${fn:escapeXml(vehiculosUrl)}"><c:out
+						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}"><c:out
 								value="${vehiculos.matricula}" /></a></td>
+								
 					<td><c:out value="${vehiculos.tipoVehiculo}" /></td>
 					<td><c:out value="${vehiculos.fechaFabricacion}" /></td>
 					<td><c:out value="${vehiculos.kilometraje}" /></td>

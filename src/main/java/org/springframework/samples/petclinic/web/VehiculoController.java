@@ -107,4 +107,10 @@ public class VehiculoController {
             return "redirect:/vehiculo/"+vehiculo.getId();
 		}
 	}
+	
+	@GetMapping(value = { "/vehiculo/delete/{vehiculoId}" })
+	public String deleteVehiculo(@PathVariable("vehiculoId") int vehiculoId, BindingResult res) {
+		vehiculoService.deleteVehiculo(vehiculoId);
+		return "redirect:/vehiculos";
+	}
 }
