@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
-	private static final String VIEWS_OWNER_CREATE_FORM = "users/createClienteForm";
+	private static final String VIEWS_CLIENTE_CREATE_FORM = "users/createClienteForm";
 
 	private final ClienteService clienteService;
 
@@ -32,13 +32,13 @@ public class UserController {
 	public String initCreationForm(Map<String, Object> model) {
 		Cliente cliente = new Cliente();
 		model.put("cliente", cliente);
-		return VIEWS_OWNER_CREATE_FORM;
+		return VIEWS_CLIENTE_CREATE_FORM;
 	}
 
 	@PostMapping(value = "/users/new")
 	public String processCreationForm(@Valid Cliente cliente, BindingResult result) {
 		if (result.hasErrors()) {
-			return VIEWS_OWNER_CREATE_FORM;
+			return VIEWS_CLIENTE_CREATE_FORM;
 		}
 		else {
 			this.clienteService.saveCliente(cliente);
