@@ -28,15 +28,17 @@
 		<tbody>
 			<c:forEach items="${producto}" var="producto">
 				<tr>
+				
 					<td><c:out value="${producto.nombre}" /></td>
 					<td><c:out value="${producto.marca}" /></td>
 					<td><c:out value="${producto.stock}" /></td>
 					<td><c:out value="${producto.referencia}" /></td>
 					<td><c:out value="${producto.stockSeguridad}" /></td>
-					<td><a class="btn btn-default" href='<spring:url value="/productos/delete" htmlEscape="true"/>'>Eliminar</a></td>
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
+					
+					<td><spring:url value="/productos/delete/{productoId}" var="productoUrl">
+							<spring:param name="productoId" value="${producto.id}" />
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(productoUrl)}">Eliminar</a></td>
+					
 						
 				</tr>
 			</c:forEach>
