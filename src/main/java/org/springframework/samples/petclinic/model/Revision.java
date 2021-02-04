@@ -19,8 +19,10 @@ public class Revision extends BaseEntity {
 
 	@Column(name = "descripcion")
 	private String descripcion;
+	
 	@Column(name = "duracion")
 	private Integer duracion;
+	
 	@Column(name = "fechaRevision")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaRevision;

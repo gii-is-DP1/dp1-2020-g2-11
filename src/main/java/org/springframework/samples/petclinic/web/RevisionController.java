@@ -27,7 +27,7 @@ public class RevisionController {
 	public String findAllRevision(ModelMap modelMap) {
 		Collection<Revision> revisiones = (Collection<Revision>) revisionService.findAllRevisiones();
 		modelMap.addAttribute("revisiones", revisiones);
-		return "revisiones/Revisiones";
+		return "revisiones/ListaRevisiones";
 	}
 
 	@GetMapping(value = { "/revisionFecha" })
@@ -35,18 +35,18 @@ public class RevisionController {
 		if (revision.getFechaRevision() == null) {
 			Collection<Revision> results = this.revisionService.findAllRevisiones();
 			modelMap.addAttribute("revisiones",results);
-			return "revisiones/Revisiones";
+			return "revisiones/ListaRevisiones";
 		} else {
 			Collection<Revision> results = this.revisionService.findRevisionByFecha(fecha);
 			if (results.isEmpty()) {
 				res.rejectValue("fecha", "notFound", "not found");
-				return "revisiones/Revisiones";
+				return "revisiones/ListaRevisiones";
 			} else if (results.size() == 1) {
 				revision = results.iterator().next();
 				return "redirect:/revisiones/" + revision.getId();
 			} else {
 				modelMap.addAttribute("revisiones", results);
-				return "revisiones/Revisiones";
+				return "revisiones/ListaRevisiones";
 			}
 		}
 	}
