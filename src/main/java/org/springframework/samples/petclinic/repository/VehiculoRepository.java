@@ -15,4 +15,7 @@ public interface VehiculoRepository extends CrudRepository<Vehiculo, Integer> {
 
 	@Query("SELECT v FROM Vehiculo v WHERE v.tipoVehiculo = :tipoVehiculo")
 	Collection<Vehiculo> findByTipoVehiculo(@Param("tipoVehiculo") TipoVehiculo tipoVehiculo);
+	
+	@Query("SELECT v FROM Vehiculo v WHERE v.cliente.id = :clienteId")
+	Collection<Vehiculo> findByCliente(@Param("clienteId") Integer clienteId);
 }

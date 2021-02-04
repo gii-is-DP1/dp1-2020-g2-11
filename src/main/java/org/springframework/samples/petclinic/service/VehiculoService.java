@@ -38,6 +38,11 @@ import org.springframework.transaction.annotation.Transactional;
 		}
 
 		@Transactional(readOnly = true)
+		public Collection<Vehiculo> findVehiculoByCliente(Integer clienteId) throws DataAccessException {
+			return vehiculoRepository.findByCliente(clienteId);
+		}
+		
+		@Transactional(readOnly = true)
 		public Collection<Vehiculo> findVehiculos() throws DataAccessException {
 			return (Collection<Vehiculo>) vehiculoRepository.findAll();
 		}
