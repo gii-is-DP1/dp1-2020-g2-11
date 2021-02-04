@@ -75,8 +75,8 @@ public class ProveedorController {
 		}
 	}
 	
-	@GetMapping(value = { "/proveedores/delete/{proveedorId}" })
-	public String deleteRevision(@PathVariable("revisionId") int proveedorId) {
+	@GetMapping(value = { "/proveedor/delete/{proveedorId}" })
+	public String deleteProveedor(@PathVariable("proveedorId") int proveedorId) {
 		proveedorService.deleteProveedor(proveedorId);
 		return "redirect:/proveedores";
 	}
