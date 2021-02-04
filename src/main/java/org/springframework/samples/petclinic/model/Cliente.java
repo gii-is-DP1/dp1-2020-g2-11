@@ -15,7 +15,11 @@
  */
 package org.springframework.samples.petclinic.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -23,6 +27,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -58,4 +65,33 @@ public class Cliente extends Person {
 //		}		
 //		return factura;
 //	}	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+	private Set<Vehiculo> vehiculos;
+	
+	protected Set<Vehiculo> getVehiculoInternal() {
+		if (this.vehiculos == null) {
+			this.vehiculos = new HashSet<>();
+		}
+		return this.vehiculos;
+	}
+
+	protected void setVehiculoInternal(Set<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public List<Vehiculo> getVehiculos() {
+		List<Vehiculo> sortedVehiculos = new ArrayList<>(getVehiculoInternal());
+		PropertyComparator.sort(sortedVehiculos, new MutableSortDefinition("name", true, true));
+		return Collections.unmodifiableList(sortedVehiculos);
+	}
+
+	public void addVehiculo(Vehiculo vehiculo) {
+		getVehiculoInternal().add(vehiculo);
+		vehiculo.setCliente(this);
+	}
+	
+	public boolean removeVehiculo(Vehiculo vehiculo) {
+		return getVehiculoInternal().remove(vehiculo);
+	}
 }

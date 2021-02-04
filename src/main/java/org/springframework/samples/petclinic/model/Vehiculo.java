@@ -26,7 +26,7 @@ public class Vehiculo extends BaseEntity{
 	private TipoVehiculo tipoVehiculo;
 	
 	@Column(name="fechaFabricacion")
-	@DateTimeFormat(pattern="dd/MM/YYYY")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate fechaFabricacion;
 	
 	@Column (name="kilometraje")

@@ -11,7 +11,7 @@
 
 <TalleresLaPlata:layout pageName="vehiculo">
 
-	
+
 	<h2>Vehiculos</h2>
 	<table id="tablaVehiculo" class="table table-striped">
 		<thead>
@@ -20,29 +20,39 @@
 				<th style="width: 100px;">Tipo</th>
 				<th style="width: 100px;">Fecha de fabricación</th>
 				<th style="width: 100px;">Kilometraje</th>
-				<th style="width: 100px;">Propietario</th>
+				<sec:authorize
+					access="hasAuthority('admin') or hasAuthority('mecanico')">
+					<th style="width: 100px;">Propietario</th>
+				</sec:authorize>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${vehiculos}" var="vehiculos">
 				<tr>
-					<td><spring:url value="/vehiculos/{vehiculoId}" var="vehiculoUrl">
+					<td><spring:url value="/vehiculos/{vehiculoId}"
+							var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculosUrl)}"><c:out
 								value="${vehiculos.matricula}" /></a></td>
 					<td><c:out value="${vehiculos.tipoVehiculo}" /></td>
 					<td><c:out value="${vehiculos.fechaFabricacion}" /></td>
 					<td><c:out value="${vehiculos.kilometraje}" /></td>
-					
-					<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
-							<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
-						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
-								value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
+
+					<sec:authorize
+						access="hasAuthority('admin') or hasAuthority('mecanico')">
+						<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
+								<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
+							</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
+									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
+					</sec:authorize>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<sec:authorize access="hasAuthority('cliente')">
+		<a class="btn btn-default" href='<spring:url value="/vehiculo/new" htmlEscape="true"/>'>Añadir</a>
+	</sec:authorize>
 
-	<br />
-	
+
+		<br />
 </TalleresLaPlata:layout>
