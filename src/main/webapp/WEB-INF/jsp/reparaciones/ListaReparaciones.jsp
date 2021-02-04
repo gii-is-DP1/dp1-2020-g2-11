@@ -17,18 +17,20 @@
 	<table id="tablaReparacion" class="table table-striped">
 		<thead>
 			<tr>
-			    <th style="width: 150px;">Precio</th>
+			<th style="width: 150px;">Matricula</th>
+			    <th style="width: 150px;">Tipo Reparacion</th>
+				<th style="width: 150px;">Precio</th>
 				<th style="width: 150px;">Duracion</th>
-				<th style="width: 150px;">Tipo Reparacion</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${reparacion}" var="reparacion">
 				<tr>
-					<td><spring:url value="/reparaciones/{reparacionesId}" var="reparacionUrl">
-							<spring:param name="reparacionTipo" value="${reparacion.tipoReparacion}" />
-						</spring:url> <a href="${fn:escapeXml(reparacionUrl)}">
-						<c:out value="${reparacion.tipoReparacion} " /></a></td>
+					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
+							<spring:param name="vehiculoId" value="${reparacion.vehiculo.id}" />
+						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
+						<c:out value="${reparacion.vehiculo.matricula} " /></a></td>
+					<td><c:out value="${reparacion.tipoReparacion} " /></td>
 					<td><c:out value="${reparacion.precio}" /></td>
 					<td><c:out value="${reparacion.duracion}" /></td>
 					

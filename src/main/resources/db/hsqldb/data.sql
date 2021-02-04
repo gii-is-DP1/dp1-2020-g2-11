@@ -78,9 +78,9 @@ INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos 
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com');
 
 --Reparacion
-INSERT INTO reparacion(id,duracion,precio,tipo_reparacion) VALUES (1,10,20.00,2);
-INSERT INTO reparacion(id,duracion,precio,tipo_reparacion) VALUES (2,40,60.00,1);
-INSERT INTO reparacion(id,duracion,precio,tipo_reparacion) VALUES (3,55,100.33,1);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (1,10,20.00,2,1);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (2,40,60.00,1,2);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (3,55,100.33,1,3);
 
 --Revision
 INSERT INTO revision(id,descripcion,duracion,fecha_revision) VALUES (1,'Necesita aceite',10,'2020-12-10');
