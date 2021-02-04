@@ -107,6 +107,14 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('admin')">
+					<petclinic:menuItem active="${name eq 'revisiones'}" url="/revisiones"
+						title="revisiones">
+						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						<span>Revisiones</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('admin')">
 					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
 						title="factura">
 						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
