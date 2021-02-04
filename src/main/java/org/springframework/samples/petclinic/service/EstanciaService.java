@@ -46,4 +46,11 @@ public class EstanciaService {
 	public Collection<Estancia> findEstanciaByFechaEstancia(LocalDate fecha) {
 		return estanciaRepository.findByFechaEstancia(fecha);
 	}
+	
+	@Transactional
+	public void deleteEstancia(Integer idEstancia) throws DataAccessException {
+		estanciaRepository.deleteById(idEstancia);
+	}
+	
+	
 }
