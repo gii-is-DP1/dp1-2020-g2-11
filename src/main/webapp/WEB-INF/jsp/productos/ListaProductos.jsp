@@ -22,6 +22,7 @@
 				<th style="width: 150px">Stock</th>
 				<th style="width: 150px">Referencia</th>
 				<th style="width: 150px">StockSeguridad</th>
+				<th style="width: 150px"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,9 +33,11 @@
 					<td><c:out value="${producto.stock}" /></td>
 					<td><c:out value="${producto.referencia}" /></td>
 					<td><c:out value="${producto.stockSeguridad}" /></td>
+					<td><a class="btn btn-default" href='<spring:url value="/productos/delete" htmlEscape="true"/>'>Eliminar</a></td>
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">
 							<c:out value="${pet.name} " />
 						</c:forEach></td> --%>
+						
 				</tr>
 			</c:forEach>
 		</tbody>
