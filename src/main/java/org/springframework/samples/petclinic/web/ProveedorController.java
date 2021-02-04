@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -79,6 +80,13 @@ public class ProveedorController {
 	public String deleteProveedor(@PathVariable("proveedorId") int proveedorId) {
 		proveedorService.deleteProveedor(proveedorId);
 		return "redirect:/proveedores";
+	}
+	
+	@GetMapping(value = { "/proveedor/{proveedorId}" })
+	public String findProveedorById(@PathVariable("proveedorId") int proveedorId, ModelMap model) {
+		Proveedor proveedor = proveedorService.findProveedorById(proveedorId);
+		model.put("proveedor", proveedor);
+		return "proveedores/proveedorDetails";
 	}
 	
 	

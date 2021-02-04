@@ -26,10 +26,17 @@
 		<tbody>
 			<c:forEach items="${proveedor}" var="proveedor">
 				<tr>
-					<td><spring:url value="/proveedor/{proveedorID}" var="proveedorUrl">
+					
+					
+					
+					<td><spring:url value="/proveedor/{proveedorId}"
+							var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
 						</spring:url> <a href="${fn:escapeXml(proveedorUrl)}"><c:out
 								value="${proveedor.nombre}" /></a></td>
+								
+								
+								
 					<td><c:out value="${proveedor.telefono}" /></td>
 					<td><c:out value="${proveedor.direccion}" /></td>
 					<td><c:out value="${proveedor.email}" /></td>
@@ -39,9 +46,12 @@
 				
 				
 				
-				<td><spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
+				<td></table>
+	<sec:authorize access="hasAuthority('admin')">
+		<spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar proveedor</a></td>
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar</a>
+	</sec:authorize></td>
 				</tr>
 				
 			</c:forEach>
