@@ -44,7 +44,7 @@ public interface CitaRepository extends CrudRepository<Cita, Integer> {
 	@Query("DELETE FROM Cita c WHERE c.id = :id")
 	void remove(@Param("id") Integer id);
 	
-	@Modifying
-	@Query("DELETE FROM Cita c WHERE c.cliente_id = :cliente_id")
-	void deleteByCliente(@Param("cliente_id") Integer cliente_id);	
+//	@Modifying
+//	@Query("DELETE FROM Cita c WHERE c.cliente_id = :cliente_id")
+//	void deleteByCliente(@Param("cliente_id") Integer cliente_id);	
 }

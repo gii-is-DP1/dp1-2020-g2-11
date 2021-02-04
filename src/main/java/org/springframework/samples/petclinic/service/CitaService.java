@@ -37,10 +37,10 @@ public class CitaService {
 		return citaRepository.findByFechaCita(fecha);
 	}
 
-	@Transactional
-	public void removeCitaByCliente(int cliente) throws DataAccessException {
-		citaRepository.deleteByCliente(cliente);
-	}
+//	@Transactional
+//	public void removeCitaByCliente(int cliente) throws DataAccessException {
+//		citaRepository.deleteByCliente(cliente);
+//	}
 	@Transactional
 	public void removeCita(Integer id) throws DataAccessException {
 		citaRepository.deleteById(id);

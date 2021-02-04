@@ -92,10 +92,10 @@ public class ClienteController {
 		return "cliente/clienteDetails";
 	}
 	
-	@GetMapping(value = { "/cliente/delete/{clienteId}" })
-	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
-		citaService.removeCitaByCliente(clienteId);
-		clienteService.deleteClienteById(clienteId);
-		return "redirect:/clientes";
-	}
+//	@GetMapping(value = { "/cliente/delete/{clienteId}" })
+//	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
+//		citaService.removeCitaByCliente(clienteId);
+//		clienteService.deleteClienteById(clienteId);
+//		return "redirect:/clientes";
+//	}
 }
