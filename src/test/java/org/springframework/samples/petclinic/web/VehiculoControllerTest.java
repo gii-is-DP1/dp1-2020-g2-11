@@ -75,4 +75,11 @@ public class VehiculoControllerTest {
 		mockMvc.perform(get("/vehiculo/tipo")).andExpect(status().isOk())
 				.andExpect(model().attributeExists("vehiculos")).andExpect(view().name("vehiculos/ListaVehiculos"));
 	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void findMisVehiculosTest() throws Exception {
+		mockMvc.perform(get("/vehiculos/cliente")).andExpect(status().isOk())
+				.andExpect(model().attributeExists("vehiculos")).andExpect(view().name("vehiculos/ListaVehiculos"));
+	}
 }

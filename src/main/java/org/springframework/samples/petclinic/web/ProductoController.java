@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
@@ -31,28 +32,14 @@ public class ProductoController {
 		return "productos/ListaProductos";
 	}
 
-	@GetMapping(value = { "/productoNombre" })
-	public String findProductosByNombre(String nombre, Producto producto, BindingResult res,
+	@PostMapping(value = { "/productos" })
+	public String findProductosByNombre(String nombre, @Valid Producto producto, BindingResult res,
 			Map<String, Object> model) {
-		if (producto.getNombre() == null) {
-			producto.setNombre(""); // empty string signifies broadest possible search
-		}
-		// find Productos by name
-		Collection<Producto> results = this.productoService.findProductoByNombre(nombre);
-		if (results.isEmpty()) {
-			// no Producto found
-			res.rejectValue("nombre", "notFound", "not found");
-			return "productos/ListaProductos";
-		} else if (results.size() == 1) {
-			// 1 Producto found
-			producto = results.iterator().next();
-			return "redirect:/productos/" + producto.getId();
-		} else {
-			// multiple Productos found
-			model.put("selections", results);
-			return "productos/ListaProductos";
-		}
+		Collection<Producto> productos = this.productoService.findProductoByNombre(nombre);
+		model.put("producto", productos);
+		return "productos/ListaProductos";
 	}
+	
 
 	@GetMapping(value = "/productos/new")
 	public String initCreationForm(ModelMap model) {

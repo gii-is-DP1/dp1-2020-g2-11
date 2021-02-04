@@ -27,10 +27,7 @@
 		<tbody>
 			<c:forEach items="${producto}" var="producto">
 				<tr>
-					<td><spring:url value="/producto/{productoId}" var="productoUrl">
-							<spring:param name="productoId" value="${producto.id}" />
-						</spring:url> <a href="${fn:escapeXml(productoUrl)}"><c:out
-								value="${producto.nombre}" /></a></td>
+					<td><c:out value="${producto.nombre}" /></td>
 					<td><c:out value="${producto.marca}" /></td>
 					<td><c:out value="${producto.stock}" /></td>
 					<td><c:out value="${producto.referencia}" /></td>
