@@ -108,9 +108,13 @@ public class VehiculoController {
 			return "vehiculos/formularioVehiculo";
 		}
 		else {
-                    cliente.addVehiculo(vehiculo);
-					this.vehiculoService.saveVehiculo(vehiculo);
-                    return "redirect:/vehiculo/{vehiculoId}";
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username = clienteDetails.getUsername();
+			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+			vehiculo.setCliente(clienteRegistered);
+            //cliente.addVehiculo(vehiculo);
+			this.vehiculoService.saveVehiculo(vehiculo);
+            return "redirect:/vehiculo/"+vehiculo.getId();
 		}
 	}
 }

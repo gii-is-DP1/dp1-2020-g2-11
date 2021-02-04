@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.VehiculoService;
@@ -75,6 +76,7 @@ public class CitaController {
 			return "exception";
 		}
 		Cita cita = new Cita();
+		
 		model.put("cita", cita);
 		return "citas/FormularioCita";
 	}
@@ -87,6 +89,10 @@ public class CitaController {
 			return "citas/FormularioCita";
 		} else {
 			model.put("cita", cita);
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username = clienteDetails.getUsername();
+			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+			cita.setCliente(clienteRegistered);
 			this.citaService.saveCita(cita);
 			return "redirect:/citas";
 		}
@@ -95,7 +101,11 @@ public class CitaController {
 	@GetMapping(value = "/citas/new")
 	public String initCreationForm2( ModelMap model) {
 		Cita cita = new Cita();
+		String dni = "";
+		String matricula = "";
 		model.put("cita", cita);
+		model.put("dni", dni);
+		model.put("matricula", matricula);
 		return "citas/FormularioCitaByAdmin";
 	}
 	
@@ -106,7 +116,11 @@ public class CitaController {
 			return "citas/FormularioCitaByAdmin";
 			
 		} else {
-			model.put("cita", cita);
+			//model.put("cita", cita);
+			Cliente c = this.clienteService.findClienteByDni(cita.getCliente().getDni());
+			cita.setCliente(c);
+			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
+			cita.setVehiculo(v);
 			this.citaService.saveCita(cita);
 			return "redirect:/citas";
 			}
