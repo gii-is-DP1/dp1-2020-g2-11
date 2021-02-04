@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -17,12 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProveedorService {
 	
 	private ProveedorRepository proveedorRepository;
-	private PedidoRepository pedidoRepository;
 	
 	@Autowired
 	public ProveedorService(ProveedorRepository proveedorRepository, PedidoRepository pedidoRepository) {
 		this.proveedorRepository = proveedorRepository;
-		this.pedidoRepository = pedidoRepository;
 	}
 	
 	@Transactional
@@ -45,19 +42,4 @@ public class ProveedorService {
 		proveedorRepository.deleteById(id);
 	}
 	
-	@Transactional(readOnly = true)	
-	public Collection<Pedido> findPedidos() throws DataAccessException {
-		return (Collection<Pedido>) pedidoRepository.findAll();
-	}
-	
-	@Transactional(readOnly = true)
-	public Optional<Pedido> findPedidobyId(Integer id) throws DataAccessException {
-		return pedidoRepository.findById(id);
-	}
-	
-	@Transactional(readOnly = true)
-	public Collection<Pedido> findPedidobyFechaPedido(LocalDate fecha) throws DataAccessException {
-		return pedidoRepository.findByFechaPedido(fecha);
-	}
-
 }
