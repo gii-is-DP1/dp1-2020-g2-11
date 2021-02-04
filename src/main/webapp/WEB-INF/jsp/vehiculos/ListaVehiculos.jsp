@@ -18,8 +18,9 @@
 			<tr>
 				<th style="width: 100px;">Matricula</th>
 				<th style="width: 100px;">Tipo</th>
-				<th style="width: 150px;">Fecha de fabricación</th>
+				<th style="width: 100px;">Fecha de fabricación</th>
 				<th style="width: 100px;">Kilometraje</th>
+				<th style="width: 100px;">Propietario</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,6 +33,11 @@
 					<td><c:out value="${vehiculos.tipoVehiculo}" /></td>
 					<td><c:out value="${vehiculos.fechaFabricacion}" /></td>
 					<td><c:out value="${vehiculos.kilometraje}" /></td>
+					
+					<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
+							<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
+						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
+								value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
