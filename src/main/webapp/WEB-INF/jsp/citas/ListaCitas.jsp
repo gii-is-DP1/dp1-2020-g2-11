@@ -45,10 +45,7 @@
 		<tbody>
 			<c:forEach items="${citas}" var="cita">
 				<tr>
-					<td><spring:url value="/cita/{citaID}" var="citaUrl">
-							<spring:param name="citaId" value="${cita.id}" />
-						</spring:url> <a href="${fn:escapeXml(citaUrl)}"><c:out
-								value="${cita.fechaCita}" /></a></td>
+					<td><c:out value="${cita.fechaCita}" /></td>
 					<td><c:out value="${cita.horaCita}" /></td>
 					<td><c:out value="${cita.cliente.dni}" /></td>
 					<td><c:out value="${cita.vehiculo.matricula}" /></td>
