@@ -23,8 +23,8 @@ public class ClienteService {
 	private AuthoritiesService authoritiesService;
 
 	@Autowired
-	public ClienteService(ClienteRepository ClienteRepository) {
-		this.clienteRepository = ClienteRepository;
+	public ClienteService(ClienteRepository clienteRepository) {
+		this.clienteRepository = clienteRepository;
 	}
 
 	@Transactional
@@ -44,7 +44,7 @@ public class ClienteService {
 		return clienteRepository.findByDni(dni);
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public Optional<Cliente> findClienteById(Integer id) throws DataAccessException {
 		return clienteRepository.findById(id);
 	}
@@ -63,8 +63,10 @@ public class ClienteService {
 	}
 	
 	@Transactional
-	public void delteCliente(Integer id) throws DataAccessException {
-		clienteRepository.deleteById(id);
+	public void delteCliente(Cliente cliente) throws DataAccessException {
+		clienteRepository.delete(cliente);
+		userService.deleteUser(cliente.getUser());
+		
 	}
 //	@Transactional(readOnly = true)
 //	public Cliente findClienteByFactura(Integer idFactura) throws DataAccessException {
@@ -96,5 +98,10 @@ public class ClienteService {
 			clienteRepository.delete(cliente);
 
 		}
+	}
+	@Transactional
+	public void deleteClienteById(Integer clienteId) {
+		clienteRepository.deleteById(clienteId);
+		
 	}
 }

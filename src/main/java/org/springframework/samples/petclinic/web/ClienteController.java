@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class ClienteController {
 
 	private ClienteService clienteService;
-
+	@Autowired
+	private CitaService citaService;
 	@Autowired
 	public ClienteController(ClienteService clienteService) {
 		this.clienteService = clienteService;
@@ -92,7 +94,8 @@ public class ClienteController {
 	
 	@GetMapping(value = { "/cliente/delete/{clienteId}" })
 	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
-		clienteService.delteCliente(clienteId);
+		citaService.removeCitaByCliente(clienteId);
+		clienteService.deleteClienteById(clienteId);
 		return "redirect:/clientes";
 	}
 }

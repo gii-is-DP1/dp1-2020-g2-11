@@ -35,9 +35,9 @@
 					<td><c:out value="${cliente.dni}" /></td>
 					<td><c:out value="${cliente.telefono}" /></td>
 					<td><c:out value="${cliente.email}" /></td>
-						<td><spring:url value="/cliente/delete/{clienteId}" var="clienteUrl">
-							<spring:param name="clienteId" value="${cliente.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Eliminar cliente</a></td>
+					<td><spring:url value="/cliente/delete/{clienteId}" var="clienteUrl">
+					<spring:param name="clienteId" value="${cliente.id}" />
+					</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Eliminar cliente</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
