@@ -125,5 +125,9 @@ public class CitaController {
 			return "redirect:/citas";
 			}
 	}	
-
+	@GetMapping(value = { "/cita/delete/{citaId}" })
+	public String deleteRevision(@PathVariable("citaId") int citaId) {
+		citaService.removeCita(citaId);
+		return "redirect:/citas";
+	}
 }
