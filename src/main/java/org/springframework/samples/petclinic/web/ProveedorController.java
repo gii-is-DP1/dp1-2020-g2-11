@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -72,6 +73,12 @@ public class ProveedorController {
 			this.proveedorService.saveProveedor(proveedor);
 			return "redirect:/proveedores";
 		}
+	}
+	
+	@GetMapping(value = { "/proveedores/delete/{proveedorId}" })
+	public String deleteRevision(@PathVariable("revisionId") int proveedorId) {
+		proveedorService.deleteProveedor(proveedorId);
+		return "redirect:/proveedores";
 	}
 	
 	

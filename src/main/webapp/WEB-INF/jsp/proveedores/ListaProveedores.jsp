@@ -20,6 +20,7 @@
 				<th style="width: 100px;">Telefono</th>
 				<th style="width: 100px">Direccion</th>
 				<th style="width: 100px">Email</th>
+				<th style="width: 100px"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,7 +36,14 @@
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">
 							<c:out value="${pet.name} " />
 						</c:forEach></td> --%>
+				
+				
+				
+				<td><spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
+							<spring:param name="proveedorId" value="${proveedor.id}" />
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar proveedor</a></td>
 				</tr>
+				
 			</c:forEach>
 		</tbody>
 	</table>
