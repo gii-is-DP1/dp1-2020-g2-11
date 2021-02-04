@@ -3,26 +3,26 @@ INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
 -- Creamos un usuario para mecanico
 INSERT INTO users(username,password,enabled) VALUES ('mecanico1','m3c4nico',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico1');
+INSERT INTO authorities(id,username,authority) VALUES (2,'mecanico1','mecanico');
 
 INSERT INTO users(username,password,enabled) VALUES ('mecanico2','m3c4nico',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (4,'mecanico2','mecanico2');
+INSERT INTO authorities(id,username,authority) VALUES (4,'mecanico2','mecanico');
 
 INSERT INTO users(username,password,enabled) VALUES ('mecanico3','m3c4nico',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (5,'mecanico3','mecanico3');
+INSERT INTO authorities(id,username,authority) VALUES (5,'mecanico3','mecanico');
 
 -- Creamos un usuario para cliente
 INSERT INTO users(username,password,enabled) VALUES ('cliente1','cl13nte',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (6,'cliente1','cliente1');
+INSERT INTO authorities(id,username,authority) VALUES (6,'cliente1','cliente');
 
 INSERT INTO users(username,password,enabled) VALUES ('cliente2','cl13nte',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (7,'cliente2','cliente2');
+INSERT INTO authorities(id,username,authority) VALUES (7,'cliente2','cliente');
 
 INSERT INTO users(username,password,enabled) VALUES ('cliente3','cl13nte',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (8,'cliente3','cliente3');
+INSERT INTO authorities(id,username,authority) VALUES (8,'cliente3','cliente');
 
 INSERT INTO users(username,password,enabled) VALUES ('cliente4','cl13nte',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (9,'cliente4','cliente4');
+INSERT INTO authorities(id,username,authority) VALUES (9,'cliente4','cliente');
 
 --Administrador
 INSERT INTO administrador(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Eugenio', 'Vicente Bravo', '13627495L', '645329832','adminTaLaPlata@gmail.com','admin1');
@@ -38,17 +38,17 @@ INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 
 INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Julian', 'Mota Fernandez', '28463574T', '715635427','julitomotores@gmail.com','cliente3');
 INSERT INTO cliente(id,nombre,apellidos,dni,telefono,email,username) VALUES (4, 'Aitor', 'Tilla Montesco', '48295647P', '655367264','aitortillapacome@gmail.com','cliente4');
 
---Cita
-INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (1,'2021-01-04', '10:00');
-INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (2,'2021-01-04', '08:00');
-INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (3,'2021-01-04', '09:00');
-INSERT INTO cita(id,fecha_cita,hora_cita) VALUES (4,'2021-01-04', '09:00');
-
 --Vehiculo
 INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (1,'4728FPG',0,'2007-10-10',175684,1);
 INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (2,'2968BPY',0,'2001-06-04',230856,1);
 INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (3,'6576JDJ',2,'2015-03-23',102302,2);
 INSERT INTO vehiculo(id,matricula,tipo_vehiculo,fecha_fabricacion,kilometraje,cliente_id) VALUES (4,'E8942JPF',1,'2016-05-28',5023,3);
+
+--Cita
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (1,'2021-01-04', '10:00',1,1);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (2,'2021-01-04', '08:00',2,3);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (3,'2021-01-04', '09:00',3,4);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (4,'2021-01-04', '09:00',1,2);
 
 --Estancia
 INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (1,'2021-01-02','10:00', '2021-01-04','12:00', 4320, 1);
