@@ -37,6 +37,8 @@
 			<tr>
 				<th style="width: 150px;">FechaCita</th>
 				<th style="width: 100px;">HoraCita</th>
+				<th style="width: 100px;">Dni del cliente</th>
+				<th style="width: 100px;">Matricula del vehiculo</th>
 				
 			</tr>
 		</thead>
@@ -48,7 +50,8 @@
 						</spring:url> <a href="${fn:escapeXml(citaUrl)}"><c:out
 								value="${cita.fechaCita}" /></a></td>
 					<td><c:out value="${cita.horaCita}" /></td>
-					
+					<td><c:out value="${cita.cliente.dni}" /></td>
+					<td><c:out value="${cita.vehiculo.matricula}" /></td>
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">
 							<c:out value="${pet.name} " />
 						</c:forEach></td> --%>
@@ -56,7 +59,28 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+	
+	
+	
+	<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
+		<a class="btn btn-default" href='<spring:url value="/citas/new" htmlEscape="true"/>'>Anadir Cita</a>
+	</sec:authorize>+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<sec:authorize access="hasAuthority('cliente')">
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="button" class="btn btn-default">Añadir Cita</button>
+			</div>	
+		</div>
+	</sec:authorize>
 	<br />
 
 </TalleresLaPlata:layout>

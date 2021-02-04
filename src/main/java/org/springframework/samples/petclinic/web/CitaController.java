@@ -89,7 +89,31 @@ public class CitaController {
 		}
 	}	
 	
+	@GetMapping(value = "/citas/new")
+	public String initCreationForm2(@PathVariable("clienteId") int clienteId, ModelMap model) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = clienteDetails.getUsername();
+		Optional<Cliente> clienteRegistered = this.clienteService.findClienteById(clienteId);
+		//if (clienteRegistered.get().getId() == clienteId) {
+			//String message = "No puedes crear una cita por otro";
+			//model.put("customMessage", message);
+			//return "exception";
+		//}
+		Cita cita = new Cita();
+		model.put("cita", cita);
+		return "citas/FormularioCitaByAdmin";
+	}
 	
-	
+	@PostMapping(value = "/citas/new")
+	public String processCreationForm2(@Valid Cita cita, BindingResult result, ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
+		if (result.hasErrors()) {
+			model.put("cita", cita);
+			return "citas/FormularioCitaByAdmin";
+		} else {
+			model.put("cita", cita);
+			this.citaService.saveCita(cita);
+			return "redirect:/citas";
+		}
+	}	
 	
 }
