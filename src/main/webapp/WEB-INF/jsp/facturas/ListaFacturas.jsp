@@ -11,38 +11,23 @@
 
 <TalleresLaPlata:layout pageName="facturas">
 
-	<h2>Buscar factura</h2>
-	<form:form modelAttribute="factura" action="/facturas" method="get"
-		class="form-horizontal" id="buscador-facturas">
-		<div class="form-group">
-			<div class="control-group" id="cliente">
-				<label class="col-sm-2 control-label">Cliente</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="cliente" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
-			</div>
-		</div>
-	</form:form>
+	
 
 	<h2>Todas las facturas</h2>
 	<table id="tablaFactura" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 150px;">Cliente</th>
-				<th style="width: 100px;">FechaEmision</th>
-				<th style="width: 100px">Precio</th>
+				<th style="width: 150px;">Decripcion</th>
+				<th style="width: 100px;">Precio</th>
+				<th style="width: 100px">Tipo de Pago</th>
+				<th style="width: 100px">Fecha</th>
+				<th style="width: 100px">Pagado</th>
+				<th style="width: 100px">Cliente</th>
 				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="factura">
+			<c:forEach items="${facturas}" var="factura">
 				<tr>
 					<td><spring:url value="/facturas/{facturaId}" var="facturaUrl">
 							<spring:param name="facturaId" value="${factura.id}" />
@@ -52,7 +37,7 @@
 					<td><c:out value="${factura.tipoPago}" /></td>
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>
-					<td><c:out value="${factura.cliente}" /></td>
+					<td><c:out value="${factura.cliente.nombre}" /></td>
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">
 							<c:out value="${pet.name} " />
 						</c:forEach></td> --%>
