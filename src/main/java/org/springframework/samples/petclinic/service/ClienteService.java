@@ -62,6 +62,10 @@ public class ClienteService {
 		return clienteRepository.findByUsername(username);
 	}
 	
+	@Transactional
+	public void delteCliente(Integer id) throws DataAccessException {
+		clienteRepository.deleteById(id);
+	}
 //	@Transactional(readOnly = true)
 //	public Cliente findClienteByFactura(Integer idFactura) throws DataAccessException {
 //		return clienteRepository.findByIdFactura(idFactura);

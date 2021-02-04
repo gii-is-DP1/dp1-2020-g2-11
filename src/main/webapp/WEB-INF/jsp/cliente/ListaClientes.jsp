@@ -21,6 +21,7 @@
 				<th style="width: 100px;">DNI</th>
 				<th style="width: 100px;">Teléfono</th>
 				<th style="width: 100px;">Email</th>
+				<th style="width: 50px;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,17 +35,13 @@
 					<td><c:out value="${cliente.dni}" /></td>
 					<td><c:out value="${cliente.telefono}" /></td>
 					<td><c:out value="${cliente.email}" /></td>
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
+						<td><spring:url value="/cliente/delete/{clienteId}" var="clienteUrl">
+							<spring:param name="clienteId" value="${cliente.id}" />
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Eliminar cliente</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
 	<br />
-	<%--     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a>
-	</sec:authorize> --%>
-
 </TalleresLaPlata:layout>

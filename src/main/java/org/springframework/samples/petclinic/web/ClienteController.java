@@ -89,4 +89,10 @@ public class ClienteController {
 		map.put("cliente", clientes);
 		return "cliente/clienteDetails";
 	}
+	
+	@GetMapping(value = { "/cliente/delete/{clienteId}" })
+	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
+		clienteService.delteCliente(clienteId);
+		return "redirect:/clientes";
+	}
 }

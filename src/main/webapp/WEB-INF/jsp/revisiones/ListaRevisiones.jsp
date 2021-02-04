@@ -33,19 +33,30 @@
 					<td><c:out value="${revision.duracion}" /></td>
 					<td><c:out value="${revision.fechaRevision}" /></td>
 					
-					<td><spring:url value="/cliente/{clienteId}" var="vehiculoUrl">
+				<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
 							<spring:param name="clienteId" value="${revision.cliente.id}" />
-						</spring:url> <a href="${fn:escapeXml(clienteUrl)}">
-						   <c:out value="${revision.cliente.dni}" /></a></td>
-						   
+						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
+								value="${revision.cliente.dni}" /></a></td>
+								
+								
 					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
 						   <c:out value="${revision.vehiculo.matricula}" /></a></td>
+
+
+
+
 					<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
 							<spring:param name="revisionId" value="${revision.id}" />
 						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(revisionUrl)}">Eliminar revision</a></td>
+
+
+
+
 				</tr>
+
+
 			</c:forEach>
 		</tbody>
 	</table>
