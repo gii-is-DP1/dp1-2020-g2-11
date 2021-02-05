@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -61,8 +62,8 @@ public class FacturaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Factura> findMisfacturas(Integer id) throws DataAccessException {
-		return (Collection<Factura>) facturaRepository.findByCliente(id);
+	public Set<Factura> findMisfacturas(Integer id) throws DataAccessException {
+		return (Set<Factura>) facturaRepository.findByCliente(id);
 	}
 
 	@Transactional
