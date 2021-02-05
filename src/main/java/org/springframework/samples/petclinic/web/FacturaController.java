@@ -14,6 +14,8 @@ import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,17 @@ public class FacturaController {
 	@GetMapping(value = { "/facturas" })
 	public String findAllFacturas(Map<String, Object> model) {
 		Collection<Factura> facturas = facturaService.findFacturas();
+		model.put("facturas", facturas);
+		return "facturas/ListaFacturas";
+	}
+	
+	@GetMapping(value = { "/facturas/{clienteId}" })
+	public String findMisFacturas(Map<String, Object> model) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		Cliente cliente = clienteService.findClienteByUsername(clienteDetails.getUsername());
+		Integer clienteId = cliente.getId();
+		Collection<Factura> facturas = facturaService.findMisfacturas(clienteId);
 		model.put("facturas", facturas);
 		return "facturas/ListaFacturas";
 	}

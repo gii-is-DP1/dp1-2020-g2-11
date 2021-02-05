@@ -59,6 +59,11 @@ public class FacturaService {
 	public Collection<Factura> findFacturas() throws DataAccessException {
 		return (Collection<Factura>) facturaRepository.findAll();
 	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Factura> findMisfacturas(Integer id) throws DataAccessException {
+		return (Collection<Factura>) facturaRepository.findByCliente(id);
+	}
 
 	@Transactional
 	public void deleteFactura(Integer id) throws NoPagadaException {
