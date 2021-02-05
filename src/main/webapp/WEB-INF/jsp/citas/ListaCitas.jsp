@@ -12,7 +12,7 @@
 <TalleresLaPlata:layout pageName="citas">
 
 		<h2>Buscar cita</h2>
-	<form:form modelAttribute="citas" action="/citas" method="post"
+	<form:form modelAttribute="cita" action="/citas" method="post"
 		class="form-horizontal" id="buscador-citas">
 		<div class="form-group">
 			<div class="control-group" id="fechaCita">
