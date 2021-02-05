@@ -43,5 +43,6 @@
 	<%--     <sec:authorize access="hasAuthority('admin')">
 		<a class="btn btn-default" href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a>
 	</sec:authorize> --%>
-
+	<a class="btn btn-default" href='<spring:url value="/reparacion/new" htmlEscape="true"/>'>Añadir</a>
+	<br/>
 </TalleresLaPlata:layout>
