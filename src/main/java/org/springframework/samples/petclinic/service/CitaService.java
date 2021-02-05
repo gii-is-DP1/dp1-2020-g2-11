@@ -50,4 +50,9 @@ public class CitaService {
 	public Collection<Cita> findAllCita() throws DataAccessException {
 		return (Collection<Cita>) citaRepository.findAll();
 	}
+	
+	@Transactional(readOnly = true)
+	public Cita findCitaById(Integer id) {
+		return citaRepository.findById(id).get();
+	}
 }

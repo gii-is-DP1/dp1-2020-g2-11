@@ -39,7 +39,8 @@
 				<th style="width: 100px;">HoraCita</th>
 				<th style="width: 100px;">Dni del cliente</th>
 				<th style="width: 100px;">Matricula del vehiculo</th>
-				<th style="width: 100px;"></th>
+				<th style="width: 50px;">Editar</th>
+				<th style="width: 50px;">Borrar</th>
 				
 			</tr>
 		</thead>
@@ -50,9 +51,13 @@
 					<td><c:out value="${cita.horaCita}" /></td>
 					<td><c:out value="${cita.cliente.dni}" /></td>
 					<td><c:out value="${cita.vehiculo.matricula}" /></td>
+					<td><spring:url value="/cliente/{clienteId}/cita/edit/{citaId}" var="citaUrl">
+							<spring:param name="citaId" value="${cita.id}" />
+							<spring:param name="clienteId" value="${cita.cliente.id}" />
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(citaUrl)}"></a></td>
 						<td><spring:url value="/cita/delete/{citaId}" var="citaUrl">
 							<spring:param name="citaId" value="${cita.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(citaUrl)}">Eliminar</a></td>
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(citaUrl)}"></a></td>
 
 					
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">

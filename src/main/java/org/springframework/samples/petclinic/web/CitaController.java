@@ -130,4 +130,37 @@ public class CitaController {
 		citaService.removeCita(citaId);
 		return "redirect:/citas";
 	}
+	
+	@GetMapping(value = "/cliente/{clienteId}/cita/edit/{citaId}")
+	public String initUpdateForm(@PathVariable("clienteId") int clienteId, @PathVariable("citaId") int citaId, ModelMap model) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = clienteDetails.getUsername();
+		Optional<Cliente> clienteRegistered = this.clienteService.findClienteById(clienteId);
+		if (clienteRegistered.get().getId() == clienteId) {
+			String message = "No puedes crear una cita por otro";
+			model.put("customMessage", message);
+			return "exception";
+		}
+		Cita cita = this.citaService.findCitaById(citaId);
+		model.put("cita", cita);
+		return "citas/FormularioCita";
+	}
+	
+	@PostMapping(value = "/cliente/{clienteId}/cita/edit/{citaId}")
+	public String processUpdateForm(@Valid Cita cita, BindingResult result,
+			@PathVariable("clienteId") int clienteId, @PathVariable("citaId") int citaId, ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
+		
+		if (result.hasErrors()) {
+			model.put("cita", cita);
+			return "citas/FormularioCita";
+		} else {
+			model.put("cita", cita);
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username = clienteDetails.getUsername();
+			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+			cita.setCliente(clienteRegistered);
+			this.citaService.saveCita(cita);
+			return "redirect:/citas";
+		}
+	}	
 }
