@@ -49,5 +49,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
+	<a class="btn btn-default" href='<spring:url value="/estancia/new" htmlEscape="true"/>'>Añadir</a>
+	</sec:authorize>
 	<br />
 </TalleresLaPlata:layout>

@@ -76,7 +76,7 @@ public class ReparacionServiceTest {
 		reparacion.setTipoReparacion(TipoReparacion.MECANICA);
 
 		this.reparacionService.saveReparacion(reparacion);
-		Reparacion reparacion = this.reparacionService.findReparacionById(1);
+		Reparacion reparacion = this.reparacionService.findReparacionById(1).get();
 		assertThat(reparacion).isNotNull();
 	}
 
