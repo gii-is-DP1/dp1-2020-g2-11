@@ -29,10 +29,7 @@
 		<tbody>
 			<c:forEach items="${facturas}" var="factura">
 				<tr>
-					<td><spring:url value="/facturas/{facturaId}" var="facturaUrl">
-							<spring:param name="facturaId" value="${factura.id}" />
-						</spring:url> <a href="${fn:escapeXml(facturaUrl)}"><c:out
-								value="${factura.descripcion}" /></a></td>
+					<td><c:out value="${factura.descripcion}" /></a></td>
 					<td><c:out value="${factura.precio}" /></td>
 					<td><c:out value="${factura.tipoPago}" /></td>
 					<td><c:out value="${factura.fechaEmision}" /></td>
