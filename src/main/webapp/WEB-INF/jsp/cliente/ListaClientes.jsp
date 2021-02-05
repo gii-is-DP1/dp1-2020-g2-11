@@ -16,13 +16,13 @@
 	<table id="tablaCliente" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 150px;">Nombre</th>
-				<th style="width: 100px;">Apellidos</th>
+				<th style="width: 100px;">Nombre</th>
+				<th style="width: 150px;">Apellidos</th>
 				<th style="width: 100px;">DNI</th>
 				<th style="width: 100px;">Teléfono</th>
 				<th style="width: 100px;">Email</th>
-				<th style="width: 50px;"></th>
-				<th style="width: 50px;"></th>
+				<th style="width: 50px;">Editar</th>
+				<th style="width: 50px;">Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,10 +38,10 @@
 					<td><c:out value="${cliente.email}" /></td>
 					<td><spring:url value="/cliente/{clienteId}/edit" var="clienteUrl">
 							<spring:param name="clienteId" value="${cliente.id}" />
-						</spring:url> <a href="${fn:escapeXml(clienteUrl)}">EditarCliente</a></td>
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(clienteUrl)}"></a></td>
 					<td><spring:url value="/cliente/delete/{clienteId}" var="clienteUrl">
 					<spring:param name="clienteId" value="${cliente.id}" />
-					</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Eliminar cliente</a></td>
+					</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(clienteUrl)}"></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
