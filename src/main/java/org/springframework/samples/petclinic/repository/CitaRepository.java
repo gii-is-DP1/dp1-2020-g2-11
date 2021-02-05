@@ -24,7 +24,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cita;
-import org.springframework.samples.petclinic.model.Cliente;
 
 /**
  * Spring Data JPA OwnerRepository interface
@@ -43,6 +42,9 @@ public interface CitaRepository extends CrudRepository<Cita, Integer> {
 	@Modifying
 	@Query("DELETE FROM Cita c WHERE c.id = :id")
 	void remove(@Param("id") Integer id);
+	
+	@Query("SELECT c FROM Cita c WHERE c.cliente.id = :clienteId")
+	Collection<Cita> findByCliente(@Param("clienteId") Integer clienteId);
 	
 //	@Modifying
 //	@Query("DELETE FROM Cita c WHERE c.cliente_id = :cliente_id")

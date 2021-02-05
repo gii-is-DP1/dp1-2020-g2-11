@@ -38,11 +38,7 @@
 			<td><c:out value="${vehiculo.kilometraje}" /></td>
 		</tr>
 	</table>
-	<sec:authorize access="hasAuthority('cliente') or hasAuthority('admin')">
-		<spring:url value="/vehiculo/delete/{vehiculoId}" var="vehiculoUrl">
-							<spring:param name="vehiculoId" value="${vehiculo.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(vehiculoUrl)}">Eliminar</a>
-	</sec:authorize>
+	
 	
 	
 </TalleresLaPlata:layout>

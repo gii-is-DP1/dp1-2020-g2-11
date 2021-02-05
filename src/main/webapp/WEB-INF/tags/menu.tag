@@ -59,7 +59,7 @@
 
 				<sec:authorize access="hasAuthority('cliente')">
 					<petclinic:menuItem active="${name eq 'cita'}"
-						url="/cliente/{clienteId}/cita" title="cita">
+						url="/citas/cliente" title="cita">
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 						<span>Mis Citas</span>
 					</petclinic:menuItem>
@@ -90,14 +90,6 @@
 					</petclinic:menuItem>
 				</sec:authorize>
 
-				<sec:authorize access="hasAuthority('cliente')">
-					<petclinic:menuItem active="${name eq 'productos'}" url="/cliente/{clienteId}/facturas)"
-						title="producto">
-						<span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
-						<span>Mis Facturas</span>
-					</petclinic:menuItem>
-				</sec:authorize>
-
 				<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<petclinic:menuItem active="${name eq 'reparaciones'}" url="/reparaciones"
 						title="reparacion">
@@ -119,6 +111,14 @@
 						title="factura">
 						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 						<span>Facturas</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('cliente')">
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/cliente/{clienteId}/facturas)"
+						title="producto">
+						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+						<span>Mis Facturas</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 
