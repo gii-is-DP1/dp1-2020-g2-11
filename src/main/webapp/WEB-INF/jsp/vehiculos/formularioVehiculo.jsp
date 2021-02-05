@@ -16,6 +16,7 @@
             <TalleresLaPlata:inputField label="Tipo" name="tipoVehiculo"/>
             <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
             <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
+             <TalleresLaPlata:inputField label="Dni Cliente" name="cliente.dni"/>
             <c:out
 								value="${vehiculos.matricula}" />
 								

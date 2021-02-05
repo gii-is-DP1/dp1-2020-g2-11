@@ -122,7 +122,7 @@
 					</petclinic:menuItem>
 				</sec:authorize>
 				
-				<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
+				<sec:authorize access="hasAuthority('admin')">
 					<petclinic:menuItem active="${name eq 'pedidos'}" url="/pedidos"
 						title="pedido">
 						<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
