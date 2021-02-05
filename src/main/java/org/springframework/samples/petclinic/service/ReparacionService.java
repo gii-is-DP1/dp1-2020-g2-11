@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,14 +29,19 @@ public class ReparacionService {
 //	public void updateReparacion(Reparacion reparacion) throws DataAccessException {
 //		reparacionRepository.update(reparacion);
 //	}
-
+	
+	@Transactional
+	public void deleteReparacion(Integer idReparacion) throws DataAccessException {
+		reparacionRepository.deleteById(idReparacion);
+	}
+	
 	@Transactional(readOnly = true)
 	public Collection<Reparacion> findReparaciones() throws DataAccessException {
 		return reparacionRepository.findAll();
 	}
 
 	@Transactional(readOnly = true)
-	public Reparacion findReparacionById(Integer id) throws DataAccessException {
+	public Optional<Reparacion> findReparacionById(Integer id) throws DataAccessException {
 		return reparacionRepository.findById(id);
 	}
 }
