@@ -68,40 +68,17 @@
 							<spring:param name="citaId" value="${citas.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash"
 						href="${fn:escapeXml(citasUrl)}"></a></td>
-
-
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-
-
 	<sec:authorize
-		access="hasAuthority('admin') or hasAuthority('mecanico')">
+		access="hasAuthority('admin') or hasAuthority('cliente')">
 		<a class="btn btn-default"
-			href='<spring:url value="/citas/new" htmlEscape="true"/>'>Anadir
-			Cita</a>
+			href='<spring:url value="/citas/new" htmlEscape="true"/>'>Añadir</a>
 	</sec:authorize>
 
-
-
-
-
-
-
-
-
-	<sec:authorize access="hasAuthority('cliente')">
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="button" class="btn btn-default">Añadir Cita</button>
-			</div>
-		</div>
-	</sec:authorize>
 	<br />
 
 </TalleresLaPlata:layout>

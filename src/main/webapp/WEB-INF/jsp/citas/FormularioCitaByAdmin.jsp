@@ -11,10 +11,10 @@
     </h2>
     <form:form modelAttribute="cita" class="form-horizontal" id="add-cita-form">
         <div class="form-group has-feedback">
-            <TalleresLaPlata:inputField label="FechaCita" name="fechaCita" />
-            <TalleresLaPlata:inputField label="HoraCita" name="horaCita" />
-            <TalleresLaPlata:inputField label="Dni-Cliente" name="cliente.dni"/>
-            <TalleresLaPlata:inputField label="Matricula-Coche" name="vehiculo.matricula"/>
+            <TalleresLaPlata:inputField label="Fecha" name="fechaCita" />
+            <TalleresLaPlata:inputField label="Hora" name="horaCita" />
+            <TalleresLaPlata:inputField label="DNI" name="cliente.dni"/>
+            <TalleresLaPlata:inputField label="Matricula del vehiculo" name="vehiculo.matricula"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
