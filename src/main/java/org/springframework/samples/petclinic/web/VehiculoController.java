@@ -18,6 +18,7 @@ import org.springframework.samples.petclinic.service.exceptions.VehiculosAntiguo
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,4 +114,32 @@ public class VehiculoController {
 		vehiculoService.deleteVehiculo(vehiculoId);
 		return "redirect:/vehiculos";
 	}
+	
+	@GetMapping("/cliente/{clienteId}/vehiculo/{vehiculoId}/edit")
+	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, @PathVariable("vehiculoId") int vehiculoId, Model model) {
+		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
+		Cliente cliente = vehiculo.getCliente();
+		vehiculo.setCliente(cliente);
+		model.addAttribute(vehiculo);
+		return "vehiculos/formularioVehiculo";
+	}
+
+	@PostMapping("/cliente/{clienteId}/vehiculo/{vehiculoId}/edit")
+	public String processUpdateOwnerForm(@Valid Vehiculo vehiculo, BindingResult result,@PathVariable("clienteId") int clienteId,
+			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
+		if (result.hasErrors()) {
+			return "vehiculos/formularioVehiculo";
+		}
+		else {
+			Cliente cliente = clienteService.findClienteById(clienteId).get();
+			vehiculo.setCliente(cliente);
+			vehiculo.setId(vehiculoId);
+			this.vehiculoService.saveVehiculo(vehiculo);
+			return "redirect:/vehiculo/{vehiculoId}";
+		}
+	}
+	
+	
+	
+	
 }

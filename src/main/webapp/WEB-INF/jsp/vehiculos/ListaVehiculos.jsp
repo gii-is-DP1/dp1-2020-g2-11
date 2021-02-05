@@ -20,9 +20,11 @@
 				<th style="width: 100px;">Tipo</th>
 				<th style="width: 100px;">Fecha de fabricación</th>
 				<th style="width: 100px;">Kilometraje</th>
+				
 				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<th style="width: 100px;">Propietario</th>
+					<th style="width: 100px;"></th>
 				</sec:authorize>
 			</tr>
 		</thead>
@@ -38,6 +40,7 @@
 					<td><c:out value="${vehiculos.tipoVehiculo}" /></td>
 					<td><c:out value="${vehiculos.fechaFabricacion}" /></td>
 					<td><c:out value="${vehiculos.kilometraje}" /></td>
+					
 
 					<sec:authorize
 						access="hasAuthority('admin')">
@@ -46,11 +49,17 @@
 							</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
 									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
 					</sec:authorize>
+	
 					<sec:authorize
 						access="hasAuthority('mecanico')">
 						<td><c:out
 									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
 					</sec:authorize>
+					<td><spring:url value="/cliente/{clienteId}/vehiculo/{vehiculoId}/edit"
+							var="vehiculoUrl">
+							<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
+							<spring:param name="vehiculoId" value="${vehiculos.id}" />
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(vehiculoUrl)}">Editar vehiculo</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

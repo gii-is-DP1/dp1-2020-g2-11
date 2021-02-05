@@ -16,6 +16,12 @@
             <TalleresLaPlata:inputField label="Tipo" name="tipoVehiculo"/>
             <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
             <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
+            <c:out
+								value="${vehiculos.matricula}" />
+								
+					<c:out value="${vehiculos.tipoVehiculo}" />
+					<c:out value="${vehiculos.fechaFabricacion}" />
+					<c:out value="${vehiculos.kilometraje}" />
             
         </div>
         <div class="form-group">
