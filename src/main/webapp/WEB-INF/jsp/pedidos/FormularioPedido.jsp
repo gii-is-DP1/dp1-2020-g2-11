@@ -16,5 +16,17 @@
 			<TalleresLaPlata:inputField label="FechaEntrada" name="fechaEntrada" />
 			<TalleresLaPlata:inputField label="FechaEmision" name="fechaEmision" />
 		</div>
+		<div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <c:choose>
+                    <c:when test="${pedido['new']}">
+                        <button class="btn btn-default" type="submit">Registrarse</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button class="btn btn-default" type="submit">Actualizar</button>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
 	</form:form>
 </TalleresLaPlata:layout>

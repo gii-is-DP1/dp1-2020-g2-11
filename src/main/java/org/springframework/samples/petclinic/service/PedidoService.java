@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.repository.PedidoRepository;
@@ -11,11 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PedidosService {
+public class PedidoService {
 	
 	private PedidoRepository pedidoRepository;
 	
-	public PedidosService(PedidoRepository pedidoRepository) {
+	@Autowired
+	public PedidoService(PedidoRepository pedidoRepository) {
 		this.pedidoRepository=pedidoRepository;
 	}
 		
@@ -37,6 +39,11 @@ public class PedidosService {
 	@Transactional
 	public Collection<Pedido> findPedidoByfechaDeEmision(LocalDate fechaEmision){
 		return pedidoRepository.findByFechaPedido(fechaEmision);
+	}
+	
+	@Transactional
+	public void deletePedido(Integer id) throws DataAccessException {
+		pedidoRepository.deleteById(id);
 	}
 	
 }

@@ -40,14 +40,18 @@
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>
 					<td><c:out value="${factura.cliente.nombre}" /></td>
-				<%--	<td><spring:url value="/facturas/{facturaId}" var="facturaUrl">
+					
+					
+					<td><spring:url value="/cliente/{clienteId}/factura/{facturaId}/edit"
+							var="facturaUrl">
+							<spring:param name="clienteId" value="${factura.cliente.id}" />
 							<spring:param name="facturaId" value="${factura.id}" />
-						</spring:url> <a href="${fn:escapeXml(facturaUrl)}"><c:out
-								value="${factura.descripcion}" /></a></td>
-								<td><spring:url value="/facturas/{facturaId}" var="facturaUrl">
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(facturaUrl)}">Editar factura</a></td>
+								
+								
+								<td><spring:url value="/factura/{facturaId}/delete" var="facturaUrl">
 							<spring:param name="facturaId" value="${factura.id}" />
-						</spring:url> <a href="${fn:escapeXml(facturaUrl)}"><c:out
-								value="${factura.descripcion}" /></a></td>--%>
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(facturaUrl)}">Eliminar factura</a></td>
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">
 							<c:out value="${pet.name} " />
 						</c:forEach></td> --%>
@@ -64,3 +68,4 @@
 	</sec:authorize> --%>
 
 </TalleresLaPlata:layout>
+

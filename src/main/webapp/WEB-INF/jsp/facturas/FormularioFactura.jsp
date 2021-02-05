@@ -17,7 +17,7 @@
             <TalleresLaPlata:inputField label="TipoPago" name="tipoPago"/>
             <TalleresLaPlata:inputField label="FechaEmision" name="fechaEmision"/>
             <TalleresLaPlata:inputField label="Pagado" name="pagado"/>
-             <TalleresLaPlata:inputField label="Cliente" name="cliente"/>
+             <TalleresLaPlata:inputField label="Cliente" name="cliente.dni"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

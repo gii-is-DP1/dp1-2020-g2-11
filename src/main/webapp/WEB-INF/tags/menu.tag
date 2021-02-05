@@ -89,7 +89,6 @@
 						<span>Productos</span>
 					</petclinic:menuItem>
 				</sec:authorize>
-
 				<sec:authorize access="hasAuthority('cliente')">
 					<petclinic:menuItem active="${name eq 'productos'}" url="/cliente/{clienteId}/facturas)"
 						title="producto">
@@ -119,6 +118,14 @@
 						title="factura">
 						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 						<span>Facturas</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
+					<petclinic:menuItem active="${name eq 'pedidos'}" url="/pedidos"
+						title="pedido">
+						<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+						<span>Pedidos</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 

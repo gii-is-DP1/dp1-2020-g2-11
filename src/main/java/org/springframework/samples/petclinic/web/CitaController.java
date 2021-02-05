@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -163,4 +161,15 @@ public class CitaController {
 			return "redirect:/citas";
 		}
 	}	
+	
+	@GetMapping(value = { "/citas/cliente" })
+	public String findMisCitas(ModelMap model) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		Cliente cliente = clienteService.findClienteByUsername(clienteDetails.getUsername());
+		Integer clienteId = cliente.getId();
+		Collection<Cita> citas = citaService.findCitasByCliente(clienteId);
+		model.put("citas", citas);
+		return "citas/ListaCitas";
+	}
 }

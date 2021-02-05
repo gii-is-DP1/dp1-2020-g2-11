@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +29,7 @@ public class Cita extends BaseEntity{
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime horaCita;
 
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 	
