@@ -31,11 +31,12 @@ public class VehiculoController {
 	private VehiculoService vehiculoService;
 
 	@Autowired
-	private ClienteService clienteService;
+	private final ClienteService clienteService;
 
 	@Autowired
-	public VehiculoController(VehiculoService vehiculoService, AuthoritiesService authoritiesService) {
+	public VehiculoController(ClienteService clienteService, VehiculoService vehiculoService, AuthoritiesService authoritiesService) {
 		this.vehiculoService = vehiculoService;
+		this.clienteService = clienteService;
 	}
 
 	@GetMapping(value = { "/vehiculos" })
@@ -115,25 +116,25 @@ public class VehiculoController {
 		return "redirect:/vehiculos";
 	}
 	
-	@GetMapping("/cliente/{clienteId}/vehiculo/{vehiculoId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, @PathVariable("vehiculoId") int vehiculoId, Model model) {
+	@GetMapping("/vehiculo/{vehiculoId}/edit")
+	public String initUpdateOwnerForm( @PathVariable("vehiculoId") int vehiculoId, Model model) {
+		
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
-		Cliente cliente = vehiculo.getCliente();
-		vehiculo.setCliente(cliente);
 		model.addAttribute(vehiculo);
 		return "vehiculos/formularioVehiculo";
 	}
 
-	@PostMapping("/cliente/{clienteId}/vehiculo/{vehiculoId}/edit")
-	public String processUpdateOwnerForm(@Valid Vehiculo vehiculo, BindingResult result,@PathVariable("clienteId") int clienteId,
+	@PostMapping("/vehiculo/{vehiculoId}/edit")
+	public String processUpdateOwnerForm(@Valid Vehiculo vehiculo, BindingResult result,ModelMap model,
 			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
 		if (result.hasErrors()) {
+			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
 		}
 		else {
-			Cliente cliente = clienteService.findClienteById(clienteId).get();
-			vehiculo.setCliente(cliente);
 			vehiculo.setId(vehiculoId);
+			Cliente c = this.clienteService.findClienteByDni(vehiculo.getCliente().getDni());
+            vehiculo.setCliente(c);
 			this.vehiculoService.saveVehiculo(vehiculo);
 			return "redirect:/vehiculo/{vehiculoId}";
 		}

@@ -53,9 +53,8 @@
 								value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
 					</sec:authorize>
 					<td><spring:url
-							value="/cliente/{clienteId}/vehiculo/{vehiculoId}/edit"
+							value="/vehiculo/{vehiculoId}/edit"
 							var="vehiculoUrl">
-							<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
 						</spring:url> <a class="glyphicon glyphicon-pencil"
 						href="${fn:escapeXml(vehiculoUrl)}"></a></td>
