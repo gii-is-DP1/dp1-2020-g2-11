@@ -24,7 +24,6 @@
 				<th style="width: 100px">Pagado</th>
 				<th style="width: 100px">Cliente</th>
 				<th style="width: 100px"></th>
-				<th style="width: 100px"></th>
 				
 			</tr>
 		</thead>
@@ -40,14 +39,6 @@
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>
 					<td><c:out value="${factura.cliente.nombre}" /></td>
-					
-					
-					<td><spring:url value="/cliente/{clienteId}/factura/{facturaId}/edit"
-							var="facturaUrl">
-							<spring:param name="clienteId" value="${factura.cliente.id}" />
-							<spring:param name="facturaId" value="${factura.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(facturaUrl)}">Editar factura</a></td>
-								
 								
 								<td><spring:url value="/factura/{facturaId}/delete" var="facturaUrl">
 							<spring:param name="facturaId" value="${factura.id}" />
