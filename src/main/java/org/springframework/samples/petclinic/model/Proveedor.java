@@ -24,5 +24,6 @@ public class Proveedor extends BaseEntity {
 
 	@Column(name = "email")
 	private String email;
+	
 
 }

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,4 +27,11 @@ public class Pedido extends BaseEntity{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEmision;
 
+	@OneToOne
+    @JoinColumn(name = "proveedor_id")
+    private Proveedor proveedor;
+	
+	@OneToOne
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 }

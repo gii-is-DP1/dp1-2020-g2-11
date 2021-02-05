@@ -62,12 +62,6 @@ INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente
 INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (3,'Arreglo piston de arranque', 100.33, 2, '2020-12-16', FALSE,3);
 INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (4,'Cambio de neumaticos', 60.50, 0, '2020-12-16', FALSE,4);
 
---Pedido
-INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (1,'2020-12-10', '2020-12-14');
-INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (2,'2020-12-10', '2020-12-15');
-INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (3,'2020-12-13', '2020-12-16');
-INSERT INTO pedido(id,fecha_entrada,fecha_emision) VALUES (4,'2020-12-13', '2020-12-16');
-
 --Producto
 INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (1,'NEU54638',10,'Neumaticos','Nexen',4);
 INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (2,'71632A',20,'Aceite','Castrol',10);
@@ -76,6 +70,12 @@ INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (3
 --Proveedor
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com');
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com');
+
+--Pedido
+INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (1,'2020-12-10', '2020-12-14',1,2);
+INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (2,'2020-12-10', '2020-12-15',2,1);
+INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (3,'2020-12-13', '2020-12-16',1,3);
+INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (4,'2020-12-13', '2020-12-16',1,2);
 
 --Reparacion
 INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (1,10,20.00,2,1);
