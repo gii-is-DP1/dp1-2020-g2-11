@@ -11,7 +11,7 @@
 
 <TalleresLaPlata:layout pageName="citas">
 
-	<%--	<h2>Buscar cita</h2>
+		<h2>Buscar cita</h2>
 	<form:form modelAttribute="citas" action="/citas" method="post"
 		class="form-horizontal" id="buscador-citas">
 		<div class="form-group">
@@ -29,7 +29,7 @@
 				<button type="submit" class="btn btn-default">Buscar</button>
 			</div>
 		</div>
-	</form:form> --%>
+	</form:form> 
 
 	<h2>Todas las citas</h2>
 	<table id="tablaProveedor" class="table table-striped">
