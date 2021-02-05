@@ -9,8 +9,27 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
-<TalleresLaPlata:layout pageName="vehiculo">
+<TalleresLaPlata:layout pageName="vehiculos">
 
+<h2>Buscar vehiculo</h2>
+	<form:form modelAttribute="vehiculo" action="/vehiculos" method="post"
+		class="form-horizontal" id="buscador-vehiculos">
+		<div class="form-group">
+			<div class="control-group" id="matricula">
+				<label class="col-sm-2 control-label">Matricula</label>
+				<div class="col-sm-10">
+					<form:input class="form-control" path="matricula" size="30"
+						maxlength="80" />
+					<span class="help-inline"><form:errors path="*" /></span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Buscar</button>
+			</div>
+		</div>
+	</form:form> 
 
 	<h2>Vehiculos</h2>
 	<table id="tablaVehiculo" class="table table-striped">

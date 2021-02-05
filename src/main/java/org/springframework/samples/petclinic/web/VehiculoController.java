@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.TipoVehiculo;
 import org.springframework.samples.petclinic.model.Vehiculo;
@@ -40,11 +41,28 @@ public class VehiculoController {
 	}
 
 	@GetMapping(value = { "/vehiculos" })
-	public String findAllVehiculos(ModelMap model) {
+	public String findVehiculos(Map<String, Object> model) {
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
+		Vehiculo vehiculo = new Vehiculo();
+		model.put("vehiculo", vehiculo);
 		model.put("vehiculos", vehiculos);
 		return "vehiculos/ListaVehiculos";
 	}
+
+	@PostMapping(value = { "/vehiculos" })
+	public String findvehiculosByMatricula(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
+		// buscamos citas por fecha
+		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
+		model.put("vehiculo", vehiculos);
+		return "redirect:/vehiculo/" + vehiculos.getId();
+	}	
+	
+//	@GetMapping(value = { "/vehiculos" })
+//	public String findAllVehiculos(ModelMap model) {
+//		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
+//		model.put("vehiculos", vehiculos);
+//		return "vehiculos/ListaVehiculos";
+//	}
 
 	@GetMapping(value = { "/vehiculo/tipo" })
 	public String findVehiculoByTipo(String tpo, BindingResult res, ModelMap model) {
