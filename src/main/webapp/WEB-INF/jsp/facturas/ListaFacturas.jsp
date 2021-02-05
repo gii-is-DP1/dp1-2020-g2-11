@@ -17,31 +17,32 @@
 	<table id="tablaFactura" class="table table-striped">
 		<thead>
 			<tr>
+				<sec:authorize access="hasAuthority('admin')">
+					<th style="width: 100px">Cliente</th>
+				</sec:authorize>
 				<th style="width: 150px;">Decripcion</th>
 				<th style="width: 100px;">Precio</th>
 				<th style="width: 100px">Tipo de Pago</th>
 				<th style="width: 100px">Fecha</th>
 				<th style="width: 100px">Pagado</th>
-				<th style="width: 100px">Cliente</th>
+
 
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${facturas}" var="factura">
 				<tr>
-					<td><c:out value="${factura.descripcion}" /></a></td>
+					<sec:authorize access="hasAuthority('admin')">
+						<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
+								<spring:param name="clienteId" value="${factura.cliente.id}" />
+							</spring:url> <a href="${fn:escapeXml(clienteUrl)}"> <c:out
+									value="${factura.cliente.dni}" /></a></td>
+					</sec:authorize>
+					<td><c:out value="${factura.descripcion}" />
 					<td><c:out value="${factura.precio}" /></td>
 					<td><c:out value="${factura.tipoPago}" /></td>
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>
-					<td><c:out value="${factura.cliente.nombre}" /></td>
-
-					
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
-
-
 				</tr>
 			</c:forEach>
 		</tbody>
