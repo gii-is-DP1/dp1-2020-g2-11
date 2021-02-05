@@ -20,7 +20,7 @@
 				<th style="width: 100px">Fecha Revisión</th>
 				<th style="width: 100px">Cliente</th>
 				<th style="width: 100px">Matricula</th>
-				<th style="width: 50px"></th>
+				<th style="width: 50px">Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,7 +49,7 @@
 
 					<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
 							<spring:param name="revisionId" value="${revision.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(revisionUrl)}">Eliminar revision</a></td>
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
 
 
 

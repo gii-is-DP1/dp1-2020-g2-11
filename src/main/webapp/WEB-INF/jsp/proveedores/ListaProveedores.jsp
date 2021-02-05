@@ -20,8 +20,8 @@
 				<th style="width: 100px;">Telefono</th>
 				<th style="width: 100px">Direccion</th>
 				<th style="width: 100px">Email</th>
-				<th style="width: 100px"></th>
-				<th style="width: 100px"></th>
+				<th style="width: 50px">Editar</th>
+				<th style="width: 50px">Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,24 +35,15 @@
 							<spring:param name="proveedorId" value="${proveedor.id}" />
 						</spring:url> <a href="${fn:escapeXml(proveedorUrl)}"><c:out
 								value="${proveedor.nombre}" /></a></td>
-								
-								
-								
 					<td><c:out value="${proveedor.telefono}" /></td>
 					<td><c:out value="${proveedor.direccion}" /></td>
 					<td><c:out value="${proveedor.email}" /></td>
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
-				
 					<td><spring:url value="/proveedor/{proveedorId}/edit" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Editar proveedor</a></td>
-						
-				
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(proveedorUrl)}"></a></td>
 				<td><spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar proveedor</a></td>
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(proveedorUrl)}"></a></td>
 						
 						
 				</tr>
@@ -60,7 +51,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+		<a class="btn btn-default" href='<spring:url value="/pre/new" htmlEscape="true"/>'>Añadir</a>
 	<br />
 
 </TalleresLaPlata:layout>

@@ -24,7 +24,7 @@
 				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<th style="width: 100px;">Propietario</th>
-					<th style="width: 100px;"></th>
+					<th style="width: 50px;">Editar</th>
 				</sec:authorize>
 			</tr>
 		</thead>
@@ -59,7 +59,7 @@
 							var="vehiculoUrl">
 							<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(vehiculoUrl)}">Editar vehiculo</a></td>
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(vehiculoUrl)}"></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

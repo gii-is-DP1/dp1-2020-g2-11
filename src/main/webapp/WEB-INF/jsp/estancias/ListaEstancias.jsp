@@ -22,7 +22,7 @@
 				<th style="width: 100px;">Fecha salida</th>
 				<th style="width: 100px;">Hora salida</th>
 				<th style="width: 100px;">Duración</th>
-				<th style="width: 50px"></th>
+				<th style="width: 50px">Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,7 +41,7 @@
 					
 					<td><spring:url value="/estancias/delete/{estanciaId}" var="estanciaUrl">
 							<spring:param name="estanciaId" value="${estancia.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(estanciaUrl)}">Eliminar estancia</a></td>
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(estanciaUrl)}"></a></td>
 					
 					
 					

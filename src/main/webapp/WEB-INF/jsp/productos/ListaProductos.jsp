@@ -22,7 +22,7 @@
 				<th style="width: 150px">Stock</th>
 				<th style="width: 150px">Referencia</th>
 				<th style="width: 150px">StockSeguridad</th>
-				<th style="width: 150px"></th>
+				<th style="width: 50px">Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,7 +37,7 @@
 					
 					<td><spring:url value="/productos/delete/{productoId}" var="productoUrl">
 							<spring:param name="productoId" value="${producto.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(productoUrl)}">Eliminar</a></td>
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(productoUrl)}"></a></td>
 					
 						
 				</tr>
