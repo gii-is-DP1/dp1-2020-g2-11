@@ -40,11 +40,16 @@
 					<td><c:out value="${vehiculos.kilometraje}" /></td>
 
 					<sec:authorize
-						access="hasAuthority('admin') or hasAuthority('mecanico')">
+						access="hasAuthority('admin')">
 						<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
 								<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
 							</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
 									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
+					</sec:authorize>
+					<sec:authorize
+						access="hasAuthority('mecanico')">
+						<td><c:out
+									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
 					</sec:authorize>
 				</tr>
 			</c:forEach>

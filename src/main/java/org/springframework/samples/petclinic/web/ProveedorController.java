@@ -6,11 +6,13 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -90,7 +92,25 @@ public class ProveedorController {
 	}
 	
 	
-	
+	@GetMapping("/proveedor/{proveedorId}/edit")
+	public String initUpdateOwnerForm(@PathVariable("proveedorId") int proveedorId, Model model) {
+		Proveedor proveedor = this.proveedorService.findProveedorById(proveedorId);
+		model.addAttribute(proveedor);
+		return "proveedores/FormularioProveedor";
+	}
+
+	@PostMapping("/proveedor/{proveedorId}/edit")
+	public String processUpdateOwnerForm(@Valid Proveedor proveedor, BindingResult result,
+			@PathVariable("proveedorId") int proveedorId) {
+		if (result.hasErrors()) {
+			return "proveedores/FormularioProveedor";
+		}
+		else {
+			proveedor.setId(proveedorId);
+			this.proveedorService.saveProveedor(proveedor);
+			return "redirect:/proveedor/{proveedorId}";
+		}
+	}
 	
 	
 }

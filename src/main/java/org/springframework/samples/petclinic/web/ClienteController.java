@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -98,4 +99,26 @@ public class ClienteController {
 //		clienteService.deleteClienteById(clienteId);
 //		return "redirect:/clientes";
 //	}
+	
+	
+	
+	@GetMapping("/cliente/{clienteId}/edit")
+	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, Model model) {
+		Cliente cliente = this.clienteService.findClienteById(clienteId).get();
+		model.addAttribute(cliente);
+		return "users/createClienteForm";
+	}
+
+	@PostMapping("/cliente/{clienteId}/edit")
+	public String processUpdateOwnerForm(@Valid Cliente cliente, BindingResult result,
+			@PathVariable("clienteId") int clienteId) {
+		if (result.hasErrors()) {
+			return "users/createClienteForm";
+		}
+		else {
+			cliente.setId(clienteId);
+			this.clienteService.saveCliente(cliente);
+			return "redirect:/cliente/{ownerId}";
+		}
+	}
 }

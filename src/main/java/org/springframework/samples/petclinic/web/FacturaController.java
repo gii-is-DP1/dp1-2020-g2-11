@@ -5,21 +5,30 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.FacturaService;
+import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class FacturaController {
 	private FacturaService facturaService;
-
 	@Autowired
-	public FacturaController(FacturaService facturaService) {
+	private final ClienteService clienteService;
+	@Autowired
+	public FacturaController(FacturaService facturaService, ClienteService clienteService) {
 		this.facturaService = facturaService;
+		this.clienteService = clienteService;
 	}
 
 	@GetMapping(value = { "/facturas" })
@@ -29,6 +38,27 @@ public class FacturaController {
 		return "facturas/ListaFacturas";
 	}
 
+	@GetMapping(value = "/factura/new")
+	public String initCreationForm(ModelMap model) {
+		Factura factura = new Factura();
+		String dni = "";
+		model.put("factura", factura);
+		model.put("dni", dni);
+		return "facturas/FormularioFactura";
+	}
+	@PostMapping(value = "/factura/new")
+	public String processCreationForm(@Valid Factura factura, BindingResult result,ModelMap model) throws DataAccessException, TipoPagoException {
+		if (result.hasErrors()) {
+			model.put("factura", factura);
+			return "facturas/FormularioFactura";
+		}
+		else {
+			Cliente c = this.clienteService.findClienteByDni(factura.getCliente().getDni());
+			factura.setCliente(c);
+			this.facturaService.saveFactura(factura);
+			return "redirect:/facturas";
+		}
+	}
 	@GetMapping(value = { "/facturaId" })
 	public String findFacturaById(Factura factura, BindingResult res, ModelMap model) {
 		if (factura.getId() == null) {

@@ -23,6 +23,8 @@
 				<th style="width: 100px">Fecha</th>
 				<th style="width: 100px">Pagado</th>
 				<th style="width: 100px">Cliente</th>
+				<th style="width: 100px"></th>
+				<th style="width: 100px"></th>
 				
 			</tr>
 		</thead>
@@ -38,14 +40,24 @@
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>
 					<td><c:out value="${factura.cliente.nombre}" /></td>
+				<%--	<td><spring:url value="/facturas/{facturaId}" var="facturaUrl">
+							<spring:param name="facturaId" value="${factura.id}" />
+						</spring:url> <a href="${fn:escapeXml(facturaUrl)}"><c:out
+								value="${factura.descripcion}" /></a></td>
+								<td><spring:url value="/facturas/{facturaId}" var="facturaUrl">
+							<spring:param name="facturaId" value="${factura.id}" />
+						</spring:url> <a href="${fn:escapeXml(facturaUrl)}"><c:out
+								value="${factura.descripcion}" /></a></td>--%>
 					<%-- <td><c:forEach var="pet" items="${owner.pets}">
 							<c:out value="${pet.name} " />
 						</c:forEach></td> --%>
+						
+						
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
+<a class="btn btn-default" href='<spring:url value="/factura/new" htmlEscape="true"/>'>Añadir</a>
 	<br />
 	<%--     <sec:authorize access="hasAuthority('admin')">
 		<a class="btn btn-default" href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a>

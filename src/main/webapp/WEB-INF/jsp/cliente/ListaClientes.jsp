@@ -22,6 +22,7 @@
 				<th style="width: 100px;">Teléfono</th>
 				<th style="width: 100px;">Email</th>
 				<th style="width: 50px;"></th>
+				<th style="width: 50px;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,6 +36,9 @@
 					<td><c:out value="${cliente.dni}" /></td>
 					<td><c:out value="${cliente.telefono}" /></td>
 					<td><c:out value="${cliente.email}" /></td>
+					<td><spring:url value="/cliente/{clienteId}/edit" var="clienteUrl">
+							<spring:param name="clienteId" value="${cliente.id}" />
+						</spring:url> <a href="${fn:escapeXml(clienteUrl)}">EditarCliente</a></td>
 					<td><spring:url value="/cliente/delete/{clienteId}" var="clienteUrl">
 					<spring:param name="clienteId" value="${cliente.id}" />
 					</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Eliminar cliente</a></td>
