@@ -11,46 +11,23 @@
 
 <TalleresLaPlata:layout pageName="pedidos">
 
-	<h2>Buscar pedido</h2>
-	<form:form modelAttribute="pedido" action="/pedidos" method="get"
-		class="form-horizontal" id="buscador-pedidos">
-		<div class="form-group">
-			<div class="control-group" id="id">
-				<label class="col-sm-2 control-label">FechaEmision</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="fechaEmision" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
-			</div>
-		</div>
-	</form:form>
-
 	<h2>Todos los pedidos</h2>
 	<table id="tablaPedido" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 150px;">FechaEmision</th>
+				<th style="width: 150px;">Fecha Emisión</th>
+				<th style="width: 150px;">Fecha Entrada</th>
 				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="pedido">
+			<c:forEach items="${pedidos}" var="pedido">
 				<tr>
 					<td><spring:url value="/pedidos/{pedidoId}" var="pedidoUrl">
 							<spring:param name="pedidoId" value="${pedido.id}" />
 						</spring:url> <a href="${fn:escapeXml(pedidoUrl)}"><c:out
 								value="${pedido.fechaEmision} " /></a></td>
 					<td><c:out value="${pedido.fechaEntrada}" /></td>
-					
-					<%-- <td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td> --%>
 				</tr>
 			</c:forEach>
 		</tbody>
