@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -27,5 +28,9 @@ public class Reparacion extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "vehiculo_id")
 	private Vehiculo vehiculo;
+	
+	@OneToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 	
 }
