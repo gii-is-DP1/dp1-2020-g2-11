@@ -1,11 +1,14 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.junit.Assume.assumeNoException;
+
 import java.time.LocalDate;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.repository.EstanciaRepository;
+import org.springframework.samples.petclinic.service.exceptions.FechasIncorrectas;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +25,9 @@ public class EstanciaService {
 	}
 
 	@Transactional
-	public void saveEstancia(Estancia estancia) throws DataAccessException, SobrecargaDeVehiculosException {
+	public void saveEstancia(Estancia estancia) throws DataAccessException, SobrecargaDeVehiculosException, FechasIncorrectas {
 		int n_otherEstancias = estanciaRepository.findByFechaEstancia(estancia.getFechaEntrada()).size();
+		if (estancia.getFechaEntrada().isAfter(estancia.getFechaSalida())) throw new FechasIncorrectas();
 		if (n_otherEstancias  <= 2) {
 			estanciaRepository.save(estancia);
 		} else {

@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Estancia;
+import org.springframework.samples.petclinic.service.exceptions.FechasIncorrectas;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class EstanciaServiceTest {
 
 	@Test
 	@Transactional
-	public void shouldInsertEstancia() throws DataAccessException, SobrecargaDeVehiculosException {
+	public void shouldInsertEstancia() throws DataAccessException, SobrecargaDeVehiculosException, FechasIncorrectas {
 
 		estancia = new Estancia();
 		estancia.setId(7);
