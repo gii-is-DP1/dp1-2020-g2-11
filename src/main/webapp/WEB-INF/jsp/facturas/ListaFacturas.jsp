@@ -25,7 +25,7 @@
 				<th style="width: 100px">Tipo de Pago</th>
 				<th style="width: 100px">Fecha</th>
 				<th style="width: 100px">Pagado</th>
-
+				<th style="width: 100px"></th>
 
 			</tr>
 		</thead>
@@ -43,6 +43,11 @@
 					<td><c:out value="${factura.tipoPago}" /></td>
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>
+		<sec:authorize access="hasAuthority('admin')">
+						<td><spring:url value="/factura/Pagada/{facturaId}" var="facturaUrl">
+							<spring:param name="facturaId" value="${factura.id}" />
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(facturaUrl)}"></a></td>
+					</sec:authorize>
 				</tr>
 			</c:forEach>
 		</tbody>

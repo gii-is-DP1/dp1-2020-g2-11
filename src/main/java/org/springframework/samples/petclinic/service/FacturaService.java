@@ -55,6 +55,12 @@ public class FacturaService {
 //	public void updateFactura(Factura factura) throws DataAccessException {
 //		facturaRepository.update(factura);
 //	}
+	@Transactional
+	public void setFacturaPagado(Integer id){
+		Factura factura= facturaRepository.findById(id).get();
+		factura.setPagado(true);
+		
+	}
 
 	@Transactional(readOnly = true)
 	public Collection<Factura> findFacturas() throws DataAccessException {

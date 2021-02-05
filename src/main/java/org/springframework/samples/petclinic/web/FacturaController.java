@@ -13,11 +13,11 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.FacturaService;
+import org.springframework.samples.petclinic.service.exceptions.NoPagadaException;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class FacturaController {
+	
 	private FacturaService facturaService;
 	@Autowired
 	private final ClienteService clienteService;
+	
 	@Autowired
 	public FacturaController(FacturaService facturaService, ClienteService clienteService) {
 		this.facturaService = facturaService;
@@ -52,7 +54,12 @@ public class FacturaController {
 		model.put("facturas", facturas);
 		return "facturas/ListaFacturas";
 	}
-
+	@GetMapping(value = "/factura/Pagada/{facturaId}")
+	public String facturaPagada(@PathVariable("facturaId") int facturaId) {
+		facturaService.setFacturaPagado(facturaId);
+		return"redirect:/facturas";
+	}
+	
 	@GetMapping(value = "/factura/new")
 	public String initCreationForm(ModelMap model) {
 		Factura factura = new Factura();
