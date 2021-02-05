@@ -115,7 +115,7 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('cliente')">
-					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas/cliente)"
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas/cliente"
 						title="producto">
 						<span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
 						<span>Mis Facturas</span>

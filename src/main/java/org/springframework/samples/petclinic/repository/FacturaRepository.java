@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.repository;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,7 +19,7 @@ public interface FacturaRepository extends CrudRepository<Factura, Integer>{
 	public Collection<Factura> findByPagado(@Param("pagado") Boolean pagado);
 	
 	@Query("SELECT f FROM Factura f, Cliente c WHERE f.cliente.id = :cliente_id")
-    public List<Factura> findByCliente(@Param("cliente_id") Integer idCliente);
+    public Set<Factura> findByCliente(@Param("cliente_id") Integer idCliente);
 	
 	
 }

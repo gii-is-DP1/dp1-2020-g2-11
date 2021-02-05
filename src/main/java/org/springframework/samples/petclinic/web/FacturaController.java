@@ -42,7 +42,7 @@ public class FacturaController {
 		return "facturas/ListaFacturas";
 	}
 	
-	@GetMapping(value = { "/facturas/{clienteId}" })
+	@GetMapping(value = { "/facturas/cliente" })
 	public String findMisFacturas(Map<String, Object> model) {
 		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
@@ -74,29 +74,6 @@ public class FacturaController {
 			return "redirect:/facturas";
 		}
 	}
-	@GetMapping("/cliente/{clienteId}/factura/{facturaId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, @PathVariable("facturaId") int vehiculoId, Model model) {
-		Factura factura=this.facturaService.findFacturabyId(vehiculoId).get();
-		factura.setCliente(clienteService.findClienteById(clienteId).get());
-		model.addAttribute(factura);
-		return "facturas/FormularioFactura";
-	}
-
-	@PostMapping("/cliente/{clienteId}/factura/{vehiculoId}/edit")
-	public String processUpdateOwnerForm(@Valid Factura factura, BindingResult result,@PathVariable("clienteId") int clienteId,
-			@PathVariable("facturaId") int facturaId) throws DataAccessException, TipoPagoException {
-		if (result.hasErrors()) {
-			return "facturas/FormularioFactura";
-		}
-		else {
-			Cliente cliente = clienteService.findClienteById(clienteId).get();
-			factura.setCliente(cliente);
-			factura.setId(facturaId);
-			this.facturaService.saveFactura(factura);
-			return "redirect:/facturas";
-		}
-	}
-
 
 	@GetMapping(value = { "/facturaId" })
 	public String findFacturaById(Factura factura, BindingResult res, ModelMap model) {
