@@ -60,5 +60,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a class="btn btn-default" href='<spring:url value="/revision/new" htmlEscape="true"/>'>Añadir</a>
 	<br />
 </TalleresLaPlata:layout>
