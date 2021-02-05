@@ -20,12 +20,11 @@
 				<th style="width: 100px;">Tipo</th>
 				<th style="width: 100px;">Fecha de fabricación</th>
 				<th style="width: 100px;">Kilometraje</th>
-				
 				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<th style="width: 100px;">Propietario</th>
-					<th style="width: 50px;">Editar</th>
 				</sec:authorize>
+				<th style="width: 50px;">Editar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,38 +35,39 @@
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}"><c:out
 								value="${vehiculos.matricula}" /></a></td>
-								
+
 					<td><c:out value="${vehiculos.tipoVehiculo}" /></td>
 					<td><c:out value="${vehiculos.fechaFabricacion}" /></td>
 					<td><c:out value="${vehiculos.kilometraje}" /></td>
-					
 
-					<sec:authorize
-						access="hasAuthority('admin')">
+
+					<sec:authorize access="hasAuthority('admin')">
 						<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
 								<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
 							</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
 									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
 					</sec:authorize>
-	
-					<sec:authorize
-						access="hasAuthority('mecanico')">
+
+					<sec:authorize access="hasAuthority('mecanico')">
 						<td><c:out
-									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
+								value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
 					</sec:authorize>
-					<td><spring:url value="/cliente/{clienteId}/vehiculo/{vehiculoId}/edit"
+					<td><spring:url
+							value="/cliente/{clienteId}/vehiculo/{vehiculoId}/edit"
 							var="vehiculoUrl">
 							<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
-						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(vehiculoUrl)}"></a></td>
+						</spring:url> <a class="glyphicon glyphicon-pencil"
+						href="${fn:escapeXml(vehiculoUrl)}"></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<sec:authorize access="hasAuthority('cliente')">
-		<a class="btn btn-default" href='<spring:url value="/vehiculo/new" htmlEscape="true"/>'>Añadir</a>
+		<a class="btn btn-default"
+			href='<spring:url value="/vehiculo/new" htmlEscape="true"/>'>Añadir</a>
 	</sec:authorize>
 
 
-		<br />
+	<br />
 </TalleresLaPlata:layout>
