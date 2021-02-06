@@ -21,6 +21,7 @@
 			    <th style="width: 150px;">Tipo Reparacion</th>
 				<th style="width: 150px;">Precio</th>
 				<th style="width: 150px;">Duracion</th>
+				<th style="width: 50px">Editar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,7 +34,9 @@
 					<td><c:out value="${reparacion.tipoReparacion} " /></td>
 					<td><c:out value="${reparacion.precio}" /></td>
 					<td><c:out value="${reparacion.duracion}" /></td>
-					
+					<td><spring:url value="/reparacion/{reparacionId}/edit" var="reparacionUrl">
+							<spring:param name="reparacionId" value="${reparacion.id}" />
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(reparacionUrl)}"></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
