@@ -30,7 +30,7 @@ public class CitaService {
 			throw new SobrecargaDeVehiculosException();
 		}
 	}
-
+	
 	@Transactional(readOnly = true)
 	public Collection<Cita> findCitaByFechaCita(LocalDate fecha) {
 		return citaRepository.findByFechaCita(fecha);
@@ -40,19 +40,17 @@ public class CitaService {
 	public Collection<Cita> findCitasByCliente(Integer clienteId) throws DataAccessException {
 		return citaRepository.findByCliente(clienteId);
 	}
-//	@Transactional
-//	public void removeCitaByCliente(int cliente) throws DataAccessException {
-//		citaRepository.deleteByCliente(cliente);
-//	}
+	
 	@Transactional
 	public void removeCita(Integer id) throws DataAccessException {
-		citaRepository.deleteById(id);
+	citaRepository.remove(id);
 	}
 
 	@Transactional(readOnly = true)
 	public Collection<Cita> findAllCita() throws DataAccessException {
 		return (Collection<Cita>) citaRepository.findAll();
 	}
+		
 	
 	@Transactional(readOnly = true)
 	public Cita findCitaById(Integer id) {

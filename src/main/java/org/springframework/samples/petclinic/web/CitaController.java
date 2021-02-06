@@ -42,11 +42,6 @@ public class CitaController {
 		this.clienteService = clienteService;
 		this.vehiculoService = vehiculoService;
 	}
-
-//	@InitBinder
-//	public void setAllowedFields(WebDataBinder dataBinder) {
-//		dataBinder.setDisallowedFields("id");
-//	}
 	
 	@InitBinder("cita")
     public void initPetBinder(WebDataBinder dataBinder) {
@@ -62,41 +57,33 @@ public class CitaController {
 		return "citas/ListaCitas";
 	}
 	
-	@GetMapping(value = "/citas/find")
-	public String initFindForm(Map<String, Object> model) {
-		model.put("cita", new Cita());
-		return "citas/findCitas";
-	}
-
-	@PostMapping(value = { "/citas" })
-	public String findcitasByFecha(@Valid Cita cita, BindingResult res, Map<String, Object> model) {
-		if (cita.getFechaCita() == null) {
-			 // empty string signifies broadest possible search
-			return "redirect:/citas";
-		}
-		Collection<Cita> citas = this.citaService.findCitaByFechaCita(cita.getFechaCita());
-		if (citas.isEmpty()) {
-			// no clientes found
-			res.rejectValue("fechaCita", "notFound", "not found");
-			return "redirect:/citas/find";
-		} else {
-			// buscamos citas por fecha
-		model.put("citas", citas);
-		return "citas/ListaCitas";
-		}
-		
-	}
+//	@GetMapping(value = "/citas")
+//	public String initFindForm(Map<String, Object> model) {
+//		model.put("cita", new Cita());
+//		return "citas/findCitas";
+//	}
+//
+//	@PostMapping(value = { "/citas" })
+//	public String findcitasByFecha(@Valid Cita cita, BindingResult res, Map<String, Object> model) {
+//		if (cita.getFechaCita() == null) {
+//			 // empty string signifies broadest possible search
+//			return "redirect:/citas";
+//		}
+//		Collection<Cita> citas = this.citaService.findCitaByFechaCita(cita.getFechaCita());
+//		if (citas.isEmpty()) {
+//			// no citas found
+//			res.rejectValue("fechaCita", "notFound", "not found");
+//			return "redirect:/citas/";
+//		} else {
+//			// buscamos citas por fecha
+//		model.put("citas", citas);
+//		return "citas/ListaCitas";
+//		}
+//		
+//	}
 
 	@GetMapping(value = "/cita/new")
 	public String initCreationForm(ModelMap model) {
-//		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		String username = clienteDetails.getUsername();
-//		Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
-//		if (clienteRegistered.getId() != clienteId) {
-//			String message = "No puedes crear una cita por otro";
-//			model.put("customMessage", message);
-//			return "exception";
-//		}
 		Cita cita = new Cita();
 		model.put("cita", cita);
 		return "citas/FormularioCita";
@@ -120,34 +107,6 @@ public class CitaController {
 			return "redirect:/citas/cliente";
 		}
 	}	
-	
-//	@GetMapping(value = "/citas/new")
-//	public String initCreationForm2( ModelMap model) {
-//		Cita cita = new Cita();
-//		String dni = "";
-//		String matricula = "";
-//		model.put("cita", cita);
-//		model.put("dni", dni);
-//		model.put("matricula", matricula);
-//		return "citas/FormularioCitaByAdmin";
-//	}
-//	
-//	@PostMapping(value = "/citas/new")
-//	public String processCreationForm2(@Valid Cita cita, BindingResult result, ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
-//		if (result.hasErrors()) {
-//			model.put("cita", cita);
-//			return "citas/FormularioCitaByAdmin";
-//			
-//		} else {
-//			//model.put("cita", cita);
-//			Cliente c = this.clienteService.findClienteByDni(cita.getCliente().getDni());
-//			cita.setCliente(c);
-//			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
-//			cita.setVehiculo(v);
-//			this.citaService.saveCita(cita);
-//			return "redirect:/citas";
-//			}
-//	}	
 	
 	@GetMapping(value = { "/cita/delete/{citaId}" })
 	public String deleteCita(@PathVariable("citaId") int citaId) {

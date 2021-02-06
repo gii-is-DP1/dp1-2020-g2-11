@@ -1,18 +1,3 @@
-/*
- * Copyright 2002-2013 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.springframework.samples.petclinic.repository;
 
 import java.time.LocalDate;
@@ -25,12 +10,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cita;
 
-/**
- * Spring Data JPA OwnerRepository interface
- *
- * @author Michael Isvy
- * @since 15.1.2013
- */
 public interface CitaRepository extends CrudRepository<Cita, Integer> {
 
 	@Query("SELECT DISTINCT c FROM Cita c WHERE c.fechaCita = :fechaCita")
@@ -45,8 +24,4 @@ public interface CitaRepository extends CrudRepository<Cita, Integer> {
 	
 	@Query("SELECT c FROM Cita c WHERE c.cliente.id = :clienteId")
 	Collection<Cita> findByCliente(@Param("clienteId") Integer clienteId);
-	
-//	@Modifying
-//	@Query("DELETE FROM Cita c WHERE c.cliente_id = :cliente_id")
-//	void deleteByCliente(@Param("cliente_id") Integer cliente_id);	
 }
