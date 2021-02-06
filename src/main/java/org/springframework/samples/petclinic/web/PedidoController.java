@@ -1,20 +1,18 @@
 package org.springframework.samples.petclinic.web;
-
 import java.util.Collection;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.PedidoService;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,12 +67,34 @@ public class PedidoController {
 		}
 	}
 	
+	@GetMapping(value = "/pedido/new")
+	public String initCreationForm(ModelMap model) {
+		Pedido pedido = new Pedido();
+		String referencia = "";
+		model.put("pedido", pedido);
+		model.put("referencia", referencia);
+		return "pedidos/FormularioPedido";
+	}
+	
+	@PostMapping(value = "/pedido/new")
+	public String processCreationForm(@Valid Pedido pedido, BindingResult result,ModelMap model) throws DataAccessException{
+		if (result.hasErrors()) {
+			model.put("pedido", pedido);
+			return "pedidos/FormularioPedido";
+		}
+		else {
+			Producto pro=this.productoService.findProductoByReferencia(pedido.getProducto().getReferencia());
+			pedido.setProducto(pro);
+			this.pedidoService.savePedido(pedido);
+			return "redirect:/pedidos";
+		}
+	}
+	
 	@PostMapping(value = { "/pedidos" })
 	public String findPedidosByFechaEmision(@Valid Pedido pedido, BindingResult res, Map<String, Object> model) {
 		// buscamos pedidos por fecha
 		Collection<Pedido> pedidos = this.pedidoService.findPedidoByfechaDeEmision(pedido.getFechaEmision());
 		model.put("pedidos", pedidos);
 		return "pedidos/ListaPedidos";
-	}	
-
+	}
 }

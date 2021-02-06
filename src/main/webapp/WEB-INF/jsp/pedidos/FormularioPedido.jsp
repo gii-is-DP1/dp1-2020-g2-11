@@ -19,14 +19,7 @@
 		</div>
 		<div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
-                    <c:when test="${pedido['new']}">
                         <button class="btn btn-default" type="submit">Añadir</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar</button>
-                    </c:otherwise>
-                </c:choose>
             </div>
         </div>
 	</form:form>

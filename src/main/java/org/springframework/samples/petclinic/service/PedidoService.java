@@ -41,9 +41,4 @@ public class PedidoService {
 		return pedidoRepository.findByFechaPedido(fechaEmision);
 	}
 	
-	@Transactional
-	public void deletePedido(Integer id) throws DataAccessException {
-		pedidoRepository.deleteById(id);
-	}
-	
 }
