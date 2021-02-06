@@ -33,18 +33,12 @@ class ProductoServiceTest {
 		producto.setReferencia("102375");
 		producto.setStock(7);
 		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
 
 		productoService.saveProducto(producto);
 		assertThat(producto.getMarca()).isNotNull();
 	}
 
-	@Test
-	@Transactional
-	public void shouldDeleteProducto() {
-		productoService.deleteProducto(1);
-		Collection<Producto> productos = (Collection<Producto>) this.productoService.findProductos();
-		assertThat(productos.size()).isEqualTo(2);
-	}
 
 //	@Test
 //	@Transactional
@@ -71,6 +65,8 @@ class ProductoServiceTest {
 		producto.setMarca("Nexen");
 		producto.setReferencia("95/70R15");
 		producto.setStock(7);
+		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
 
 		productoService.saveProducto(producto);
 		Collection<Producto> productos = (Collection<Producto>) this.productoService.findProductos();
@@ -86,6 +82,8 @@ class ProductoServiceTest {
 		producto.setMarca("Nexen");
 		producto.setReferencia("95/70R15");
 		producto.setStock(7);
+		producto.setStockSeguridad(3);
+		producto.setDisponible(false);
 
 		productoService.saveProducto(producto);
 		Producto productos = this.productoService.findProductoByReferencia("95/70R15");
@@ -102,6 +100,7 @@ class ProductoServiceTest {
 		producto.setReferencia("95/70R15");
 		producto.setStock(7);
 		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
 
 		productoService.saveProducto(producto);
 		Collection<Producto> productos = this.productoService.findProductoByMarca("Nexen");
@@ -118,10 +117,34 @@ class ProductoServiceTest {
 		producto.setReferencia("95/70R15");
 		producto.setStock(7);
 		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
 
 		productoService.saveProducto(producto);
 		Collection<Producto> productos = this.productoService.findProductoByNombre("Neumaticos");
 		assertThat(productos.size()).isEqualTo(2);
+	}
+	
+	@Test
+	@Transactional
+	public void shouldFindProductosDisponibles() {
+		Collection<Producto> productos = (Collection<Producto>) this.productoService.findProductosDisponibles();
+		assertThat(productos.size()).isEqualTo(2);
+	}
+	
+	@Test
+	@Transactional
+	public void shoudOcultarProducto() {
+		producto = new Producto();
+		producto.setNombre("Neumaticos");
+		producto.setMarca("Nexen");
+		producto.setReferencia("95/70R15");
+		producto.setStock(7);
+		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
+
+		productoService.saveProducto(producto);
+		productoService.ocultarProducto(producto.getId());
+		assertThat(producto.getDisponible()).isFalse();
 	}
 
 }

@@ -45,6 +45,7 @@ public class ProductoControllerTest {
 		producto.setMarca("Firestone");
 		producto.setStock(4);
 		producto.setStockSeguridad(2);
+		producto.setDisponible(true);
 		
 		given(this.productoService.findProductoByReferencia("NEU54638")).willReturn(new Producto());
 		
@@ -75,7 +76,7 @@ public class ProductoControllerTest {
 	@WithMockUser(value = "spring")
      @Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("productos/new")
+		mockMvc.perform(post("/productos/new")
 							.with(csrf())
 							//.param("id", "1")
 							.param("referencia", "NEU54638")
@@ -84,20 +85,22 @@ public class ProductoControllerTest {
 							.param("stock", "10")
 							.param("stockSeguridad", "4"))	
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("productos/ListaProductos"));
+				.andExpect(view().name("redirect:/productos"));
 	}
 
-//	@WithMockUser(value = "spring")
-// @Test
-//	void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, TEST_PET_ID)
-//							.with(csrf())
-//							.param("name", "Betty")
-//							.param("birthDate", "2015/02/12"))
-//				.andExpect(model().attributeHasNoErrors("owner"))
-//				.andExpect(model().attributeHasErrors("pet"))
-//				.andExpect(status().isOk())
-//				.andExpect(view().name("pets/createOrUpdatePetForm"));
-//	}
+	@WithMockUser(value = "spring")
+ @Test
+	void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/productos/new")
+							.with(csrf())
+							.param("referencia", "NEU54638")
+							.param("nombre", "Neumaticos")
+							.param("marca", "Nexen")
+							.param("stock", "3")
+							.param("stockSeguridad", "4"))
+		.andExpect(model().attributeHasErrors("producto"))
+		.andExpect(model().attributeHasFieldErrors("producto", "stockSeguridad")).andExpect(status().isOk())
+		.andExpect(view().name("/productos/FormularioProducto"));
+	}
 
 }

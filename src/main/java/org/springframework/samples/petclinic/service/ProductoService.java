@@ -25,10 +25,10 @@ public class ProductoService {
 		productoRepository.save(producto);
 	}
 	
-	@Transactional
-	public void deleteProducto(Integer id) throws DataAccessException {
-		productoRepository.deleteById(id);
-	}
+//	@Transactional
+//	public void deleteProducto(Integer id) throws DataAccessException {
+//		productoRepository.deleteById(id);
+//	}
 	
 //	@Transactional
 //	public void updateProducto(Producto producto) throws DataAccessException, ProductoStockSeguridad {
