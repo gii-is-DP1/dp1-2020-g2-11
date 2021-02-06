@@ -63,9 +63,9 @@ INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente
 INSERT INTO factura(id,descripcion,precio,tipo_pago,fecha_emision,pagado,cliente_id) VALUES (4,'Cambio de neumaticos', 60.50, 0, '2020-12-16', FALSE,4);
 
 --Producto
-INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (1,'NEU54638',10,'Neumaticos','Nexen',4);
-INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (2,'71632A',20,'Aceite','Castrol',10);
-INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad) VALUES (3,'AS73464',4,'Anticongelante','Repsol',1);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible) VALUES (1,'NEU54638',10,'Neumaticos','Nexen',4,true);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible) VALUES (2,'71632A',20,'Aceite','Castrol',10,false);
+INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible) VALUES (3,'AS73464',4,'Anticongelante','Repsol',1,true);
 
 --Proveedor
 INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com');

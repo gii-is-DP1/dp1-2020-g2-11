@@ -13,7 +13,8 @@
 	<h2>Información sobre el vehiculo</h2>
 
 	<table class="table table-striped">
-		<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
+		<sec:authorize
+			access="hasAuthority('admin') or hasAuthority('mecanico')">
 			<tr>
 				<th>Propietario</th>
 				<td><b><c:out
@@ -38,7 +39,11 @@
 			<td><c:out value="${vehiculo.kilometraje}" /></td>
 		</tr>
 	</table>
-	
-	
-	
+
+	<spring:url value="/vehiculo/{vehiculoId}/edit" var="vehiculoUrl">
+		<spring:param name="vehiculoId" value="${vehiculo.id}" />
+	</spring:url>
+	<a class="btn btn-default" href="${fn:escapeXml(vehiculoUrl)}">Editar</a>
+
+
 </TalleresLaPlata:layout>
