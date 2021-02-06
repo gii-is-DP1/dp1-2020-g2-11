@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Reparacion;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.model.Vehiculo;
@@ -15,6 +16,7 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReparacionService;
 import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,5 +89,29 @@ public class ReparacionController {
 			this.reparacionService.saveReparacion(reparacion);
 			return "redirect:/reparaciones";
 		}
-	}	
+	}
+	
+	@GetMapping("/reparacion/{reparacionId}/edit")
+	public String initUpdateOwnerForm(@PathVariable("reparacionId") int reparacionId, Model model) {
+		Reparacion reparacion = this.reparacionService.findReparacionById(reparacionId).get();
+		model.addAttribute(reparacion);
+		return "reparaciones/FormularioReparacion";
+	}
+
+	@PostMapping("/reparacion/{reparacionId}/edit")
+	public String processUpdateOwnerForm(@Valid Reparacion reparacion, BindingResult result,
+			@PathVariable("reparacionId") int reparacionId) {
+		if (result.hasErrors()) {
+			return "reparaciones/FormularioReparacion";
+		}
+		else {
+			Cliente c = this.clienteService.findClienteByDni(reparacion.getCliente().getDni());
+			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(reparacion.getVehiculo().getMatricula());
+			reparacion.setCliente(c);
+			reparacion.setVehiculo(v);
+			reparacion.setId(reparacionId);
+			this.reparacionService.saveReparacion(reparacion);
+			return "redirect:/reparaciones";
+		}
+	}
 }

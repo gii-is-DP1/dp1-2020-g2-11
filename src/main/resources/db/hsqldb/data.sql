@@ -78,9 +78,9 @@ INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALU
 INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (4,'2020-12-13', '2020-12-16',1,2);
 
 --Reparacion
-INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (1,10,20.00,2,1);
-INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (2,40,60.00,1,2);
-INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,vehiculo_id) VALUES (3,55,100.33,1,3);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,cliente_id,vehiculo_id) VALUES (1,10,20.00,2,1,1);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,cliente_id,vehiculo_id) VALUES (2,40,60.00,1,1,2);
+INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,cliente_id,vehiculo_id) VALUES (3,55,100.33,1,2,3);
 
 --Revision
 INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (1,'Necesita aceite',10,'2020-12-10',1,1);
