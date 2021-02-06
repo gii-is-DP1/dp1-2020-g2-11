@@ -8,9 +8,8 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
-
-<TalleresLaPlata:layout pageName="pedidos">
-
+	
+<TalleresLaPlata:layout pageName="pedidos">	
 	<h2>Todos los pedidos</h2>
 	<table id="tablaPedido" class="table table-striped">
 		<thead>

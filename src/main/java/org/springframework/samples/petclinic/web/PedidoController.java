@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.PedidoService;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.samples.petclinic.service.ProveedorService;
@@ -67,5 +68,13 @@ public class PedidoController {
 			return "redirect:/pedidos";
 		}
 	}
+	
+	@PostMapping(value = { "/pedidos" })
+	public String findPedidosByFechaEmision(@Valid Pedido pedido, BindingResult res, Map<String, Object> model) {
+		// buscamos pedidos por fecha
+		Collection<Pedido> pedidos = this.pedidoService.findPedidoByfechaDeEmision(pedido.getFechaEmision());
+		model.put("pedidos", pedidos);
+		return "pedidos/ListaPedidos";
+	}	
 
 }
