@@ -87,32 +87,34 @@ public class CitaController {
 		
 	}
 
-	@GetMapping(value = "/cliente/{clienteId}/cita/new")
-	public String initCreationForm(@PathVariable("clienteId") int clienteId, ModelMap model) {
-		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = clienteDetails.getUsername();
-		Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
-		if (clienteRegistered.getId() != clienteId) {
-			String message = "No puedes crear una cita por otro";
-			model.put("customMessage", message);
-			return "exception";
-		}
+	@GetMapping(value = "/cita/new")
+	public String initCreationForm(ModelMap model) {
+//		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		String username = clienteDetails.getUsername();
+//		Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+//		if (clienteRegistered.getId() != clienteId) {
+//			String message = "No puedes crear una cita por otro";
+//			model.put("customMessage", message);
+//			return "exception";
+//		}
 		Cita cita = new Cita();
 		model.put("cita", cita);
 		return "citas/FormularioCita";
 	}
 
-	@PostMapping(value = "/cliente/{clienteId}/cita/new")
+	@PostMapping(value = "/cita/new")
 	public String processCreationForm(@Valid Cita cita, BindingResult result,
-			@PathVariable("clienteId") int citaId, ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
+			 ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
 		if (result.hasErrors()) {
 			model.put("cita", cita);
 			return "citas/FormularioCita";
 		} else {
-			model.put("cita", cita);
-			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+			Vehiculo vehiculo = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
+			cita.setVehiculo(vehiculo);
 			cita.setCliente(clienteRegistered);
 			this.citaService.saveCita(cita);
 			return "redirect:/citas/cliente";

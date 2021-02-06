@@ -20,13 +20,6 @@
             <sec:authorize access="hasAuthority('admin')">
              <TalleresLaPlata:inputField label="Dni Cliente" name="cliente.dni"/>
              </sec:authorize>
-            <c:out
-								value="${vehiculos.matricula}" />
-								
-					<c:out value="${vehiculos.tipoVehiculo}" />
-					<c:out value="${vehiculos.fechaFabricacion}" />
-					<c:out value="${vehiculos.kilometraje}" />
-            
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

@@ -73,8 +73,7 @@
 	</table>
 
 	<sec:authorize access="hasAuthority('cliente')">
-		<spring:url value="/cliente/{clienteId}/cita/new" var="clienteUrl">
-			<spring:param name="clienteId" value="${cliente.id}" />
+		<spring:url value="/cita/new" var="clienteUrl">
 		</spring:url>
 		<a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Añadir</a>
 	</sec:authorize>
