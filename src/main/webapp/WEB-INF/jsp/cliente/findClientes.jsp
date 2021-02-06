@@ -12,9 +12,8 @@
 <TalleresLaPlata:layout pageName="cliente">
 
 	<h2>Buscar Clientes</h2>
-
 	<form:form modelAttribute="cliente" action="/cliente" method="get"
-		class="form-horizontal" id="search-cliente-form">
+		class="form-horizontal" id="buscador-clientes">
 		<div class="form-group">
 			<div class="control-group" id="nombre">
 				<label class="col-sm-2 control-label">Nombre </label>
@@ -22,6 +21,7 @@
 					<form:input class="form-control" path="nombre" size="30"
 						maxlength="80" />
 					<span class="help-inline"><form:errors path="*" /></span>
+					<span id="cliente.errors">No existe cliente</span>
 				</div>
 			</div>
 		</div>
@@ -31,10 +31,9 @@
 			</div>
 		</div>
 	</form:form>
-	<br />
 	
-	<%--    <sec:authorize access="hasAuthority('admin')">
+<%-- 	    <sec:authorize access="hasAuthority('admin')">
 		<a class="btn btn-default" href='<spring:url value="/clientes/new" htmlEscape="true"/>'>Add Cliente</a>
-	</sec:authorize>--%>
+	</sec:authorize> --%>
 
 </TalleresLaPlata:layout>
