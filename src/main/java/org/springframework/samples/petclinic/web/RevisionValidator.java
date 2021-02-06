@@ -1,8 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-
-import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -23,6 +21,6 @@ public class RevisionValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Cita.class.isAssignableFrom(clazz);
+		return true;
 	}
 }
