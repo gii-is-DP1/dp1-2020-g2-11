@@ -7,23 +7,19 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class ClienteController {
 
 	private ClienteService clienteService;
-	@Autowired
-	private CitaService citaService;
 	@Autowired
 	public ClienteController(ClienteService clienteService) {
 		this.clienteService = clienteService;
@@ -36,24 +32,24 @@ public class ClienteController {
 		return "cliente/ListaClientes";
 	}
 
-	// crear nuevo cliente
-	@GetMapping(value = "/clientes/new")
-	public String initCreationForm(Map<String, Object> model) {
-		Cliente cliente = new Cliente();
-		model.put("cliente", cliente);
-		return "cliente/createOrUpdateClienteForm";
-	}
-
-	@PostMapping(value = "/clientes/new")
-	public String processCreationForm(@Valid Cliente cliente, BindingResult result, ModelMap model) {
-		if (result.hasErrors()) {
-			model.put("cliente", cliente);
-			return "cliente/createOrUpdateClienteForm";
-		} else {
-			this.clienteService.saveCliente(cliente);
-			return "redirect:/";
-		}
-	}
+//	// crear nuevo cliente
+//	@GetMapping(value = "/clientes/new")
+//	public String initCreationForm(Map<String, Object> model) {
+//		Cliente cliente = new Cliente();
+//		model.put("cliente", cliente);
+//		return "cliente/createOrUpdateClienteForm";
+//	}
+//
+//	@PostMapping(value = "/clientes/new")
+//	public String processCreationForm(@Valid Cliente cliente, BindingResult result, ModelMap model) {
+//		if (result.hasErrors()) {
+//			model.put("cliente", cliente);
+//			return "cliente/createOrUpdateClienteForm";
+//		} else {
+//			this.clienteService.saveCliente(cliente);
+//			return "redirect:/";
+//		}
+//	}
 
 	@GetMapping(value = "/cliente/find")
 	public String initFindForm(Map<String, Object> model) {
@@ -62,7 +58,7 @@ public class ClienteController {
 	}
 
 	@GetMapping(value = { "/cliente" })
-	public String processFindForm(Cliente cliente, BindingResult res, Map<String, Object> model) {
+	public String processFindForm(@Valid Cliente cliente, BindingResult res, Map<String, Object> model) {
 		if (cliente.getNombre() == null) {
 			cliente.setNombre(""); // empty string signifies broadest possible search
 		}
@@ -86,34 +82,29 @@ public class ClienteController {
 		}
 	}
 
-	@GetMapping(value = { "/cliente/{clienteId}" })
-	public String findById(@PathVariable("clienteId") int clienteId, ModelMap map) {
-		Cliente clientes = clienteService.findClienteById(clienteId).get();
-		map.put("cliente", clientes);
-		return "cliente/clienteDetails";
-	}
+
 	
-	@GetMapping(value = { "/cliente/delete/{clienteId}" })
-	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
-		//citaService.removeCitaByCliente(clienteId);
-		clienteService.deleteClienteById(clienteId);
-		return "redirect:/clientes";
-	}
-	
-	
+//	@GetMapping(value = { "/cliente/delete/{clienteId}" })
+//	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
+//		//citaService.removeCitaByCliente(clienteId);
+//		clienteService.deleteClienteById(clienteId);
+//		return "redirect:/clientes";
+//	}
+//	
+//	
 	
 	@GetMapping("/cliente/{clienteId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, Model model) {
+	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, ModelMap model) {
 		Cliente cliente = this.clienteService.findClienteById(clienteId).get();
-		model.addAttribute(cliente);
-		return "users/createClienteForm";
+		model.put("cliente", cliente);
+		return "cliente/ListaClientes";
 	}
 
 	@PostMapping("/cliente/{clienteId}/edit")
 	public String processUpdateOwnerForm(@Valid Cliente cliente, BindingResult result,
 			@PathVariable("clienteId") int clienteId) {
 		if (result.hasErrors()) {
-			return "users/createClienteForm";
+			return "cliente/ListaClientes";
 		}
 		else {
 			cliente.setId(clienteId);

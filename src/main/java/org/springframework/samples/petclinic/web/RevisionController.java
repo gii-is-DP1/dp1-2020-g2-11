@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -73,9 +74,9 @@ public class RevisionController {
 	}
 
 	@GetMapping(value = { "/revision/{revisionId}" })
-	public String findById(@PathVariable("revisionId") int revisionId, ModelMap map) {
+	public String findById(ModelMap model,@PathVariable("revisionId") int revisionId) {
 		Revision revision = revisionService.findRevisionById(revisionId).get();
-		map.put("revision", revision);
+		model.put("revision", revision);
 		return "revisiones/revisionDetails";
 	}
 

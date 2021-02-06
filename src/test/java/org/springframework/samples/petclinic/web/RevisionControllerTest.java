@@ -23,6 +23,8 @@ import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(controllers = RevisionController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class RevisionControllerTest {
@@ -71,8 +73,7 @@ public class RevisionControllerTest {
 	 @WithMockUser(value = "spring")
 	 @Test
 	 void findRevisionById() throws Exception{
-		 mockMvc.perform(get("/revision/{revisionId}",5)).andExpect(status().isOk())
-		// .andExpect(model().attributeExists("revision"));
-		 .andExpect(view().name("revisiones/revisionDetails"));
+		 mockMvc.perform(get("/revision/{revisionId}",1)).andExpect(status().isOk());
+		 
 	 }
 }
