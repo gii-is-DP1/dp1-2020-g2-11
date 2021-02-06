@@ -20,7 +20,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -45,6 +47,11 @@ public class CitaController {
 //	public void setAllowedFields(WebDataBinder dataBinder) {
 //		dataBinder.setDisallowedFields("id");
 //	}
+	
+	@InitBinder("cita")
+    public void initPetBinder(WebDataBinder dataBinder) {
+        dataBinder.setValidator(new CitaValidator());
+    }
 
 	@GetMapping(value = { "/citas" })
 	public String findAllCitas(Map<String, Object> model) {
@@ -84,14 +91,13 @@ public class CitaController {
 	public String initCreationForm(@PathVariable("clienteId") int clienteId, ModelMap model) {
 		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = clienteDetails.getUsername();
-		Optional<Cliente> clienteRegistered = this.clienteService.findClienteById(clienteId);
-		if (clienteRegistered.get().getId() == clienteId) {
+		Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+		if (clienteRegistered.getId() != clienteId) {
 			String message = "No puedes crear una cita por otro";
 			model.put("customMessage", message);
 			return "exception";
 		}
 		Cita cita = new Cita();
-		
 		model.put("cita", cita);
 		return "citas/FormularioCita";
 	}
@@ -109,37 +115,38 @@ public class CitaController {
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
 			cita.setCliente(clienteRegistered);
 			this.citaService.saveCita(cita);
-			return "redirect:/citas";
+			return "redirect:/citas/cliente";
 		}
 	}	
 	
-	@GetMapping(value = "/citas/new")
-	public String initCreationForm2( ModelMap model) {
-		Cita cita = new Cita();
-		String dni = "";
-		String matricula = "";
-		model.put("cita", cita);
-		model.put("dni", dni);
-		model.put("matricula", matricula);
-		return "citas/FormularioCitaByAdmin";
-	}
+//	@GetMapping(value = "/citas/new")
+//	public String initCreationForm2( ModelMap model) {
+//		Cita cita = new Cita();
+//		String dni = "";
+//		String matricula = "";
+//		model.put("cita", cita);
+//		model.put("dni", dni);
+//		model.put("matricula", matricula);
+//		return "citas/FormularioCitaByAdmin";
+//	}
+//	
+//	@PostMapping(value = "/citas/new")
+//	public String processCreationForm2(@Valid Cita cita, BindingResult result, ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
+//		if (result.hasErrors()) {
+//			model.put("cita", cita);
+//			return "citas/FormularioCitaByAdmin";
+//			
+//		} else {
+//			//model.put("cita", cita);
+//			Cliente c = this.clienteService.findClienteByDni(cita.getCliente().getDni());
+//			cita.setCliente(c);
+//			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
+//			cita.setVehiculo(v);
+//			this.citaService.saveCita(cita);
+//			return "redirect:/citas";
+//			}
+//	}	
 	
-	@PostMapping(value = "/citas/new")
-	public String processCreationForm2(@Valid Cita cita, BindingResult result, ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
-		if (result.hasErrors()) {
-			model.put("cita", cita);
-			return "citas/FormularioCitaByAdmin";
-			
-		} else {
-			//model.put("cita", cita);
-			Cliente c = this.clienteService.findClienteByDni(cita.getCliente().getDni());
-			cita.setCliente(c);
-			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
-			cita.setVehiculo(v);
-			this.citaService.saveCita(cita);
-			return "redirect:/citas";
-			}
-	}	
 	@GetMapping(value = { "/cita/delete/{citaId}" })
 	public String deleteCita(@PathVariable("citaId") int citaId) {
 		citaService.removeCita(citaId);

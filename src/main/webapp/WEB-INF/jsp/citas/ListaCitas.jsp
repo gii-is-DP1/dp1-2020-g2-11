@@ -60,22 +60,23 @@
 					<sec:authorize
 						access="hasAuthority('admin') or hasAuthority('mecanico')">
 						<td><c:out value="${citas.cliente.dni}" /></td>
-					
 
-					<td><spring:url value="/cita/delete/{citaId}" var="citaUrl">
-							<spring:param name="citaId" value="${citas.id}" />
-						</spring:url> <a class="glyphicon glyphicon-trash"
-						href="${fn:escapeXml(citasUrl)}"></a></td>
-						</sec:authorize>
+
+						<td><spring:url value="/cita/delete/{citaId}" var="citaUrl">
+								<spring:param name="citaId" value="${citas.id}" />
+							</spring:url> <a class="glyphicon glyphicon-trash"
+							href="${fn:escapeXml(citasUrl)}"></a></td>
+					</sec:authorize>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-	<sec:authorize
-		access="hasAuthority('cliente')">
-		<a class="btn btn-default"
-			href='<spring:url value="/citas/new" htmlEscape="true"/>'>Añadir</a>
+	<sec:authorize access="hasAuthority('cliente')">
+		<spring:url value="/cliente/{clienteId}/cita/new" var="clienteUrl">
+			<spring:param name="clienteId" value="${cliente.id}" />
+		</spring:url>
+		<a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Añadir</a>
 	</sec:authorize>
 
 	<br />

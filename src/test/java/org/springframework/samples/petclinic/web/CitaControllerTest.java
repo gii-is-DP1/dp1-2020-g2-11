@@ -35,6 +35,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class CitaControllerTest {
 
 	private static final int TEST_CITA_ID = 1;
+	private static final LocalDate TEST_FECHA = LocalDate.of(2020, 1, 25);
 
 	@Autowired
 	private CitaController citaController;
@@ -48,7 +49,6 @@ public class CitaControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	private static final LocalDate TEST_FECHA = LocalDate.of(2020, 1, 25);
 
 	@BeforeEach
 	void setup() {
@@ -72,54 +72,53 @@ public class CitaControllerTest {
 	 * .andExpect(model().attributeExists("cita"))
 	 * .andExpect(view().name("cita/ListaCitas")); }
 	 */
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testCitaList() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("/citas/")).andExpect(MockMvcResultMatchers.status().isOk())
-//				.andExpect(MockMvcResultMatchers.model().attributeExists("citas"))
-//				.andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
-//
-//	}
-//
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void findCitasByFecha() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("/cita")).andExpect(MockMvcResultMatchers.status().isOk())
-//				.andExpect(MockMvcResultMatchers.model().attributeExists("citas"))
-//				.andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
-//
-//	}
-//
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testInitCreationForm() throws Exception {
-//		mockMvc.perform(get("/cliente/{clienteId}/cita/new", TEST_CITA_ID)).andExpect(status().isOk())
-//				.andExpect(view().name("citas/FormularioCita"));
-//	}
-//
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testProcessCreationFormSuccess() throws Exception {
-//		mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID).with(csrf())
-//				.param("fechaCita", "04/05/2021").param("horaCita", "10:00"))
-////				.andExpect(model().attributeHasNoErrors("cita"))
-////				.andExpect(status().is3xxRedirection())
-////				.andExpect(status().isOk());
-//				.andExpect(view().name("redirect:/citas"));
-//	}
+	@WithMockUser(value = "spring")
+	@Test
+	void testCitaList() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/citas/")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("citas"))
+				.andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
+
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void findCitasByFecha() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/cita")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("citas"))
+				.andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
+
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitCreationForm() throws Exception {
+		mockMvc.perform(get("/cliente/{clienteId}/cita/new", TEST_CITA_ID)).andExpect(status().isOk())
+				.andExpect(view().name("citas/FormularioCita")).andExpect(model().attributeExists("cita"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID).with(csrf())
+				.param("fechaCita", "04/05/2021").param("horaCita", "10:00"))
+//				.andExpect(model().attributeHasNoErrors("cita"))
+//				.andExpect(status().is3xxRedirection())
+//				.andExpect(status().isOk());
+				.andExpect(view().name("redirect:/citas"));
+	}
 
 	// ESCENARIOS NEGATIVOS
-
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormCitaFailedHora() throws Exception {
 		mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID).with(csrf())
-				.param("fechaCita", "04/05/2021").param("horaCita", "PEPE"))
+				.param("fechaCita", "04/05/2021").param("horaCita", "18:00"))
 				.andExpect(model().attributeHasErrors("cita"))
 				.andExpect(model().attributeHasFieldErrors("cita", "horaCita")).andExpect(status().isOk())
 				.andExpect(view().name("citas/FormularioCita"));
 	}
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormCitaFailedFecha() throws Exception {
@@ -130,8 +129,3 @@ public class CitaControllerTest {
 				.andExpect(view().name("citas/FormularioCita"));
 	}
 }
-
-
-
-
-
