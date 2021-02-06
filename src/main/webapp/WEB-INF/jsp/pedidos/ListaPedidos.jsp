@@ -19,8 +19,6 @@
 				<th style="width: 100px">Proveedor</th>
 				<th style="width: 100px">Producto</th>
 				<th style="width: 50px">Editar</th>
-				
-				
 			</tr>
 		</thead>
 		<tbody>
@@ -50,10 +48,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
-	<br />
-	<%--     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a>
-	</sec:authorize> --%>
-
+    <sec:authorize access="hasAuthority('admin')">
+		<a class="btn btn-default" href='<spring:url value="/pedido/new" htmlEscape="true"/>'>Añadir</a>
+	</sec:authorize>
 </TalleresLaPlata:layout>
