@@ -12,8 +12,9 @@
 <TalleresLaPlata:layout pageName="cliente">
 
 	<h2>Buscar Clientes</h2>
+
 	<form:form modelAttribute="cliente" action="/cliente" method="get"
-		class="form-horizontal" id="buscador-clientes">
+		class="form-horizontal" id="buscador-cliente">
 		<div class="form-group">
 			<div class="control-group" id="nombre">
 				<label class="col-sm-2 control-label">Nombre </label>
@@ -21,7 +22,7 @@
 					<form:input class="form-control" path="nombre" size="30"
 						maxlength="80" />
 					<span class="help-inline"><form:errors path="*" /></span>
-					<span id="cliente.errors">No existe cliente</span>
+					<span id="cliente.errors">No existe el cliente </span>
 				</div>
 			</div>
 		</div>
