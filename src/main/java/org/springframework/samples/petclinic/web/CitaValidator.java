@@ -11,8 +11,6 @@ import org.springframework.validation.Validator;
 
 public class CitaValidator implements Validator {
 
-	private static final String REQUIRED = "requiere";
-
 	@Override
 	public void validate(Object obj, Errors errors) {
 

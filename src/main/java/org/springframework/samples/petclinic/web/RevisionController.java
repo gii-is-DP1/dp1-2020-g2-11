@@ -16,7 +16,9 @@ import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,13 +30,20 @@ public class RevisionController {
 	private final ClienteService clienteService;
 	@Autowired
 	private final VehiculoService vehiculoService;
+	
 	@Autowired
-	public RevisionController(RevisionService revisionService, ClienteService clienteService, VehiculoService vehiculoService) {
+	public RevisionController(RevisionService revisionService, ClienteService clienteService,
+			VehiculoService vehiculoService) {
 		this.revisionService = revisionService;
 		this.clienteService = clienteService;
 		this.vehiculoService = vehiculoService;
 	}
 
+	@InitBinder("revision")
+    public void initPetBinder(WebDataBinder dataBinder) {
+        dataBinder.setValidator(new RevisionValidator());
+    }
+	
 	@GetMapping(value = { "/revisiones" })
 	public String findAllRevision(ModelMap modelMap) {
 		Collection<Revision> revisiones = (Collection<Revision>) revisionService.findAllRevisiones();
@@ -46,7 +55,7 @@ public class RevisionController {
 	public String findRevisionByFecha(LocalDate fecha, Revision revision, BindingResult res, ModelMap modelMap) {
 		if (revision.getFechaRevision() == null) {
 			Collection<Revision> results = this.revisionService.findAllRevisiones();
-			modelMap.addAttribute("revisiones",results);
+			modelMap.addAttribute("revisiones", results);
 			return "revisiones/ListaRevisiones";
 		} else {
 			Collection<Revision> results = this.revisionService.findRevisionByFecha(fecha);
@@ -62,6 +71,7 @@ public class RevisionController {
 			}
 		}
 	}
+
 	@GetMapping(value = { "/revision/{revisionId}" })
 	public String findById(@PathVariable("revisionId") int revisionId, ModelMap map) {
 		Revision revision = revisionService.findRevisionById(revisionId).get();
@@ -69,15 +79,12 @@ public class RevisionController {
 		return "revisiones/revisionDetails";
 	}
 
-
-
-
 	@GetMapping(value = { "/revision/delete/{revisionId}" })
 	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
 		revisionService.deleteRevision(revisionId);
 		return "redirect:/revisiones";
 	}
-	
+
 	@GetMapping(value = "/revision/new")
 	public String initCreationForm(ModelMap model) {
 		Revision revision = new Revision();
@@ -88,13 +95,14 @@ public class RevisionController {
 		model.put("matricula", matricula);
 		return "revisiones/FormularioRevision";
 	}
+
 	@PostMapping(value = "/revision/new")
-	public String processCreationForm(@Valid Revision revision, BindingResult result,ModelMap model) throws DataAccessException {
+	public String processCreationForm(@Valid Revision revision, BindingResult result, ModelMap model)
+			throws DataAccessException {
 		if (result.hasErrors()) {
 			model.put("revision", revision);
 			return "revisiones/FormularioRevision";
-		}
-		else {
+		} else {
 			Cliente c = this.clienteService.findClienteByDni(revision.getCliente().getDni());
 			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(revision.getVehiculo().getMatricula());
 			revision.setCliente(c);
@@ -103,12 +111,8 @@ public class RevisionController {
 			return "redirect:/revisiones";
 		}
 	}
-	
-	
+
 }
-
-
-
 
 //	@GetMapping(value = { "/productonombre" })
 //	public String findProductosByNombre(String nombre, Producto producto, BindingResult res, Map<String, Object> model) {
@@ -131,4 +135,3 @@ public class RevisionController {
 //			return "producto/ListaProductos";
 //		}
 //	}
-
