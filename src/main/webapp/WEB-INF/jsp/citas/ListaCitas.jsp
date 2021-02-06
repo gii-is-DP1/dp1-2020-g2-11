@@ -12,30 +12,29 @@
 <TalleresLaPlata:layout pageName="citas">
 
 		<h2>Buscar cita</h2>
-	<form:form modelAttribute="cita" action="/citas" method="post"
-		class="form-horizontal" id="buscador-citas">
-		<div class="form-group">
-			<div class="control-group" id="fechaCita">
-				<label class="col-sm-2 control-label">FechaCita</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="fechaCita" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
+		<form:form modelAttribute="cita" action="/citas" method="post"
+			class="form-horizontal" id="buscador-citas">
+			<div class="form-group">
+				<div class="control-group" id="fechaCita">
+					<label class="col-sm-2 control-label">Fecha de la Cita</label>
+					<div class="col-sm-10">
+						<form:input class="form-control" path="fechaCita" size="30"
+							maxlength="80" />
+						<span class="help-inline"><form:errors path="*" /></span>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Buscar</button>
+				</div>
 			</div>
-		</div>
-	</form:form> 
-
+		</form:form>
 	<h2>Todas las citas</h2>
 	<table id="tablaProveedor" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 100px;">Matricula del vehiculo</th>
+				<th style="width: 100px;">Vehículo</th>
 				<th style="width: 100px;">Fecha</th>
 				<th style="width: 100px;">Hora</th>
 				<sec:authorize
@@ -50,7 +49,11 @@
 		<tbody>
 			<c:forEach items="${citas}" var="citas">
 				<tr>
-					<td><c:out value="${citas.vehiculo.matricula}" /></td>
+					<td><spring:url value="/vehiculo/{vehiculoId}"
+							var="vehiculoUrl">
+							<spring:param name="vehiculoId" value="${citas.vehiculo.id}" />
+						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}"> <c:out
+								value="${citas.vehiculo.matricula} " /></a></td>
 					<td><c:out value="${citas.fechaCita}" /></td>
 					<td><c:out value="${citas.horaCita}" /></td>
 					<sec:authorize
