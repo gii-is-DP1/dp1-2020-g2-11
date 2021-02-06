@@ -1,0 +1,40 @@
+package org.springframework.samples.petclinic.web;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import org.springframework.samples.petclinic.model.Cita;
+import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Vehiculo;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+public class CitaValidator implements Validator {
+
+	private static final String REQUIRED = "requiere";
+
+	@Override
+	public void validate(Object obj, Errors errors) {
+
+		Cita cita = (Cita) obj;
+		LocalDate fechaCita = cita.getFechaCita();
+		LocalTime horaCita = cita.getHoraCita();
+		Cliente cliente = cita.getCliente();
+		Vehiculo vehiculo = cita.getVehiculo();
+
+		if (fechaCita.isBefore(LocalDate.now())) {
+			errors.rejectValue("fechaCita", REQUIRED + " debe ser posterior a hoy",
+					REQUIRED + " debe ser posterior a hoy");
+		}
+		
+		if (!(horaCita.isAfter(LocalTime.of(8, 00)) && horaCita.isBefore(LocalTime.of(16, 00)))) {
+			errors.rejectValue("horaCita", REQUIRED + " debe estar entre las 8:00 y las 16:00",
+					REQUIRED + " debe estar entre las 8:00 y las 16:00");
+		}
+	}
+
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return Cita.class.isAssignableFrom(clazz);
+	}
+}
