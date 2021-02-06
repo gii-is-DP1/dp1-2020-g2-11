@@ -23,13 +23,13 @@ public class CitaValidator implements Validator {
 		Vehiculo vehiculo = cita.getVehiculo();
 
 		if (fechaCita.isBefore(LocalDate.now())) {
-			errors.rejectValue("fechaCita", REQUIRED + " debe ser posterior a hoy",
-					REQUIRED + " debe ser posterior a hoy");
+			errors.rejectValue("fechaCita", " debe ser posterior a hoy",
+					" debe ser posterior a hoy");
 		}
 		
 		if (!(horaCita.isAfter(LocalTime.of(8, 00)) && horaCita.isBefore(LocalTime.of(16, 00)))) {
-			errors.rejectValue("horaCita", REQUIRED + " debe estar entre las 8:00 y las 16:00",
-					REQUIRED + " debe estar entre las 8:00 y las 16:00");
+			errors.rejectValue("horaCita",  " debe estar entre las 8:00 y las 16:00",
+					 " debe estar entre las 8:00 y las 16:00");
 		}
 	}
 
