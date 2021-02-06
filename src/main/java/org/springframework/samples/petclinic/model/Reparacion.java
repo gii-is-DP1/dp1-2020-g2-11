@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +17,15 @@ import lombok.Setter;
 @Table(name = "Reparacion")
 public class Reparacion extends BaseEntity{
 	
+	@NotNull
 	@Column(name = "duracion")
 	private Integer duracion;
 	
+	@NotNull
 	@Column(name = "precio")
 	private Double precio;
 	
+	@NotNull
 	@Column(name = "tipoReparacion")
 	private TipoReparacion tipoReparacion;
 	

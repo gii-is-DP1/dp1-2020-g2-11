@@ -73,7 +73,7 @@
 	</table>
 
 	<sec:authorize
-		access="hasAuthority('admin') or hasAuthority('cliente')">
+		access="hasAuthority('cliente')">
 		<a class="btn btn-default"
 			href='<spring:url value="/citas/new" htmlEscape="true"/>'>Añadir</a>
 	</sec:authorize>

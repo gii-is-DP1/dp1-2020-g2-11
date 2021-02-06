@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,10 +20,12 @@ import lombok.Setter;
 @Table(name="pedido")
 public class Pedido extends BaseEntity{
 	
+	@NotNull
 	@Column(name = "fechaEntrada")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEntrada;
 	
+	@NotNull
 	@Column(name = "fechaEmision")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEmision;

@@ -54,13 +54,30 @@ public class CitaController {
 		model.put("citas", citas);
 		return "citas/ListaCitas";
 	}
+	
+	@GetMapping(value = "/citas/find")
+	public String initFindForm(Map<String, Object> model) {
+		model.put("cita", new Cita());
+		return "citas/findCitas";
+	}
 
 	@PostMapping(value = { "/citas" })
 	public String findcitasByFecha(@Valid Cita cita, BindingResult res, Map<String, Object> model) {
-		// buscamos citas por fecha
+		if (cita.getFechaCita() == null) {
+			 // empty string signifies broadest possible search
+			return "redirect:/citas";
+		}
 		Collection<Cita> citas = this.citaService.findCitaByFechaCita(cita.getFechaCita());
+		if (citas.isEmpty()) {
+			// no clientes found
+			res.rejectValue("fechaCita", "notFound", "not found");
+			return "redirect:/citas/find";
+		} else {
+			// buscamos citas por fecha
 		model.put("citas", citas);
 		return "citas/ListaCitas";
+		}
+		
 	}
 
 	@GetMapping(value = "/cliente/{clienteId}/cita/new")
@@ -124,7 +141,7 @@ public class CitaController {
 			}
 	}	
 	@GetMapping(value = { "/cita/delete/{citaId}" })
-	public String deleteRevision(@PathVariable("citaId") int citaId) {
+	public String deleteCita(@PathVariable("citaId") int citaId) {
 		citaService.removeCita(citaId);
 		return "redirect:/citas";
 	}

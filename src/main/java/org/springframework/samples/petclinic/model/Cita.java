@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,10 +22,12 @@ import lombok.Setter;
 @Table(name = "cita")
 public class Cita extends BaseEntity{
 
+	@NotNull
 	@Column(name = "fechaCita")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaCita;
 	
+	@NotNull
 	@Column(name = "horaCita")        
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime horaCita;
@@ -33,7 +36,7 @@ public class Cita extends BaseEntity{
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 	
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
 }

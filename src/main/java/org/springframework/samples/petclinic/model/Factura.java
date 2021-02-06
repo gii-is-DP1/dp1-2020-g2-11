@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,16 +23,20 @@ public class Factura extends BaseEntity {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	@NotNull
 	@Column(name = "precio")
 	private Double precio;
 	
+	@NotNull
 	@Column(name = "tipoPago")
 	private TipoPago tipoPago;
 	
+	@NotNull
 	@Column(name = "fechaEmision")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEmision;
 	
+	@NotNull
 	@Column(name = "pagado")
 	private Boolean pagado;
 

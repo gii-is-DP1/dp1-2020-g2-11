@@ -55,7 +55,7 @@ public class EstanciaController {
 	public String processCreationForm(@Valid Estancia estancia, BindingResult result,ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException, FechasIncorrectas {
 		if (result.hasErrors()) {
 			model.put("estancia", estancia);
-			return "estancia/FormularioEstancias";
+			return "estancias/FormularioEstancias";
 		}
 		else {
 			Vehiculo v = this.vehiculoService.findVehiculoByMatricula(estancia.getVehiculo().getMatricula());

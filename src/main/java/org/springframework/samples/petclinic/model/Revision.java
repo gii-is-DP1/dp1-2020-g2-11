@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,9 +24,11 @@ public class Revision extends BaseEntity {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	@NotNull
 	@Column(name = "duracion")
 	private Integer duracion;
 	
+	@NotNull
 	@Column(name = "fechaRevision")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaRevision;

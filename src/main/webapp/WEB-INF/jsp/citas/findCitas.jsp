@@ -21,6 +21,7 @@
 					<form:input class="form-control" path="fechaCita" size="30"
 						maxlength="80" />
 					<span class="help-inline"><form:errors path="*" /></span>
+					<span id="fechaCita.errors">No existe cita con esa fecha </span>
 				</div>
 			</div>
 		</div>
