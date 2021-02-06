@@ -62,7 +62,7 @@
 						<td><c:out value="${citas.cliente.dni}" /></td>
 
 
-						<td><spring:url value="/cita/delete/{citaId}" var="citaUrl">
+						<td><spring:url value="/cita/delete/{citaId}" var="citasUrl">
 								<spring:param name="citaId" value="${citas.id}" />
 							</spring:url> <a class="glyphicon glyphicon-trash"
 							href="${fn:escapeXml(citasUrl)}"></a></td>
