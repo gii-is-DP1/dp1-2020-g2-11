@@ -5,7 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="TalleresLaPlata" tagdir="/WEB-INF/tags" %>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <TalleresLaPlata:layout pageName="vehiculos">
     <h2>
         <c:if test="${vehiculo['new']}">Nuevo </c:if> Vehiculo
@@ -16,7 +17,9 @@
             <TalleresLaPlata:inputField label="Tipo" name="tipoVehiculo"/>
             <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
             <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
+            <sec:authorize access="hasAuthority('admin')">
              <TalleresLaPlata:inputField label="Dni Cliente" name="cliente.dni"/>
+             </sec:authorize>
             <c:out
 								value="${vehiculos.matricula}" />
 								
