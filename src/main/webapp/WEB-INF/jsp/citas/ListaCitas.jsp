@@ -11,6 +11,8 @@
 
 <TalleresLaPlata:layout pageName="citas">
 
+	<sec:authorize
+		access="hasAuthority('admin') or hasAuthority('mecanico')">
 		<h2>Buscar cita</h2>
 		<form:form modelAttribute="cita" action="/citas" method="post"
 			class="form-horizontal" id="buscador-citas">
@@ -30,6 +32,7 @@
 				</div>
 			</div>
 		</form:form>
+	</sec:authorize>
 	<h2>Todas las citas</h2>
 	<table id="tablaProveedor" class="table table-striped">
 		<thead>

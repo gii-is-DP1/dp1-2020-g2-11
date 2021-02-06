@@ -11,26 +11,31 @@
 
 <TalleresLaPlata:layout pageName="vehiculos">
 
-<h2>Buscar vehiculo</h2>
-	<form:form modelAttribute="vehiculo" action="/vehiculos" method="post"
-		class="form-horizontal" id="buscador-vehiculos">
-		<div class="form-group">
-			<div class="control-group" id="matricula">
-				<label class="col-sm-2 control-label">Matricula</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="matricula" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
+	<sec:authorize
+		access="hasAuthority('admin') or hasAuthority('mecanico')">
+		
+		<h2>Buscar vehiculo</h2>
+		<form:form modelAttribute="vehiculo" action="/vehiculos" method="post"
+			class="form-horizontal" id="buscador-vehiculos">
+			<div class="form-group">
+				<div class="control-group" id="matricula">
+					<label class="col-sm-2 control-label">Matricula</label>
+					<div class="col-sm-10">
+						<form:input class="form-control" path="matricula" size="30"
+							maxlength="80" />
+						<span class="help-inline"><form:errors path="*" /></span>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Buscar</button>
+				</div>
 			</div>
-		</div>
-	</form:form> 
-
+			 <p>${customMessage}</p>
+			
+		</form:form>
+	</sec:authorize>
 	<h2>Vehiculos</h2>
 	<table id="tablaVehiculo" class="table table-striped">
 		<thead>
@@ -71,8 +76,7 @@
 						<td><c:out
 								value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
 					</sec:authorize>
-					<td><spring:url
-							value="/vehiculo/{vehiculoId}/edit"
+					<td><spring:url value="/vehiculo/{vehiculoId}/edit"
 							var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />
 						</spring:url> <a class="glyphicon glyphicon-pencil"

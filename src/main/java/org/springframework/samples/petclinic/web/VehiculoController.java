@@ -35,7 +35,8 @@ public class VehiculoController {
 	private final ClienteService clienteService;
 
 	@Autowired
-	public VehiculoController(ClienteService clienteService, VehiculoService vehiculoService, AuthoritiesService authoritiesService) {
+	public VehiculoController(ClienteService clienteService, VehiculoService vehiculoService,
+			AuthoritiesService authoritiesService) {
 		this.vehiculoService = vehiculoService;
 		this.clienteService = clienteService;
 	}
@@ -51,12 +52,19 @@ public class VehiculoController {
 
 	@PostMapping(value = { "/vehiculos" })
 	public String findvehiculosByMatricula(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
-		// buscamos citas por fecha
+		// buscamos vehiculo por matricula
 		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
-		model.put("vehiculo", vehiculos);
+		if (vehiculos == null) {
+			// no clientes found
+			res.rejectValue("matricula", "notFound", "not found");
+			return "redirect:/vehiculos";
+
+		} else {
+			model.put("vehiculo", vehiculos);
+		}
 		return "redirect:/vehiculo/" + vehiculos.getId();
-	}	
-	
+	}
+
 //	@GetMapping(value = { "/vehiculos" })
 //	public String findAllVehiculos(ModelMap model) {
 //		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
@@ -78,7 +86,7 @@ public class VehiculoController {
 				model.put("vehiculos", results);
 			}
 		}
-		return "proveedor/ListaVehiculos";
+		return "vehiculos/ListaVehiculos";
 	}
 
 	@GetMapping(value = "/vehiculos/find")
@@ -113,52 +121,49 @@ public class VehiculoController {
 	}
 
 	@PostMapping(value = "/vehiculo/new")
-	public String processCreationForm(Cliente cliente, @Valid Vehiculo vehiculo, BindingResult result, ModelMap model) throws DataAccessException, VehiculosAntiguo, DuplicatedVehiculoException {		
+	public String processCreationForm(Cliente cliente, @Valid Vehiculo vehiculo, BindingResult result, ModelMap model)
+			throws DataAccessException, VehiculosAntiguo, DuplicatedVehiculoException {
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
-		}
-		else {
-			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		} else {
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
 			vehiculo.setCliente(clienteRegistered);
 			this.vehiculoService.saveVehiculo(vehiculo);
-            return "redirect:/vehiculo/"+vehiculo.getId();
+			return "redirect:/vehiculo/" + vehiculo.getId();
 		}
 	}
-	
+
 	@GetMapping(value = { "/vehiculo/delete/{vehiculoId}" })
 	public String deleteVehiculo(@PathVariable("vehiculoId") int vehiculoId, BindingResult res) {
 		vehiculoService.deleteVehiculo(vehiculoId);
 		return "redirect:/vehiculos";
 	}
-	
+
 	@GetMapping("/vehiculo/{vehiculoId}/edit")
-	public String initUpdateOwnerForm( @PathVariable("vehiculoId") int vehiculoId, Model model) {
-		
+	public String initUpdateOwnerForm(@PathVariable("vehiculoId") int vehiculoId, Model model) {
+
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
 		model.addAttribute(vehiculo);
 		return "vehiculos/formularioVehiculo";
 	}
 
 	@PostMapping("/vehiculo/{vehiculoId}/edit")
-	public String processUpdateOwnerForm(@Valid Vehiculo vehiculo, BindingResult result,ModelMap model,
+	public String processUpdateOwnerForm(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model,
 			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
-		}
-		else {
+		} else {
 			vehiculo.setId(vehiculoId);
 			Cliente c = this.clienteService.findClienteByDni(vehiculo.getCliente().getDni());
-            vehiculo.setCliente(c);
+			vehiculo.setCliente(c);
 			this.vehiculoService.saveVehiculo(vehiculo);
 			return "redirect:/vehiculo/{vehiculoId}";
 		}
 	}
-	
-	
-	
-	
+
 }

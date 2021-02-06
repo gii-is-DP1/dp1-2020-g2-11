@@ -4,11 +4,13 @@
 
 <TalleresLaPlata:layout pageName="error">
 
-    <h2>Se produjo un error...</h2>
+    <h2>Oupss error...</h2>
     
      <spring:url value="/resources/images/Error.jpg" var="logoTaller"/>
             <img src="${logoTaller}" width="300" height="200" />
-
+	
     <p>${exception.message}</p>
+  	
+    <button type="submit" class="btn btn-default"><a href="javascript:history.back()"> Volver Atrás</a></button>
 
 </TalleresLaPlata:layout>
