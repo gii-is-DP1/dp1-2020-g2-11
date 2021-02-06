@@ -43,15 +43,15 @@
 						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(proveedorUrl)}"></a></td>
 				<td><spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(proveedorUrl)}"></a></td>
+						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar</a></td>
 						
-						
+					
 				</tr>
 				
 			</c:forEach>
 		</tbody>
 	</table>
-		<a class="btn btn-default" href='<spring:url value="/pre/new" htmlEscape="true"/>'>Añadir</a>
+		<a class="btn btn-default" href='<spring:url value="/proveedores/new" htmlEscape="true"/>'>Añadir</a>
 	<br />
 
 </TalleresLaPlata:layout>

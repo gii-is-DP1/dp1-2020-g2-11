@@ -28,7 +28,7 @@ public class ProductoController {
 
 	@GetMapping(value = { "/productos" })
 	public String findAllProductos(Map<String, Object> model) {
-		Collection<Producto> productos = (Collection<Producto>) productoService.findProductos();
+		Collection<Producto> productos = (Collection<Producto>) productoService.findProductosDisponibles();
 		model.put("producto", productos);
 		return "productos/ListaProductos";
 	}
@@ -45,25 +45,32 @@ public class ProductoController {
 	@GetMapping(value = "/productos/new")
 	public String initCreationForm(ModelMap model) {
 		Producto producto = new Producto();
+		
 		model.put("producto", producto);
+		producto.setDisponible(true);
 		return "productos/FormularioProducto";
 	}
 
 	@PostMapping(value = "/productos/new")
 	public String processCreationForm(@Valid Producto producto, BindingResult result, ModelMap model) {
+		
 		if (result.hasErrors()) {
 			model.put("producto", producto);
+			producto.setDisponible(true);
 			return "productos/FormularioProducto";
 		} else {
+			
 			model.put("producto", producto);
+			producto.setDisponible(true);
 			this.productoService.saveProducto(producto);
+			
 			return "redirect:/productos";
 		}
 	}
 	
-	@GetMapping(value = { "/productos/delete/{productoId}" })
-	public String deleteRevision(@PathVariable("productoId") Integer productoId) {
-		productoService.deleteProducto(productoId);
+	@GetMapping(value = { "/productos/oculta/{productoId}" })
+	public String ocultaProducto(@PathVariable("productoId") Integer productoId) {
+		productoService.ocultarProducto(productoId);
 		return "redirect:/productos";
 	}
 	

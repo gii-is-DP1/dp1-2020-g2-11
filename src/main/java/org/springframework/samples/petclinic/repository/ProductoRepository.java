@@ -18,4 +18,7 @@ public interface ProductoRepository extends CrudRepository<Producto, Integer>{
 	@Query("SELECT p FROM Producto p WHERE p.referencia =:referencia")
 	Producto findByReferencia(@Param("referencia") String referencia);
 
+	@Query("SELECT p FROM Producto p WHERE p.disponible =:disponible")
+	Collection<Producto> findDisponibles(@Param("disponible") boolean disponible);
+
 }

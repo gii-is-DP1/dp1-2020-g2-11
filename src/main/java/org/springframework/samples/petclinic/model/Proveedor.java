@@ -12,16 +12,20 @@ import lombok.Setter;
 @Setter
 @Table(name = "proveedor")
 public class Proveedor extends BaseEntity {
-
+	
+	@javax.validation.constraints.NotBlank
 	@Column(name = "nombre")
 	private String nombre;
 
+	@javax.validation.constraints.NotBlank
 	@Column(name = "telefono")
 	private String telefono;
 
+	@javax.validation.constraints.NotBlank
 	@Column(name = "direccion")
 	private String direccion;
 
+	@javax.validation.constraints.NotBlank
 	@Column(name = "email")
 	private String email;
 	

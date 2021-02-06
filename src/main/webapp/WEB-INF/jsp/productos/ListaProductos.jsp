@@ -35,7 +35,7 @@
 					<td><c:out value="${producto.referencia}" /></td>
 					<td><c:out value="${producto.stockSeguridad}" /></td>
 					
-					<td><spring:url value="/productos/delete/{productoId}" var="productoUrl">
+					<td><spring:url value="/productos/oculta/{productoId}" var="productoUrl">
 							<spring:param name="productoId" value="${producto.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(productoUrl)}"></a></td>
 					

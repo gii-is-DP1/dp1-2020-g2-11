@@ -43,10 +43,8 @@
 				<sec:authorize
 					access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<th style="width: 100px;">Dni del cliente</th>
+					<th style="width: 50px;">Borrar</th>
 				</sec:authorize>
-				<th style="width: 50px;">Editar</th>
-				<th style="width: 50px;">Borrar</th>
-
 			</tr>
 		</thead>
 		<tbody>
@@ -62,18 +60,13 @@
 					<sec:authorize
 						access="hasAuthority('admin') or hasAuthority('mecanico')">
 						<td><c:out value="${citas.cliente.dni}" /></td>
-					</sec:authorize>
+					
 
-					<td><spring:url
-							value="/cliente/{clienteId}/cita/edit/{citaId}" var="citaUrl">
-							<spring:param name="citaId" value="${citas.id}" />
-							<spring:param name="clienteId" value="${citas.cliente.id}" />
-						</spring:url> <a class="glyphicon glyphicon-pencil"
-						href="${fn:escapeXml(citasUrl)}"></a></td>
 					<td><spring:url value="/cita/delete/{citaId}" var="citaUrl">
 							<spring:param name="citaId" value="${citas.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash"
 						href="${fn:escapeXml(citasUrl)}"></a></td>
+						</sec:authorize>
 				</tr>
 			</c:forEach>
 		</tbody>

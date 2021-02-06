@@ -70,9 +70,8 @@ public class ProveedorController {
 	public String processCreationForm(@Valid Proveedor proveedor, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
 			model.put("proveedor", proveedor);
-			return "productos/FormularioProducto";
+			return "proveedores/FormularioProveedor";
 		} else {
-			model.put("proveedor", proveedor);
 			this.proveedorService.saveProveedor(proveedor);
 			return "redirect:/proveedores";
 		}
@@ -100,9 +99,10 @@ public class ProveedorController {
 	}
 
 	@PostMapping("/proveedor/{proveedorId}/edit")
-	public String processUpdateOwnerForm(@Valid Proveedor proveedor, BindingResult result,
+	public String processUpdateOwnerForm(@Valid Proveedor proveedor, BindingResult result,  ModelMap model,
 			@PathVariable("proveedorId") int proveedorId) {
 		if (result.hasErrors()) {
+			model.put("proveedor", proveedor);
 			return "proveedores/FormularioProveedor";
 		}
 		else {
