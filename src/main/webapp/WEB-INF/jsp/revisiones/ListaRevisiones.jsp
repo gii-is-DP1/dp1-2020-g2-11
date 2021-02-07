@@ -20,39 +20,30 @@
 				<th style="width: 100px">Fecha Revisión</th>
 				<th style="width: 100px">Cliente</th>
 				<th style="width: 100px">Matricula</th>
-				<th style="width: 50px">Borrar</th>
+				<th style="width: 50px">Borrar</th>	
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${revisiones}" var="revision">
-				<tr>
-					<td><spring:url value="/revision/{revisionId}" var="revisionUrl">
-							<spring:param name="revisionId" value="${revision.id}" />
+				<c:forEach items="${revisiones}" var="revision">
+					<tr>
+						<td><spring:url value="/revision/{revisionId}" var="revisionUrl">
+						<spring:param name="revisionId" value="${revision.id}" />
 						</spring:url> <a href="${fn:escapeXml(revisionUrl)}">
-						   <c:out value="${revision.descripcion}" /></a></td>
-					<td><c:out value="${revision.duracion}" /></td>
-					<td><c:out value="${revision.fechaRevision}" /></td>
+						<c:out value="${revision.descripcion}" /></a></td>
+						<td><c:out value="${revision.duracion}" /></td>
+						<td><c:out value="${revision.fechaRevision}" /></td>
+						<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
+						<spring:param name="clienteId" value="${revision.cliente.id}" />
+						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out value="${revision.cliente.dni}" /></a></td>
 					
-				<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
-							<spring:param name="clienteId" value="${revision.cliente.id}" />
-						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
-								value="${revision.cliente.dni}" /></a></td>
-											
-					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
-							<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
+						<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
+						<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
-						   <c:out value="${revision.vehiculo.matricula}" /></a></td>
-
-					<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
-							<spring:param name="revisionId" value="${revision.id}" />
+						<c:out value="${revision.vehiculo.matricula}" /></a></td>
+						<td><spring:url value="/revision/asignar/{revisionId}" var="revisionUrl">
+						<spring:param name="revisionId" value="${revision.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
-
-
-
-
 				</tr>
-
-
 			</c:forEach>
 		</tbody>
 	</table>

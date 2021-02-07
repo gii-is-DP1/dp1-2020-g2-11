@@ -1,5 +1,5 @@
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -9,62 +9,61 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
-<TalleresLaPlata:layout pageName="revisiones">
+<TalleresLaPlata:layout pageName="revision"> 
 
-	<h2>Revisiones no asignadas</h2>
-	<table id="tablaVehiculo" class="table table-striped">
+<h2>Todas las revisiones sin asignar</h2>
+	<table id="tablaRevision" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 100px;">Descripcion</th>
-				<th style="width: 100px;">Duracion</th>
-				<th style="width: 100px;">Fecha </th>
-				<th style="width: 100px;">Kilometraje</th>
-				<sec:authorize
-					access="hasAuthority('admin') or hasAuthority('mecanico')">
-					<th style="width: 100px;">Propietario</th>
+				<th style="width: 150px;">Descripción</th>
+				<th style="width: 100px;">Duración</th>
+				<th style="width: 100px">Fecha Revisión</th>
+				<th style="width: 100px">Cliente</th>
+				<th style="width: 100px">Matricula</th>
+				<sec:authorize access="hasAuthority('admin')">
+				<th style="width: 50px">Borrar</th>
 				</sec:authorize>
-				<th style="width: 50px;">Editar</th>
+				<sec:authorize access="hasAuthority('mecanico')">
+				<th style="width: 50px">Asignar</th>
+				</sec:authorize>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${vehiculos}" var="vehiculos">
+			<c:forEach items="${revisiones}" var="revision">
 				<tr>
-					<td><spring:url value="/vehiculo/{vehiculoId}"
-							var="vehiculoUrl">
-							<spring:param name="vehiculoId" value="${vehiculos.id}" />
-						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}"><c:out
-								value="${vehiculos.matricula}" /></a></td>
-
-					<td><c:out value="${vehiculos.tipoVehiculo}" /></td>
-					<td><c:out value="${vehiculos.fechaFabricacion}" /></td>
-					<td><c:out value="${vehiculos.kilometraje}" /></td>
-
-
+					<td><spring:url value="/revision/{revisionId}" var="revisionUrl">
+							<spring:param name="revisionId" value="${revision.id}" />
+						</spring:url> <a href="${fn:escapeXml(revisionUrl)}">
+						   <c:out value="${revision.descripcion}" /></a></td>
+					<td><c:out value="${revision.duracion}" /></td>
+					<td><c:out value="${revision.fechaRevision}" /></td>
+					
+				<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
+							<spring:param name="clienteId" value="${revision.cliente.id}" />
+						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
+								value="${revision.cliente.dni}" /></a></td>
+											
+					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
+							<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
+						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
+						   <c:out value="${revision.vehiculo.matricula}" /></a></td>
 					<sec:authorize access="hasAuthority('admin')">
-						<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
-								<spring:param name="clienteId" value="${vehiculos.cliente.id}" />
-							</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
-									value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></a></td>
+					<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
+					<spring:param name="revisionId" value="${revision.id}" />
+					</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
 					</sec:authorize>
-
+					
 					<sec:authorize access="hasAuthority('mecanico')">
-						<td><c:out
-								value="${vehiculos.cliente.nombre} ${vehiculos.cliente.apellidos}" /></td>
-					</sec:authorize>
-					<td><spring:url value="/vehiculo/{vehiculoId}/edit"
-							var="vehiculoUrl">
-							<spring:param name="vehiculoId" value="${vehiculos.id}" />
-						</spring:url> <a class="glyphicon glyphicon-pencil"
-						href="${fn:escapeXml(vehiculoUrl)}"></a></td>
+					<td><spring:url value="/revision/asignar/{revisionId}" var="revisionUrl">
+					<spring:param name="revisionId" value="${revision.id}" />
+					</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
+</sec:authorize>
 				</tr>
+
+
 			</c:forEach>
 		</tbody>
 	</table>
-	<sec:authorize access="hasAuthority('cliente')">
-		<a class="btn btn-default"
-			href='<spring:url value="/vehiculo/new" htmlEscape="true"/>'>Añadir</a>
-	</sec:authorize>
-
-
+	<a class="btn btn-default" href='<spring:url value="/revision/new" htmlEscape="true"/>'>Añadir</a>
 	<br />
 </TalleresLaPlata:layout>
