@@ -17,6 +17,8 @@
             <TalleresLaPlata:inputField label="DNI" name="dni"/>
             <TalleresLaPlata:inputField label="Telefono" name="telefono"/>
             <TalleresLaPlata:inputField label="E-mail" name="email"/>
+            <TalleresLaPlata:inputField label="Usuario" name="user.username"/>
+            <TalleresLaPlata:inputField label="Contraseña"  name="user.password"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

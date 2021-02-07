@@ -11,27 +11,7 @@
 
 <TalleresLaPlata:layout pageName="mecanicos">
 
-	<h2>Buscar mecanico</h2>
-	<form:form modelAttribute="cliente" action="/mecanicos" method="get"
-		class="form-horizontal" id="buscador-mecanicos">
-		<div class="form-group">
-			<div class="control-group" id="nombre">
-				<label class="col-sm-2 control-label">Nombre</label>
-				<div class="col-sm-10">
-					<form:input class="form-control" path="nombre" size="30"
-						maxlength="80" />
-					<span class="help-inline"><form:errors path="*" /></span>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar</button>
-			</div>
-		</div>
-	</form:form>
-
-	<h2>Todos los clientes</h2>
+	<h2>Todos los mecanicos</h2>
 	<table id="tablaMecanico" class="table table-striped">
 		<thead>
 			<tr>
@@ -57,6 +37,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+<spring:url value="/mecanicos/new" var="mecanicoUrl">
+		</spring:url>
+		<a class="btn btn-default" href="${fn:escapeXml(mecanicoUrl)}">Añadir</a>
 	<br />
 </TalleresLaPlata:layout>

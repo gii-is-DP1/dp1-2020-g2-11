@@ -107,7 +107,7 @@
 				</sec:authorize>
 				
 					<sec:authorize access="hasAuthority('mecanico')">
-					<petclinic:menuItem active="${name eq 'revisiones'}" url="/revisionesNoAsignadas"
+					<petclinic:menuItem active="${name eq 'revisiones'}" url="/revisiones"
 						title="revisiones">
 						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 						<span>Revisiones por asignar</span>
@@ -135,6 +135,14 @@
 						title="pedido">
 						<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
 						<span>Pedidos</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+			
+			<sec:authorize access="hasAuthority('admin')">
+					<petclinic:menuItem active="${name eq 'pedidos'}" url="/mecanicos"
+						title="pedido">
+						<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+						<span>Mecanicos</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 			</ul>
