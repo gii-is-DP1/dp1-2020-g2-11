@@ -2,18 +2,21 @@ package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Mecanico;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.MecanicoService;
 import org.springframework.samples.petclinic.service.RevisionService;
 import org.springframework.samples.petclinic.service.VehiculoService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,13 +34,15 @@ public class RevisionController {
 	private final ClienteService clienteService;
 	@Autowired
 	private final VehiculoService vehiculoService;
-	
+	@Autowired
+	private final MecanicoService mecanicoService;
 	@Autowired
 	public RevisionController(RevisionService revisionService, ClienteService clienteService,
-			VehiculoService vehiculoService) {
+			VehiculoService vehiculoService,MecanicoService mecanicoService) {
 		this.revisionService = revisionService;
 		this.clienteService = clienteService;
 		this.vehiculoService = vehiculoService;
+		this.mecanicoService = mecanicoService;
 	}
 
 	@InitBinder("revision")
@@ -50,6 +55,12 @@ public class RevisionController {
 		Collection<Revision> revisiones = (Collection<Revision>) revisionService.findAllRevisiones();
 		modelMap.addAttribute("revisiones", revisiones);
 		return "revisiones/ListaRevisiones";
+	}
+	@GetMapping(value = { "/revisionesNoAsignadas" })
+	public String findAllRevisionDisponible(ModelMap modelMap) {
+		Collection<Revision> revisiones = (Collection<Revision>) revisionService.findAllRevisionesDisponibles();
+		modelMap.addAttribute("revisiones", revisiones);
+		return "revisiones/revisionesMecanico";
 	}
 
 	@GetMapping(value = { "/revisionFecha" })
@@ -112,27 +123,14 @@ public class RevisionController {
 			return "redirect:/revisiones";
 		}
 	}
-
+	@GetMapping(value = "/revision/asignar/{revisionId}")
+	public String setRevision(@PathVariable("revisionId") int revisionId) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		String username = clienteDetails.getUsername();
+		Revision revision = this.revisionService.findRevisionById(revisionId).get();
+		Mecanico mecanico =this.mecanicoService.findByUsername(username);
+		revision.setMecanico(mecanico);
+		return "redirect:/revisionesNoAsignadas";
+	}
 }
-
-//	@GetMapping(value = { "/productonombre" })
-//	public String findProductosByNombre(String nombre, Producto producto, BindingResult res, Map<String, Object> model) {
-//		if (producto.getNombre() == null) {
-//			producto.setNombre(""); // empty string signifies broadest possible search
-//		}
-//		// find Productos by name
-//		Collection<Producto> results = this.productoService.findProductoByNombre(nombre);
-//		if (results.isEmpty()) {
-//			// no Producto found
-//			res.rejectValue("nombre", "notFound", "not found");
-//			return "producto/ListaProductos";
-//		} else if (results.size() == 1) {
-//			// 1 Producto found
-//			producto = results.iterator().next();
-//			return "redirect:/producto/" + producto.getId();
-//		} else {
-//			// multiple Productos found
-//			model.put("selections", results);
-//			return "producto/ListaProductos";
-//		}
-//	}

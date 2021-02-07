@@ -28,7 +28,7 @@ public class MecanicoService {
 	public Collection<Mecanico> findMecanico() throws DataAccessException {
 		return (Collection<Mecanico>) mecanicoRepository.findAll();
 	}
-
+	
 	@Transactional
 	public void saveMecanico(Mecanico mecanico) throws DataAccessException {
 		//creating owner
@@ -43,5 +43,10 @@ public class MecanicoService {
     public Optional<Mecanico> findById(Integer id) throws DataAccessException {
         return mecanicoRepository.findById(id);
     }
+
+	public Mecanico findByUsername(String username) {
+		return mecanicoRepository.findByUsername(username);
+	}
+
 
 }

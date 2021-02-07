@@ -9,7 +9,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
-<TalleresLaPlata:layout pageName="revisiones"> 
+<TalleresLaPlata:layout pageName="revision"> 
 
 <h2>Todas las Revisiones</h2>
 	<table id="tablaRevision" class="table table-striped">
@@ -37,15 +37,11 @@
 							<spring:param name="clienteId" value="${revision.cliente.id}" />
 						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
 								value="${revision.cliente.dni}" /></a></td>
-								
-								
+											
 					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
 						   <c:out value="${revision.vehiculo.matricula}" /></a></td>
-
-
-
 
 					<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
 							<spring:param name="revisionId" value="${revision.id}" />

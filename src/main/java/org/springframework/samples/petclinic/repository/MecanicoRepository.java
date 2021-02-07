@@ -11,6 +11,9 @@ public interface MecanicoRepository extends CrudRepository<Mecanico, Integer>{
 	
 	@Query("SELECT mecanico FROM Mecanico mecanico WHERE mecanico.id =:id")
     public Mecanico findById(@Param("id") int id);
+	
+	@Query("SELECT mecanico FROM Mecanico mecanico WHERE mecanico.user.username = :username")
+	public Mecanico findByUsername(@Param("username") String username);
 
 	
 }

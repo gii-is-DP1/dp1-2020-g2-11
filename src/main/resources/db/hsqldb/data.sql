@@ -72,7 +72,7 @@ INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (1,'
 INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com',false);
 
 --Pedido
-INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (1,'2020-12-10', '2020-12-14',1,2);
+INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (1,'2020-12-10', '2020-12-14',1,1);
 INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (2,'2020-12-10', '2020-12-15',2,1);
 INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (3,'2020-12-13', '2020-12-16',1,3);
 INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (4,'2020-12-13', '2020-12-16',1,2);
@@ -83,7 +83,8 @@ INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,cliente_id,vehiculo_id
 INSERT INTO reparacion(id,duracion,precio,tipo_reparacion,cliente_id,vehiculo_id) VALUES (3,55,100.33,1,2,3);
 
 --Revision
-INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (1,'Necesita aceite',10,'2020-12-10',1,1);
-INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (2,'Pastilla de freno gastada',10,'2020-12-13',1,2);
-INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (3,'Piston atascado',20,'2020-12-11',2,3);
-INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (4,'Piston atascado',20,'2020-12-11',3,4);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id,mecanico_id) VALUES (1,'Necesita aceite',10,'2020-12-10',1,1,2);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id,mecanico_id) VALUES (2,'Pastilla de freno gastada',10,'2020-12-13',1,2,3);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id,mecanico_id) VALUES (3,'Piston atascado',20,'2020-12-11',2,3,null);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id,mecanico_id) VALUES (4,'Piston atascado',20,'2020-12-11',3,4,2);
+INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id,mecanico_id) VALUES (5,'Piston atascado',20,'2020-12-11',2,3,null);

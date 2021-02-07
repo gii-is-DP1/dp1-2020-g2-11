@@ -7,10 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +21,6 @@ import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
 @WebMvcTest(value = ProveedorController.class,
@@ -48,7 +42,7 @@ public class ProveedorControllerTest {
 		Proveedor proveedor = new Proveedor();
 		proveedor.setId(5);
 		proveedor.setNombre("Marcos");
-		proveedor.setTelefono("654857147");
+		proveedor.setTelefono(654857147);
 		proveedor.setDireccion("Virgen de las Angustias, 9");
 		proveedor.setEmail("marquitosbambino@gmail.com");
 	}

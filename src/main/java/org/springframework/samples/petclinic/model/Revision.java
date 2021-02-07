@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -39,4 +40,8 @@ public class Revision extends BaseEntity {
 	@OneToOne
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
+	
+	@ManyToOne
+	@JoinColumn(name = "mecanico_id")
+	private Mecanico mecanico;
 }
