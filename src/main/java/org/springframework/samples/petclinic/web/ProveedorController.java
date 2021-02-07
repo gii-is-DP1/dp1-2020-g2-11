@@ -77,12 +77,6 @@ public class ProveedorController {
 		}
 	}
 	
-	@GetMapping(value = { "/proveedor/delete/{proveedorId}" })
-	public String deleteProveedor(@PathVariable("proveedorId") int proveedorId) {
-		proveedorService.deleteProveedor(proveedorId);
-		return "redirect:/proveedores";
-	}
-	
 	@GetMapping(value = { "/proveedor/{proveedorId}" })
 	public String findProveedorById(@PathVariable("proveedorId") int proveedorId, ModelMap model) {
 		Proveedor proveedor = proveedorService.findProveedorById(proveedorId);
@@ -112,5 +106,9 @@ public class ProveedorController {
 		}
 	}
 	
-	
+	@GetMapping(value = { "/proveedor/{proveedorId}/oculta" })
+	public String ocultaProveedor(@PathVariable("proveedorId") Integer proveedorId) {
+		proveedorService.ocultarProveedor(proveedorId);
+		return "redirect:/proveedores";
+	}
 }
