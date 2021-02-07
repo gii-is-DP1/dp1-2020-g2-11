@@ -2,10 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
@@ -41,7 +38,7 @@ public class RevisionController {
 	}
 
 	@InitBinder("revision")
-    public void initPetBinder(WebDataBinder dataBinder) {
+    public void initRevisionBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new RevisionValidator());
     }
 	
@@ -72,20 +69,7 @@ public class RevisionController {
 			}
 		}
 	}
-
-	@GetMapping(value = { "/revision/{revisionId}" })
-	public String findById(ModelMap model,@PathVariable("revisionId") int revisionId) {
-		Revision revision = revisionService.findRevisionById(revisionId).get();
-		model.put("revision", revision);
-		return "revisiones/revisionDetails";
-	}
-
-	@GetMapping(value = { "/revision/delete/{revisionId}" })
-	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
-		revisionService.deleteRevision(revisionId);
-		return "redirect:/revisiones";
-	}
-
+	
 	@GetMapping(value = "/revision/new")
 	public String initCreationForm(ModelMap model) {
 		Revision revision = new Revision();
@@ -113,6 +97,18 @@ public class RevisionController {
 		}
 	}
 
+	@GetMapping(value = { "/revision/{revisionId}" })
+	public String findById(ModelMap model,@PathVariable("revisionId") int revisionId) {
+		Revision revision = revisionService.findRevisionById(revisionId).get();
+		model.put("revision", revision);
+		return "revisiones/revisionDetails";
+	}
+
+	@GetMapping(value = { "/revision/delete/{revisionId}" })
+	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
+		revisionService.deleteRevision(revisionId);
+		return "redirect:/revisiones";
+	}
 }
 
 //	@GetMapping(value = { "/productonombre" })

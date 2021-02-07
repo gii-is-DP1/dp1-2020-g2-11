@@ -11,16 +11,15 @@ public class RevisionValidator implements Validator {
 	public void validate(Object obj, Errors errors) {
 
 		Revision revision = (Revision) obj;
-		LocalDate fechaRev = revision.getFechaRevision();
+		LocalDate fechaRevision = revision.getFechaRevision();
 
-		if (fechaRev.isAfter(LocalDate.now())) {
-			errors.rejectValue("fechaRev", "se debe rellenar a posteriori de realizar dicha revision",
-					"se debe rellenar a posteriori de realizar dicha revision");
+		if (fechaRevision.isAfter(LocalDate.now())) {
+			errors.rejectValue("fechaRevision", "la fecha de revisión debe ser anterior a la fecha actual", "la fecha de revisión debe ser anterior a la fecha actual");
 		}
 	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return true;
+		return Revision.class.isAssignableFrom(clazz);
 	}
 }
