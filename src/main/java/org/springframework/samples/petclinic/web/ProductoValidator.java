@@ -15,14 +15,14 @@ public class ProductoValidator implements Validator {
 		Integer stockSeguridad = producto.getStockSeguridad();
 
 		if (stock<=stockSeguridad) {
-			errors.rejectValue("stockSeguridad", " debe ser menor al stock actual");
+			errors.rejectValue("stockSeguridad", " debe ser menor al stock actual", " debe ser menor al stock actual");
 		}
 		
 	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Cita.class.isAssignableFrom(clazz);
+		return Producto.class.isAssignableFrom(clazz);
 	}
 
 }

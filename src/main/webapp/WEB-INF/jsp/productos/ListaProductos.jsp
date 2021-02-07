@@ -22,6 +22,7 @@
 				<th style="width: 150px">Stock</th>
 				<th style="width: 150px">Referencia</th>
 				<th style="width: 150px">StockSeguridad</th>
+				<th style="width: 50px">Editar</th>
 				<th style="width: 50px">Borrar</th>
 			</tr>
 		</thead>
@@ -34,6 +35,10 @@
 					<td><c:out value="${producto.stock}" /></td>
 					<td><c:out value="${producto.referencia}" /></td>
 					<td><c:out value="${producto.stockSeguridad}" /></td>
+					
+					<td><spring:url value="/productos/{productoId}/edit" var="productoUrl">
+							<spring:param name="productoId" value="${producto.id}" />
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(productoUrl)}"></a></td>
 					
 					<td><spring:url value="/productos/oculta/{productoId}" var="productoUrl">
 							<spring:param name="productoId" value="${producto.id}" />

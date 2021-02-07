@@ -22,6 +22,7 @@ public class ProductoService {
 	
 	@Transactional
 	public void saveProducto(Producto producto) throws DataAccessException {
+		producto.setDisponible(true);
 		productoRepository.save(producto);
 	}
 	
@@ -69,6 +70,11 @@ public class ProductoService {
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductosDisponibles() {
 		return productoRepository.findDisponibles(true);
+	}
+
+	@Transactional(readOnly=true)
+	public Producto findProductoById(int productoId) {
+		return productoRepository.findById(productoId).get();
 	}
 
 	
