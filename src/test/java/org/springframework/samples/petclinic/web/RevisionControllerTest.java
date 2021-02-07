@@ -49,7 +49,7 @@ public class RevisionControllerTest {
 		revision.setDuracion(5);
 		revision.setFechaRevision(LocalDate.of(2021, 1, 23));
 
-//		given(this.revisionService.findAllRevisiones()).willReturn(Lists.newArrayList(revision));
+
 
 	}
 
@@ -92,9 +92,9 @@ public class RevisionControllerTest {
 							.param("duracion", "30")
 							.param("fechaRevision", "05/02/2021")
 							.param("cliente", "62748364G")
-							.param("matricula", "2968BPY"))	;
-	//			.andExpect(status().is3xxRedirection())
-	//			.andExpect(view().name("redirect:/revisiones"));
+							.param("matricula", "2968BPY")).andExpect(status().isOk());	
+				//.andExpect(status().is3xxRedirection())
+				//.andExpect(view().name("redirect:/revisiones"));
 	}
 	 
 	 
