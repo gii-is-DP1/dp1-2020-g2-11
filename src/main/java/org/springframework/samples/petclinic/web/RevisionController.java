@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
@@ -46,7 +45,7 @@ public class RevisionController {
 	}
 
 	@InitBinder("revision")
-    public void initPetBinder(WebDataBinder dataBinder) {
+    public void initRevisionBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new RevisionValidator());
     }
 	
@@ -83,20 +82,7 @@ public class RevisionController {
 			}
 		}
 	}
-
-	@GetMapping(value = { "/revision/{revisionId}" })
-	public String findById(ModelMap model,@PathVariable("revisionId") int revisionId) {
-		Revision revision = revisionService.findRevisionById(revisionId).get();
-		model.put("revision", revision);
-		return "revisiones/revisionDetails";
-	}
-
-	@GetMapping(value = { "/revision/delete/{revisionId}" })
-	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
-		revisionService.deleteRevision(revisionId);
-		return "redirect:/revisiones";
-	}
-
+	
 	@GetMapping(value = "/revision/new")
 	public String initCreationForm(ModelMap model) {
 		Revision revision = new Revision();
@@ -123,6 +109,7 @@ public class RevisionController {
 			return "redirect:/revisiones";
 		}
 	}
+
 	@GetMapping(value = "/revision/asignar/{revisionId}")
 	public String setRevision(@PathVariable("revisionId") int revisionId) {
 		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
@@ -133,4 +120,19 @@ public class RevisionController {
 		revision.setMecanico(mecanico);
 		return "redirect:/revisionesNoAsignadas";
 	}
-}
+
+	@GetMapping(value = { "/revision/{revisionId}" })
+	public String findById(ModelMap model,@PathVariable("revisionId") int revisionId) {
+		Revision revision = revisionService.findRevisionById(revisionId).get();
+		model.put("revision", revision);
+		return "revisiones/revisionDetails";
+	}
+
+	@GetMapping(value = { "/revision/delete/{revisionId}" })
+	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
+		revisionService.deleteRevision(revisionId);
+		return "redirect:/revisiones";
+
+	}
+  }
+
