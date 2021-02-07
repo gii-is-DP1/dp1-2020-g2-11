@@ -37,6 +37,10 @@ public class Revision extends BaseEntity {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 	
+	@NotNull
+	@Column(name = "asignada")
+	private Boolean asignada;
+	
 	@OneToOne
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
