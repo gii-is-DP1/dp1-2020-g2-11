@@ -24,6 +24,7 @@
 						<form:input class="form-control" path="matricula" size="30"
 							maxlength="80" />
 						<span class="help-inline"><form:errors path="*" /></span>
+						<span id="matricula.errors">No existe la matrícula </span>
 					</div>
 				</div>
 			</div>

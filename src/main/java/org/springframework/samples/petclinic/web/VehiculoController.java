@@ -71,6 +71,37 @@ public class VehiculoController {
 //		model.put("vehiculos", vehiculos);
 //		return "vehiculos/ListaVehiculos";
 //	}
+	
+	@GetMapping(value = "/vehiculos/find")
+	public String initFindForm(Map<String, Object> model) {
+		model.put("vehiculo", new Vehiculo());
+		return "vehiculos/ListaVehiculos";
+	}
+	
+	@GetMapping(value = { "/vehiculo" })
+	public String processFindForm(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
+		if (vehiculo.getMatricula() == null) {
+			vehiculo.setMatricula(""); // empty string signifies broadest possible search
+		}
+		// find vehiculos by matricula
+		Collection<Vehiculo> results = (Collection<Vehiculo>) this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
+		
+		if (results.isEmpty()) {
+			// no vehiculos found
+			res.rejectValue("matricula", "notFound", "not found");
+			return "redirect:/vehiculos/find";
+			
+		} else if (results.size() == 1) {
+			// 1 vehiculo found
+			vehiculo = results.iterator().next();
+			return "redirect:/vehiculos/" + vehiculo.getId();
+			
+		} else {
+			// multiple vehiculos found
+			model.put("vehiculo", results);
+			return "vehiculos/ListaVehiculos";
+		}
+	}
 
 	@GetMapping(value = { "/vehiculo/tipo" })
 	public String findVehiculoByTipo(String tpo, BindingResult res, ModelMap model) {
@@ -88,13 +119,7 @@ public class VehiculoController {
 		}
 		return "vehiculos/ListaVehiculos";
 	}
-
-	@GetMapping(value = "/vehiculos/find")
-	public String initFindForm(Map<String, Object> model) {
-		model.put("vehiculo", new Vehiculo());
-		return "vehiculos/findVehiculos";
-	}
-
+	
 	@GetMapping(value = { "/vehiculo/{vehiculoId}" })
 	public String findVehiculosById(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
 		Vehiculo vehiculo = vehiculoService.findVehiculoById(vehiculoId);
