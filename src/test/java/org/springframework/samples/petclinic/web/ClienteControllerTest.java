@@ -82,7 +82,7 @@ public class ClienteControllerTest {
 		@Test
 		void testInitEditCliente() throws Exception {
 			mockMvc.perform(get("/cliente/{clienteId}/edit", 1))
-			.andExpect(status().isOk());
+			.andExpect(status().isOk());  
 			//.andExpect(model().attributeExists("cliente"))
 			//.andExpect(view().name("redirect:/cliente/ListaClientes"));
 		}
