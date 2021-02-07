@@ -71,16 +71,14 @@ public class CitaController {
 			model.put("cita", cita);
 			return "citas/FormularioCita";
 		} 	
-			
 			else {
-			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
 			Vehiculo vehiculo = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
 			cita.setVehiculo(vehiculo);
 			cita.setCliente(clienteRegistered);
-				this.citaService.saveCita(cita);
+			this.citaService.saveCita(cita);
 			return "redirect:/citas/cliente";
 		}
 	}	

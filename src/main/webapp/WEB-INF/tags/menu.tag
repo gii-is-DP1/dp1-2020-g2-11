@@ -107,7 +107,7 @@
 				</sec:authorize>
 				
 					<sec:authorize access="hasAuthority('mecanico')">
-					<petclinic:menuItem active="${name eq 'revisiones'}" url="/revisiones"
+					<petclinic:menuItem active="${name eq 'revisiones'}" url="/revisionesNoAsignadas"
 						title="revisiones">
 						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 						<span>Revisiones por asignar</span>

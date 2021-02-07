@@ -114,11 +114,8 @@ public class RevisionController {
 	public String setRevision(@PathVariable("revisionId") int revisionId) {
 		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = clienteDetails.getUsername();
-		Revision revision = this.revisionService.findRevisionById(revisionId).get();
 		Mecanico mecanico =this.mecanicoService.findByUsername(username);
-		Mecanico mecanico2= new Mecanico();
-		mecanico2.setNombre("Pepito");
-		revision.setMecanico(mecanico2);
+		revisionService.AsignedRevision(revisionId, mecanico);
 		return "redirect:/revisionesNoAsignadas";
 	}
 
