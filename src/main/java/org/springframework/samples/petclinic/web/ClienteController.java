@@ -59,7 +59,7 @@ public class ClienteController {
 	}
 
 	@GetMapping(value = { "/cliente" })
-	public String processFindForm(Cliente cliente, BindingResult res, Map<String, Object> model) {
+	public String processFindForm(@Valid Cliente cliente, BindingResult res, Map<String, Object> model) {
 		if (cliente.getNombre() == null) {
 			cliente.setNombre(""); // empty string signifies broadest possible search
 		}
@@ -85,14 +85,12 @@ public class ClienteController {
 
 
 	
-//	@GetMapping(value = { "/cliente/delete/{clienteId}" })
-//	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
-//		//citaService.removeCitaByCliente(clienteId);
-//		clienteService.deleteClienteById(clienteId);
-//		return "redirect:/clientes";
-//	}
-//	
-//	
+	@GetMapping(value = { "/cliente/delete/{clienteId}" })
+	public String deleteCliente(@PathVariable("clienteId") int clienteId) {
+		//citaService.removeCitaByCliente(clienteId);
+		clienteService.deleteClienteById(clienteId);
+		return "redirect:/clientes";
+	}
 	@GetMapping(value = { "/cliente/{clienteId}" })
     public String findById(@PathVariable("clienteId") int clienteId, ModelMap map) {
         Cliente clientes = clienteService.findClienteById(clienteId).get();

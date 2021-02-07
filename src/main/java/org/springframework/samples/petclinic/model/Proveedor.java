@@ -32,5 +32,4 @@ public class Proveedor extends BaseEntity {
 	@Column(name = "disponible")
 	private Boolean disponible;
 	
-
 }

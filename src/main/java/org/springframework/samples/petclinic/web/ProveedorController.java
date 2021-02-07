@@ -31,7 +31,7 @@ public class ProveedorController {
 
 	@GetMapping(value = { "/proveedores" })
 	public String findAllproveedores(ModelMap modelMap) {
-		Collection<Proveedor> proveedores = proveedorService.findProveedores();
+		Collection<Proveedor> proveedores = proveedorService.findProveedoresDisponibles();
 		modelMap.put("proveedor", proveedores);
 		return "proveedores/ListaProveedores";
 	}
@@ -108,7 +108,7 @@ public class ProveedorController {
 	
 	@GetMapping(value = { "/proveedor/{proveedorId}/oculta" })
 	public String ocultaProveedor(@PathVariable("proveedorId") Integer proveedorId) {
-		proveedorService.ocultarProveedor(proveedorId);
+		proveedorService.findProveedorNoDisponibles(proveedorId);
 		return "redirect:/proveedores";
 	}
 }

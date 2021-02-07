@@ -24,7 +24,9 @@ public class ProveedorService {
 	
 	@Transactional
 	public void saveProveedor(Proveedor proveedor) throws DataAccessException {
+		proveedor.setDisponible(true);
 		proveedorRepository.save(proveedor);
+		
 	}
 	
 	@Transactional(readOnly = true)
@@ -46,5 +48,13 @@ public class ProveedorService {
 	public Proveedor findProveedorById(Integer id) throws DataAccessException {
 		return proveedorRepository.findById(id).get();
 	}
-	
+	@Transactional(readOnly = true)	
+	public Collection<Proveedor> findProveedoresDisponibles() throws DataAccessException {
+		return proveedorRepository.findDisponibles(true);
+	}
+	@Transactional
+	public void findProveedorNoDisponibles(Integer id) throws DataAccessException {
+		Proveedor proveedor= proveedorRepository.findById(id).get();
+		proveedor.setDisponible(false);
+	}
 }
