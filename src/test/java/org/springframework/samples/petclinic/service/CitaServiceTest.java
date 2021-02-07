@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cita;
+import org.springframework.samples.petclinic.service.exceptions.NotPropertyException;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ public class CitaServiceTest {
 
 	@Test
 	@Transactional
-	public void shouldInsertCita() throws DataAccessException, SobrecargaDeVehiculosException {
+	public void shouldInsertCita() throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException {
 
 		cita = new Cita();
 		cita.setId(5);
