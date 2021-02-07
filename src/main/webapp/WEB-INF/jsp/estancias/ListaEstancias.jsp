@@ -22,7 +22,10 @@
 				<th style="width: 100px;">Fecha salida</th>
 				<th style="width: 100px;">Hora salida</th>
 				<th style="width: 100px;">Duración</th>
+				<sec:authorize access="hasAuthority('admin')">
 				<th style="width: 50px">Borrar</th>
+				</sec:authorize>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -38,18 +41,18 @@
 					<td><c:out value="${estancia.fechaSalida}" /></td>
 					<td><c:out value="${estancia.horaSalida}" /></td>
 					<td><c:out value="${estancia.duracion}" /></td>
-					
+						<sec:authorize access="hasAuthority('admin')">
 					<td><spring:url value="/estancias/delete/{estanciaId}" var="estanciaUrl">
 							<spring:param name="estanciaId" value="${estancia.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(estanciaUrl)}"></a></td>
-					
+					</sec:authorize>
 					
 					
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
+	<sec:authorize access="hasAuthority('admin')">
 	<a class="btn btn-default" href='<spring:url value="/estancia/new" htmlEscape="true"/>'>Añadir</a>
 	</sec:authorize>
 	<br />
