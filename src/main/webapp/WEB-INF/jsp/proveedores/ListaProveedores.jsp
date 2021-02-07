@@ -38,16 +38,15 @@
 					<td><c:out value="${proveedor.telefono}" /></td>
 					<td><c:out value="${proveedor.direccion}" /></td>
 					<td><c:out value="${proveedor.email}" /></td>
+					
 					<td><spring:url value="/proveedor/{proveedorId}/edit" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
 						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(proveedorUrl)}"></a></td>
-				<td><spring:url value="/proveedor/delete/{proveedorId}" var="proveedorUrl">
-							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="btn btn-default" href="${fn:escapeXml(proveedorUrl)}">Eliminar</a></td>
-						
-					
-				</tr>
 				
+				    <td><spring:url value="/proveedor/{proveedorId}/oculta" var="proveedorUrl">
+							<spring:param name="proveedorId" value="${proveedor.id}" />
+						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(proveedorUrl)}"></a></td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>

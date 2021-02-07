@@ -68,8 +68,8 @@ INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible
 INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible) VALUES (3,'AS73464',4,'Anticongelante','Repsol',1,true);
 
 --Proveedor
-INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com');
-INSERT INTO proveedor(id,nombre,telefono,direccion,email) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com');
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com',false);
 
 --Pedido
 INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (1,'2020-12-10', '2020-12-14',1,2);
@@ -87,5 +87,3 @@ INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_
 INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (2,'Pastilla de freno gastada',10,'2020-12-13',1,2);
 INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (3,'Piston atascado',20,'2020-12-11',2,3);
 INSERT INTO revision(id,descripcion,duracion,fecha_revision,cliente_id,vehiculo_id) VALUES (4,'Piston atascado',20,'2020-12-11',3,4);
-
-

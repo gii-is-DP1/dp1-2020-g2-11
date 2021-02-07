@@ -65,7 +65,6 @@ public class ProductoService {
 	public void ocultarProducto(Integer productoId) {
 		Producto producto= productoRepository.findById(productoId).get();
 		producto.setDisponible(false);
-		
 	}
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductosDisponibles() {
