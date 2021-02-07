@@ -38,8 +38,8 @@ public class ProveedorServiceTest {
 	@Test
 	@Transactional
 	public void shoulFindProveedorByNombre() {
-		Collection<Proveedor> proveedores = this.proveedorService.findProveedorByNombre("Neumaticos Paco");
-		assertThat(proveedores.size()).isEqualTo(1);
+		Proveedor proveedores = this.proveedorService.findProveedorByNombre("Neumaticos Paco");
+		assertThat(proveedores).isNotNull();
 	}
 	
 	@Test

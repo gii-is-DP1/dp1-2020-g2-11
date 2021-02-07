@@ -1,11 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Pedido;
+
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.repository.PedidoRepository;
 import org.springframework.samples.petclinic.repository.ProveedorRepository;
@@ -30,7 +29,7 @@ public class ProveedorService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Proveedor> findProveedorByNombre(String nombre) throws DataAccessException {
+	public Proveedor findProveedorByNombre(String nombre) throws DataAccessException {
 		return proveedorRepository.findByNombre(nombre);
 	}
 	

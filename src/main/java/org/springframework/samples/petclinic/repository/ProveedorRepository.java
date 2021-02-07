@@ -12,7 +12,7 @@ import org.springframework.samples.petclinic.model.Proveedor;
 public interface ProveedorRepository extends CrudRepository<Proveedor, Integer> {
 	
 	@Query("SELECT proveedor FROM Proveedor proveedor WHERE proveedor.nombre =:nombre")
-	public Collection<Proveedor> findByNombre(@Param("nombre") String nombre);
+	public Proveedor findByNombre(@Param("nombre") String nombre);
 	
 	@Query("SELECT p FROM Proveedor p WHERE p.disponible =:disponible")
 	Collection<Proveedor> findDisponibles(@Param("disponible") boolean disponible);

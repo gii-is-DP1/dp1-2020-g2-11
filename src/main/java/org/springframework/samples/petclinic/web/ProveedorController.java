@@ -6,10 +6,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,17 +41,14 @@ public class ProveedorController {
 			proveedor.setNombre(""); // empty string signifies broadest possible search
 		}
 		// find proveedors by name
-		Collection<Proveedor> results = this.proveedorService.findProveedorByNombre(nombre);
-		if (results.isEmpty()) {
-			// no proveedors found
+		Proveedor results = this.proveedorService.findProveedorByNombre(nombre);
+		if (results==null) {
+			// no proveedor found
 			res.rejectValue("nombre", "notFound", "not found");
 			return "proveedores/ListaProveedores";
-		} else if (results.size() == 1) {
-			// 1 proveedor found
-			proveedor = results.iterator().next();
-			return "redirect:/proveedores/" + proveedor.getId();
-		} else {
-			// multiple proveedors found
+			}
+		else {
+			// proveedor found
 			model.put("proveedor", results);
 			return "proveedores/ListaProveedores";
 		}

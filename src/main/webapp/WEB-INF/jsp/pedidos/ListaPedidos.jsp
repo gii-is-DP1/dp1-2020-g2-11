@@ -35,10 +35,7 @@
 						</spring:url> <a href="${fn:escapeXml(proveedorUrl)}"><c:out
 								value="${pedido.proveedor.nombre}" /></a></td>
 								
-					<td><spring:url value="/producto/{productoId}" var="productoUrl">
-							<spring:param name="productoId" value="${pedido.producto.id}" />
-						</spring:url> <a href="${fn:escapeXml(productoUrl)}"><c:out
-								value="${pedido.producto.nombre}" /></a></td>
+					<td><c:out value="${pedido.producto.nombre}" /></td>
 					
 					<td><spring:url value="/pedido/{pedidoId}/edit" var="pedidoUrl">
 							<spring:param name="pedidoId" value="${pedido.id}" />

@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,7 @@ import lombok.Setter;
 @Table(name = "proveedor")
 public class Proveedor extends BaseEntity {
 	
+	@UniqueElements
 	@javax.validation.constraints.NotBlank
 	@Column(name = "nombre")
 	private String nombre;
