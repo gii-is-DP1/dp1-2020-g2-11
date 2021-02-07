@@ -22,20 +22,18 @@ import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers=ProductoController.class,
-excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
-excludeAutoConfiguration= SecurityConfiguration.class)
+@WebMvcTest(controllers = ProductoController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class ProductoControllerTest {
-	
+
 	@Autowired
 	private ProductoController productoController;
 
 	@MockBean
 	private ProductoService productoService;
-	
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@BeforeEach
 	void setup() {
 		Producto producto = new Producto();
@@ -46,61 +44,119 @@ public class ProductoControllerTest {
 		producto.setStock(4);
 		producto.setStockSeguridad(2);
 		producto.setDisponible(true);
-		
+
 		given(this.productoService.findProductoByReferencia("NEU54638")).willReturn(new Producto());
-		
-	}
-	
-	 @WithMockUser(value = "spring")
-	 @Test
-	 void findAllProductosTest() throws Exception{
-		 mockMvc.perform(get("/productos")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("producto")).andExpect(view().name("productos/ListaProductos"));
-	 }
-	 
-	 @WithMockUser(value = "spring")
-	 @Test
-	 void findProductoByNombreTest() throws Exception{
-		 mockMvc.perform(get("/productos")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("producto")).andExpect(view().name("productos/ListaProductos"));
-		// mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
-	 }
-	 
-	 @WithMockUser(value = "spring")
-     @Test
-	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/productos/new")).andExpect(status().isOk())
-				.andExpect(view().name("productos/FormularioProducto")).andExpect(model().attributeExists("producto"));
+
 	}
 
 	@WithMockUser(value = "spring")
-     @Test
+	@Test
+	void findAllProductosTest() throws Exception {
+		mockMvc.perform(get("/productos")).andExpect(status().isOk())
+				.andExpect(model().attributeExists("producto"))
+				.andExpect(view().name("productos/ListaProductos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void findAllProductosNoDisponiblesTest() throws Exception {
+		mockMvc.perform(get("/productos/productosNoDisponibles")).andExpect(status().isOk())
+				.andExpect(model().attributeExists("producto"))
+				.andExpect(view().name("productos/ProductosNoDisponibles"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void findProductoByNombreTest() throws Exception {
+		mockMvc.perform(get("/productos")).andExpect(status().isOk())
+				.andExpect(model().attributeExists("producto"))
+				.andExpect(view().name("productos/ListaProductos"));
+		// mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitCreationForm() throws Exception {
+		mockMvc.perform(get("/productos/new")).andExpect(status().isOk())
+				.andExpect(view().name("productos/FormularioProducto"))
+				.andExpect(model().attributeExists("producto"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/productos/new")
-							.with(csrf())
-							//.param("id", "1")
-							.param("referencia", "NEU54638")
-							.param("nombre", "Neumaticos")
-							.param("marca", "Nexen")
-							.param("stock", "10")
-							.param("stockSeguridad", "4"))	
+		mockMvc.perform(post("/productos/new").with(csrf())
+				// .param("id", "1")
+				.param("referencia", "NEU54638")
+				.param("nombre", "Neumaticos")
+				.param("marca", "Nexen")
+				.param("stock", "10")
+				.param("stockSeguridad", "4"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/productos"));
 	}
 
 	@WithMockUser(value = "spring")
- @Test
+	@Test
 	void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/productos/new")
-							.with(csrf())
-							.param("referencia", "NEU54638")
-							.param("nombre", "Neumaticos")
-							.param("marca", "Nexen")
-							.param("stock", "3")
-							.param("stockSeguridad", "4"))
-		.andExpect(model().attributeHasErrors("producto"))
-		.andExpect(model().attributeHasFieldErrors("producto", "stockSeguridad")).andExpect(status().isOk())
-		.andExpect(view().name("/productos/FormularioProducto"));
+		mockMvc.perform(post("/productos/new").with(csrf())
+				.param("referencia", "NEU54638")
+				.param("nombre", "Neumaticos")
+				.param("marca", "Nexen")
+				.param("stock", "3")
+				.param("stockSeguridad", "4"))
+				.andExpect(model().attributeHasErrors("producto"))
+				.andExpect(model().attributeHasFieldErrors("producto", "stockSeguridad")).andExpect(status().isOk())
+				.andExpect(view().name("productos/FormularioProducto"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void ocultarProductoTest() throws Exception {
+		mockMvc.perform(get("/productos/oculta/{productoId}",1)).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/productos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void devuelveProductoTest() throws Exception {
+		mockMvc.perform(get("/productos/devuelve/{productoId}",1)).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/productos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessInitUpdateForm() throws Exception {
+		mockMvc.perform(get("/productos/{productoId}/edit",1)).andExpect(status().isOk())
+				.andExpect(view().name("productos/FormularioProducto"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessUpdateFormSuccess() throws Exception {
+		mockMvc.perform(post("/productos/{productoId}/edit",1).with(csrf())
+				// .param("id", "1")
+				.param("referencia", "NEU54638")
+				.param("nombre", "Neumaticos")
+				.param("marca", "Nexen")
+				.param("stock", "7")
+				.param("stockSeguridad", "4"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/productos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessUpdateFormHasErrors() throws Exception {
+		mockMvc.perform(post("/productos/{productoId}/edit",1).with(csrf())
+				.param("referencia", "NEU54638")
+				.param("nombre", "Neumaticos")
+				.param("marca", "Nexen")
+				.param("stock", "3")
+				.param("stockSeguridad", "4"))
+				.andExpect(model().attributeHasErrors("producto"))
+				.andExpect(model().attributeHasFieldErrors("producto", "stockSeguridad")).andExpect(status().isOk())
+				.andExpect(view().name("productos/FormularioProducto"));
 	}
 
 }

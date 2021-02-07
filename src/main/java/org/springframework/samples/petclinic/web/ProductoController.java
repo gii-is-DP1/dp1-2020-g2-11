@@ -41,7 +41,7 @@ public class ProductoController {
 		return "productos/ListaProductos";
 	}
 	
-	@GetMapping(value = { "/productos/productosNoDisonibles" })
+	@GetMapping(value = { "/productos/productosNoDisponibles" })
 	public String findAllProductosNoDisponibles(Map<String, Object> model) {
 		Collection<Producto> productos = (Collection<Producto>) productoService.findProductosNoDisponibles();
 		model.put("producto", productos);
@@ -60,9 +60,7 @@ public class ProductoController {
 	@GetMapping(value = "/productos/new")
 	public String initCreationForm(ModelMap model) {
 		Producto producto = new Producto();
-		
-		model.put("producto", producto);
-		
+		model.put("producto", producto);		
 		return "productos/FormularioProducto";
 	}
 
@@ -80,8 +78,6 @@ public class ProductoController {
 		}
 	}
 	
-	
-	
 	@GetMapping(value = { "/productos/oculta/{productoId}" })
 	public String ocultaProducto(@PathVariable("productoId") Integer productoId) {
 		productoService.ocultarProducto(productoId);
@@ -95,9 +91,9 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/productos/{productoId}/edit")
-	public String initUpdateProductoForm(@PathVariable("productoId") int productoId, Model model) {
+	public String initUpdateProductoForm(@PathVariable("productoId") int productoId, ModelMap model) {
 		Producto producto = this.productoService.findProductoById(productoId);
-		model.addAttribute(producto);
+		model.put("producto", producto);
 		return "productos/FormularioProducto";
 	}
 
