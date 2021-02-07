@@ -7,11 +7,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,6 +28,11 @@ public class ProductoController {
 	public ProductoController(ProductoService productoService) {
 		this.productoService = productoService;
 	}
+	
+	@InitBinder("producto")
+    public void initProductoBinder(WebDataBinder dataBinder) {
+        dataBinder.setValidator(new ProductoValidator());
+    }
 
 	@GetMapping(value = { "/productos" })
 	public String findAllProductos(Map<String, Object> model) {
@@ -46,23 +55,20 @@ public class ProductoController {
 		Producto producto = new Producto();
 		
 		model.put("producto", producto);
-		producto.setDisponible(true);
+		
 		return "productos/FormularioProducto";
 	}
 
 	@PostMapping(value = "/productos/new")
 	public String processCreationForm(@Valid Producto producto, BindingResult result, ModelMap model) {
-		
 		if (result.hasErrors()) {
+			
 			model.put("producto", producto);
-			producto.setDisponible(true);
 			return "productos/FormularioProducto";
 		} else {
 			
 			model.put("producto", producto);
-			producto.setDisponible(true);
 			this.productoService.saveProducto(producto);
-			
 			return "redirect:/productos";
 		}
 	}
@@ -71,6 +77,27 @@ public class ProductoController {
 	public String ocultaProducto(@PathVariable("productoId") Integer productoId) {
 		productoService.ocultarProducto(productoId);
 		return "redirect:/productos";
+	}
+	
+	@GetMapping("/productos/{productoId}/edit")
+	public String initUpdateProductoForm(@PathVariable("productoId") int productoId, Model model) {
+		Producto producto = this.productoService.findProductoById(productoId);
+		model.addAttribute(producto);
+		return "productos/FormularioProducto";
+	}
+
+	@PostMapping("/productos/{productoId}/edit")
+	public String processUpdateProductoForm(@Valid Producto producto, BindingResult result,  ModelMap model,
+			@PathVariable("productoId") int productoId) {
+		if (result.hasErrors()) {
+			model.put("producto", producto);
+			return "productos/FormularioProducto";
+		}
+		else {
+			producto.setId(productoId);
+			this.productoService.saveProducto(producto);
+			return "redirect:/productos";
+		}
 	}
 	
 	
