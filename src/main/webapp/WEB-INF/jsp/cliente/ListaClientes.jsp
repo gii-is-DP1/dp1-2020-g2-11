@@ -22,7 +22,6 @@
 				<th style="width: 100px;">Teléfono</th>
 				<th style="width: 100px;">Email</th>
 				<th style="width: 50px;">Editar</th>
-				<th style="width: 50px;">Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,9 +38,6 @@
 					<td><spring:url value="/cliente/{clienteId}/edit" var="clienteUrl">
 							<spring:param name="clienteId" value="${cliente.id}" />
 						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(clienteUrl)}"></a></td>
-					<td><spring:url value="/cliente/delete/{clienteId}" var="clienteUrl">
-					<spring:param name="clienteId" value="${cliente.id}" />
-					</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(clienteUrl)}"></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

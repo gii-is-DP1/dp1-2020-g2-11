@@ -27,6 +27,8 @@
 		</tr>
 
 	</table>
-	
+	<spring:url value="/cliente/{clienteId}/edit" var="clienteUrl">
+					<spring:param name="clienteId" value="${cliente.id}" />
+	</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Editar</a>
 	
 </petclinic:layout>

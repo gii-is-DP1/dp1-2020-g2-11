@@ -15,9 +15,7 @@
 	<table id="tablaMecanico" class="table table-striped">
 		<thead>
 			<tr>
-				<th style="width: 150px;">Id</th>
 				<th style="width: 100px;">Nombre</th>
-				<th style="width: 100px">Apellidos</th>
 				<th style="width: 100px">DNI</th>
 				<th style="width: 100px">Telefono</th>
 				<th style="width: 100px">Email</th>
@@ -26,10 +24,7 @@
 		<tbody>
 			<c:forEach items="${selections}" var="mecanico">
 				<tr>
-					<td><spring:url value="/mecanicos/{mecanicoId}" var="mecanicoUrl">
-							<spring:param name="mecanicoId" value="${mecanico.id}" />
-						</spring:url> <a href="${fn:escapeXml(mecanicoUrl)}"><c:out
-								value="${mecanico.nombre} ${mecanico.apellidos}" /></a></td>
+					<td><c:out value="${mecanico.nombre} ${mecanico.apellidos}"/></td>
 					<td><c:out value="${mecanico.dni}" /></td>
 					<td><c:out value="${mecanico.telefono}" /></td>
 					<td><c:out value="${mecanico.email}" /></td>
