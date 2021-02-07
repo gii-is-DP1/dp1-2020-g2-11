@@ -27,7 +27,7 @@ public class ProveedorServiceTest {
 	public void shouldInsertProveedor() {
 		proveedor = new Proveedor();
 		proveedor.setNombre("Aceites Juan");
-		proveedor.setTelefono(655212326);
+		proveedor.setTelefono("655212326");
 		proveedor.setDireccion("C/Jacinto");
 		proveedor.setEmail("aceitesjuan@gmail.com");
                 

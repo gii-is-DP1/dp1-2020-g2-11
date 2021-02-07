@@ -37,9 +37,11 @@ import lombok.Setter;
 		@NotEmpty
 		private String dni;
 		
+		@Pattern(regexp = "\\d{9}")
 		@Column(name = "telefono")
 		private String telefono;
 
+		@Pattern(regexp = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")
 		@Column(name = "email")
 		private String email;
 		
