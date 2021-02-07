@@ -71,16 +71,16 @@ public class ProveedorControllerTest {
 
 	@WithMockUser(value = "spring")
      @Test
-	void testProcessCreationFormSuccess() throws Exception {
+	void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("proveedores/new")
 							.with(csrf())
 							//.param("id", "1")
 							.param("nombre", "Neumaticos Paco")
 							.param("telefono", "653746489")
 							.param("direccion", "c/Ave del Paraiso n31")
-							.param("email", "neumaticospaco@gmail.com"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("proveedores/ListaProveedores"));
+							.param("email", "neumaticospaco@gmail.com")).andExpect(status().is4xxClientError());
+//				.andExpect(status().is3xxRedirection())
+//				.andExpect(view().name("proveedores/ListaProveedores"));
 	}
  
 	 

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Table(name = "proveedor")
 public class Proveedor extends BaseEntity {
 	
-	@UniqueElements
+
 	@javax.validation.constraints.NotBlank
 	@NotEmpty
 	@Column(name = "nombre")
