@@ -3,6 +3,8 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -17,18 +19,21 @@ public class Proveedor extends BaseEntity {
 	
 	@UniqueElements
 	@javax.validation.constraints.NotBlank
+	@NotEmpty
 	@Column(name = "nombre")
 	private String nombre;
 
-	@javax.validation.constraints.NotBlank
+	@NotNull
 	@Column(name = "telefono")
-	private String telefono;
+	private Integer telefono;
 
 	@javax.validation.constraints.NotBlank
+	@NotEmpty
 	@Column(name = "direccion")
 	private String direccion;
 
 	@javax.validation.constraints.NotBlank
+	@NotEmpty
 	@Column(name = "email")
 	private String email;
 	

@@ -22,15 +22,18 @@ import lombok.Setter;
 	public class Person extends BaseEntity {
 
 		@Column(name = "nombre")
+		@javax.validation.constraints.NotBlank
 		@NotEmpty
 		protected String nombre;
 
 		@Column(name = "apellidos")
+		@javax.validation.constraints.NotBlank
 		@NotEmpty
 		protected String apellidos;
 		
 		@Pattern(regexp = "\\d{8}[A-HJ-NP-TV-Z]")
 		@Column(name =  "dni", unique=true)
+		@javax.validation.constraints.NotBlank
 		@NotEmpty
 		private String dni;
 		

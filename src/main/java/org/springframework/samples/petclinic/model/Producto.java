@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -15,6 +16,7 @@ import lombok.Setter;
 public class Producto extends BaseEntity{
 	
 	@javax.validation.constraints.NotBlank
+	@NotEmpty
 	@Column(name = "referencia")
 	private String referencia;
 
@@ -23,10 +25,12 @@ public class Producto extends BaseEntity{
 	private Integer stock;
 
 	@javax.validation.constraints.NotBlank
+	@NotEmpty
 	@Column(name = "nombre")
 	private String nombre;
 
 	@javax.validation.constraints.NotBlank
+	@NotEmpty
 	@Column(name = "marca")
 	private String marca;
 

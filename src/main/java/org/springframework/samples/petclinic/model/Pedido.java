@@ -20,7 +20,7 @@ import lombok.Setter;
 @Table(name="pedido")
 public class Pedido extends BaseEntity{
 	
-	@NotNull
+	
 	@Column(name = "fechaEntrada")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEntrada;
