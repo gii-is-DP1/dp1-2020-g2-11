@@ -9,12 +9,11 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
-<TalleresLaPlata:layout pageName="productosNoDisponibles">
+<TalleresLaPlata:layout pageName="proveedores">
 
-
-
-	<h2>Todos los productos no disponibles</h2>
-	<table id="tablaProducto" class="table table-striped">
+	
+	<h2>Todos los proveedores no disponibles</h2>
+	<table id="tablaProveedor" class="table table-striped">
 		<thead>
 			<tr>
 				<th style="width: 150px;">Nombre</th>
@@ -22,11 +21,12 @@
 				<th style="width: 100px">Direccion</th>
 				<th style="width: 100px">Email</th>
 				<th style="width: 50px">Añadir</th>
+				
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${proveedor}" var="proveedor">
-				<tr>
+				<tr>			
 					<td><spring:url value="/proveedor/{proveedorId}"
 							var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
@@ -36,9 +36,11 @@
 					<td><c:out value="${proveedor.direccion}" /></td>
 					<td><c:out value="${proveedor.email}" /></td>
 					
-				    <td><spring:url value="/proveedor/{proveedorId}/oculta" var="proveedorUrl">
+					<td><spring:url value="/proveedor/{proveedorId}/devuelve" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(proveedorUrl)}"></a></td>
+						</spring:url> <a class="glyphicon glyphicon-plus" href="${fn:escapeXml(proveedorUrl)}"></a></td>
+				
+				    
 				</tr>
 			</c:forEach>
 		</tbody>

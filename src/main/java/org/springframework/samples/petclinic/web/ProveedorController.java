@@ -33,6 +33,13 @@ public class ProveedorController {
 		modelMap.put("proveedor", proveedores);
 		return "proveedores/ListaProveedores";
 	}
+	
+	@GetMapping(value = { "/proveedores/proveedoresNoDisponibles" })
+	public String findAllproveedoresNoDisponibles(ModelMap modelMap) {
+		Collection<Proveedor> proveedores = proveedorService.findProveedoresNoDisponibles();
+		modelMap.put("proveedor", proveedores);
+		return "proveedores/ProveedoresNoDisponibles";
+	}
 
 	@GetMapping(value = { "/proveedorbynombre" })
 	public String findproveedorsByNombre(String nombre, Proveedor proveedor, BindingResult res,
@@ -103,7 +110,13 @@ public class ProveedorController {
 	
 	@GetMapping(value = { "/proveedor/{proveedorId}/oculta" })
 	public String ocultaProveedor(@PathVariable("proveedorId") Integer proveedorId) {
-		proveedorService.findProveedorNoDisponibles(proveedorId);
+		proveedorService.ocultaProveedorDisponible(proveedorId);
+		return "redirect:/proveedores";
+	}
+	
+	@GetMapping(value = { "/proveedor/{proveedorId}/devuelve" })
+	public String devuelveProveedor(@PathVariable("proveedorId") Integer proveedorId) {
+		proveedorService.devuelveProveedorNoDisponible(proveedorId);
 		return "redirect:/proveedores";
 	}
 }
