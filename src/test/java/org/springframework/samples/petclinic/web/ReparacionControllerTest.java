@@ -17,22 +17,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Reparacion;
 import org.springframework.samples.petclinic.model.Revision;
+import org.springframework.samples.petclinic.model.TipoReparacion;
 import org.springframework.samples.petclinic.service.ClienteService;
-import org.springframework.samples.petclinic.service.RevisionService;
+import org.springframework.samples.petclinic.service.ReparacionService;
 import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers = RevisionController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
-public class RevisionControllerTest {
+@WebMvcTest(controllers = ReparacionController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
+
+public class ReparacionControllerTest {
 
 	@Autowired
-	private RevisionController revisionController;
+	private ReparacionController reparacionController;
 
 	@MockBean
-	private RevisionService revisionService;
+	private ReparacionService reparacionService;
 	@MockBean
 	private ClienteService clienteService;
 	@MockBean
@@ -40,47 +43,37 @@ public class RevisionControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-
+	
 	@BeforeEach
 	void setup() {
-		Revision revision = new Revision();
-		revision.setId(5);
-		revision.setDescripcion("Ruedas traseras y frenos desgastados");
-		revision.setDuracion(5);
-		revision.setFechaRevision(LocalDate.of(2021, 1, 23));
-
-//		given(this.revisionService.findAllRevisiones()).willReturn(Lists.newArrayList(revision));
+		Reparacion reparacion = new Reparacion();
+		reparacion.setId(5);
+		reparacion.setDuracion(30);
+		reparacion.setPrecio(25.00);;
+		reparacion.setTipoReparacion(TipoReparacion.MECANICA);
 
 	}
-
+	
 	@WithMockUser(value = "spring")
 	@Test
 	void findAllRevisionesTest() throws Exception {
-		mockMvc.perform(get("/revisiones")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("revisiones"))
-		.andExpect(view().name("revisiones/ListaRevisiones"));
-	}
-
-	@WithMockUser(value = "spring")
-	@Test
-	void findRevisionByFechaTest() throws Exception {
-		mockMvc.perform(get("/revisionFecha")).andExpect(status().isOk())
-			.andExpect(model().attributeExists("revisiones"))
-			.andExpect(view().name("revisiones/ListaRevisiones"));
+		mockMvc.perform(get("/reparaciones")).andExpect(status().isOk())
+		.andExpect(model().attributeExists("reparaciones"))
+		.andExpect(view().name("reparaciones/ListaReparaciones"));
 	}
 	
-	 @WithMockUser(value = "spring")
+	@WithMockUser(value = "spring")
 	 @Test
 	 void findRevisionById() throws Exception{
-		 mockMvc.perform(get("/revision/{revisionId}",1)).andExpect(status().isOk());
+		 mockMvc.perform(get("/reparacion/{reparacionId}",1)).andExpect(status().isOk());
 		 
 	 }
-	 
+	
 	 @WithMockUser(value = "spring")
      @Test
 	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/revision/new")).andExpect(status().isOk())
-				.andExpect(view().name("revisiones/FormularioRevision")).andExpect(model().attributeExists("revision"));
+		mockMvc.perform(get("/reparacion/new")).andExpect(status().isOk())
+				.andExpect(view().name("reparaciones/FormularioReparacion")).andExpect(model().attributeExists("reparacion"));
 	}
 	 
 	 @WithMockUser(value = "spring")
@@ -97,5 +90,11 @@ public class RevisionControllerTest {
 	//			.andExpect(view().name("redirect:/revisiones"));
 	}
 	 
-	 
+	 @WithMockUser(value = "spring")
+	    @Test
+	    void testInitUpdateReparacionForm() throws Exception {
+			mockMvc.perform(get("/reparacion/1/edit")).andExpect(status().isOk());
+	//		.andExpect(view().name("reparaciones/FormularioReparacion")).andExpect(model().attributeExists("reparacion"));
+		}
+
 }

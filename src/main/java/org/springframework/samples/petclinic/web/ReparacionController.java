@@ -42,7 +42,7 @@ public class ReparacionController {
 	@GetMapping(value= {"/reparaciones"})
 	public String findAllReparaciones(Map<String,Object> model) {
 		Collection<Reparacion> reparaciones= reparacionService.findReparaciones();
-		model.put("reparacion", reparaciones);
+		model.put("reparaciones", reparaciones);
 		return "reparaciones/ListaReparaciones";
 	}
 //	@GetMapping(value = "/reparacion/find")
@@ -92,7 +92,7 @@ public class ReparacionController {
 	}
 	
 	@GetMapping("/reparacion/{reparacionId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("reparacionId") int reparacionId, Model model) {
+	public String initUpdateReparacionForm(@PathVariable("reparacionId") int reparacionId, Model model) {
 		Reparacion reparacion = this.reparacionService.findReparacionById(reparacionId).get();
 		model.addAttribute(reparacion);
 		return "reparaciones/FormularioReparacion";
