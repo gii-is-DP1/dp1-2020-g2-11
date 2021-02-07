@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +59,7 @@ public class ClienteController {
 	}
 
 	@GetMapping(value = { "/cliente" })
-	public String processFindForm(@Valid Cliente cliente, BindingResult res, Map<String, Object> model) {
+	public String processFindForm(Cliente cliente, BindingResult res, Map<String, Object> model) {
 		if (cliente.getNombre() == null) {
 			cliente.setNombre(""); // empty string signifies broadest possible search
 		}
@@ -100,17 +101,17 @@ public class ClienteController {
     }
 	
 	@GetMapping("/cliente/{clienteId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, ModelMap model) {
+	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, Model model) {
 		Cliente cliente = this.clienteService.findClienteById(clienteId).get();
-		model.put("cliente", cliente);
-		return "cliente/ListaClientes";
+		model.addAttribute(cliente);
+		return "users/createClienteForm";
 	}
 
 	@PostMapping("/cliente/{clienteId}/edit")
 	public String processUpdateOwnerForm(@Valid Cliente cliente, BindingResult result,
 			@PathVariable("clienteId") int clienteId) {
 		if (result.hasErrors()) {
-			return "cliente/ListaClientes";
+			return "users/createClienteForm";
 		}
 		else {
 			cliente.setId(clienteId);
