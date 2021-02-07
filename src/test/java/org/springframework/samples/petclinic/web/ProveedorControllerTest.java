@@ -42,7 +42,7 @@ public class ProveedorControllerTest {
 		Proveedor proveedor = new Proveedor();
 		proveedor.setId(5);
 		proveedor.setNombre("Marcos");
-		proveedor.setTelefono(654857147);
+		proveedor.setTelefono("654857147");
 		proveedor.setDireccion("Virgen de las Angustias, 9");
 		proveedor.setEmail("marquitosbambino@gmail.com");
 	}
@@ -51,22 +51,24 @@ public class ProveedorControllerTest {
 	 @Test
 	 void findAllProveedoresTest() throws Exception{
 		 mockMvc.perform(get("/proveedores")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("proveedor")).andExpect(view().name("proveedores/ListaProveedores"));
+		 .andExpect(model().attributeExists("proveedor"))
+		 .andExpect(view().name("proveedores/ListaProveedores"));
 	 }
 	 
 	 @WithMockUser(value = "spring")
 	 @Test
 	 void findProveedorByNombreTest() throws Exception{
 		 mockMvc.perform(get("/proveedorbynombre")).andExpect(status().isOk())
-		 .andExpect(model().attributeExists("proveedor")).andExpect(view().name("proveedores/ListaProveedores"));
-		// mockMvc.perform(get("/productos/{productoId}",1)).andExpect(status().isOk());
+		 .andExpect(model().attributeExists("proveedor"))
+		 .andExpect(view().name("proveedores/ListaProveedores"));
 	}
 
 	 @WithMockUser(value = "spring")
      @Test
 	void testInitCreationForm() throws Exception {
 		mockMvc.perform(get("/proveedores/new")).andExpect(status().isOk())
-				.andExpect(view().name("proveedores/FormularioProveedor")).andExpect(model().attributeExists("proveedor"));
+				.andExpect(view().name("proveedores/FormularioProveedor"))
+				.andExpect(model().attributeExists("proveedor"));
 	}
 
 	@WithMockUser(value = "spring")
@@ -76,11 +78,12 @@ public class ProveedorControllerTest {
 							.with(csrf())
 							//.param("id", "1")
 							.param("nombre", "Neumaticos Paco")
-							.param("telefono", "653746489")
+							.param("telefono", "65374689")
 							.param("direccion", "c/Ave del Paraiso n31")
-							.param("email", "neumaticospaco@gmail.com")).andExpect(status().is4xxClientError());
-//				.andExpect(status().is3xxRedirection())
-//				.andExpect(view().name("proveedores/ListaProveedores"));
+							.param("email", "neumaticospaco@gmail.com"))
+		.andExpect(model().attributeHasErrors("proveedor"))
+		.andExpect(model().attributeHasFieldErrors("proveedor", "telefono")).andExpect(status().isOk())
+		.andExpect(view().name("proveedor/FormularioProveedor"));
 	}
  
 	 

@@ -51,6 +51,7 @@
 		</tbody>
 	</table>
 		<a class="btn btn-default" href='<spring:url value="/proveedores/new" htmlEscape="true"/>'>Añadir</a>
+		<a class="btn btn-default" href='<spring:url value="/proveedores/proveedoresNoDisponibles" htmlEscape="true"/>'>Proveedores no disponibles</a>
 	<br />
 
 </TalleresLaPlata:layout>
