@@ -31,16 +31,6 @@ public class ProductoService {
 //		productoRepository.deleteById(id);
 //	}
 	
-//	@Transactional
-//	public void updateProducto(Producto producto) throws DataAccessException, ProductoStockSeguridad {
-//		productoRepository.update(producto);
-//		Integer StockSeguridad = ((Producto) productoRepository.findByNombre(producto.getNombre())).getStockseguridad();
-//		Integer Stock = ((Producto) productoRepository.findByNombre(producto.getNombre())).getStock();
-//		if(Stock <= StockSeguridad) {
-//			throw new ProductoStockSeguridad();
-//		}
-//	}
-	
 	@Transactional(readOnly = true)	
 	public Collection<Producto> findProductos() throws DataAccessException {
 		return (Collection<Producto>) productoRepository.findAll();
@@ -66,9 +56,21 @@ public class ProductoService {
 		Producto producto= productoRepository.findById(productoId).get();
 		producto.setDisponible(false);
 	}
+	
+	@Transactional
+	public void devuelveProducto(Integer productoId) {
+		Producto producto= productoRepository.findById(productoId).get();
+		producto.setDisponible(true);
+	}
+	
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductosDisponibles() {
 		return productoRepository.findDisponibles(true);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Producto> findProductosNoDisponibles() {
+		return productoRepository.findDisponibles(false);
 	}
 
 	@Transactional(readOnly=true)
@@ -76,5 +78,4 @@ public class ProductoService {
 		return productoRepository.findById(productoId).get();
 	}
 
-	
 }

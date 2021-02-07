@@ -40,14 +40,21 @@ public class ProductoController {
 		model.put("producto", productos);
 		return "productos/ListaProductos";
 	}
-
-	@PostMapping(value = { "/productos" })
-	public String findProductosByNombre(String nombre, @Valid Producto producto, BindingResult res,
-			Map<String, Object> model) {
-		Collection<Producto> productos = this.productoService.findProductoByNombre(nombre);
+	
+	@GetMapping(value = { "/productos/productosNoDisonibles" })
+	public String findAllProductosNoDisponibles(Map<String, Object> model) {
+		Collection<Producto> productos = (Collection<Producto>) productoService.findProductosNoDisponibles();
 		model.put("producto", productos);
-		return "productos/ListaProductos";
+		return "productos/ProductosNoDisponibles";
 	}
+
+//	@PostMapping(value = { "/productos" })
+//	public String findProductosByNombre(String nombre, @Valid Producto producto, BindingResult res,
+//			Map<String, Object> model) {
+//		Collection<Producto> productos = this.productoService.findProductoByNombre(nombre);
+//		model.put("producto", productos);
+//		return "productos/ListaProductos";
+//	}
 	
 
 	@GetMapping(value = "/productos/new")
@@ -73,9 +80,17 @@ public class ProductoController {
 		}
 	}
 	
+	
+	
 	@GetMapping(value = { "/productos/oculta/{productoId}" })
 	public String ocultaProducto(@PathVariable("productoId") Integer productoId) {
 		productoService.ocultarProducto(productoId);
+		return "redirect:/productos";
+	}
+	
+	@GetMapping(value = { "/productos/devuelve/{productoId}" })
+	public String develveProducto(@PathVariable("productoId") Integer productoId) {
+		productoService.devuelveProducto(productoId);
 		return "redirect:/productos";
 	}
 	

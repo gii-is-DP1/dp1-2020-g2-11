@@ -52,5 +52,6 @@
 
 	<br />
 		<a class="btn btn-default" href='<spring:url value="/productos/new" htmlEscape="true"/>'>Añadir</a>
-
+		<a class="btn btn-default" href='<spring:url value="/productos/productosNoDisonibles" htmlEscape="true"/>'>Productos no disponibles</a>
+		
 </TalleresLaPlata:layout>
