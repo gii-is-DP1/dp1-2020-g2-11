@@ -69,7 +69,7 @@ public class FacturaService {
 	
 	@Transactional(readOnly = true)
 	public Set<Factura> findMisfacturas(Integer id) throws DataAccessException {
-		return (Set<Factura>) facturaRepository.findByCliente(id);
+	return (Set<Factura>) facturaRepository.findByCliente(id);
 	}
 
 	@Transactional

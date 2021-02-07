@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
 import org.springframework.samples.petclinic.service.exceptions.LimitePagoException;
+import org.springframework.samples.petclinic.service.exceptions.NoPagadaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,32 +69,14 @@ public class ClienteService {
 		userService.deleteUser(cliente.getUser());
 		
 	}
-//	@Transactional(readOnly = true)
-//	public Cliente findClienteByFactura(Integer idFactura) throws DataAccessException {
-//		return clienteRepository.findByIdFactura(idFactura);
-//	}
-//
-//	@Transactional(readOnly = true)
-//	public void deleteClientebyFactura(Integer id) throws DataAccessException {
-//		Factura factura = new Factura();
-//		Cliente cliente = new Cliente();
-//		Cliente cliente2 = new Cliente();
-//		cliente2 = findClienteByFactura(id);
-//		if (factura.getPagado())
-//			if (factura.getCliente().equals(cliente2)) {
-//				cliente2 = cliente;
-//			} else
-//				System.out.println("Hay facturas sin pagar");
-//
-//	}
 
 	@Transactional
-	public void saveClientebyFactura(Cliente cliente) throws DataAccessException, LimitePagoException {
+	public void saveClientebyFactura(Cliente cliente) throws DataAccessException, NoPagadaException {
 		Factura factura = new Factura();
 		factura.getPagado();
 		if (Boolean.FALSE && factura.getFechaEmision().compareTo(LocalDate.now()) >= 15) {
 			clienteRepository.save(cliente);
-			throw new LimitePagoException();
+			throw new NoPagadaException();
 		} else {
 			clienteRepository.delete(cliente);
 

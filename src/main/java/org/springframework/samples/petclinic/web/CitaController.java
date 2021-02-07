@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.CitaService;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.VehiculoService;
+import org.springframework.samples.petclinic.service.exceptions.NotPropertyException;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,11 +66,13 @@ public class CitaController {
 
 	@PostMapping(value = "/cita/new")
 	public String processCreationForm(@Valid Cita cita, BindingResult result,
-			 ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException {
+			 ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException  {
 		if (result.hasErrors()) {
 			model.put("cita", cita);
 			return "citas/FormularioCita";
-		} else {
+		} 	
+			
+			else {
 			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 					.getPrincipal();
 			String username = clienteDetails.getUsername();
@@ -77,7 +80,7 @@ public class CitaController {
 			Vehiculo vehiculo = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
 			cita.setVehiculo(vehiculo);
 			cita.setCliente(clienteRegistered);
-			this.citaService.saveCita(cita);
+				this.citaService.saveCita(cita);
 			return "redirect:/citas/cliente";
 		}
 	}	

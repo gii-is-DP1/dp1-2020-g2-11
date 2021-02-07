@@ -29,6 +29,11 @@ public class CitaValidator implements Validator {
 			errors.rejectValue("horaCita",  " debe estar entre las 8:00 y las 16:00",
 					 " debe estar entre las 8:00 y las 16:00");
 		}
+		if (vehiculo.getCliente()!=cliente) {
+			errors.rejectValue("horaCita",  " No puedes crear una cita con un coche que pertenece a otro cliente",
+					 " No puedes crear una cita con un coche que pertenece a otro cliente");
+		}
+
 	}
 
 	@Override

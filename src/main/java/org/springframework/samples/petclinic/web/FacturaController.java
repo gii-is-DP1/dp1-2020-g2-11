@@ -13,14 +13,15 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.FacturaService;
-import org.springframework.samples.petclinic.service.exceptions.NoPagadaException;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,7 +37,10 @@ public class FacturaController {
 		this.facturaService = facturaService;
 		this.clienteService = clienteService;
 	}
-
+	@InitBinder("cita")
+    public void initPetBinder(WebDataBinder dataBinder) {
+        dataBinder.setValidator(new FacturaValidator());
+    }
 	@GetMapping(value = { "/facturas" })
 	public String findAllFacturas(Map<String, Object> model) {
 		Collection<Factura> facturas = facturaService.findFacturas();

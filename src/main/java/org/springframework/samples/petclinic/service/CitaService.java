@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.repository.CitaRepository;
+import org.springframework.samples.petclinic.service.exceptions.NotPropertyException;
 import org.springframework.samples.petclinic.service.exceptions.SobrecargaDeVehiculosException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,11 +23,14 @@ public class CitaService {
 	}
 
 	@Transactional
-	public void saveCita(Cita cita) throws DataAccessException, SobrecargaDeVehiculosException {
+	public void saveCita(Cita cita) throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException {
 		int n_otherCitas = citaRepository.findByFechaCita(cita.getFechaCita()).size();
 		if (n_otherCitas <= 12) {
 			citaRepository.save(cita);
-		} else {
+		}else if(cita.getVehiculo().getCliente()!=cita.getCliente()) {
+			throw new NotPropertyException();
+		}
+		else {
 			throw new SobrecargaDeVehiculosException();
 		}
 	}
