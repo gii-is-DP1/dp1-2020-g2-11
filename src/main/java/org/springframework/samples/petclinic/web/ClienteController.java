@@ -92,6 +92,12 @@ public class ClienteController {
 //	}
 //	
 //	
+	@GetMapping(value = { "/cliente/{clienteId}" })
+    public String findById(@PathVariable("clienteId") int clienteId, ModelMap map) {
+        Cliente clientes = clienteService.findClienteById(clienteId).get();
+        map.put("cliente", clientes);
+        return "cliente/clienteDetails";
+    }
 	
 	@GetMapping("/cliente/{clienteId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("clienteId") int clienteId, ModelMap model) {
