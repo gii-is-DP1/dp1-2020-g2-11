@@ -25,14 +25,14 @@ public class ProductoValidator implements Validator {
 		if (stockSeguridad==null) {
 			errors.rejectValue("stockSeguridad", "no puede ser null", "no puede ser null");
 		}
-		if (marca.isBlank() || marca.isEmpty()) {
-			errors.rejectValue("marca", "no puede ser null", "no puede ser null");
+		if (marca.startsWith(" ") || marca.isEmpty()) {
+			errors.rejectValue("marca", "no puede empezar por espacio ni estar vacio", "no puede empezar por espacio ni estar vacio");
 		}
-		if (nombre.isBlank() || nombre.isEmpty()) {
-			errors.rejectValue("nombre", "no puede ser null", "no puede ser null");
+		if (nombre.startsWith(" ") || nombre.isEmpty()) {
+			errors.rejectValue("nombre", "no puede empezar por espacio ni estar vacio", "no puede empezar por espacio ni estar vacio");
 		}
-		if (referencia.isBlank() || referencia.isEmpty()) {
-			errors.rejectValue("referencia", "no puede ser null", "no puede ser null");
+		if (referencia.startsWith(" ") || referencia.isEmpty()) {
+			errors.rejectValue("referencia", "no puede empezar por espacio ni estar vacio", "no puede empezar por espacio ni estar vacio");
 		}
 	}
 
