@@ -54,7 +54,7 @@ public class EstanciaControllerTest {
 		estancia.setFechaSalida(LocalDate.of(2020,11, 30));
 		estancia.setHoraEntrada(LocalTime.of(10, 30));
 		estancia.setHoraSalida(LocalTime.of(12, 30));
-		estancia.setDuracion(10);
+		
 	}
 	@WithMockUser(value = "spring")
 	@Test
@@ -106,7 +106,6 @@ public class EstanciaControllerTest {
 					.param("horaEntrada", "10:00")
 					.param("fechaSalida", "08/01/2021")
 					.param("horaSalida", "10:00")
-					.param("duracion", "50")
 					.param("vehiculo.matricula", "4728FPG"))
 					.andExpect(status().is3xxRedirection())
 					.andExpect(view().name("redirect:/estancias"));

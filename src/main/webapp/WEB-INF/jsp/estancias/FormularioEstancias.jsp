@@ -27,7 +27,6 @@
             <TalleresLaPlata:inputField label="Hora de entrada" name="horaEntrada" />
             <TalleresLaPlata:inputField label="Dia de salida" name="fechaSalida" />
             <TalleresLaPlata:inputField label="Hora de salida" name="horaSalida" />
-            <TalleresLaPlata:inputField label="Duracion de la estancia (en minutos)" name="duracion" />
             <TalleresLaPlata:inputField label="Matricula" name="vehiculo.matricula" />
             
         </div>

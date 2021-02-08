@@ -41,9 +41,6 @@ public class Estancia extends BaseEntity {
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime horaSalida;
 
-	@NotNull
-	@Column(name = "duracion")
-	private Integer duracion;
 	
 	@ManyToOne
 	@JoinColumn(name="vehiculo_id")

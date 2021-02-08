@@ -36,10 +36,7 @@ public class EstanciaService {
 		
 	}
 
-	@Transactional(readOnly = true)
-	public Collection<Estancia> findEstanciasActuales() throws DataAccessException {
-		return estanciaRepository.findByEstacionados();
-	}
+	
 
 	@Transactional(readOnly = true)
 	public Collection<Estancia> findAllEstancia() throws DataAccessException {

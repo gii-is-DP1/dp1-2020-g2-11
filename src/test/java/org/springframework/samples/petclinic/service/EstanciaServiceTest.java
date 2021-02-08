@@ -33,19 +33,14 @@ public class EstanciaServiceTest {
 		estancia.setHoraEntrada(LocalTime.of(9, 30));
 		estancia.setFechaSalida(LocalDate.of(2021, 1, 27));
 		estancia.setHoraSalida(LocalTime.of(10, 30));
-		estancia.setDuracion(28);
+		
 
 		this.estanciaService.saveEstancia(estancia);
 		Collection<Estancia> estancias = estanciaService.findAllEstancia();
 		assertThat(estancias.size()).isEqualTo(5);
 	}
 
-	@Test
-	@Transactional
-	public void shouldFindEstacionados() throws DataAccessException{
-		Collection<Estancia> estancias = estanciaService.findEstanciasActuales();
-		assertThat(estancias.size()).isEqualTo(0);
-	}
+
 
 	@Test
 	@Transactional
