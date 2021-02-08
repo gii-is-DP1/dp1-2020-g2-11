@@ -39,23 +39,6 @@ class ProductoServiceTest {
 		assertThat(producto.getMarca()).isNotNull();
 	}
 
-
-//	@Test
-//	@Transactional
-//	public void shouldUpdateProducto() throws DataAccessException, ProductoStockSeguridad {
-//
-//		producto = new Producto();
-//		producto.setNombre("Neumaticos");
-//		producto.setMarca("Michelin");
-//		producto.setReferencia("95/70R15");
-//		producto.setStock(7);
-//
-//		productoService.saveProducto(producto);
-//		producto.setMarca("Nexen");
-//		productoService.updateProducto(producto);
-//		assertThat(producto.getReferencia()).isNull();
-//	}
-
 	@Test
 	@Transactional
 	public void shoulFindAllProductos() {
@@ -127,6 +110,15 @@ class ProductoServiceTest {
 	@Test
 	@Transactional
 	public void shoulFindProductoById() {
+		producto = new Producto();
+		producto.setNombre("Neumaticos");
+		producto.setMarca("Nexen");
+		producto.setReferencia("95/70R15");
+		producto.setStock(7);
+		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
+
+		productoService.saveProducto(producto);
 		Producto producto = this.productoService.findProductoById(1);
 		assertThat(producto.getNombre().equals("Neumaticos"));
 	}
@@ -134,13 +126,31 @@ class ProductoServiceTest {
 	@Test
 	@Transactional
 	public void shouldFindProductosDisponibles() {
+		producto = new Producto();
+		producto.setNombre("Neumaticos");
+		producto.setMarca("Nexen");
+		producto.setReferencia("95/70R15");
+		producto.setStock(7);
+		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
+
+		productoService.saveProducto(producto);
 		Collection<Producto> productos = (Collection<Producto>) this.productoService.findProductosDisponibles();
-		assertThat(productos.size()).isEqualTo(2);
+		assertThat(productos.size()).isEqualTo(3);
 	}
 	
 	@Test
 	@Transactional
 	public void shouldFindProductosNoDisponibles() {
+		producto = new Producto();
+		producto.setNombre("Neumaticos");
+		producto.setMarca("Nexen");
+		producto.setReferencia("95/70R15");
+		producto.setStock(7);
+		producto.setStockSeguridad(3);
+		producto.setDisponible(true);
+
+		productoService.saveProducto(producto);
 		Collection<Producto> productos = (Collection<Producto>) this.productoService.findProductosNoDisponibles();
 		assertThat(productos.size()).isEqualTo(1);
 	}
