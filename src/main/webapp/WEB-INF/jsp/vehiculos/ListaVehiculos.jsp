@@ -13,29 +13,16 @@
 
 	<sec:authorize
 		access="hasAuthority('admin') or hasAuthority('mecanico')">
-		
-		<h2>Buscar vehiculo</h2>
-		<form:form modelAttribute="vehiculo" action="/vehiculos" method="post"
-			class="form-horizontal" id="buscador-vehiculos">
-			<div class="form-group">
-				<div class="control-group" id="matricula">
-					<label class="col-sm-2 control-label">Matricula</label>
-					<div class="col-sm-10">
-						<form:input class="form-control" path="matricula" size="30"
-							maxlength="80" />
-						<span class="help-inline"><form:errors path="*" /></span>
-						<span id="matricula.errors">No existe la matrícula </span>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
+           			  <label for="tipoVehiculo">Buscar tipo de vehiculo:</label>
+  			<select name="tipoVehiculo" id="tipoVehiculo"> 
+  			<c:forEach items="${tipoVehiculo}" var="tipoVehiculo">
+ 			  <option value="${tipoVehiculo}" ><c:out value="${tipoVehiculo}" /></option> 
+    </c:forEach>
+  </select> 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-default">Buscar</button>
 				</div>
 			</div>
-			 <p>${customMessage}</p>
-			
-		</form:form>
 	</sec:authorize>
 	<h2>Vehiculos</h2>
 	<table id="tablaVehiculo" class="table table-striped">

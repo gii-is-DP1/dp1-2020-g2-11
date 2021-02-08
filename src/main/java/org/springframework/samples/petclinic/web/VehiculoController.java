@@ -47,6 +47,8 @@ public class VehiculoController {
 	
 	@GetMapping(value = { "/vehiculos" })
 	public String findVehiculos(Map<String, Object> model) {
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
 		Vehiculo vehiculo = new Vehiculo();
 		model.put("vehiculo", vehiculo);
@@ -54,20 +56,20 @@ public class VehiculoController {
 		return "vehiculos/ListaVehiculos";
 	}
 
-	@PostMapping(value = { "/vehiculos" })
-	public String findvehiculosByMatricula(@Valid String matricula, BindingResult res, Map<String, Object> model) {
-		// buscamos vehiculo por matricula
-		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(matricula);
-		if (vehiculos == null) {
-			// no clientes found
-			res.rejectValue("matricula", "notFound", "not found");
-			return "redirect:/vehiculos";
-
-		} else {
-			model.put("vehiculo", vehiculos);
-		}
-		return "redirect:/vehiculo/" + vehiculos.getId();
-	}
+//	@PostMapping(value = { "/vehiculos" })
+//	public String findvehiculosByMatricula(String matricula, BindingResult res, Map<String, Object> model) {
+//		// buscamos vehiculo por matricula
+//		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(matricula);
+//		if (vehiculos == null) {
+//			// no clientes found
+//			res.rejectValue("matricula", "notFound", "not found");
+//			return "redirect:/vehiculos";
+//
+//		} else {
+//			model.put("vehiculo", vehiculos);
+//		}
+//		return "redirect:/vehiculo/" + vehiculos.getId();
+//	}
 
 //	@GetMapping(value = { "/vehiculos" })
 //	public String findAllVehiculos(ModelMap model) {
@@ -107,20 +109,17 @@ public class VehiculoController {
 //		}
 //	}
 
-	@GetMapping(value = { "/vehiculo/tipo" })
-	public String findVehiculoByTipo(String tpo, BindingResult res, ModelMap model) {
-		if (tpo == null || tpo == "") {
-			Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
-			model.put("vehiculos", vehiculos);
-		} else {
-			TipoVehiculo tp = TipoVehiculo.valueOf(tpo);
-			Collection<Vehiculo> results = vehiculoService.findVehiculoByTipo(tp);
+	@PostMapping(value = { "/vehiculos" })
+	public String findVehiculoByTipo(TipoVehiculo tpo, BindingResult res, ModelMap model) {
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
+			Collection<Vehiculo> results = vehiculoService.findVehiculoByTipo(tpo);
 			if (results.isEmpty()) {
 				res.rejectValue("tipoVehiculo", "notFound", "not found");
 			} else {
 				model.put("vehiculos", results);
 			}
-		}
+		
 		return "vehiculos/ListaVehiculos";
 	}
 	
