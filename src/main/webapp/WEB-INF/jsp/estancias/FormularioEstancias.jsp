@@ -14,6 +14,9 @@
             $(function () {
                 $("#fechaSalida").datepicker({dateFormat: 'dd/mm/yy'});
             });
+            $(function () {
+                $("#horaEntrada").);
+            });
         </script>
     </jsp:attribute>
 
