@@ -61,8 +61,15 @@ public class ReparacionServiceTest {
 	@Transactional
 	@DisplayName("Finding reparaciones")
 	public void shouldFindReparaciones() throws DataAccessException {
+		reparacion = new Reparacion();
+		reparacion.setId(5);
+		reparacion.setDuracion(130); // en minutos
+		reparacion.setPrecio(61.50);
+		reparacion.setTipoReparacion(TipoReparacion.ELECTRICA);
+		
+		this.reparacionService.saveReparacion(reparacion);
 		Collection<Reparacion> reparaciones = this.reparacionService.findReparaciones();
-		assertThat(reparaciones.size()).isEqualTo(3);
+		assertThat(reparaciones.size()).isEqualTo(4);
 	}
 
 	@Test
