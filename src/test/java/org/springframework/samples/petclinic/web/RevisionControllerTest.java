@@ -19,6 +19,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.MecanicoService;
 import org.springframework.samples.petclinic.service.RevisionService;
 import org.springframework.samples.petclinic.service.VehiculoService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -37,6 +38,8 @@ public class RevisionControllerTest {
 	private ClienteService clienteService;
 	@MockBean
 	private VehiculoService vehiculoService;
+	@MockBean
+	private MecanicoService mecanicoService;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -48,9 +51,6 @@ public class RevisionControllerTest {
 		revision.setDescripcion("Ruedas traseras y frenos desgastados");
 		revision.setDuracion(5);
 		revision.setFechaRevision(LocalDate.of(2021, 1, 23));
-
-
-
 	}
 
 	@WithMockUser(value = "spring")
