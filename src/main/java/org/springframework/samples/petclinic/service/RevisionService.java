@@ -3,9 +3,11 @@ package org.springframework.samples.petclinic.service;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Mecanico;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.repository.RevisionRepository;
@@ -56,6 +58,11 @@ public class RevisionService {
 		revision.setAsignada(true);
 		revision.setMecanico(mecanico);
 	
+	}
+
+	public Set<Revision> findMisRevisiones(Integer mecanicoId) {
+		// TODO Auto-generated method stub
+		return (Set<Revision>) revisionRepository.findByMecanico(mecanicoId);
 	}
 
 

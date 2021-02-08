@@ -2,11 +2,13 @@ package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Mecanico;
 import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.model.Vehiculo;
@@ -116,7 +118,7 @@ public class RevisionController {
 		String username = clienteDetails.getUsername();
 		Mecanico mecanico =this.mecanicoService.findByUsername(username);
 		revisionService.AsignedRevision(revisionId, mecanico);
-		return "redirect:/revisionesNoAsignadas";
+		return "redirect:/revisiones/mecanico";
 	}
 
 	@GetMapping(value = { "/revision/{revisionId}" })
@@ -131,6 +133,16 @@ public class RevisionController {
 		revisionService.deleteRevision(revisionId);
 		return "redirect:/revisiones";
 
+	}
+	
+	@GetMapping(value = { "/revisiones/mecanico" })
+	public String findMisRevisiones(Map<String, Object> model) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Mecanico mecanico= mecanicoService.findByUsername(clienteDetails.getUsername());
+		Integer mecanicoId = mecanico.getId();
+		Collection<Revision> revisiones = revisionService.findMisRevisiones(mecanicoId);
+		model.put("revisiones", revisiones);
+		return "revisiones/ListaRevisiones";
 	}
   }
 

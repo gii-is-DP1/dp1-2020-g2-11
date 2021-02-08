@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Cita;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.TipoVehiculo;
 import org.springframework.samples.petclinic.model.Vehiculo;
@@ -43,7 +42,7 @@ public class VehiculoController {
 		this.clienteService = clienteService;
 	}
 
-	@InitBinder("vehiculo")
+	@InitBinder("vehiculo/new")
     public void initPetBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new VehiculoValidator());
     }
@@ -57,9 +56,9 @@ public class VehiculoController {
 	}
 
 	@PostMapping(value = { "/vehiculos" })
-	public String findvehiculosByMatricula(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
+	public String findvehiculosByMatricula(@Valid String matricula, BindingResult res, Map<String, Object> model) {
 		// buscamos vehiculo por matricula
-		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
+		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(matricula);
 		if (vehiculos == null) {
 			// no clientes found
 			res.rejectValue("matricula", "notFound", "not found");
@@ -84,30 +83,30 @@ public class VehiculoController {
 		return "vehiculos/ListaVehiculos";
 	}
 	
-	@GetMapping(value = { "/vehiculo" })
-	public String processFindForm(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
-		if (vehiculo.getMatricula() == null) {
-			vehiculo.setMatricula(""); // empty string signifies broadest possible search
-		}
-		// find vehiculos by matricula
-		Collection<Vehiculo> results = (Collection<Vehiculo>) this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
-		
-		if (results.isEmpty()) {
-			// no vehiculos found
-			res.rejectValue("matricula", "notFound", "not found");
-			return "redirect:/vehiculos/find";
-			
-		} else if (results.size() == 1) {
-			// 1 vehiculo found
-			vehiculo = results.iterator().next();
-			return "redirect:/vehiculos/" + vehiculo.getId();
-			
-		} else {
-			// multiple vehiculos found
-			model.put("vehiculo", results);
-			return "vehiculos/ListaVehiculos";
-		}
-	}
+//	@GetMapping(value = { "/vehiculo" })
+//	public String processFindForm(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
+//		if (vehiculo.getMatricula() == null) {
+//			vehiculo.setMatricula(""); // empty string signifies broadest possible search
+//		}
+//		// find vehiculos by matricula
+//		Collection<Vehiculo> results = (Collection<Vehiculo>) this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
+//		
+//		if (results.isEmpty()) {
+//			// no vehiculos found
+//			res.rejectValue("matricula", "notFound", "not found");
+//			return "redirect:/vehiculos/find";
+//			
+//		} else if (results.size() == 1) {
+//			// 1 vehiculo found
+//			vehiculo = results.iterator().next();
+//			return "redirect:/vehiculos/" + vehiculo.getId();
+//			
+//		} else {
+//			// multiple vehiculos found
+//			model.put("vehiculo", results);
+//			return "vehiculos/ListaVehiculos";
+//		}
+//	}
 
 	@GetMapping(value = { "/vehiculo/tipo" })
 	public String findVehiculoByTipo(String tpo, BindingResult res, ModelMap model) {
@@ -152,14 +151,13 @@ public class VehiculoController {
 	}
 
 	@PostMapping(value = "/vehiculo/new")
-	public String processCreationForm(Cliente cliente, @Valid Vehiculo vehiculo, BindingResult result, ModelMap model)
+	public String processCreationForm(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model)
 			throws DataAccessException, VehiculosAntiguo, DuplicatedVehiculoException {
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
 		} else {
-			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
 			vehiculo.setCliente(clienteRegistered);
@@ -175,7 +173,7 @@ public class VehiculoController {
 	}
 
 	@GetMapping("/vehiculo/{vehiculoId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("vehiculoId") int vehiculoId, Model model) {
+	public String initUpdateVehicleForm(@PathVariable("vehiculoId") int vehiculoId, Model model) {
 
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
 		model.addAttribute(vehiculo);
@@ -183,18 +181,41 @@ public class VehiculoController {
 	}
 
 	@PostMapping("/vehiculo/{vehiculoId}/edit")
-	public String processUpdateOwnerForm(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model,
+	public String processUpdateVehicleForm(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model,
 			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
 		} else {
 			vehiculo.setId(vehiculoId);
-			Cliente c = this.clienteService.findClienteByDni(vehiculo.getCliente().getDni());
-			vehiculo.setCliente(c);
+			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username = clienteDetails.getUsername();
+			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+			vehiculo.setCliente(clienteRegistered);
 			this.vehiculoService.saveVehiculo(vehiculo);
 			return "redirect:/vehiculo/{vehiculoId}";
 		}
 	}
+	
+	@GetMapping("/vehiculos/{vehiculoId}/edit")
+	public String initUpdateVehicleForm2(@PathVariable("vehiculoId") int vehiculoId, Model model) {
+		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
+		model.addAttribute(vehiculo);
+		return "vehiculos/formularioVehiculo";
+	}
 
+	@PostMapping("/vehiculos/{vehiculoId}/edit")
+	public String processUpdateVehicleForm2(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model,
+			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
+		if (result.hasErrors()) {
+			model.put("vehiculo", vehiculo);
+			return "vehiculos/formularioVehiculo";
+		} else {
+			vehiculo.setId(vehiculoId);
+			Cliente cliente =clienteService.findClienteByDni(vehiculo.getCliente().getDni());
+			vehiculo.setCliente(cliente);
+			this.vehiculoService.saveVehiculo(vehiculo);
+			return "redirect:/vehiculo/{vehiculoId}";
+		}
+	}
 }
