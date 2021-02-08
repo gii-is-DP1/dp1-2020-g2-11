@@ -56,7 +56,7 @@
 					<sec:authorize access="hasAuthority('mecanico')">
 					<td><spring:url value="/revision/asignar/{revisionId}" var="revisionUrl">
 					<spring:param name="revisionId" value="${revision.id}" />
-					</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
+					</spring:url> <a class="glyphicon glyphicon-plus" href="${fn:escapeXml(revisionUrl)}"></a></td>
 </sec:authorize>
 				</tr>
 

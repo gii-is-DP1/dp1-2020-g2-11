@@ -22,7 +22,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -41,6 +43,10 @@ public class VehiculoController {
 		this.clienteService = clienteService;
 	}
 
+	@InitBinder("vehiculo")
+    public void initPetBinder(WebDataBinder dataBinder) {
+        dataBinder.setValidator(new VehiculoValidator());
+    }
 	@GetMapping(value = { "/vehiculos" })
 	public String findVehiculos(Map<String, Object> model) {
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
