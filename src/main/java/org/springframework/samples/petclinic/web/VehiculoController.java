@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.Collection;
-import java.util.Map;
-
 import javax.validation.Valid;
+import java.util.*; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -146,6 +144,8 @@ public class VehiculoController {
 	@GetMapping(value = "/vehiculo/new")
 	public String initCreationForm(ModelMap model) {
 		Vehiculo vehiculo = new Vehiculo();
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
 		model.put("vehiculo", vehiculo);
 		return "vehiculos/formularioVehiculo";
 	}
@@ -173,10 +173,13 @@ public class VehiculoController {
 //	}
 
 	@GetMapping("/vehiculo/{vehiculoId}/edit")
-	public String initUpdateVehicleForm(@PathVariable("vehiculoId") int vehiculoId, Model model) {
+	public String initUpdateVehicleForm(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
 
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
-		model.addAttribute(vehiculo);
+		model.put("vehiculo",vehiculo);
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		vehiculo.setId(vehiculoId);
+		model.put("tipoVehiculo", l);
 		return "vehiculos/formularioVehiculo";
 	}
 
@@ -187,7 +190,9 @@ public class VehiculoController {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
 		} else {
+			Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
 			vehiculo.setId(vehiculoId);
+			model.put("tipoVehiculo", l);
 			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);

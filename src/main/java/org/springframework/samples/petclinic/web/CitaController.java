@@ -59,6 +59,11 @@ public class CitaController {
 
 	@GetMapping(value = "/cita/new")
 	public String initCreationForm(ModelMap model) {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = clienteDetails.getUsername();
+		Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculoByCliente(clienteRegistered.getId());
+		model.put("vehiculo", vehiculo);
 		Cita cita = new Cita();
 		model.put("cita", cita);
 		return "citas/FormularioCita";
@@ -68,8 +73,9 @@ public class CitaController {
 	public String processCreationForm(@Valid Cita cita, BindingResult result,
 			 ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException  {
 		if (result.hasErrors()) {
+			
 			model.put("cita", cita);
-			return "citas/FormularioCita";
+			return "redirect:/cita/new";
 		} 	
 			else {
 			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

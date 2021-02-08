@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "cita")
 public class Cita extends BaseEntity{
-
+	
 	@NotNull
 	@Column(name = "fechaCita")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

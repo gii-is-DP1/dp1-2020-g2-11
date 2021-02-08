@@ -14,7 +14,13 @@
     <form:form modelAttribute="vehiculo" class="form-horizontal" id="add-producto-form">
         <div class="form-group has-feedback">
             <TalleresLaPlata:inputField label="Matricula" name="matricula"/>
-            <TalleresLaPlata:inputField label="Tipo" name="tipoVehiculo"/>
+            
+           			  <label for="tipoVehiculo">Escoge un tipo de vehiculo:</label>
+  			<select name="tipoVehiculo" id="tipoVehiculo"> 
+  			<c:forEach items="${tipoVehiculo}" var="tipoVehiculo">
+ 			  <option value="${tipoVehiculo}" ><c:out value="${tipoVehiculo}" /></option> 
+    </c:forEach>
+  </select> 
             <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
             <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
             <sec:authorize access="hasAuthority('admin')">

@@ -19,9 +19,15 @@
     </h2>
     <form:form modelAttribute="cita" class="form-horizontal" id="add-cita-form">
         <div class="form-group has-feedback">
-            <TalleresLaPlata:inputField label="Fecha" name="fechaCita" />
+            <TalleresLaPlata:inputField label="Fecha (posterior a hoy)" name="fechaCita" />
             <TalleresLaPlata:inputField label="Hora" name="horaCita" />
-            <TalleresLaPlata:inputField label="Matricula" name="vehiculo.matricula" />
+            
+<label for="vehiculo">Matricula de su coche:</label>
+  	<select name="vehiculo.matricula" id="vehiculo.matricula"> 
+  		<c:forEach items="${vehiculo}" var="vehiculo">
+  		<option value="${vehiculo.matricula}" ><c:out value="${vehiculo.matricula}" /></option> 
+    </c:forEach>
+  </select> 
             
         </div>
         <div class="form-group">
