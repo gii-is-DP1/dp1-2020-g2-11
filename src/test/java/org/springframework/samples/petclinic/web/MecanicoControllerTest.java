@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -55,5 +57,29 @@ public class MecanicoControllerTest {
 		mockMvc.perform(get("/mecanicos")).andExpect(status().isOk()).
 		andExpect(model().attributeExists("selections")).
 		andExpect(view().name("mecanicos/ListaMecanicos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitCreationForm() throws Exception {
+		mockMvc.perform(get("/mecanicos/new")).andExpect(status().isOk())
+				.andExpect(view().name("mecanicos/FormularioMecanico"))
+				.andExpect(model().attributeExists("mecanico"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/mecanicos/new").with(csrf())
+				// .param("id", "1")
+				.param("nombre", "pepe")
+				.param("apellidos", "perez")
+				.param("dni", "75446318K")
+				.param("telefono", "644568987")
+				.param("email", "pepe@gmail.com")
+				.param("usuario", "mecanico3")
+				.param("contraseña", "mec1234"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/mecanicos"));
 	}
 }
