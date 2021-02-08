@@ -21,6 +21,11 @@ public class VehiculoValidator implements Validator {
 					" No podemos atender un vehiculo con mas de 12 años de antiguedad ");
 		}
 
+		if (fechaFabricacion.isAfter(LocalDate.now())) {
+			errors.rejectValue("fechaFabricacion", " La fecha de fabricación no puede ser posterior a la de hoy ",
+					" La fecha de fabricación no puede ser posterior a la de hoy ");
+		}
+		
 		if (kilometraje == null) {
 			errors.rejectValue("kilometraje", "Este campo no puede estar vacio", "Este campo no puede estar vacio");
 		}
