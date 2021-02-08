@@ -40,7 +40,7 @@
 									value="${factura.cliente.dni}" /></a></td>
 					</sec:authorize>
 					<td><c:out value="${factura.descripcion}" />
-					<td><c:out value="${factura.precio}" /></td>
+					<td><c:out value="${factura.totalprecio}" /></td>
 					<td><c:out value="${factura.tipoPago}" /></td>
 					<td><c:out value="${factura.fechaEmision}" /></td>
 					<td><c:out value="${factura.pagado}" /></td>

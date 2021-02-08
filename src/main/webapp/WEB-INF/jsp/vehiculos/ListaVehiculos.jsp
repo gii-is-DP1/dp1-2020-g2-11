@@ -72,7 +72,7 @@
 						</spring:url> <a class="glyphicon glyphicon-pencil"
 						href="${fn:escapeXml(vehiculoUrl)}"></a></td>
 						</sec:authorize>
-						<sec:authorize access="hasAuthority('admin')">
+						<sec:authorize access="hasAuthority('admin') or hasAuthority('mecanico')">
 					<td><spring:url value="/vehiculos/{vehiculoId}/edit"
 							var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${vehiculos.id}" />

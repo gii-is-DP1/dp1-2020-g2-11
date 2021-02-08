@@ -48,6 +48,7 @@ public class FacturaService {
 		if (precio > 300 && tpago == TipoPago.EFECTIVO) {
 			throw new TipoPagoException();
 		} else {
+			factura.setTotalprecio(precio);
 			facturaRepository.save(factura);
 		}
 	}
@@ -73,8 +74,9 @@ public class FacturaService {
 		Integer notPayedDays = year*365 +days;
 		if(notPayedDays>=15) {
 		Double precio = factura.getPrecio()*notPayedDays*0.05 + factura.getPrecio();
-		factura.setPrecio(precio);
+		factura.setTotalprecio(precio);
 		}
+		
 		}
 		}
 		

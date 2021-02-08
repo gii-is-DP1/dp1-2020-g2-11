@@ -16,7 +16,7 @@ public class VehiculoValidator implements Validator {
 		Integer kilometraje = vehiculo.getKilometraje();
 		String matricula = vehiculo.getMatricula();
 
-		if (LocalDate.now().getYear() - fechaFabricacion.getYear() >= 12) {
+		if ((LocalDate.now().getYear() - fechaFabricacion.getYear() >= 12) || (fechaFabricacion.equals(null))) {
 			errors.rejectValue("fechaFabricacion", " No podemos atender un vehiculo con mas de 12 años de antiguedad ",
 					" No podemos atender un vehiculo con mas de 12 años de antiguedad ");
 		}

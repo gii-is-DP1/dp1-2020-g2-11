@@ -26,6 +26,9 @@ public class Factura extends BaseEntity {
 	@NotNull
 	@Column(name = "precio")
 	private Double precio;
+	@NotNull
+	@Column(name = "totalprecio")
+	private Double totalprecio;
 	
 	@NotNull
 	@Column(name = "tipoPago")
@@ -39,6 +42,7 @@ public class Factura extends BaseEntity {
 	@NotNull
 	@Column(name = "pagado")
 	private Boolean pagado;
+	
 
 	@ManyToOne
     @JoinColumn(name = "cliente_id")
