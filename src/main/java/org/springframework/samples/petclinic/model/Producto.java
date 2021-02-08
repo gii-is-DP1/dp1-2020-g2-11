@@ -15,26 +15,18 @@ import lombok.Setter;
 @Table(name = "producto")
 public class Producto extends BaseEntity{
 	
-	@javax.validation.constraints.NotBlank
-	@NotEmpty
 	@Column(name = "referencia")
 	private String referencia;
 
-	@NotNull
 	@Column(name = "stock")
 	private Integer stock;
 
-	@javax.validation.constraints.NotBlank
-	@NotEmpty
 	@Column(name = "nombre")
 	private String nombre;
 
-	@javax.validation.constraints.NotBlank
-	@NotEmpty
 	@Column(name = "marca")
 	private String marca;
 
-	@NotNull
 	@Column(name = "stockSeguridad")
 	private Integer stockSeguridad;
 	

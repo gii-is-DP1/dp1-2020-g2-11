@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.ProductoService;
@@ -65,13 +66,11 @@ public class ProductoController {
 	}
 
 	@PostMapping(value = "/productos/new")
-	public String processCreationForm(@Valid Producto producto, BindingResult result, ModelMap model) {
+	public String processCreationForm(@Valid Producto producto, BindingResult result, ModelMap model) throws DataAccessException{
 		if (result.hasErrors()) {
-			
 			model.put("producto", producto);
 			return "productos/FormularioProducto";
-		} else {
-			
+		} else {			
 			model.put("producto", producto);
 			this.productoService.saveProducto(producto);
 			return "redirect:/productos";
@@ -91,7 +90,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/productos/{productoId}/edit")
-	public String initUpdateProductoForm(@PathVariable("productoId") int productoId, ModelMap model) {
+	public String initUpdateProductoForm(@PathVariable("productoId") int productoId, ModelMap model) throws DataAccessException{
 		Producto producto = this.productoService.findProductoById(productoId);
 		model.put("producto", producto);
 		return "productos/FormularioProducto";
@@ -100,9 +99,14 @@ public class ProductoController {
 	@PostMapping("/productos/{productoId}/edit")
 	public String processUpdateProductoForm(@Valid Producto producto, BindingResult result,  ModelMap model,
 			@PathVariable("productoId") int productoId) {
-		if (result.hasErrors()) {
+		
+		if (!result.hasFieldErrors("stock")) {
 			model.put("producto", producto);
 			return "productos/FormularioProducto";
+		} else if (result.hasFieldErrors("stock")) {
+			producto.setId(productoId);
+			this.productoService.saveProducto(producto);
+			return "redirect:/productos";
 		}
 		else {
 			producto.setId(productoId);
