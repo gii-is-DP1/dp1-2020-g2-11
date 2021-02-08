@@ -48,4 +48,6 @@
             </div>
         </div>
     </form:form>
+         </jsp:body>
+    
 </TalleresLaPlata:layout>
