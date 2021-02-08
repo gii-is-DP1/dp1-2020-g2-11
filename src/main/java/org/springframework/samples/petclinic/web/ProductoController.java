@@ -100,15 +100,16 @@ public class ProductoController {
 	public String processUpdateProductoForm(@Valid Producto producto, BindingResult result,  ModelMap model,
 			@PathVariable("productoId") int productoId) {
 		
-		if (!result.hasFieldErrors("stock")) {
-			model.put("producto", producto);
-			return "productos/FormularioProducto";
-		} else if (result.hasFieldErrors("stock")) {
-			producto.setId(productoId);
-			this.productoService.saveProducto(producto);
-			return "redirect:/productos";
-		}
-		else {
+		if (result.hasErrors()) {
+			if (result.hasFieldErrors("stock")) {
+				producto.setId(productoId);
+				this.productoService.saveProducto(producto);
+				return "redirect:/productos";
+			} else {
+				model.put("producto", producto);
+				return "productos/FormularioProducto";
+			}
+		} else {
 			producto.setId(productoId);
 			this.productoService.saveProducto(producto);
 			return "redirect:/productos";
