@@ -44,9 +44,13 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/pedido/{pedidoId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("pedidoId") int pedidoId, Model model) {
+	public String initUpdateOwnerForm(@PathVariable("pedidoId") int pedidoId, ModelMap model, Model mo ) {
 		Pedido pedido = this.pedidoService.findById(pedidoId).get();
-		model.addAttribute(pedido);
+		Collection<Proveedor> proveedores=proveedorService.findProveedoresDisponibles();
+		model.put("proveedor", proveedores);
+		Collection <Producto> productos=productoService.findProductosDisponibles();
+		model.put("producto", productos);		
+		mo.addAttribute(pedido);
 		return "pedidos/FormularioPedido";
 	}
 
@@ -87,7 +91,9 @@ public class PedidoController {
 			return "pedidos/FormularioPedido";
 		}
 		else {
+			Proveedor pr= this.proveedorService.findProveedorById(pedido.getProveedor().getId());
 			Producto pro=this.productoService.findProductoByReferencia(pedido.getProducto().getReferencia());
+			pedido.setProveedor(pr);
 			pedido.setProducto(pro);
 			this.pedidoService.savePedido(pedido);
 			return "redirect:/pedidos";
