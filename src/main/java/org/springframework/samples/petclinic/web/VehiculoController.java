@@ -153,6 +153,8 @@ public class VehiculoController {
 	@PostMapping(value = "/vehiculo/new")
 	public String processCreationForm(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model)
 			throws DataAccessException, VehiculosAntiguo, DuplicatedVehiculoException {
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";

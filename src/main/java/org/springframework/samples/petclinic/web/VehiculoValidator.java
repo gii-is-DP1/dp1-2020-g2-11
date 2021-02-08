@@ -7,16 +7,26 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 public class VehiculoValidator implements Validator {
-	
+
 	@Override
 	public void validate(Object obj, Errors errors) {
 
-		Vehiculo vehiculo= (Vehiculo) obj;
-		LocalDate fechaFabricacion= vehiculo.getFechaFabricacion();
-		
-		if (LocalDate.now().getYear()-fechaFabricacion.getYear()>=12) {
+		Vehiculo vehiculo = (Vehiculo) obj;
+		LocalDate fechaFabricacion = vehiculo.getFechaFabricacion();
+		Integer kilometraje = vehiculo.getKilometraje();
+		String matricula = vehiculo.getMatricula();
+
+		if (LocalDate.now().getYear() - fechaFabricacion.getYear() >= 12) {
 			errors.rejectValue("fechaFabricacion", " No podemos atender un vehiculo con mas de 12 años de antiguedad ",
 					" No podemos atender un vehiculo con mas de 12 años de antiguedad ");
+		}
+
+		if (kilometraje == null) {
+			errors.rejectValue("kilometraje", "Este campo no puede estar vacio", "Este campo no puede estar vacio");
+		}
+
+		if (matricula.startsWith(" ") || matricula.isEmpty()) {
+			errors.rejectValue("matricula", "Este campo no puede estar vacio", "Este campo no puede estar vacio");
 		}
 	}
 
@@ -25,5 +35,4 @@ public class VehiculoValidator implements Validator {
 		return Vehiculo.class.isAssignableFrom(clazz);
 	}
 
-	
 }
