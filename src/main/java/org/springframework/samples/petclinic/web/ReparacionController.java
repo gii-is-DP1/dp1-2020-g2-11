@@ -2,15 +2,11 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Reparacion;
-import org.springframework.samples.petclinic.model.Revision;
 import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReparacionService;
@@ -45,11 +41,6 @@ public class ReparacionController {
 		model.put("reparaciones", reparaciones);
 		return "reparaciones/ListaReparaciones";
 	}
-//	@GetMapping(value = "/reparacion/find")
-//	public String initFindForm(Map<String, Object> model) {
-//		model.put("selections", new Reparacion());
-//		return "reparaciones/ListaReparaciones";
-//	}
 	
 	@GetMapping(value = { "/reparacion/{reparacionId}" })
 	public String findById(@PathVariable("reparacionId") int reparacionId, ModelMap map) {
