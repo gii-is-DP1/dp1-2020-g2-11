@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Controller;
@@ -39,6 +38,13 @@ public class ProveedorController {
 		Collection<Proveedor> proveedores = proveedorService.findProveedoresNoDisponibles();
 		modelMap.put("proveedor", proveedores);
 		return "proveedores/ProveedoresNoDisponibles";
+	}
+	
+	@GetMapping(value = { "/proveedor/{proveedorId}" })
+	public String findProveedorById(@PathVariable("proveedorId") int proveedorId, ModelMap model) {
+		Proveedor proveedor = this.proveedorService.findProveedorById(proveedorId);
+		model.put("proveedor", proveedor);
+		return "proveedores/proveedorDetails";
 	}
 
 	@GetMapping(value = { "/proveedorbynombre" })
@@ -74,28 +80,21 @@ public class ProveedorController {
 			model.put("proveedor", proveedor);
 			return "proveedores/FormularioProveedor";
 		} else {
+			model.put("proveedor", proveedor);
 			this.proveedorService.saveProveedor(proveedor);
 			return "redirect:/proveedores";
 		}
 	}
 	
-	@GetMapping(value = { "/proveedor/{proveedorId}" })
-	public String findProveedorById(@PathVariable("proveedorId") int proveedorId, ModelMap model) {
-		Proveedor proveedor = proveedorService.findProveedorById(proveedorId);
-		model.put("proveedor", proveedor);
-		return "proveedores/proveedorDetails";
-	}
-	
-	
 	@GetMapping("/proveedor/{proveedorId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("proveedorId") int proveedorId, Model model) {
-		Proveedor proveedor = this.proveedorService.findProveedorById(proveedorId);
-		model.addAttribute(proveedor);
+	public String initUpdateProveedorForm(@PathVariable("proveedorId") int proveedorId, ModelMap model) {
+		Proveedor proveedor = proveedorService.findProveedorById(proveedorId);
+		model.put("proveedor",proveedor);
 		return "proveedores/FormularioProveedor";
 	}
 
 	@PostMapping("/proveedor/{proveedorId}/edit")
-	public String processUpdateOwnerForm(@Valid Proveedor proveedor, BindingResult result,  ModelMap model,
+	public String processUpdateProveedorForm(@Valid Proveedor proveedor, BindingResult result,  ModelMap model,
 			@PathVariable("proveedorId") int proveedorId) {
 		if (result.hasErrors()) {
 			model.put("proveedor", proveedor);

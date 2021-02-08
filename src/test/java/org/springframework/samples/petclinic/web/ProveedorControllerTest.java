@@ -57,10 +57,25 @@ public class ProveedorControllerTest {
 	 
 	 @WithMockUser(value = "spring")
 	 @Test
+	 void findAllProveedoresNoDisponiblesTest() throws Exception{
+		 mockMvc.perform(get("/proveedores/proveedoresNoDisponibles")).andExpect(status().isOk())
+		 .andExpect(model().attributeExists("proveedor"))
+		 .andExpect(view().name("proveedores/ProveedoresNoDisponibles"));
+	 }
+	 
+	 @WithMockUser(value = "spring")
+	 @Test
 	 void findProveedorByNombreTest() throws Exception{
 		 mockMvc.perform(get("/proveedorbynombre")).andExpect(status().isOk())
 		 .andExpect(model().attributeExists("proveedor"))
 		 .andExpect(view().name("proveedores/ListaProveedores"));
+	}
+	 
+	 @WithMockUser(value = "spring")
+	 @Test
+	 void findProveedorByIdTest() throws Exception{
+		 mockMvc.perform(get("/proveedor/{proveedorId}",1)).andExpect(status().isOk())
+		 .andExpect(view().name("proveedores/proveedorDetails"));
 	}
 
 	 @WithMockUser(value = "spring")
@@ -70,32 +85,68 @@ public class ProveedorControllerTest {
 				.andExpect(view().name("proveedores/FormularioProveedor"))
 				.andExpect(model().attributeExists("proveedor"));
 	}
+	 
+	 @WithMockUser(value = "spring")
+		@Test
+		void testProcessCreationFormSuccess() throws Exception {
+			mockMvc.perform(post("/proveedores/new").with(csrf())
+					// .param("id", "1")
+					.param("nombre", "Neumaticos Paco")
+					.param("telefono", "653743689")
+					.param("direccion", "c/Ave del Paraiso n31")
+					.param("email", "neumaticospaco@gmail.com"))
+					.andExpect(status().is3xxRedirection())
+					.andExpect(view().name("redirect:/proveedores"));
+		}
 
 	@WithMockUser(value = "spring")
      @Test
 	void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("proveedores/new")
+		mockMvc.perform(post("/proveedores/new")
 							.with(csrf())
 							//.param("id", "1")
 							.param("nombre", "Neumaticos Paco")
-							.param("telefono", "65374689")
+							.param("telefono", "65374649")
 							.param("direccion", "c/Ave del Paraiso n31")
 							.param("email", "neumaticospaco@gmail.com"))
 		.andExpect(model().attributeHasErrors("proveedor"))
 		.andExpect(model().attributeHasFieldErrors("proveedor", "telefono")).andExpect(status().isOk())
-		.andExpect(view().name("proveedor/FormularioProveedor"));
+		.andExpect(view().name("proveedores/FormularioProveedor"));
 	}
  
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	@WithMockUser(value = "spring")
+    @Test
+	void testInitUpdateForm() throws Exception {
+		mockMvc.perform(get("/proveedor/{proveedorId}/edit",1)).andExpect(status().isOk())
+				.andExpect(view().name("proveedores/FormularioProveedor"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessUpdateFormSuccess() throws Exception {
+		mockMvc.perform(post("/proveedor/{proveedorId}/edit",1).with(csrf())
+				// .param("id", "1")
+				.param("nombre", "Neumatic Paco")
+				.param("telefono", "653743689")
+				.param("direccion", "c/Ave del Paraiso n31")
+				.param("email", "neumaticospaco@gmail.com"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/proveedor/{proveedorId}"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+	void testProcessUpdateFormHasErrors() throws Exception {
+		mockMvc.perform(post("/proveedor/{proveedorId}/edit",1)
+							.with(csrf())
+							//.param("id", "1")
+							.param("nombre", "Neumaticos Paco")
+							.param("telefono", "65374649")
+							.param("direccion", "c/Ave del Paraiso n31")
+							.param("email", "neumaticospaco@gmail.com"))
+		.andExpect(model().attributeHasErrors("proveedor"))
+		.andExpect(model().attributeHasFieldErrors("proveedor", "telefono")).andExpect(status().isOk())
+		.andExpect(view().name("proveedores/FormularioProveedor"));
+	}
 	 
 }
