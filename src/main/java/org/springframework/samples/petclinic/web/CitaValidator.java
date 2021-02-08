@@ -19,6 +19,7 @@ public class CitaValidator implements Validator {
 		LocalTime horaCita = cita.getHoraCita();
 		Cliente cliente = cita.getCliente();
 		Vehiculo vehiculo = cita.getVehiculo();
+	
 		if (fechaCita==null) {
 			errors.rejectValue("fechaCita", " No puede dejar el campo vacio",
 					"No puede dejar el campo vacio");

@@ -40,10 +40,11 @@ public class VehiculoController {
 		this.clienteService = clienteService;
 	}
 
-	@InitBinder("vehiculo/new")
+	@InitBinder("vehiculo")
     public void initPetBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new VehiculoValidator());
     }
+	
 	@GetMapping(value = { "/vehiculos" })
 	public String findVehiculos(Map<String, Object> model) {
 		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
