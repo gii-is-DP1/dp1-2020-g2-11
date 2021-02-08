@@ -6,6 +6,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <TalleresLaPlata:layout pageName="citas">
+       <jsp:attribute name="customScript">
+        <script>
+            $(function () {
+                $("#fechaCita").datepicker({dateFormat: 'dd/mm/yy'});
+            });
+        </script>
+    </jsp:attribute>
+    <jsp:body>
     <h2>
         <c:if test="${cita['new']}">Nuevo </c:if> Cita
     </h2>
@@ -29,4 +37,5 @@
             </div>
         </div>
     </form:form>
+     </jsp:body>
 </TalleresLaPlata:layout>

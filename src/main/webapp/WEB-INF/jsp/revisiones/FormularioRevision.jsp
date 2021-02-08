@@ -7,6 +7,13 @@
 <%@ taglib prefix="TalleresLaPlata" tagdir="/WEB-INF/tags" %>
 
 <TalleresLaPlata:layout pageName="revisiones">
+ <jsp:attribute name="customScript">
+        <script>
+            $(function () {
+                $("#fechaRevision").datepicker({dateFormat: 'dd/mm/yy'});
+            });
+        </script></jsp:attribute>
+    <jsp:body>
     <h2>
         <c:if test="${revision['new']}">Nuevo </c:if> Revision
     </h2>
@@ -32,4 +39,5 @@
             </div>
         </div>
     </form:form>
+     </jsp:body>
 </TalleresLaPlata:layout>
