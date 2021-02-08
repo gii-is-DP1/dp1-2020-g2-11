@@ -18,32 +18,32 @@
 		<thead>
 			<tr>
 				<th style="width: 150px;">Nombre</th>
-				<th style="width: 100px;">Telefono</th>
-				<th style="width: 100px">Direccion</th>
-				<th style="width: 100px">Email</th>
+				<th style="width: 150px;">Marca</th>
+				<th style="width: 150px">Stock</th>
+				<th style="width: 150px">Referencia</th>
+				<th style="width: 150px">StockSeguridad</th>
 				<th style="width: 50px">Añadir</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${proveedor}" var="proveedor">
+			<c:forEach items="${producto}" var="producto">
 				<tr>
-					<td><spring:url value="/proveedor/{proveedorId}"
-							var="proveedorUrl">
-							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a href="${fn:escapeXml(proveedorUrl)}"><c:out
-								value="${proveedor.nombre}" /></a></td>
-					<td><c:out value="${proveedor.telefono}" /></td>
-					<td><c:out value="${proveedor.direccion}" /></td>
-					<td><c:out value="${proveedor.email}" /></td>
-					
-				    <td><spring:url value="/proveedor/devuelve/{proveedorId}/" var="proveedorUrl">
-							<spring:param name="proveedorId" value="${proveedor.id}" />
-						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(proveedorUrl)}"></a></td>
+
+					<td><c:out value="${producto.nombre}" /></td>
+					<td><c:out value="${producto.marca}" /></td>
+					<td><c:out value="${producto.stock}" /></td>
+					<td><c:out value="${producto.referencia}" /></td>
+					<td><c:out value="${producto.stockSeguridad}" /></td>
+
+					<td><spring:url value="/productos/devuelve/{productoId}"
+							var="productoUrl">
+							<spring:param name="productoId" value="${producto.id}" />
+						</spring:url> <a class="glyphicon glyphicon-plus"
+						href="${fn:escapeXml(productoUrl)}"></a></td>
+
+
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-	<br />
-
 </TalleresLaPlata:layout>
