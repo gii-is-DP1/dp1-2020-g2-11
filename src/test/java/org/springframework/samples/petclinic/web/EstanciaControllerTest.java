@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -85,4 +87,28 @@ public class EstanciaControllerTest {
 		 .andExpect(status().is4xxClientError());
 	 }
 	
+	 
+	 
+		@WithMockUser(value = "spring")
+		@Test
+		void testInitCreationForm() throws Exception {
+			mockMvc.perform(get("/estancia/new")).andExpect(status().isOk())
+					.andExpect(view().name("estancias/FormularioEstancias"))
+					.andExpect(model().attributeExists("estancia"));
+		}
+
+		@WithMockUser(value = "spring")
+		@Test
+		void testProcessCreationFormSuccess() throws Exception {
+			mockMvc.perform(post("/estancia/new").with(csrf())
+					// .param("id", "1")
+					.param("fechaEntrada", "05/01/2021")
+					.param("horaEntrada", "10:00")
+					.param("fechaSalida", "08/01/2021")
+					.param("horaSalida", "10:00")
+					.param("duracion", "50")
+					.param("vehiculo.matricula", "4728FPG"))
+					.andExpect(status().is3xxRedirection())
+					.andExpect(view().name("redirect:/estancias"));
+		}
 }
