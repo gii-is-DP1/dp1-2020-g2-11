@@ -14,6 +14,9 @@
 	<sec:authorize access="hasAuthority('admin')">
 	<h2>Revisiones</h2>
 	</sec:authorize>
+	<sec:authorize access="hasAuthority('mecanico')">
+	<h2>Mis revisiones asignadas</h2>
+	</sec:authorize>
 	
 		
 	<table id="tablaRevision" class="table table-striped">
