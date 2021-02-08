@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import javax.validation.Valid;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Reparacion;
+import org.springframework.samples.petclinic.model.TipoReparacion;
+import org.springframework.samples.petclinic.model.TipoVehiculo;
 import org.springframework.samples.petclinic.model.Vehiculo;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReparacionService;
@@ -60,6 +63,8 @@ public class ReparacionController {
 		Reparacion reparacion = new Reparacion();
 		String dni = "";
 		String matricula = "";
+		Collection<TipoReparacion> tipo=(Arrays.asList(TipoReparacion.values()));
+		model.put("tipoReparacion", tipo);
 		model.put("reparacion", reparacion);
 		model.put("dni", dni);
 		model.put("matricula", matricula);
@@ -83,8 +88,10 @@ public class ReparacionController {
 	}
 	
 	@GetMapping("/reparacion/{reparacionId}/edit")
-	public String initUpdateReparacionForm(@PathVariable("reparacionId") int reparacionId, Model model) {
+	public String initUpdateReparacionForm(@PathVariable("reparacionId") int reparacionId, ModelMap model) {
 		Reparacion reparacion = this.reparacionService.findReparacionById(reparacionId).get();
+		Collection<TipoReparacion> tipo=(Arrays.asList(TipoReparacion.values()));
+		model.put("tipoReparacion", tipo);
 		model.addAttribute(reparacion);
 		return "reparaciones/FormularioReparacion";
 	}

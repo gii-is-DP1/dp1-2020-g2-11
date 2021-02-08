@@ -8,28 +8,36 @@
 
 <TalleresLaPlata:layout pageName="reparaciones">
 	<h2>
-		<c:if test="${reparacion['new']}">Nueva </c:if>Reparación
+		<c:if test="${reparacion['new']}">Nueva </c:if>
+		Reparación
 	</h2>
 	<form:form modelAttribute="reparacion" class="form-horizontal"
 		id="add-reparacion-form">
 		<div class="form-group has-feedback">
 			<TalleresLaPlata:inputField label="Duracion" name="duracion" />
 			<TalleresLaPlata:inputField label="Precio" name="precio" />
-			<TalleresLaPlata:inputField label="TipoReparacion" name="tipoReparacion" />
-			 <TalleresLaPlata:inputField label="Cliente" name="cliente.dni"/>
-            <TalleresLaPlata:inputField label="Matricula" name="vehiculo.matricula"/>
+			<label for="tipoReparacion">Escoge un tipo de reparacion:</label> <select
+				name="tipoReparacion" id="tipoReparacion">
+				<c:forEach items="${tipoReparacion}" var="tipoReparacion">
+					<option value="${tipoReparacion}"><c:out
+							value="${tipoReparacion}" /></option>
+				</c:forEach>
+			</select>
+			<TalleresLaPlata:inputField label="Cliente" name="cliente.dni" />
+			<TalleresLaPlata:inputField label="Matricula"
+				name="vehiculo.matricula" />
 		</div>
 		<div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
-                    <c:when test="${reparacion['new']}">
-                        <button class="btn btn-default" type="submit">Añadir</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar</button>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
+			<div class="col-sm-offset-2 col-sm-10">
+				<c:choose>
+					<c:when test="${reparacion['new']}">
+						<button class="btn btn-default" type="submit">Añadir</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btn btn-default" type="submit">Actualizar</button>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 	</form:form>
 </TalleresLaPlata:layout>
