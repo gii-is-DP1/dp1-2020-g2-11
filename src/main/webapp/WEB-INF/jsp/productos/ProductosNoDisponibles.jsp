@@ -36,7 +36,7 @@
 					<td><c:out value="${proveedor.direccion}" /></td>
 					<td><c:out value="${proveedor.email}" /></td>
 					
-				    <td><spring:url value="/proveedor/{proveedorId}/oculta" var="proveedorUrl">
+				    <td><spring:url value="/proveedor/devuelve/{proveedorId}/" var="proveedorUrl">
 							<spring:param name="proveedorId" value="${proveedor.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(proveedorUrl)}"></a></td>
 				</tr>

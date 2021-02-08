@@ -41,5 +41,4 @@
             </div>
         </div>
     </form:form>
-<a href="/vehiculo/"  class="btn btn-default" onclick="return confirm('¿Seguro que deseas crear un producto con stock de seguridad menor al stock?');"><c:out value="new"/></a>
 </TalleresLaPlata:layout>

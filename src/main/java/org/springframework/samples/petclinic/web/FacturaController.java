@@ -13,7 +13,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.TipoPago;
-import org.springframework.samples.petclinic.model.TipoReparacion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
@@ -94,6 +93,8 @@ public class FacturaController {
 	}
 	@PostMapping(value = "/factura/new")
 	public String processCreationForm(@Valid Factura factura, BindingResult result,ModelMap model) throws DataAccessException, TipoPagoException {
+		Collection<TipoPago> tipo=(Arrays.asList(TipoPago.values()));
+		model.put("tipoPago", tipo);
 		if (result.hasErrors()) {
 			model.put("factura", factura);
 			return "facturas/FormularioFactura";

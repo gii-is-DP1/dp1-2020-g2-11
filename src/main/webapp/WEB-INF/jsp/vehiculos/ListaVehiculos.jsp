@@ -13,16 +13,17 @@
 
 	<sec:authorize
 		access="hasAuthority('admin') or hasAuthority('mecanico')">
-           			  <label for="tipoVehiculo">Buscar tipo de vehiculo:</label>
+           	<label for="tipoVehiculo">Buscar tipo de vehiculo:</label>
   			<select name="tipoVehiculo" id="tipoVehiculo"> 
   			<c:forEach items="${tipoVehiculo}" var="tipoVehiculo">
- 			  <option value="${tipoVehiculo}" ><c:out value="${tipoVehiculo}" /></option> 
+ 			<option value="${tipoVehiculo}" ><c:out value="${tipoVehiculo}" /></option> 
     </c:forEach>
-  </select> 			<div class="form-group">
+  </select> 	
+  <div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Buscar</button>
-				</div>
-			</div>
+				<button type="submit" class="btn btn-default">Buscar</button>
+		</div>
+	</div>
 	</sec:authorize>
 	<h2>Vehiculos</h2>
 	<table id="tablaVehiculo" class="table table-striped">
