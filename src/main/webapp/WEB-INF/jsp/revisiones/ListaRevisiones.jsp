@@ -10,8 +10,12 @@
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
 <TalleresLaPlata:layout pageName="revision"> 
-
-<h2>Todas las Revisiones</h2>
+			
+	<sec:authorize access="hasAuthority('admin')">
+	<h2>Revisiones</h2>
+	</sec:authorize>
+	
+		
 	<table id="tablaRevision" class="table table-striped">
 		<thead>
 			<tr>
