@@ -100,11 +100,11 @@ public class CitaControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID).with(csrf())
+		mockMvc.perform(post("/cita/new").with(csrf())
 				.param("fechaCita", "04/05/2021").param("horaCita", "10:00"))
-//				.andExpect(model().attributeHasNoErrors("cita"))
-//				.andExpect(status().is3xxRedirection())
-//				.andExpect(status().isOk());
+				.andExpect(model().attributeHasNoErrors("cita"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(status().isOk())
 				.andExpect(view().name("redirect:/citas"));
 	}
 

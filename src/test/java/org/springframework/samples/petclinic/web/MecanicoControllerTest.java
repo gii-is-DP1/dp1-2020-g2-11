@@ -54,6 +54,6 @@ public class MecanicoControllerTest {
 	void findAllMecanicosTest() throws Exception{
 		mockMvc.perform(get("/mecanicos")).andExpect(status().isOk()).
 		andExpect(model().attributeExists("selections")).
-		andExpect(view().name("mecanico/ListaMecanicos"));
+		andExpect(view().name("mecanicos/ListaMecanicos"));
 	}
 }
