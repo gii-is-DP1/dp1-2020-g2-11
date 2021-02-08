@@ -24,10 +24,7 @@
 		<tbody>
 			<c:forEach items="${pedidos}" var="pedido">
 				<tr>
-					<td><spring:url value="/pedidos/{pedidoId}" var="pedidoUrl">
-							<spring:param name="pedidoId" value="${pedido.id}" />
-						</spring:url> <a href="${fn:escapeXml(pedidoUrl)}"><c:out
-								value="${pedido.fechaEmision} " /></a></td>
+					<td><c:out value="${pedido.fechaEmision} " /></td>
 					<td><c:out value="${pedido.fechaEntrada}" /></td>
 					
 					<td><spring:url value="/proveedor/{proveedorId}" var="proveedorUrl">

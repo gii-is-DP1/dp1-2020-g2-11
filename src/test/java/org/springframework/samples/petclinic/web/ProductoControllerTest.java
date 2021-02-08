@@ -45,7 +45,7 @@ public class ProductoControllerTest {
 		producto.setStockSeguridad(2);
 		producto.setDisponible(true);
 
-		given(this.productoService.findProductoByReferencia("NEU54638")).willReturn(new Producto());
+		given(this.productoService.findProductoByReferencia("95/65R15")).willReturn(new Producto());
 
 	}
 

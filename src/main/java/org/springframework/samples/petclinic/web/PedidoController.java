@@ -95,6 +95,7 @@ public class PedidoController {
 			Producto pro=this.productoService.findProductoByReferencia(pedido.getProducto().getReferencia());
 			pedido.setProveedor(pr);
 			pedido.setProducto(pro);
+			model.put("pedido", pedido);
 			this.pedidoService.savePedido(pedido);
 			return "redirect:/pedidos";
 		}
