@@ -28,7 +28,7 @@
 
 	</table>
 	<spring:url value="/cliente/{clienteId}/edit" var="clienteUrl">
-					<spring:param name="clienteId" value="${cliente.id}" />
-	</spring:url> <a class="btn btn-default" href="${fn:escapeXml(clienteUrl)}">Editar</a>
+							<spring:param name="clienteId" value="${cliente.id}" />
+						</spring:url> <a class="glyphicon glyphicon-pencil" href="${fn:escapeXml(clienteUrl)}"></a>
 	
 </petclinic:layout>
