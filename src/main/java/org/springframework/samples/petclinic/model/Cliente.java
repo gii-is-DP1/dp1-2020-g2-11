@@ -23,6 +23,9 @@ public class Cliente extends Person {
 	@OneToMany(mappedBy ="cliente")
 	private List<Factura> facturas;
 	
+	@OneToMany(mappedBy ="cliente")
+	private List<Vehiculo> vehiculos;
+	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;

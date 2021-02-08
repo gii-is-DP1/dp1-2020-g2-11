@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -47,8 +48,18 @@ public class FacturaServiceTest {
 	@Test
 	@Transactional
 	public void deleteFacturaTest() throws DataAccessException, TipoPagoException, NoPagadaException {
+		factura = new Factura();
+		factura.setCliente(clienteService.findClienteById(1).get());
+		factura.setDescripcion("p");
+		factura.setFechaEmision(LocalDate.of(2020, 8, 12));
+		factura.setId(5);
+		factura.setPagado(false);
+		factura.setPrecio(12.20);
+		factura.setTipoPago(TipoPago.EFECTIVO);
+
+		facturaService.saveFactura(factura);
 		facturaService.deleteFactura(2);
 		Collection<Factura> facturas = this.facturaService.findFacturas();
-		assertThat(facturas.size()).isEqualTo(3);
+		assertThat(facturas.size()).isEqualTo(4);
 	}
 }

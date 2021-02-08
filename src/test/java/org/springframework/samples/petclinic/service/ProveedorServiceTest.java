@@ -38,15 +38,29 @@ public class ProveedorServiceTest {
 	@Test
 	@Transactional
 	public void shoulFindProveedorByNombre() {
-		Proveedor proveedores = this.proveedorService.findProveedorByNombre("Neumaticos Paco");
+		proveedor = new Proveedor();
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+                
+		proveedorService.saveProveedor(proveedor);
+		Proveedor proveedores = this.proveedorService.findProveedorByNombre("Aceites Juan");
 		assertThat(proveedores).isNotNull();
 	}
 	
 	@Test
 	@Transactional
 	public void shoulFindAllProveedores() {
+		proveedor = new Proveedor();
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+                
+		proveedorService.saveProveedor(proveedor);
 		Collection<Proveedor> proveedores = this.proveedorService.findProveedores();
-		assertThat(proveedores.size()).isEqualTo(8);
+		assertThat(proveedores.size()).isEqualTo(9);
 	}
 	
 //	@Test
