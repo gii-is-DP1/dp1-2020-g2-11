@@ -105,7 +105,7 @@ public class ProductoControllerTest {
 				.param("stock", "3")
 				.param("stockSeguridad", "4"))
 				.andExpect(model().attributeHasErrors("producto"))
-				.andExpect(model().attributeHasFieldErrors("producto", "stockSeguridad")).andExpect(status().isOk())
+				.andExpect(model().attributeHasFieldErrors("producto", "stock")).andExpect(status().isOk())
 				.andExpect(view().name("productos/FormularioProducto"));
 	}
 	
@@ -148,13 +148,13 @@ public class ProductoControllerTest {
 	@Test
 	void testProcessUpdateFormHasErrors() throws Exception {
 		mockMvc.perform(post("/productos/{productoId}/edit",1).with(csrf())
-				.param("referencia", "NEU54638")
+				.param("referencia", "")
 				.param("nombre", "Neumaticos")
 				.param("marca", "Nexen")
-				.param("stock", "3")
+				.param("stock", "7")
 				.param("stockSeguridad", "4"))
 				.andExpect(model().attributeHasErrors("producto"))
-				.andExpect(model().attributeHasFieldErrors("producto", "stockSeguridad")).andExpect(status().isOk())
+				.andExpect(model().attributeHasFieldErrors("producto", "referencia")).andExpect(status().isOk())
 				.andExpect(view().name("productos/FormularioProducto"));
 	}
 
