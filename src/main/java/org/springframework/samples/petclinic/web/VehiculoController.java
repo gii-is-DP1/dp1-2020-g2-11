@@ -166,11 +166,11 @@ public class VehiculoController {
 		}
 	}
 
-	@GetMapping(value = { "/vehiculo/delete/{vehiculoId}" })
-	public String deleteVehiculo(@PathVariable("vehiculoId") int vehiculoId, BindingResult res) {
-		vehiculoService.deleteVehiculo(vehiculoId);
-		return "redirect:/vehiculos";
-	}
+//	@GetMapping(value = { "/vehiculo/delete/{vehiculoId}" })
+//	public String deleteVehiculo(@PathVariable("vehiculoId") int vehiculoId, BindingResult res) {
+//		vehiculoService.deleteVehiculo(vehiculoId);
+//		return "redirect:/vehiculos";
+//	}
 
 	@GetMapping("/vehiculo/{vehiculoId}/edit")
 	public String initUpdateVehicleForm(@PathVariable("vehiculoId") int vehiculoId, Model model) {

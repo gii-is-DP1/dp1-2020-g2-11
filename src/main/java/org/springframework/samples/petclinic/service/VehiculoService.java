@@ -56,9 +56,10 @@ import org.springframework.transaction.annotation.Transactional;
 			}
 		}
 
-		public void deleteVehiculo(Integer id) {
-			vehiculoRepository.deleteById(id);
-		}
+//		@Transactional
+//		public void deleteVehiculo(Integer id) {
+//			vehiculoRepository.deleteById(id);
+//		}
 	}
 
 
