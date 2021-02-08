@@ -25,7 +25,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${reparacion}" var="reparacion">
+			<c:forEach items="${reparaciones}" var="reparacion">
 				<tr>
 					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${reparacion.vehiculo.id}" />
@@ -43,9 +43,6 @@
 	</table>
 
 	<br />
-	<%--     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a>
-	</sec:authorize> --%>
 	<a class="btn btn-default" href='<spring:url value="/reparacion/new" htmlEscape="true"/>'>Añadir</a>
 	<br/>
 </TalleresLaPlata:layout>
