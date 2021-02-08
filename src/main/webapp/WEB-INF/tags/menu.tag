@@ -137,14 +137,6 @@
 						<span>Pedidos</span>
 					</petclinic:menuItem>
 				</sec:authorize>
-			
-			<sec:authorize access="hasAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'pedidos'}" url="/mecanicos"
-						title="pedido">
-						<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
-						<span>Mecanicos</span>
-					</petclinic:menuItem>
-				</sec:authorize>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
@@ -192,6 +184,12 @@
 												<sec:authorize access="hasAnyAuthority('mecanico')">
 												
 												<a href="<c:url value="/revisiones/mecanico"/>" class="btn btn-primary btn-block">Mis revisiones</a>
+											
+													</sec:authorize>
+													<sec:authentication var="principal" property="principal" />
+												<sec:authorize access="hasAnyAuthority('admin')">
+												
+												<a href="<c:url value="/mecanicos"/>" class="btn btn-primary btn-block">Empleados</a>
 											
 													</sec:authorize>	
 													
