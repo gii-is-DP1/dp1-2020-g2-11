@@ -73,7 +73,7 @@ class ClienteServiceTest {
 	@Transactional
 	public void shouldFindClienteByNombre(){
 		Collection<Cliente> clientes = this.clienteService.findClienteByNombre("Manuel");
-		assertThat(clientes.size()).isEqualTo(1);
+		assertThat(clientes.size()).isEqualTo(2);
 	}
 	
 	@Test

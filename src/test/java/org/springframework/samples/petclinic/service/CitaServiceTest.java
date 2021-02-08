@@ -35,7 +35,7 @@ public class CitaServiceTest {
 
 		this.citaService.saveCita(cita);
 		Collection<Cita> citas = citaService.findAllCita();
-		assertThat(citas.size()).isEqualTo(5);
+		assertThat(citas.size()).isEqualTo(16);
 	}
 
 	@Test
@@ -55,8 +55,7 @@ public class CitaServiceTest {
 	@Test
 	@Transactional
 	public void shouldDeleteCita() throws DataAccessException {
-
 		this.citaService.removeCita(3);
-		assertThat(citaService.findAllCita().size()).isEqualTo(3);
+		assertThat(citaService.findAllCita().size()).isEqualTo(15);
 	}
 }

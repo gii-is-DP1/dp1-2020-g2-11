@@ -33,7 +33,7 @@ public class EstanciaServiceTest {
 		estancia.setHoraEntrada(LocalTime.of(9, 30));
 		estancia.setFechaSalida(LocalDate.of(2021, 1, 27));
 		estancia.setHoraSalida(LocalTime.of(10, 30));
-		
+		estancia.setDuracion(28);
 
 		this.estanciaService.saveEstancia(estancia);
 		Collection<Estancia> estancias = estanciaService.findAllEstancia();

@@ -39,18 +39,17 @@ public class RevisionServiceTest {
 
 	@Test
 	@Transactional
-	public void shouldFindRevision() throws DataAccessException {
+	public void shouldFindByFechaRevision() throws DataAccessException {
 		Collection<Revision> revisiones = this.revisionService
 				.findRevisionByFecha(LocalDate.of(2020, Month.DECEMBER, 11));
-		assertThat(revisiones.size()).isEqualTo(2);
+		assertThat(revisiones.size()).isEqualTo(3);
 	}
 
 	@Test
 	@Transactional
 	public void shouldDeleteRevision() throws DataAccessException {
 		revisionService.deleteRevision(3);
-		Collection<Revision> revisiones = this.revisionService
-				.findRevisionByFecha(LocalDate.of(2020, Month.DECEMBER, 11));
-		assertThat(revisiones.size()).isEqualTo(1);
+		Collection<Revision> revisiones = this.revisionService.findAllRevisiones();
+		assertThat(revisiones.size()).isEqualTo(4);
 	}
 }
