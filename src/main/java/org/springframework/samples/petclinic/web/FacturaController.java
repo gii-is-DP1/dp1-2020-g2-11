@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.TipoPago;
+import org.springframework.samples.petclinic.model.TipoReparacion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.exceptions.TipoPagoException;
@@ -83,6 +86,8 @@ public class FacturaController {
 	public String initCreationForm(ModelMap model) {
 		Factura factura = new Factura();
 		String dni = "";
+		Collection<TipoPago> tipo=(Arrays.asList(TipoPago.values()));
+		model.put("tipoPago", tipo);
 		model.put("factura", factura);
 		model.put("dni", dni);
 		return "facturas/FormularioFactura";
