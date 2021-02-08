@@ -48,7 +48,7 @@ public class ProductoController {
 		return "productos/ProductosNoDisponibles";
 	}
 
-//	@PostMapping(value = { "/productos" })
+//	@PostMapping(value = { "/productosbynombre" })
 //	public String findProductosByNombre(String nombre, @Valid Producto producto, BindingResult res,
 //			Map<String, Object> model) {
 //		Collection<Producto> productos = this.productoService.findProductoByNombre(nombre);
