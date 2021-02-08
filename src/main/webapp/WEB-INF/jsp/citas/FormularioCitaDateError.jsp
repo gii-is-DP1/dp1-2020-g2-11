@@ -20,13 +20,14 @@
   </jsp:attribute>
 
     <jsp:body>
-<c:out value="${error}"/>
+
     <h2>
-        <c:if test="${cita['new']}">Nuevo </c:if> Cita
+        <c:if test="${cita['new']}">Nueva </c:if> Cita
     </h2>
     <form:form modelAttribute="cita" class="form-horizontal" id="add-cita-form">
         <div class="form-group has-feedback">
             <TalleresLaPlata:inputField label="Fecha (posterior a hoy)" name="fechaCita" />
+    El dia que selecciono no atendemos mas citas; por favor prueve otro dia.
             <TalleresLaPlata:inputField label="Hora" name="horaCita" />
             
 <label for="vehiculo">Matricula de su coche:</label>
@@ -49,8 +50,6 @@
                 </c:choose>
             </div>
         </div>
-        					<a href="/cita/new"  class="btn btn-default" onclick="return confirm('¿Seguro que deseas inscribirte al Evento?');"></a>
-        
     </form:form>
      </jsp:body>
 </TalleresLaPlata:layout>

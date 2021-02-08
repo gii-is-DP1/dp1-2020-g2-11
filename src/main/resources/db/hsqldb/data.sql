@@ -49,7 +49,18 @@ INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (1,'2021
 INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (2,'2021-01-04', '08:00',2,3);
 INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (3,'2021-01-04', '09:00',3,4);
 INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (4,'2021-01-04', '09:00',1,2);
-
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (5,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (6,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (7,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (8,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (9,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (10,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (11,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (12,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (13,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (14,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (15,'2021-05-04', '09:00',1,2);
+INSERT INTO cita(id,fecha_cita,hora_cita,cliente_id,vehiculo_id) VALUES (16,'2021-05-04', '09:00',1,2);
 --Estancia
 INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (1,'2021-01-02','10:00', '2021-01-04','12:00', 4320, 1);
 INSERT INTO estancia(id,fecha_entrada,hora_entrada,fecha_salida,hora_salida,duracion,vehiculo_id) VALUES (2,'2021-01-05','10:00',  '2021-01-05','12:00', 200, 2);

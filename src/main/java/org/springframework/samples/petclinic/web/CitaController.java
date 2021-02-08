@@ -72,17 +72,27 @@ public class CitaController {
 	@PostMapping(value = "/cita/new")
 	public String processCreationForm(@Valid Cita cita, BindingResult result,
 			 ModelMap model) throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException  {
+		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = clienteDetails.getUsername();
+		Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculoByCliente(clienteRegistered.getId());
+		model.put("vehiculo", vehiculo);
+		
+		int n_otherCitas = citaService.findByFechaCita(cita.getFechaCita()).size();
 		if (result.hasErrors()) {
 			
 			model.put("cita", cita);
 			return "redirect:/cita/new";
 		} 	
+		
+		else if(n_otherCitas >= 12) {
+			model.put("cita", cita);
+			return "/citas/FormularioCitaDateError";
+			
+		}
 			else {
-			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String username = clienteDetails.getUsername();
-			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);
-			Vehiculo vehiculo = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
-			cita.setVehiculo(vehiculo);
+			Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(cita.getVehiculo().getMatricula());
+			cita.setVehiculo(vehiculos);
 			cita.setCliente(clienteRegistered);
 			this.citaService.saveCita(cita);
 			return "redirect:/citas/cliente";
