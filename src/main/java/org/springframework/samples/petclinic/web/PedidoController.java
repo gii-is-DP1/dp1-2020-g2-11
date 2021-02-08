@@ -70,6 +70,10 @@ public class PedidoController {
 	@GetMapping(value = "/pedido/new")
 	public String initCreationForm(ModelMap model) {
 		Pedido pedido = new Pedido();
+		Collection<Proveedor> proveedores=proveedorService.findProveedoresDisponibles();
+		model.put("proveedor", proveedores);
+		Collection <Producto> productos=productoService.findProductosDisponibles();
+		model.put("producto", productos);
 		String referencia = "";
 		model.put("pedido", pedido);
 		model.put("referencia", referencia);

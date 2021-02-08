@@ -68,8 +68,14 @@ INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible
 INSERT INTO producto(id,referencia,stock,nombre,marca,stock_seguridad,disponible) VALUES (3,'AS73464',4,'Anticongelante','Repsol',1,true);
 
 --Proveedor
-INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (1,'Neumaticos Paco','653746489','c/Ave del Paraiso n31','neumaticospaco@gmail.com',true);
-INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (2,'Recambios JOVAMA','683764346','c/esengano n21','jovama@gmail.com',false);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (1,'Neumaticos Paco','653746009','c/Ave del Paraiso n31','neumaticospaco@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (2,'Recambios JOVAMA','683764300','c/esengano n21','jovama@gmail.com',false);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (3,'Neumaticos Manolo','653749089','c/Ave del Paraiso n31','neumaticosmanolo@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (4,'Neumaticos Juan','653746499','c/Ave del Paraiso n31','neumaticosjuan@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (5,'Neumaticos Francisco','659746489','c/Ave del Paraiso n31','neumaticosfrancisco@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (6,'Recambios Eugenio','653790489','c/Ave del Paraiso n31','neumaticoseugenio@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (7,'Bugias Paco','653796489','c/Ave del Paraiso n31','bugiaspaco@gmail.com',true);
+INSERT INTO proveedor(id,nombre,telefono,direccion,email,disponible) VALUES (8,'Motores Manuel','693746489','c/Ave del Paraiso n31','motoresmanuel@gmail.com',true);
 
 --Pedido
 INSERT INTO pedido(id,fecha_entrada,fecha_emision,proveedor_id,producto_id) VALUES (1,'2020-12-10', '2020-12-14',1,1);

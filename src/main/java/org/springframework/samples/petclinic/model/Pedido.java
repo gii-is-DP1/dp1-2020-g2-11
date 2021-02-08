@@ -1,10 +1,12 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -37,4 +39,5 @@ public class Pedido extends BaseEntity{
 	@OneToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
+	
 }
