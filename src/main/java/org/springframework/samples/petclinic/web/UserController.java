@@ -22,7 +22,10 @@ public class UserController {
 	public UserController(ClienteService clienteService) {
 		this.clienteService = clienteService;
 	}
-
+	@InitBinder("user")
+    public void initRevisionBinder(WebDataBinder dataBinder) {
+        dataBinder.setValidator(new UserValidator());
+    }
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");

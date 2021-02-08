@@ -8,8 +8,15 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <TalleresLaPlata:layout pageName="vehiculos">
+       
+        <jsp:attribute name="customScript">
+        <script>
+            $(function () {
+                $("#fechaFabricacion").datepicker({dateFormat: 'dd/mm/yy'});
+            });
+        </script></jsp:attribute>
+    <jsp:body>
     <h2>
-    <c:out value="${confirmacion}"/>
         <c:if test="${vehiculo['new']}">Nuevo </c:if> Vehiculo
     </h2>
     <form:form modelAttribute="vehiculo" class="form-horizontal" id="add-producto-form">
