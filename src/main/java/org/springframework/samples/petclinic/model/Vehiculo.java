@@ -22,21 +22,16 @@ import lombok.Setter;
 @Table(name = "vehiculo")
 public class Vehiculo extends BaseEntity{
 	
-	@javax.validation.constraints.NotBlank
-	@NotEmpty
 	@Column(name="matricula")
 	private String matricula;
 	
-	@NotNull
 	@Column(name="tipoVehiculo")
 	private TipoVehiculo tipoVehiculo;
 	
-	@NotNull
 	@Column(name="fechaFabricacion")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate fechaFabricacion;
 	
-	@NotNull
 	@Column (name="kilometraje")
 	private Integer kilometraje;
 
