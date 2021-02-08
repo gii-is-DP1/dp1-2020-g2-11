@@ -1,10 +1,12 @@
 package org.springframework.samples.petclinic.web;
 
+import javax.swing.text.html.ListView;
 import javax.validation.Valid;
 import java.util.*; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.TipoVehiculo;
 import org.springframework.samples.petclinic.model.Vehiculo;
@@ -56,72 +58,12 @@ public class VehiculoController {
 		return "vehiculos/ListaVehiculos";
 	}
 
-//	@PostMapping(value = { "/vehiculos" })
-//	public String findvehiculosByMatricula(String matricula, BindingResult res, Map<String, Object> model) {
-//		// buscamos vehiculo por matricula
-//		Vehiculo vehiculos = this.vehiculoService.findVehiculoByMatricula(matricula);
-//		if (vehiculos == null) {
-//			// no clientes found
-//			res.rejectValue("matricula", "notFound", "not found");
-//			return "redirect:/vehiculos";
-//
-//		} else {
-//			model.put("vehiculo", vehiculos);
-//		}
-//		return "redirect:/vehiculo/" + vehiculos.getId();
-//	}
-
-//	@GetMapping(value = { "/vehiculos" })
-//	public String findAllVehiculos(ModelMap model) {
-//		Collection<Vehiculo> vehiculos = vehiculoService.findVehiculos();
-//		model.put("vehiculos", vehiculos);
-//		return "vehiculos/ListaVehiculos";
-//	}
-	
 	@GetMapping(value = "/vehiculos/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("vehiculo", new Vehiculo());
 		return "vehiculos/ListaVehiculos";
 	}
 	
-//	@GetMapping(value = { "/vehiculo" })
-//	public String processFindForm(@Valid Vehiculo vehiculo, BindingResult res, Map<String, Object> model) {
-//		if (vehiculo.getMatricula() == null) {
-//			vehiculo.setMatricula(""); // empty string signifies broadest possible search
-//		}
-//		// find vehiculos by matricula
-//		Collection<Vehiculo> results = (Collection<Vehiculo>) this.vehiculoService.findVehiculoByMatricula(vehiculo.getMatricula());
-//		
-//		if (results.isEmpty()) {
-//			// no vehiculos found
-//			res.rejectValue("matricula", "notFound", "not found");
-//			return "redirect:/vehiculos/find";
-//			
-//		} else if (results.size() == 1) {
-//			// 1 vehiculo found
-//			vehiculo = results.iterator().next();
-//			return "redirect:/vehiculos/" + vehiculo.getId();
-//			
-//		} else {
-//			// multiple vehiculos found
-//			model.put("vehiculo", results);
-//			return "vehiculos/ListaVehiculos";
-//		}
-//	}
-
-	@PostMapping(value = { "/vehiculos" })
-	public String findVehiculoByTipo(TipoVehiculo tpo, BindingResult res, ModelMap model) {
-		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
-		model.put("tipoVehiculo", l);
-			Collection<Vehiculo> results = vehiculoService.findVehiculoByTipo(tpo);
-			if (results.isEmpty()) {
-				res.rejectValue("tipoVehiculo", "notFound", "not found");
-			} else {
-				model.put("vehiculos", results);
-			}
-		
-		return "vehiculos/ListaVehiculos";
-	}
 	
 	@GetMapping(value = { "/vehiculo/{vehiculoId}" })
 	public String findVehiculosById(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
@@ -168,33 +110,29 @@ public class VehiculoController {
 		}
 	}
 
-//	@GetMapping(value = { "/vehiculo/delete/{vehiculoId}" })
-//	public String deleteVehiculo(@PathVariable("vehiculoId") int vehiculoId, BindingResult res) {
-//		vehiculoService.deleteVehiculo(vehiculoId);
-//		return "redirect:/vehiculos";
-//	}
 
 	@GetMapping("/vehiculo/{vehiculoId}/edit")
 	public String initUpdateVehicleForm(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
-
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
 		model.put("vehiculo",vehiculo);
-		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		
 		vehiculo.setId(vehiculoId);
-		model.put("tipoVehiculo", l);
+		
 		return "vehiculos/formularioVehiculo";
 	}
 
 	@PostMapping("/vehiculo/{vehiculoId}/edit")
 	public String processUpdateVehicleForm(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model,
 			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
 		} else {
-			Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
 			vehiculo.setId(vehiculoId);
-			model.put("tipoVehiculo", l);
 			UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String username = clienteDetails.getUsername();
 			Cliente clienteRegistered = this.clienteService.findClienteByUsername(username);

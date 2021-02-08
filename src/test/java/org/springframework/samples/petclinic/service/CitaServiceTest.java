@@ -19,43 +19,95 @@ import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class CitaServiceTest {
-
+	@Autowired
+	protected ClienteService clienteService;
+	@Autowired
+	protected VehiculoService vehiculoService;
 	@Autowired
 	protected CitaService citaService;
 	private Cita cita;
 
 	@Test
 	@Transactional
-	public void shouldInsertCita() throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException {
+	public void shouldSaveCita() throws DataAccessException, SobrecargaDeVehiculosException, NotPropertyException {
 
 		cita = new Cita();
 		cita.setId(5);
 		cita.setFechaCita(LocalDate.of(2021, 1, 25));
 		cita.setHoraCita(LocalTime.of(9, 30));
-
+		cita.setCliente(clienteService.findClienteById(1).get());
+		cita.setVehiculo(vehiculoService.findVehiculoById(1));
 		this.citaService.saveCita(cita);
-		Collection<Cita> citas = citaService.findAllCita();
-		assertThat(citas.size()).isEqualTo(16);
-	}
-
-	@Test
-	@Transactional
-	public void shouldFindCitaByFecha() {
-		Collection<Cita> citas = citaService.findCitaByFechaCita(LocalDate.of(2021, 01, 04));
+		Cita citas = citaService.findCitaById(5);
 		assertThat(citas).isNotNull();
 	}
 
-//	@Test
-//	@Transactional
-//	public void shouldFindEstacionados() {
-//		Collection<Estancia> estacionados = citaService.findAllEstancia();
-//		assertThat(estacionados.size()).isEqualTo(4);
-//	}
+	@Test
+	@Transactional
+	public void shouldFindCitaByFecha() throws DataAccessException, SobrecargaDeVehiculosException {
+		cita = new Cita();
+		cita.setId(5);
+		cita.setFechaCita(LocalDate.of(2021, 01, 25));
+		cita.setHoraCita(LocalTime.of(9, 30));
+		cita.setCliente(clienteService.findClienteById(1).get());
+		cita.setVehiculo(vehiculoService.findVehiculoById(1));
+		this.citaService.saveCita(cita);
+		Collection<Cita> citas = citaService.findCitaByFechaCita(LocalDate.of(2021, 01, 25));
+		assertThat(citas.size()).isEqualTo(1);
+	}
 
 	@Test
 	@Transactional
-	public void shouldDeleteCita() throws DataAccessException {
-		this.citaService.removeCita(3);
+	public void shouldFindCitasByCliente() throws DataAccessException, SobrecargaDeVehiculosException {
+		cita = new Cita();
+		cita.setId(5);
+		cita.setFechaCita(LocalDate.of(2021, 01, 25));
+		cita.setHoraCita(LocalTime.of(9, 30));
+		cita.setCliente(clienteService.findClienteById(1).get());
+		cita.setVehiculo(vehiculoService.findVehiculoById(1));
+		this.citaService.saveCita(cita);
+		Collection<Cita> citas = citaService.findCitasByCliente(1);
+		assertThat(citas.size()).isNotNull();
+	}
+
+	@Test
+	@Transactional
+	public void shouldDeleteCita() throws DataAccessException, SobrecargaDeVehiculosException {
+		cita = new Cita();
+		cita.setId(5);
+		cita.setFechaCita(LocalDate.of(2021, 01, 25));
+		cita.setHoraCita(LocalTime.of(9, 30));
+		cita.setCliente(clienteService.findClienteById(1).get());
+		cita.setVehiculo(vehiculoService.findVehiculoById(1));
+		this.citaService.saveCita(cita);
+		this.citaService.removeCita(5);
 		assertThat(citaService.findAllCita().size()).isEqualTo(15);
+	}
+
+	@Test
+	@Transactional
+	public void shouldFindAllCitas() throws DataAccessException, SobrecargaDeVehiculosException {
+		cita = new Cita();
+		cita.setId(5);
+		cita.setFechaCita(LocalDate.of(2021, 01, 25));
+		cita.setHoraCita(LocalTime.of(9, 30));
+		cita.setCliente(clienteService.findClienteById(1).get());
+		cita.setVehiculo(vehiculoService.findVehiculoById(1));
+		this.citaService.saveCita(cita);
+		assertThat(citaService.findAllCita().size()).isEqualTo(16);
+	}
+
+	@Test
+	@Transactional
+	public void shouldFindCitasById() throws DataAccessException, SobrecargaDeVehiculosException {
+		cita = new Cita();
+		cita.setId(5);
+		cita.setFechaCita(LocalDate.of(2021, 01, 25));
+		cita.setHoraCita(LocalTime.of(9, 30));
+		cita.setCliente(clienteService.findClienteById(1).get());
+		cita.setVehiculo(vehiculoService.findVehiculoById(1));
+		this.citaService.saveCita(cita);
+		Cita citas = citaService.findCitaById(1);
+		assertThat(citas).isNotNull();
 	}
 }

@@ -78,7 +78,7 @@ public class CitaController {
 		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculoByCliente(clienteRegistered.getId());
 		model.put("vehiculo", vehiculo);
 		
-		int n_otherCitas = citaService.findByFechaCita(cita.getFechaCita()).size();
+		int n_otherCitas = citaService.findCitaByFechaCita(cita.getFechaCita()).size();
 		if (result.hasErrors()) {
 			
 			model.put("cita", cita);

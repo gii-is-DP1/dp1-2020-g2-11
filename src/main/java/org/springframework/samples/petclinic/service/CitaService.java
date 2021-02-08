@@ -53,7 +53,4 @@ public class CitaService {
 		return citaRepository.findById(id).get();
 	}
 
-	public Collection<Cita> findByFechaCita(LocalDate fechaCita) {
-		return citaRepository.findByFechaCita(fechaCita);
-	}
 }
