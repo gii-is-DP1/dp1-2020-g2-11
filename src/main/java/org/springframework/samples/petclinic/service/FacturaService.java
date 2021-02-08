@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -61,10 +62,30 @@ public class FacturaService {
 		factura.setPagado(true);
 		
 	}
-
+	@Transactional
+	public void UpdatePrecio(){
+		List<Factura> facturas =(List<Factura>) facturaRepository.findAll();
+		for (int id=1;id<=facturas.size();id++) {
+		Factura factura= facturaRepository.findById(id).get();
+		if(factura.getPagado()==false) {
+		Integer year = LocalDate.now().getYear()-factura.getFechaEmision().getYear();
+		Integer days= LocalDate.now().getDayOfYear()-factura.getFechaEmision().getDayOfYear();
+		Integer notPayedDays = year*365 +days;
+		if(notPayedDays>=15) {
+		Double precio = factura.getPrecio()*notPayedDays*0.05 + factura.getPrecio();
+		factura.setPrecio(precio);
+		}
+		}
+		}
+		
+	}
 	@Transactional(readOnly = true)
 	public Collection<Factura> findFacturas() throws DataAccessException {
 		return (Collection<Factura>) facturaRepository.findAll();
+	}
+	@Transactional(readOnly = true)
+	public Collection<Factura> findFacturasNoAbonadas() throws DataAccessException {
+		return (Collection<Factura>) facturaRepository.findByPagado(false);
 	}
 	
 	@Transactional(readOnly = true)

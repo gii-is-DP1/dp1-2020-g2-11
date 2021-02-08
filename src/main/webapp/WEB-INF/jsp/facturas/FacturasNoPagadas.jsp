@@ -13,7 +13,7 @@
 
 
 
-	<h2>Todas las facturas</h2>
+	<h2>Todas las facturas no abonadas</h2>
 	<table id="tablaFactura" class="table table-striped">
 		<thead>
 			<tr>

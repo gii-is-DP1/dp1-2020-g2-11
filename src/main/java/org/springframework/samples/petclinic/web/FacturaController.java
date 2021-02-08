@@ -47,7 +47,12 @@ public class FacturaController {
 		model.put("facturas", facturas);
 		return "facturas/ListaFacturas";
 	}
-	
+	@GetMapping(value = { "/facturasNoAbonadas" })
+	public String findAllFacturasNoAbonadas(Map<String, Object> model) {
+		Collection<Factura> facturas = facturaService.findFacturasNoAbonadas();
+		model.put("facturas", facturas);
+		return "facturas/FacturasNoPagadas";
+	}	
 	@GetMapping(value = { "/facturas/cliente" })
 	public String findMisFacturas(Map<String, Object> model) {
 		UserDetails clienteDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
@@ -58,12 +63,22 @@ public class FacturaController {
 		model.put("facturas", facturas);
 		return "facturas/ListaFacturas";
 	}
-	@GetMapping(value = "/factura/Pagada/{facturaId}")
-	public String facturaPagada(@PathVariable("facturaId") int facturaId) {
+	@GetMapping(value = "/factura/Actualizada/{facturaId}")
+	public String facturaActualizada(@PathVariable("facturaId") int facturaId) {
 		facturaService.setFacturaPagado(facturaId);
 		return"redirect:/facturas";
 	}
+	@GetMapping(value = "/factura/Actualizada")
+	public String facturaNoPagada() {
+		facturaService.UpdatePrecio();
+		return"redirect:/facturas";
+	}
 	
+	@GetMapping(value = "/factura/Actualizada/cliente")
+	public String facturaNoPagadaCliente() {
+		facturaService.UpdatePrecio();
+		return"redirect:/facturas/cliente";
+	}
 	@GetMapping(value = "/factura/new")
 	public String initCreationForm(ModelMap model) {
 		Factura factura = new Factura();

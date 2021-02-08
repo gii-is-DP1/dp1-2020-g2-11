@@ -115,7 +115,7 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/factura/Actualizada"
 						title="factura">
 						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 						<span>Facturas</span>
@@ -123,7 +123,7 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('cliente')">
-					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas/cliente"
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas/Actualizada/cliente"
 						title="producto">
 						<span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
 						<span>Mis Facturas</span>
@@ -190,6 +190,7 @@
 												<sec:authorize access="hasAnyAuthority('admin')">
 												
 												<a href="<c:url value="/mecanicos"/>" class="btn btn-primary btn-block">Empleados</a>
+												<a href="<c:url value="/facturasNoAbonadas"/>" class="btn btn-primary btn-block">Facturas no abonadas</a>
 											
 													</sec:authorize>	
 													
