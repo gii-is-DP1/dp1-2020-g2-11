@@ -110,4 +110,19 @@ public class EstanciaControllerTest {
 					.andExpect(status().is3xxRedirection())
 					.andExpect(view().name("redirect:/estancias"));
 		}
+		
+		@WithMockUser(value = "spring")
+		@Test
+		void testProcessCreationFormFailed() throws Exception {
+			mockMvc.perform(post("/estancia/new").with(csrf())
+					// .param("id", "1")
+					.param("fechaEntrada", "05/01/2021")
+					.param("horaEntrada", "")
+					.param("fechaSalida", "08/01/2021")
+					.param("horaSalida", "10:00")
+					.param("vehiculo.matricula", "4728FPG"))
+				.andExpect(model().attributeHasErrors("estancia"))
+				.andExpect(model().attributeHasFieldErrors("estancia", "horaEntrada")).andExpect(status().isOk())
+				.andExpect(view().name("estancias/FormularioEstancias"));
+		}
 }
