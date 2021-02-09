@@ -45,6 +45,7 @@ public class FacturaController {
     }
 	@GetMapping(value = { "/facturas" })
 	public String findAllFacturas(Map<String, Object> model) {
+		facturaService.UpdatePrecio();
 		Collection<Factura> facturas = facturaService.findFacturas();
 		model.put("facturas", facturas);
 		return "facturas/ListaFacturas";
@@ -76,7 +77,7 @@ public class FacturaController {
 		return"redirect:/facturas";
 	}
 	
-	@GetMapping(value = "/factura/Actualizada/cliente")
+	@GetMapping(value = "/facturas/Actualizada/cliente")
 	public String facturaNoPagadaCliente() {
 		facturaService.UpdatePrecio();
 		return"redirect:/facturas/cliente";

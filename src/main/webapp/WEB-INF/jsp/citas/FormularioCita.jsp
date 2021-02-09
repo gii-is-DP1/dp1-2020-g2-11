@@ -48,9 +48,7 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-        </div>
-        					<a href="/cita/new"  class="btn btn-default" onclick="return confirm('¿Seguro que deseas inscribirte al Evento?');"></a>
-        
+        </div>        
     </form:form>
      </jsp:body>
 </TalleresLaPlata:layout>

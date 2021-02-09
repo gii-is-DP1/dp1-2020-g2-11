@@ -54,7 +54,7 @@
 		</tbody>
 	</table>
 	<sec:authorize access="hasAuthority('mecanico')">
-	<a class="btn btn-default" href='<spring:url value="/revision/new" htmlEscape="true"/>'>Añadir</a>
+		<a class="btn btn-default" href='<spring:url value="/revisionesNoAsignadas" htmlEscape="true"/>'>Volver a las revisionses sin asignar</a>
 	</sec:authorize>
 	<br />
 </TalleresLaPlata:layout>

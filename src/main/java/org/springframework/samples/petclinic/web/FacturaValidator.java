@@ -13,9 +13,13 @@ public class FacturaValidator implements Validator {
 		Factura factura= (Factura) obj;
 		Double precio= factura.getPrecio();
 		TipoPago t= factura.getTipoPago();
-
+		if (precio<0) {
+			errors.rejectValue("precio", " El precio de la factura no puede ser negativo",
+					" El precio de la factura no puede ser negativo");
+		
+		}
 		if (precio >=300 && t.equals(TipoPago.EFECTIVO)) {
-			errors.rejectValue("t", " No puedes abonar la cantidad de "+ precio+" en efectivo el maximo es 299.99",
+			errors.rejectValue("precio", " No puedes abonar la cantidad de "+ precio+" en efectivo el maximo es 299.99",
 					" No puedes abonar la cantidad de "+ precio+" en efectivo el maximo es 299.99");
 		}
 		

@@ -41,12 +41,12 @@
 		</div>
 		<div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                        <c:choose>
+                    <c:choose>
                     <c:when test="${revision['new']}">
                         <button class="btn btn-default" type="submit">Añadir</button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar</button>
+                        <button class="btn btn-default" type="submit">Actualizar/Añadir</button>
                     </c:otherwise>
                 </c:choose>
             </div>

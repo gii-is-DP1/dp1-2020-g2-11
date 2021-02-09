@@ -86,6 +86,10 @@ public class PedidoController {
 	
 	@PostMapping(value = "/pedido/new")
 	public String processCreationForm(@Valid Pedido pedido, BindingResult result,ModelMap model) throws DataAccessException{
+		Collection<Proveedor> proveedores=proveedorService.findProveedoresDisponibles();
+		model.put("proveedor", proveedores);
+		Collection <Producto> productos=productoService.findProductosDisponibles();
+		model.put("producto", productos);
 		if (result.hasErrors()) {
 			model.put("pedido", pedido);
 			return "pedidos/FormularioPedido";
