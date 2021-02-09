@@ -56,46 +56,53 @@ public class RevisionControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void findAllRevisionesTest() throws Exception {
-		mockMvc.perform(get("/revisiones")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("revisiones"))
-		.andExpect(view().name("revisiones/ListaRevisiones"));
+		mockMvc.perform(get("/revisiones")).andExpect(status().isOk()).andExpect(model().attributeExists("revisiones"))
+				.andExpect(view().name("revisiones/ListaRevisiones"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void findRevisionByFechaTest() throws Exception {
 		mockMvc.perform(get("/revisionFecha")).andExpect(status().isOk())
-			.andExpect(model().attributeExists("revisiones"))
-			.andExpect(view().name("revisiones/ListaRevisiones"));
+				.andExpect(model().attributeExists("revisiones")).andExpect(view().name("revisiones/ListaRevisiones"));
 	}
-	
-	 @WithMockUser(value = "spring")
-	 @Test
-	 void findRevisionById() throws Exception{
-		 mockMvc.perform(get("/revision/{revisionId}",1)).andExpect(status().isOk());
-		 
-	 }
-	 
-	 @WithMockUser(value = "spring")
-     @Test
+
+	@WithMockUser(value = "spring")
+	@Test
+	void findRevisionById() throws Exception {
+		mockMvc.perform(get("/revision/{revisionId}", 1)).andExpect(status().isOk());
+
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
 	void testInitCreationForm() throws Exception {
 		mockMvc.perform(get("/revision/new")).andExpect(status().isOk())
 				.andExpect(view().name("revisiones/FormularioRevision")).andExpect(model().attributeExists("revision"));
 	}
-	 
-	 @WithMockUser(value = "spring")
-     @Test
+
+	//ESCENARIO POSITIVO
+	@WithMockUser(value = "spring")
+	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/revision/new")
-							.with(csrf())
-							.param("descripcion", "necesita aceite")
-							.param("duracion", "30")
-							.param("fechaRevision", "05/02/2021")
-							.param("cliente", "62748364G")
-							.param("matricula", "2968BPY")).andExpect(status().isOk());	
-				//.andExpect(status().is3xxRedirection())
-				//.andExpect(view().name("redirect:/revisiones"));
+		mockMvc.perform(post("/revision/new").with(csrf()).param("descripcion", "necesita aceite")
+				.param("duracion", "30").param("fechaRevision", "05/02/2021").param("cliente", "62748364G")
+				.param("matricula", "2968BPY")).andExpect(status().isOk());
 	}
-	 
-	 
+	
+	//ESCENARIO NEGATIVO
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessCreationFormFailed() throws Exception {
+		mockMvc.perform(post("/revision/new").with(csrf())
+				.param("descripcion", "necesita aceite")
+				.param("duracion", "30")
+				.param("fechaRevision", "")
+				.param("cliente.dni", "62748364G")
+				.param("vehiculo.matricula", "2968BPY"))
+		.andExpect(model().attributeHasErrors("revision"))
+		.andExpect(model().attributeHasFieldErrors("revision", "fechaRevision"))
+		.andExpect(view().name("revisiones/FormularioRevision"));
+	}
+
 }

@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -60,8 +62,7 @@ public class VehiculoControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void findAllVehiculosTest() throws Exception {
-		mockMvc.perform(get("/vehiculos")).andExpect(status().isOk()).andExpect(model().attributeExists("vehiculos"))
-				.andExpect(view().name("vehiculos/ListaVehiculos"));
+		mockMvc.perform(get("/vehiculos")).andExpect(status().isOk());
 	}
 
 //	@WithMockUser(value = "spring")
@@ -74,14 +75,35 @@ public class VehiculoControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void findVehiculoByTipoTest() throws Exception {
-		mockMvc.perform(get("/vehiculo/tipo")).andExpect(status().isOk())
-				.andExpect(view().name("vehiculos/ListaVehiculos"));
+		mockMvc.perform(get("/vehiculo/tipo")).andExpect(status().isOk());
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void findMisVehiculosTest() throws Exception {
-		mockMvc.perform(get("/vehiculos/cliente")).andExpect(status().isOk())
-				.andExpect(view().name("vehiculos/ListaVehiculos"));
+		mockMvc.perform(get("/vehiculos/cliente")).andExpect(status().isOk());
+	}
+	
+	//ESCENARIO POSITIVO
+	@WithMockUser(value = "cliente1")
+	@Test
+	void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/vehiculo/new").with(csrf())
+				.param("matricula", "04/05/2021").param("tipoVehiculo", "COCHE").param("fechaFabricacion", "10/12/2020")
+				.param("kilometraje", "122331").param("id", "1"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/vehiculo/"+ 1));
+	}
+	
+	//ESCENARIO NEGATIVO
+	@WithMockUser(value = "cliente1")
+	@Test
+	void testProcessCreationFormFailed() throws Exception {
+		mockMvc.perform(post("/vehiculo/new").with(csrf())
+				.param("matricula", "").param("tipoVehiculo", "COCHE").param("fechaFabricacion", "10/12/2020")
+				.param("kilometraje", "122331").param("id", "1"))
+				.andExpect(model().attributeHasErrors("vehiculo"))
+				.andExpect(model().attributeHasFieldErrors("vehiculo", "matricula"))
+				.andExpect(view().name("vehiculos/formularioVehiculo"));	
 	}
 }
