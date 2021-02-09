@@ -63,13 +63,78 @@ public class ProveedorServiceTest {
 		assertThat(proveedores.size()).isEqualTo(9);
 	}
 	
-//	@Test
-//	@Transactional
-//	public void shoulDeleteProveedores() {
-//		proveedorService.deleteProveedor(2);
-//        Collection<Proveedor> proveedores = this.proveedorService.findProveedores();
-//        assertThat(proveedores.size()).isEqualTo(1);
-//		
-//	}
+	@Test
+	@Transactional
+	public void shoulFindProveedoresById() {
+		proveedor = new Proveedor();
+		proveedor.setId(8);
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+                
+		proveedorService.saveProveedor(proveedor);
+		Proveedor proveedores = this.proveedorService.findProveedorById(8);
+		assertThat(proveedores).isNotNull();
+	}
+	@Test
+	@Transactional
+	public void shoulFindProveedoresByDisponibles() {
+		proveedor = new Proveedor();
+		proveedor.setId(8);
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+		proveedor.setDisponible(true);
+		Collection<Proveedor> proveedores = this.proveedorService.findProveedoresDisponibles();
+		assertThat(proveedores).isNotNull();
 
-}
+	}
+	@Test
+	@Transactional
+	public void shoulFindProveedoresByNoDisponibles() {
+		proveedor = new Proveedor();
+		proveedor.setId(8);
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+		proveedor.setDisponible(false);
+		Collection<Proveedor> proveedores = this.proveedorService.findProveedoresNoDisponibles();
+		assertThat(proveedores).isNotNull();
+
+	}
+	@Test
+	@Transactional
+	public void shouldOcultProveedores() {
+		proveedor = new Proveedor();
+		proveedor.setId(8);
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+		proveedor.setDisponible(true);
+		proveedorService.saveProveedor(proveedor);
+		this.proveedorService.ocultaProveedorDisponible(8);
+		Proveedor proveedores = this.proveedorService.findProveedorById(8);
+		assertThat(proveedores.getDisponible()).isEqualTo(false);
+
+	}
+	@Test
+	@Transactional
+	public void shouldShowProveedores() {
+		proveedor = new Proveedor();
+		proveedor.setId(8);
+		proveedor.setNombre("Aceites Juan");
+		proveedor.setTelefono("655212326");
+		proveedor.setDireccion("C/Jacinto");
+		proveedor.setEmail("aceitesjuan@gmail.com");
+		proveedor.setDisponible(false);
+		proveedorService.saveProveedor(proveedor);
+		this.proveedorService.devuelveProveedorNoDisponible(8);
+		Proveedor proveedores = this.proveedorService.findProveedorById(8);
+		assertThat(proveedores.getDisponible()).isEqualTo(true);
+
+	}
+	}

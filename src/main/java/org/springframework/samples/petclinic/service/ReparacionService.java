@@ -25,10 +25,6 @@ public class ReparacionService {
 		reparacionRepository.save(reparacion);
 	}
 
-//	@Transactional
-//	public void updateReparacion(Reparacion reparacion) throws DataAccessException {
-//		reparacionRepository.update(reparacion);
-//	}
 	
 	@Transactional
 	public void deleteReparacion(Integer idReparacion) throws DataAccessException {
