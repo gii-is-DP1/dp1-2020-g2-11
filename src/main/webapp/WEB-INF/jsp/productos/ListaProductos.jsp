@@ -39,8 +39,8 @@
 
 					<c:choose>
 						<c:when test="${producto.stock<=producto.stockSeguridad}">
-							<td><div title="El stock es menor al de seguridad"><img src="/resources/images/warning.png"
-								alt="El stock es menor al de seguridad" width="20"></div></td>
+							<td><div title="El stock es menor o igual al de seguridad. Considera hacer un pedido"><img src="/resources/images/warning.png"
+								alt="El stock es menor o igual al de seguridad. Considera hecer un pedido" width="20"></div></td>
 							<br />
 
 						</c:when>
