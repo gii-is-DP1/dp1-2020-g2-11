@@ -85,17 +85,19 @@ public class FacturaController {
 	@GetMapping(value = "/factura/new")
 	public String initCreationForm(ModelMap model) {
 		Factura factura = new Factura();
-		String dni = "";
 		Collection<TipoPago> tipo=(Arrays.asList(TipoPago.values()));
 		model.put("tipoPago", tipo);
 		model.put("factura", factura);
-		model.put("dni", dni);
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		model.put("cliente", clienteRegistered);
 		return "facturas/FormularioFactura";
 	}
 	@PostMapping(value = "/factura/new")
 	public String processCreationForm(@Valid Factura factura, BindingResult result,ModelMap model) throws DataAccessException, TipoPagoException {
 		Collection<TipoPago> tipo=(Arrays.asList(TipoPago.values()));
 		model.put("tipoPago", tipo);
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		model.put("cliente", clienteRegistered);
 		if (result.hasErrors()) {
 			model.put("factura", factura);
 			return "facturas/FormularioFactura";

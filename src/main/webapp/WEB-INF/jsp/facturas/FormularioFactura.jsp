@@ -24,7 +24,12 @@
 			</select>
 			<TalleresLaPlata:inputField label="FechaEmision" name="fechaEmision" />
 			<TalleresLaPlata:inputField label="Pagado" name="pagado" />
-			<TalleresLaPlata:inputField label="Cliente" name="cliente.dni" />
+				  <label for="cliente">Cliente:</label>
+  	<select name="cliente.dni" id="cliente.dni"> 
+  		<c:forEach items="${cliente}" var="cliente">
+  		<option value="${cliente.dni}" ><c:out value="${cliente.dni}" /></option> 
+    </c:forEach>
+  </select> 
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">

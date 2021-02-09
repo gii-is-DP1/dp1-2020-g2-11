@@ -143,17 +143,26 @@ public class VehiculoController {
 	}
 	
 	@GetMapping("/vehiculos/{vehiculoId}/edit")
-	public String initUpdateVehicleForm2(@PathVariable("vehiculoId") int vehiculoId, Model model) {
+	public String initUpdateVehicleForm2(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
-		model.addAttribute(vehiculo);
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		model.put("cliente", clienteRegistered);
+		model.addAttribute("vehiculo" ,vehiculo);
 		return "vehiculos/formularioVehiculo";
 	}
 
 	@PostMapping("/vehiculos/{vehiculoId}/edit")
 	public String processUpdateVehicleForm2(@Valid Vehiculo vehiculo, BindingResult result, ModelMap model,
 			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
+		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
+		model.put("tipoVehiculo", l);
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		model.put("cliente", clienteRegistered);
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
+			
 			return "vehiculos/formularioVehiculo";
 		} else {
 			vehiculo.setId(vehiculoId);

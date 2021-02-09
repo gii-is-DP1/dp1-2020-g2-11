@@ -32,7 +32,12 @@
             <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
             <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
             <sec:authorize access="hasAuthority('admin')">
-             <TalleresLaPlata:inputField label="Dni Cliente" name="cliente.dni"/>
+            <label for="cliente">Cliente:</label>
+  	<select name="cliente.dni" id="cliente.dni"> 
+  		<c:forEach items="${cliente}" var="cliente">
+  		<option value="${cliente.dni}" ><c:out value="${cliente.dni}" /></option> 
+    </c:forEach>
+  </select> 
              </sec:authorize>
         </div>
         <div class="form-group">
