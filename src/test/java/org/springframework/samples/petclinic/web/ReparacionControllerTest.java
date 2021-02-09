@@ -43,58 +43,75 @@ public class ReparacionControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@BeforeEach
 	void setup() {
 		Reparacion reparacion = new Reparacion();
 		reparacion.setId(5);
 		reparacion.setDuracion(30);
-		reparacion.setPrecio(25.00);;
+		reparacion.setPrecio(25.00);
+		;
 		reparacion.setTipoReparacion(TipoReparacion.MECANICA);
 
 	}
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void findAllRevisionesTest() throws Exception {
 		mockMvc.perform(get("/reparaciones")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("reparaciones"))
-		.andExpect(view().name("reparaciones/ListaReparaciones"));
+				.andExpect(model().attributeExists("reparaciones"))
+				.andExpect(view().name("reparaciones/ListaReparaciones"));
 	}
-	
+
 	@WithMockUser(value = "spring")
-	 @Test
-	 void findRevisionById() throws Exception{
-		 mockMvc.perform(get("/reparacion/{reparacionId}",1)).andExpect(status().isOk());
-		 
-	 }
-	
-	 @WithMockUser(value = "spring")
-     @Test
+	@Test
+	void findRevisionById() throws Exception {
+		mockMvc.perform(get("/reparacion/{reparacionId}", 1)).andExpect(status().isOk());
+
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
 	void testInitCreationForm() throws Exception {
 		mockMvc.perform(get("/reparacion/new")).andExpect(status().isOk())
-				.andExpect(view().name("reparaciones/FormularioReparacion")).andExpect(model().attributeExists("reparacion"));
+				.andExpect(view().name("reparaciones/FormularioReparacion"))
+				.andExpect(model().attributeExists("reparacion"));
 	}
-	 
-	 @WithMockUser(value = "spring")
-     @Test
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitUpdateReparacionForm() throws Exception {
+		mockMvc.perform(get("/reparacion/1/edit")).andExpect(status().isOk());
+		// .andExpect(view().name("reparaciones/FormularioReparacion")).andExpect(model().attributeExists("reparacion"));
+	}
+
+	// ESCENARIO POSITIVO
+	@WithMockUser(value = "spring")
+	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/revision/new")
-							.with(csrf())
-							.param("descripcion", "necesita aceite")
-							.param("duracion", "30")
-							.param("fechaRevision", "05/02/2021")
-							.param("cliente", "62748364G")
-							.param("matricula", "2968BPY"))	;
-	//			.andExpect(status().is3xxRedirection())
-	//			.andExpect(view().name("redirect:/revisiones"));
+		mockMvc.perform(post("/reparacion/new").with(csrf())
+				.param("duracion", "30")
+				.param("precio", "20.0")
+				.param("tipoReparacion", "MECANICA")
+				.param("cliente.dni", "62748364G")
+				.param("vehiculo.matricula", "2968BPY"))
+		 .andExpect(status().is3xxRedirection())
+		 .andExpect(view().name("redirect:/reparaciones"));
 	}
-	 
-	 @WithMockUser(value = "spring")
-	    @Test
-	    void testInitUpdateReparacionForm() throws Exception {
-			mockMvc.perform(get("/reparacion/1/edit")).andExpect(status().isOk());
-	//		.andExpect(view().name("reparaciones/FormularioReparacion")).andExpect(model().attributeExists("reparacion"));
-		}
+
+	// ESCENARIO NEGATIVO
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessCreationFormFailed() throws Exception {
+		mockMvc.perform(post("/reparacion/new").with(csrf())
+				.param("duracion", "30")
+				.param("precio", "")
+				.param("tipoReparacion", "MECANICA")
+				.param("cliente.dni", "62748364G")
+				.param("vehiculo.matricula", "2968BPY"))
+		.andExpect(model().attributeHasErrors("reparacion"))
+		.andExpect(model().attributeHasFieldErrors("reparacion", "precio"))
+		.andExpect(view().name("reparaciones/FormularioReparacion"));
+	}
 
 }
