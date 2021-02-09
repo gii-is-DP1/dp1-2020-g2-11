@@ -26,11 +26,6 @@ public class ProductoService {
 		productoRepository.save(producto);
 	}
 	
-//	@Transactional
-//	public void deleteProducto(Integer id) throws DataAccessException {
-//		productoRepository.deleteById(id);
-//	}
-	
 	@Transactional(readOnly = true)	
 	public Collection<Producto> findProductos() throws DataAccessException {
 		return (Collection<Producto>) productoRepository.findAll();
