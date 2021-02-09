@@ -116,12 +116,5 @@ public class VehiculoServiceTest {
 			assertThat(vehiculos.size()).isEqualTo(5);
 		}
 
-//		@Test
-//		@Transactional
-//		public void shouldDeleteVehiculos() throws DataAccessException {
-//			this.vehiculoService.deleteVehiculo(1);
-//			Collection<Vehiculo> vehiculos = this.vehiculoService.findVehiculos();
-//			assertThat(vehiculos.size()).isEqualTo(3);
-//		}
 
 }

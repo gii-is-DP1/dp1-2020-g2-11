@@ -56,7 +56,11 @@ public class PedidoController {
 
 	@PostMapping("/pedido/{pedidoId}/edit")
 	public String processUpdateOwnerForm(@Valid Pedido pedido, BindingResult result,
-			@PathVariable("pedidoId") int pedidoId) {
+			@PathVariable("pedidoId") int pedidoId, ModelMap model) {
+		Collection<Proveedor> proveedores=proveedorService.findProveedoresDisponibles();
+		model.put("proveedor", proveedores);
+		Collection <Producto> productos=productoService.findProductosDisponibles();
+		model.put("producto", productos);
 		if (result.hasErrors()) {
 			return "pedidos/FormularioPedido";
 		}

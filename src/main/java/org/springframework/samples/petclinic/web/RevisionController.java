@@ -86,6 +86,10 @@ public class RevisionController {
 	@GetMapping(value = "/revision/new")
 	public String initCreationForm(ModelMap model) {
 		Revision revision = new Revision();
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculos();
+		model.put("vehiculo", vehiculo);
+		model.put("cliente", clienteRegistered);
 		String dni = "";
 		String matricula = "";
 		model.put("revision", revision);
@@ -97,6 +101,10 @@ public class RevisionController {
 	@PostMapping(value = "/revision/new")
 	public String processCreationForm(@Valid Revision revision, BindingResult result, ModelMap model)
 			throws DataAccessException {
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculos();
+		model.put("vehiculo", vehiculo);
+		model.put("cliente", clienteRegistered);
 		if (result.hasErrors()) {
 			model.put("revision", revision);
 			return "revisiones/FormularioRevision";
@@ -106,7 +114,7 @@ public class RevisionController {
 			revision.setCliente(c);
 			revision.setVehiculo(v);
 			this.revisionService.saveRevision(revision);
-			return "redirect:/revisiones";
+			return "redirect:/revisionesNoAsignadas";
 		}
 	}
 

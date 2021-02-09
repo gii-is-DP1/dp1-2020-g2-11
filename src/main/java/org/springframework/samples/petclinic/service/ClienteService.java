@@ -71,18 +71,6 @@ public class ClienteService {
 	}
 
 	@Transactional
-	public void saveClientebyFactura(Cliente cliente) throws DataAccessException, NoPagadaException {
-		Factura factura = new Factura();
-		factura.getPagado();
-		if (Boolean.FALSE && factura.getFechaEmision().compareTo(LocalDate.now()) >= 15) {
-			clienteRepository.save(cliente);
-			throw new NoPagadaException();
-		} else {
-			clienteRepository.delete(cliente);
-
-		}
-	}
-	@Transactional
 	public void deleteClienteById(Integer clienteId) {
 		clienteRepository.deleteById(clienteId);
 		

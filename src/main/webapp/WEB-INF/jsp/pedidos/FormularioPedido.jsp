@@ -22,7 +22,7 @@
 	</h2>
 	<form:form modelAttribute="pedido" class="form-horizontal" id="add-pedido-form">
 		<div class="form-group has-feedback">
-			<TalleresLaPlata:inputField label="Fecha de Entrada del pedido al tayer (puede dejar el campo en blanco si no lo sabe)" name="fechaEntrada" />
+			<TalleresLaPlata:inputField label="Fecha de Entrada del pedido al taller (puede dejar el campo en blanco si no lo sabe)" name="fechaEntrada" />
 			<TalleresLaPlata:inputField label="Fecha de Emision del pedido al proveedor" name="fechaEmision" />
 			  <label for="proveedor">Escoge un proveedor:</label>
   			<select name="proveedor.id" id="proveedor.id	"> 

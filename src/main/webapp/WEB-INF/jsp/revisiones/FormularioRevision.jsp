@@ -22,8 +22,18 @@
             <TalleresLaPlata:inputField label="Descripcion" name="descripcion"/>
             <TalleresLaPlata:inputField label="Duracion" name="duracion"/>
             <TalleresLaPlata:inputField label="FechaRevision" name="fechaRevision"/>
-            <TalleresLaPlata:inputField label="Cliente" name="cliente.dni"/>
-            <TalleresLaPlata:inputField label="Matricula" name="vehiculo.matricula"/>
+            <label for="cliente">Cliente:</label>
+  	<select name="cliente.dni" id="cliente.dni"> 
+  		<c:forEach items="${cliente}" var="cliente">
+  		<option value="${cliente.dni}" ><c:out value="${cliente.dni}" /></option> 
+    </c:forEach>
+  </select> 
+            <label for="vehiculo">Matricula de su coche:</label>
+  	<select name="vehiculo.matricula" id="vehiculo.matricula"> 
+  		<c:forEach items="${vehiculo}" var="vehiculo">
+  		<option value="${vehiculo.matricula}" ><c:out value="${vehiculo.matricula}" /></option> 
+    </c:forEach>
+  </select> 
             
         </div>
         <div class="form-group">

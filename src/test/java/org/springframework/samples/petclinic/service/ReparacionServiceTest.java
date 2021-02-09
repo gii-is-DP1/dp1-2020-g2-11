@@ -41,22 +41,6 @@ public class ReparacionServiceTest {
 		assertThat(reparaciones.equals(1));
 	}
 
-//	@Test
-//	@Transactional
-//	@DisplayName("Updating a reparacion")
-//	public void shouldUpdateReparacion() throws DataAccessException {
-//		reparacion = new Reparacion();
-//		reparacion.setId(1);
-//		reparacion.setDuracion(120); // en minutos
-//		reparacion.setPrecio(60.50);
-//		reparacion.setTipoReparacion(TipoReparacion.MECANICA);
-//
-//		this.reparacionService.saveReparacion(reparacion);
-//		reparacion.setPrecio(70.00);
-//		this.reparacionService.updateReparacion(reparacion);
-//		assertThat(reparacion).isNull();
-//	}
-
 	@Test
 	@Transactional
 	@DisplayName("Finding reparaciones")
@@ -87,7 +71,16 @@ public class ReparacionServiceTest {
 		assertThat(reparacion).isNotNull();
 	}
 
+	@Test
+	@Transactional
+	@DisplayName("Deleting reparacion by id")
+	public void shouldDeleteReparacionById() throws DataAccessException {
 
+		Collection<Reparacion> reparacionPreview=reparacionService.findReparaciones();
+		this.reparacionService.deleteReparacion(1);
+		Collection<Reparacion> reparacion=reparacionService.findReparaciones();
+		assertThat(reparacionPreview.size()).isEqualTo(reparacion.size()+1);
+	}
 	
 
 

@@ -26,6 +26,7 @@ public class ProductoService {
 		productoRepository.save(producto);
 	}
 	
+	
 	@Transactional(readOnly = true)	
 	public Collection<Producto> findProductos() throws DataAccessException {
 		return (Collection<Producto>) productoRepository.findAll();

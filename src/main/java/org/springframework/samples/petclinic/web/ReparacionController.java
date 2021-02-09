@@ -91,6 +91,10 @@ public class ReparacionController {
 	public String initUpdateReparacionForm(@PathVariable("reparacionId") int reparacionId, ModelMap model) {
 		Reparacion reparacion = this.reparacionService.findReparacionById(reparacionId).get();
 		Collection<TipoReparacion> tipo=(Arrays.asList(TipoReparacion.values()));
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculos();
+		model.put("vehiculo", vehiculo);
+		model.put("cliente", clienteRegistered);
 		model.put("tipoReparacion", tipo);
 		model.addAttribute(reparacion);
 		return "reparaciones/FormularioReparacion";
@@ -98,7 +102,13 @@ public class ReparacionController {
 
 	@PostMapping("/reparacion/{reparacionId}/edit")
 	public String processUpdateOwnerForm(@Valid Reparacion reparacion, BindingResult result,
-			@PathVariable("reparacionId") int reparacionId) {
+			@PathVariable("reparacionId") int reparacionId, ModelMap model) {
+		Collection<TipoReparacion> tipo=(Arrays.asList(TipoReparacion.values()));
+		Collection<Cliente> clienteRegistered = this.clienteService.findClientes();
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculos();
+		model.put("vehiculo", vehiculo);
+		model.put("cliente", clienteRegistered);
+		model.put("tipoReparacion", tipo);
 		if (result.hasErrors()) {
 			return "reparaciones/FormularioReparacion";
 		}
