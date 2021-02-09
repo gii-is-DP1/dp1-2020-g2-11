@@ -25,7 +25,7 @@
             <label for="cliente">Cliente:</label>
   	<select name="cliente.dni" id="cliente.dni"> 
   		<c:forEach items="${cliente}" var="cliente">
-  		<option value="${cliente.dni}" ><c:out value="${cliente.dni}" /></option> 
+  		<option value="${cliente.dni}" ><c:out value="${cliente.nombre} ${cliente.apellidos}" /></option> 
     </c:forEach>
   </select> 
             <label for="vehiculo">Matricula de su coche:</label>
