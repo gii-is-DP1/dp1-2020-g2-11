@@ -82,4 +82,24 @@ public class MecanicoControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/mecanicos"));
 	}
+		
+		
+		@WithMockUser(value = "spring")
+		@Test
+		void testProcessUpdateFormHasErrors() throws Exception {
+			mockMvc.perform(post("/mecanicos/new").with(csrf())
+					// .param("id", "1")
+					.param("nombre", "pepe")
+					.param("apellidos", "perez")
+					.param("dni", "75446318K")
+					.param("telefono", "")
+					.param("email", "pepe@gmail.com")
+					.param("usuario", "mecanico3")
+					.param("contraseña", "mec1234"))
+					.andExpect(model().attributeHasErrors("mecanico"))
+					.andExpect(model().attributeHasFieldErrors("mecanico", "telefono")).andExpect(status().isOk())
+					.andExpect(view().name("mecanicos/FormularioMecanico"));
+		
+		}		
 }
+
