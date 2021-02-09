@@ -16,20 +16,21 @@ public class CitaValidator implements Validator {
 
 		Cita cita = (Cita) obj;
 		LocalDate fechaCita = cita.getFechaCita();
-		LocalTime horaCita = cita.getHoraCita();
-		Cliente cliente = cita.getCliente();
-		Vehiculo vehiculo = cita.getVehiculo();
+		LocalTime horaCita = cita.getHoraCita(); 
 	
 		if (fechaCita==null) {
 			errors.rejectValue("fechaCita", " No puede dejar el campo vacio",
 					"No puede dejar el campo vacio");
 		}
-		if (fechaCita.isBefore(LocalDate.now())) {
+		else if (fechaCita.isBefore(LocalDate.now())) {
 			errors.rejectValue("fechaCita", " debe ser posterior a hoy",
-					" debe ser posterior a hoy");
-		}
+					" debe ser posterior a hoy");}
 		
-		if (!(horaCita.isAfter(LocalTime.of(8, 00)) && horaCita.isBefore(LocalTime.of(16, 00)))) {
+		if (horaCita==null) {
+			errors.rejectValue("fechaCita", " No puede dejar el campo vacio",
+					"No puede dejar el campo vacio");
+			}
+		else if (!(horaCita.isAfter(LocalTime.of(8, 00)) && horaCita.isBefore(LocalTime.of(16, 00)))) {
 			errors.rejectValue("horaCita",  " debe estar entre las 8:00 y las 16:00",
 					 " debe estar entre las 8:00 y las 16:00");
 		}

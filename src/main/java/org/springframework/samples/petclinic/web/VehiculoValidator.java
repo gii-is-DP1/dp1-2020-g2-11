@@ -15,13 +15,15 @@ public class VehiculoValidator implements Validator {
 		LocalDate fechaFabricacion = vehiculo.getFechaFabricacion();
 		Integer kilometraje = vehiculo.getKilometraje();
 		String matricula = vehiculo.getMatricula();
-
-		if ((LocalDate.now().getYear() - fechaFabricacion.getYear() >= 12) || (fechaFabricacion.equals(null))) {
+		if (fechaFabricacion == null) {
+			errors.rejectValue("fechaFabricacion", "Este campo no puede estar vacio", "Este campo no puede estar vacio");
+		}
+		else if ((LocalDate.now().getYear() - fechaFabricacion.getYear() >= 12) || (fechaFabricacion.equals(null))) {
 			errors.rejectValue("fechaFabricacion", " No podemos atender un vehiculo con mas de 12 años de antiguedad ",
 					" No podemos atender un vehiculo con mas de 12 años de antiguedad ");
 		}
 
-		if (fechaFabricacion.isAfter(LocalDate.now())) {
+		else if (fechaFabricacion.isAfter(LocalDate.now())) {
 			errors.rejectValue("fechaFabricacion", " La fecha de fabricación no puede ser posterior a la de hoy ",
 					" La fecha de fabricación no puede ser posterior a la de hoy ");
 		}

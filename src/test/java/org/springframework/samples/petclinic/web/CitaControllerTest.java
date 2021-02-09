@@ -64,14 +64,6 @@ public class CitaControllerTest {
 		given(this.citaService.findCitaByFechaCita(LocalDate.of(2021, 1, 25))).willReturn(cita1);
 	}
 
-	/*
-	 * @WithMockUser(value = "spring")
-	 * 
-	 * @Test void findAllCitaTest() throws Exception {
-	 * this.mockMvc.perform(get("/cita")) .andExpect(status().isOk())
-	 * .andExpect(model().attributeExists("cita"))
-	 * .andExpect(view().name("cita/ListaCitas")); }
-	 */
 	@WithMockUser(value = "spring")
 	@Test
 	void testCitaList() throws Exception {
@@ -81,51 +73,38 @@ public class CitaControllerTest {
 
 	}
 
-	@WithMockUser(value = "spring")
-	@Test
-	void findCitasByFecha() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/cita")).andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("citas"))
-				.andExpect(MockMvcResultMatchers.view().name("citas/ListaCitas"));
 
+	@WithMockUser(value = "cliente1")
+	@Test
+	void testInitCreationFormNotRegistered() throws Exception {
+		mockMvc.perform(get("/cita/new")).andExpect(status().isOk())
+				.andExpect(view().name("/")).andExpect(model().attributeExists("cita"));
 	}
 
-	@WithMockUser(value = "spring")
-	@Test
-	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/cliente/{clienteId}/cita/new", TEST_CITA_ID)).andExpect(status().isOk())
-				.andExpect(view().name("citas/FormularioCita")).andExpect(model().attributeExists("cita"));
-	}
-
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "cliente1")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/cita/new").with(csrf())
 				.param("fechaCita", "04/05/2021").param("horaCita", "10:00"))
-				.andExpect(model().attributeHasNoErrors("cita"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(status().isOk())
-				.andExpect(view().name("redirect:/citas"));
+				.andExpect(status().is2xxSuccessful())
+				.andExpect(status().isOk());
 	}
 
 	// ESCENARIOS NEGATIVOS
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "cliente1")
 	@Test
-	void testProcessCreationFormCitaFailedHora() throws Exception {
-		mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID).with(csrf())
-				.param("fechaCita", "04/05/2021").param("horaCita", "18:00"))
-				.andExpect(model().attributeHasErrors("cita"))
-				.andExpect(model().attributeHasFieldErrors("cita", "horaCita")).andExpect(status().isOk())
-				.andExpect(view().name("citas/FormularioCita"));
+	void testProcessCreationFormCitaFailed() throws Exception {
+		mockMvc.perform(post("/cita/new").with(csrf())
+				.param("fechaCita", "")
+				.param("horaCita", "18:00"))
+				.andExpect(view().name("redirect:/cita/new"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessCreationFormCitaFailedFecha() throws Exception {
-		mockMvc.perform(post("/cliente/{clienteId}/cita/new", TEST_CITA_ID).with(csrf())
-				.param("fechaCita", "04/05/1988").param("horaCita", "10:00"))
-				.andExpect(model().attributeHasErrors("cita"))
-				.andExpect(model().attributeHasFieldErrors("cita", "fechaCita")).andExpect(status().isOk())
-				.andExpect(view().name("citas/FormularioCita"));
+	void testProcessCreationFormCitaFailed2() throws Exception {
+		mockMvc.perform(post("/cita/new", TEST_CITA_ID).with(csrf())
+				.param("fechaCita", "04/05/2021").param("horaCita", ""))
+				.andExpect(view().name("redirect:/cita/new"));
 	}
 }
