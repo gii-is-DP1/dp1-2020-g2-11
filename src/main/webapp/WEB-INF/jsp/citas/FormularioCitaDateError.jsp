@@ -27,7 +27,7 @@
     <form:form modelAttribute="cita" class="form-horizontal" id="add-cita-form">
         <div class="form-group has-feedback">
             <TalleresLaPlata:inputField label="Fecha (posterior a hoy)" name="fechaCita" />
-    El dia que selecciono no atendemos mas citas; por favor prueve otro dia.
+    El dia que selecciono no atendemos mas citas; por favor pruebe otro dia.
             <TalleresLaPlata:inputField label="Hora" name="horaCita" />
             
 <label for="vehiculo">Matricula de su coche:</label>
