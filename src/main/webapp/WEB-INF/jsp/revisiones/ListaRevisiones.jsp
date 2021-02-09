@@ -27,7 +27,9 @@
 				<th style="width: 100px">Fecha Revisión</th>
 				<th style="width: 100px">Cliente</th>
 				<th style="width: 100px">Matricula</th>
-				<th style="width: 50px">Borrar</th>	
+				<sec:authorize access="hasAuthority('mecanico')">
+				<th style="width: 50px">Borrar</th>
+				</sec:authorize>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,9 +48,11 @@
 						<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
 						<c:out value="${revision.vehiculo.matricula}" /></a></td>
-						<td><spring:url value="/revision/asignar/{revisionId}" var="revisionUrl">
+						<sec:authorize access="hasAuthority('mecanico')">
+						<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
 						<spring:param name="revisionId" value="${revision.id}" />
 						</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
+						</sec:authorize>
 				</tr>
 			</c:forEach>
 		</tbody>

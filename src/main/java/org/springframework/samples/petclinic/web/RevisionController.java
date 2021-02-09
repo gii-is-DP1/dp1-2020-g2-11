@@ -129,7 +129,7 @@ public class RevisionController {
 	@GetMapping(value = { "/revision/delete/{revisionId}" })
 	public String deleteRevision(@PathVariable("revisionId") int revisionId) {
 		revisionService.deleteRevision(revisionId);
-		return "redirect:/revisiones";
+		return "redirect:/revisionesNoAsignadas";
 
 	}
 	

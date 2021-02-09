@@ -39,7 +39,7 @@ public class FacturaController {
 		this.facturaService = facturaService;
 		this.clienteService = clienteService;
 	}
-	@InitBinder("cita")
+	@InitBinder("factura")
     public void initPetBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new FacturaValidator());
     }

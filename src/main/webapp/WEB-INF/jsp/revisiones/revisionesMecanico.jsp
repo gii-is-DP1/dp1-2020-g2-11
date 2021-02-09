@@ -47,11 +47,11 @@
 							<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />
 						</spring:url> <a href="${fn:escapeXml(vehiculoUrl)}">
 						   <c:out value="${revision.vehiculo.matricula}" /></a></td>
-					<sec:authorize access="hasAuthority('admin')">
+					<%-- <sec:authorize access="hasAuthority('admin')">
 					<td><spring:url value="/revision/delete/{revisionId}" var="revisionUrl">
 					<spring:param name="revisionId" value="${revision.id}" />
 					</spring:url> <a class="glyphicon glyphicon-trash" href="${fn:escapeXml(revisionUrl)}"></a></td>
-					</sec:authorize>
+					</sec:authorize> --%>
 					
 					<sec:authorize access="hasAuthority('mecanico')">
 					<td><spring:url value="/revision/asignar/{revisionId}" var="revisionUrl">

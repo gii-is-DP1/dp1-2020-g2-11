@@ -23,23 +23,19 @@ public class Factura extends BaseEntity {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
-	@NotNull
 	@Column(name = "precio")
 	private Double precio;
-	@NotNull
+	
 	@Column(name = "totalprecio")
 	private Double totalprecio;
 	
-	@NotNull
 	@Column(name = "tipoPago")
 	private TipoPago tipoPago;
 	
-	@NotNull
 	@Column(name = "fechaEmision")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEmision;
 	
-	@NotNull
 	@Column(name = "pagado")
 	private Boolean pagado;
 	
