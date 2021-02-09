@@ -75,17 +75,33 @@ public class PedidoControllerTest {
 				.andExpect(view().name("pedidos/FormularioPedido"))
 				.andExpect(model().attributeExists("pedido"));
 	}
-	
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testProcessCreationFormSuccess() throws Exception {
-//		mockMvc.perform(post("/pedido/new").with(csrf())
-//				// .param("id", "1")
-//				.param("fechaEntrada", "14/12/2020")
-//				.param("fechaEmision", "10/12/2020")
-//				.param("proveedor_id", "1")
-//				.param("producto_id", "1"))
-//				//.andExpect(status().is3xxRedirection())
-//				.andExpect(view().name("redirect:/pedidos"));
-//	}
+	//ESCENARIO POSITIVO
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/pedido/new").with(csrf())
+				// .param("id", "1")
+				.param("fechaEntrada", "14/12/2020")
+				.param("fechaEmision", "10/12/2020")
+				.param("proveedor.id", "1")
+				.param("producto.nombre", "Neumaticos"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/pedidos"));
+		
+	}
+	//ESCENARIO NEGATIVO
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessCreationFormFailed() throws Exception {
+		mockMvc.perform(post("/pedido/new").with(csrf())
+				// .param("id", "1")
+				.param("fechaEntrada", "14/12/2020")
+				.param("fechaEmision", "")
+				.param("proveedor.id", "1")
+				.param("producto.nombre", "Neumaticos"))
+			.andExpect(model().attributeHasErrors("pedido"))
+			.andExpect(model().attributeHasFieldErrors("pedido", "fechaEmision")).andExpect(status().isOk())
+		.andExpect(view().name("pedidos/FormularioPedido"));
+		
+	}
 }
