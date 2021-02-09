@@ -64,8 +64,12 @@ public class ReparacionController {
 		String dni = "";
 		String matricula = "";
 		Collection<TipoReparacion> tipo=(Arrays.asList(TipoReparacion.values()));
+		Collection <Cliente> cliente = clienteService.findClientes();
 		model.put("tipoReparacion", tipo);
 		model.put("reparacion", reparacion);
+		model.put("cliente", cliente);
+		Collection<Vehiculo> vehiculo = vehiculoService.findVehiculos();
+		model.put("vehiculo", vehiculo);
 		model.put("dni", dni);
 		model.put("matricula", matricula);
 		return "reparaciones/FormularioReparacion";

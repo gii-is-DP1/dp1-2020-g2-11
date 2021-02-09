@@ -28,17 +28,17 @@
   			<c:forEach items="${tipoVehiculo}" var="tipoVehiculo">
  			  <option value="${tipoVehiculo}" ><c:out value="${tipoVehiculo}" /></option> 
     </c:forEach>
-  </select> 
-            <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
-            <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
-            <sec:authorize access="hasAuthority('admin')">
-            <label for="cliente">Cliente:</label>
+  </select> 	<sec:authorize access="hasAuthority('admin')">
+  
+  			  <label for="cliente">Cliente:</label>
   	<select name="cliente.dni" id="cliente.dni"> 
   		<c:forEach items="${cliente}" var="cliente">
   		<option value="${cliente.dni}" ><c:out value="${cliente.dni}" /></option> 
     </c:forEach>
   </select> 
-             </sec:authorize>
+  </sec:authorize>
+            <TalleresLaPlata:inputField label="Fecha de fabricacion" name="fechaFabricacion"/>
+            <TalleresLaPlata:inputField label="Kilometraje" name="kilometraje"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

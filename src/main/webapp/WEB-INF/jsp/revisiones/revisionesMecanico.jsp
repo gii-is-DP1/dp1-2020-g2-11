@@ -38,10 +38,8 @@
 					<td><c:out value="${revision.duracion}" /></td>
 					<td><c:out value="${revision.fechaRevision}" /></td>
 					
-				<td><spring:url value="/cliente/{clienteId}" var="clienteUrl">
-							<spring:param name="clienteId" value="${revision.cliente.id}" />
-						</spring:url> <a href="${fn:escapeXml(clienteUrl)}"><c:out
-								value="${revision.cliente.dni}" /></a></td>
+				<td><c:out
+								value="${revision.cliente.dni}" /></td>
 											
 					<td><spring:url value="/vehiculo/{vehiculoId}" var="vehiculoUrl">
 							<spring:param name="vehiculoId" value="${revision.vehiculo.id}" />

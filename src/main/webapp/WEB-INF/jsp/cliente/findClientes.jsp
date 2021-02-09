@@ -22,10 +22,11 @@
 					<form:input class="form-control" path="nombre" size="30"
 						maxlength="80" />
 					<span class="help-inline"><form:errors path="*" /></span>
-					<span id="nombre.errors">No existe el cliente </span>
+					<span id="nombre.errors">Pulsa buscar con la entrada vacia para ver todos los clientes</span>
 				</div>
 			</div>
 		</div>
+		
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default">Buscar</button>

@@ -115,6 +115,8 @@ public class VehiculoController {
 	public String initUpdateVehicleForm(@PathVariable("vehiculoId") int vehiculoId, ModelMap model) {
 		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
 		model.put("tipoVehiculo", l);
+		Collection<Cliente> clientes = clienteService.findClientes();
+		model.put("cliente", clientes);
 		Vehiculo vehiculo = this.vehiculoService.findVehiculoById(vehiculoId);
 		model.put("vehiculo",vehiculo);
 		
@@ -128,6 +130,8 @@ public class VehiculoController {
 			@PathVariable("vehiculoId") int vehiculoId) throws VehiculosAntiguo {
 		Collection<TipoVehiculo> l=(Arrays.asList(TipoVehiculo.values()));
 		model.put("tipoVehiculo", l);
+		Collection<Cliente> clientes = clienteService.findClientes();
+		model.put("cliente", clientes);
 		if (result.hasErrors()) {
 			model.put("vehiculo", vehiculo);
 			return "vehiculos/formularioVehiculo";
